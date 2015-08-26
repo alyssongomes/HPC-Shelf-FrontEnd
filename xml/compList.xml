@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+    <component name="hue">
+        <name>Componente 1</name>
+        <type>Tipo 1</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 2</name>
+        <type>Tipo 2</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 3</name>
+        <type>Tipo 3</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 4</name>
+        <type>Tipo 4</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 5</name>
+        <type>Tipo 5</type>
+        <description>Aki é uma descrição...</description>
+    </component >
+    <component name="hue">
+        <name>Componente 6</name>
+        <type>Tipo 6</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 7</name>
+        <type>Tipo 7</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 8</name>
+        <type>Tipo 8</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 9</name>
+        <type>Tipo 9</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 10</name>
+        <type>Tipo 10</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 11</name>
+        <type>Tipo 11</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 12</name>
+        <type>Tipo 12</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+    <component name="hue">
+        <name>Componente 13</name>
+        <type>Tipo 13</type>
+        <description>Aki é uma descrição...</description>
+    </component>
+</components>

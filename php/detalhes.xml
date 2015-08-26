@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<abstract_component id_ac="114" name="mDiffexec" xmlns="http://storm.lia.ufc.br">
+    <supertype id_ac="108" name="Montage"/>
+    <context_parameter cp_id="56" name="IN A">
+        <bound cc_id="43" cc_name="String"/>
+    </context_parameter>
+    <context_parameter cp_id="57" name="IN B">
+        <bound cc_id="49" cc_name="directory"/>
+    </context_parameter>
+    <context_parameter cp_id="58" name="IN C">
+        <bound cc_id="47" cc_name="tbl"/>
+    </context_parameter>
+    <context_parameter cp_id="59" name="IN D">
+        <bound cc_id="48" cc_name="hdr"/>
+    </context_parameter>
+    <context_parameter cp_id="60" name="OUT A">
+        <bound cc_id="49" cc_name="directory"/>
+    </context_parameter>
+</abstract_component>

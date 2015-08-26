@@ -1,0 +1,80 @@
+#quadro1{ 
+    background-color: cadetblue; 
+    margin: 3px 3px 3px 0; 
+    padding: 15px; 
+    width: 250px; 
+    float: left; 
+    border-radius: 10px; 
+}
+
+#quadro2{ 
+    background-color: silver; 
+    margin: 3px 3px 3px 0; 
+    padding: 15px; 
+    width: 780px; 
+    float: left; 
+    border-radius: 10px; 
+}
+
+#trash{
+	background-color: silver;
+	width: 200px;
+}
+
+
+#autoScroll{
+    height: 400px; 
+    overflow: auto;
+}
+
+#autoScroll2{
+    height: 450px; 
+    overflow: auto;
+}
+
+ul { 
+    list-style-type: none; 
+    margin: 0;
+    padding: 0; 
+    margin-bottom: 10px;
+}
+
+li { 
+    margin: 5px;
+    padding: 5px; 
+    width: 200px; 
+    border-radius: 0px;
+    text-align: center;
+}
+
+
+ #divMenu {
+        font:bold 15pt Calibri;
+        border:1px black;
+        width:220px;
+        padding:0;
+        position:absolute;
+        background:rgba(133, 192, 242, 0.54);
+        background-position:-1100px -200px;
+        visibility:hidden;
+    }
+
+#divMenu ul{
+    list-style-type:none;
+    margin:0;
+    line-height:20px;
+    padding:0;
+    text-align:center;
+}
+
+#divMenu > ul > li {
+    cursor:pointer;
+}
+
+#divMenu > ul > li:nth-child(n < 3) {
+    border-bottom:1px dotted;
+}
+
+#divMenu > ul > li:hover {
+    background-color:rgba(133, 192, 242, 0.7);
+}
