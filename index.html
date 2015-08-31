@@ -9,7 +9,7 @@
         <script type="text/javascript" src="js/sortDrag.js" charset="UTF-8"></script>
         <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
     </head>
-    <body>
+    <body  >
         <div id="quadro1">
             <h3><center>Componentes Disponiveis</center></h3>
             <div id="autoScroll">
@@ -17,26 +17,28 @@
                 </ul>
             </div>
         </div>
-        <div id="quadro2" >
-            <h3><center>Aplicação</center></h3>
-            <h5><center>COLOQUE AKI</center></h5>
-            <div id="autoScroll2">
-            	<div id="trash">
-                	<img alt="lixo" src="img/lixo.png" height="70px" width="70px">
-            	</div>
-                <ul id="sort2" class="connectedSortable">
-                    <!-- <li id="primeiro"></li> -->
-                </ul>
+        <div id="quadro2" class="navbar navbar-top navbar-fixed-top" role="navigation" >
+        	<div class="container" id ="container">
+	            <h3><center>Aplicação</center></h3>
+	            <h5><center>COLOQUE AKI</center></h5>
+	            <div id="autoScroll2">
+	            	<div id="sort2" class="connectedSortable" >
+	            	<div id="trash">
+	                	<img alt="lixo" src="img/lixo.png" height="70px" width="70px">
+	            	</div>	
+	            	</div>
+	            </div>
+	            <br>
+	            <a href="#" id="submeter"> Submeter</a>
             </div>
-            <br>
-            <a href="#" id="submeter"> Submeter</a>
         </div>
         <p id="msg"></p>
         <div id="divMenu">
         <ul>
             <li>MAKE SOURCE</li>
-            <li>DRAGGABLE</li>
             <li>MAKE TARGET</li>
+            <!--  <li>DRAGGABLE</li>-->
+            <!-- <li>END POINT</li>-->
         </ul>
     </div>
     </body>

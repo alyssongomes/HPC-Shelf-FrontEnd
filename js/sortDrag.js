@@ -2,10 +2,17 @@ var ELEMENT = null;
 
 $(document).ready(function(){
 	var jsplumb = jsPlumb.getInstance();
+	 jsplumb.importDefaults({
+         anchors: ["AutoDefault","AutoDefault"],
+         connector:"StateMachine",
+         Container: "canvas"
+     });
+	
+	
     var sort = $("#sort1");
-    loadComponents(sort);
+    loadComponents(sort, jsplumb);
 
-    $("#autoScroll2").droppable();
+    //$("#autoScroll2").droppable();
     $("#trash").droppable({
         drop: function( event, ui ) {
           deleteElement( ui.draggable );
@@ -25,39 +32,49 @@ $(document).ready(function(){
 
         $("#divMenu > ul > li:nth-child(1)").click(
             function () {
-                createMakeSource($("#sort2 li[value="+ELEMENT+"]"),jsplumb);
+                createMakeSource($("#sort2 div[value="+ELEMENT+"]"),jsplumb, ELEMENT);
             }
         );
 
+        /*$("#divMenu > ul > li:nth-child(2)").click(
+            function () {
+            	/*$("#sort2 li[value="+ELEMENT+"]").draggable('enable');
+            	jsplumb.unmakeSource($("#sort2 li[value="+ELEMENT+"]"));
+            	//alert($("#sort2 li[value="+ELEMENT+"]"));
+            	jsplumb.draggable($("#sort2 li[value="+ELEMENT+"]"));
+            }
+        );*/
+        
         $("#divMenu > ul > li:nth-child(2)").click(
             function () {
-            	$("#sort2 li[value="+ELEMENT+"]").draggable('enable');
-            	jsplumb.unmakeSource($("#sort2 li[value="+ELEMENT+"]"));
+            	createMakeTarget($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
             }
         );
         
         $("#divMenu > ul > li:nth-child(3)").click(
-                function () {
-                	createMakeTarget($("#sort2 li[value="+ELEMENT+"]"),jsplumb);
-                }
-            );
+		        function () {
+		        	jsPlumb.setDraggable($("#sort2 div[value="+ELEMENT+"]"),true);
+		        	//createEndPoint($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
+		        }
+          );
     
     /* FIM MENU POP-UP*/
     
 });
 
-function loadComponents(listSort){
+function loadComponents(listSort, jsplumblocal){
+	/*
     var ajax = new XMLHttpRequest;
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4 ){
-                alert(ajax.status+" : "+ajax.statusText);
+                //alert(ajax.status+" : "+ajax.statusText);
                 var xml = ajax.responseXML;
                 var components = xml.getElementsByTagName("abstract_component");
                 for(var i=0; i<components.length;i++){
                     var li = $("<li/>",{ value:i, class:"ui-state-default" });
                     li.append($("<a/>",{id:components[i].getAttribute("ac_id"),text:components[i].getAttribute("name"), href:"#"}));
                     li.click(function(){
-                    	createComponent(this);
+                    	createComponent(this, jsplumblocal);
                 	});
                     listSort.append(li);
                 }
@@ -66,7 +83,31 @@ function loadComponents(listSort){
     ajax.open("POST","php/resposta2.xml");
     ajax.send(null);
     return false;
-     
+     */
+	 $.ajax({ 
+			url:"php/requisicaoExterna.php", 
+			type:"POST",
+			success: function(data) {
+				var ajax = new XMLHttpRequest;
+			    ajax.onreadystatechange = function(){
+			        if(ajax.readyState == 4 ){
+			        	var xml = ajax.responseXML;
+			        	var components = xml.getElementsByTagName("abstract_component");
+		                for(var i=0; i<components.length;i++){
+		                    var li = $("<li/>",{ value:i, class:"ui-state-default" });
+		                    li.append($("<a/>",{id:components[i].getAttribute("ac_id"),text:components[i].getAttribute("name"), href:"#"}));
+		                    li.click(function(){
+		                    	createComponent(this, jsplumblocal);
+		                	});
+		                    listSort.append(li);
+		                }              
+			        }
+			    }
+			    ajax.open("POST","php/resposta2.xml");
+			    ajax.send(null);
+			}
+		}); 
+
 }
 
 function findInfoComponent(nameComponent){
@@ -130,26 +171,24 @@ function submitAplication(){
     }
 }
 
-function createComponent(element){
+function createComponent(element, jsplumblocal){
 	var cpElement = element.cloneNode(true);
-	$("#sort2").append(cpElement);
-	$("#sort2 > li").draggable({ cursor:"move" ,scroll: true, scrollSensitivity: 100 });
-	$("#sort2 > li").css("height","50px").css("display","table-cell").css("vertical-align"," middle");
-	addFindInfoComponentAndMenu($("#sort2 li"));
+	var id = identifier();
+	var div = $("<div/>",{ value:id, class:"ui-widget-content ui-state-default", oncontextmenu:"showMenu("+id+"); return false;"});
+	div.css("height","40px").css("padding-right","25px").css("padding-top","20px").css("padding-left","25px").css("width","auto").css("text-align", "center").css("top","200px");
+    div.append($("<a/>",{text:element.firstChild.text, href:"#",onclick:"findInfoComponent('"+element.firstChild.text+"');"}));
+    $("#sort2").append(div);
+	$("#sort2 > div:not(#trash)").draggable({ cursor:"move" , containment: "parent", scroll:true  });
 }
 
 function deleteElement(element){
-	element.hide(1000);
+	jsPlumb.remove(element);
 	element.remove();
-}
-
-function addFindInfoComponentAndMenu(list){
-	for (var i = 0; i < list.length; i++) {
-		list[i].firstChild.setAttribute("onclick","findInfoComponent('"+list[i].firstChild.text+"');");
-		var id = identifier();
-		list[i].setAttribute("value",id);
-		list[i].setAttribute("oncontextmenu","showMenu("+id+"); return false;");
-	}
+	
+	/*
+	if(jsPlumb.isTarget(element)){
+		alert("É alvo")
+	}*/
 }
 
 function showMenu(idelement) {
@@ -176,7 +215,7 @@ function showMenu(idelement) {
 
 function identifier(){
 	for (var i = 0; true; i++) {
-		if(exist(i, $("#sort2 li")) === false){
+		if(exist(i, $("#sort2 div")) === false){
 			return i;
 		}
 	}
@@ -191,30 +230,64 @@ function exist(id,list){
 	return false;
 }
 
-function createMakeSource(element, jsplumblocal){
+function createMakeSource(element, jsplumblocal, valEle){
 	element.draggable('disable');
-	
-	 jsplumblocal.importDefaults({
-         anchors: ["AutoDefault","AutoDefault"]
-     });
-	
-	jsplumblocal.makeSource(element,{
-		anchor:"Bottom",
+	jsPlumb.setDraggable(element,false);
+	/*jsplumblocal.makeSource(element,{
+		isSource: true,
+		anchor:"AutoDefault",
 		endpoint:["Rectangle",{width:20,height:20}],
-		maxConnections: 3
-	});
+		maxConnections: 6
+	});*/
+	 var exampleGreyEndpointOptions = {
+             endpoint:"Rectangle",
+             paintStyle:{ width:15, height:11, fillStyle:'#666' },
+             connector:"StateMachine",
+             isSource:true,
+             connectorStyle : { strokeStyle:"#666" },
+             overlays:[
+                       /*[ "Diamont", { width:10, length:30, location:50, id:"diamant" } ],*/
+                       [ "Label", { label:"Conector", id:"label", location:[0.5, 0.5] } ]
+                     ],
+             connectorOverlays:[ 
+               [ "Arrow", { width:30, length:30, location: 0.5, id:"arrow" } ],
+               [ "Label", { label:/*"Interesse"*/prompt("Digite o interesse",""), id:"label" } ]
+             ],
+             Container: "quadro2",
+             anchor: "Continuous",
+             deleteEndpointsOnDetach : false
+           };
+           
+	 jsPlumb.makeSource(element,exampleGreyEndpointOptions);
 }
 
 function createMakeTarget(element, jsplumblocal){
+	jsPlumb.importDefaults({
+	       // anchors: ["AutoDefault","AutoDefault"],
+	        connector:"StateMachine",
+	        
+	    });
+	/*
 	var endpointOptions = {
             isTarget: true,
             endpoint: "Rectangle",
             paintStyle: {fillStyle:"gray"},
-            anchor: "Bottom",
-            deleteEndpointsOnDetach : false,//assim os endpoints não são excluidos quando á não ligações
+            anchor: "AutoDefault",
+            //deleteEndpointsOnDetach : false,//assim os endpoints não são excluidos quando á não ligações
             maxConnections: 6
-        };
-	jsplumblocal.makeTarget(element,endpointOptions);
-	element.draggable("disable");
-	jsplumblocal.draggable(element);
+        };*/
+	 var  exampleGreyEndpointOptions  =  { 
+             endpoint : "Rectangle" , 
+             paintStyle : {  width : 15 ,  height : 11 ,  fillStyle : '#669'  }, 
+             //isSource : true , 
+             //connectorStyle  :  {  strokeStyle : "#666"  }, //estilo da linha q conecta
+             isTarget : true
+             
+         };
+         
+	 jsPlumb.addEndpoint ( element ,{  
+                     anchor : "Continuous"},  exampleGreyEndpointOptions );
+	 jsPlumb.draggable(element);
+	//jsPlumb.makeTarget(element,endpointOptions);
+	//jsPlumb.setContainer($("#container"));
 }

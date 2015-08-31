@@ -1,4 +1,5 @@
-#quadro1{ 
+
+#quadro1{
     background-color: cadetblue; 
     margin: 3px 3px 3px 0; 
     padding: 15px; 
@@ -29,6 +30,13 @@
 
 #autoScroll2{
     height: 450px; 
+    width: 1000px;
+    overflow: auto;
+}
+
+#sort2{
+	height: 450px; 
+    width: 750px;
     overflow: auto;
 }
 
@@ -47,6 +55,9 @@ li {
     text-align: center;
 }
 
+#sort2 > div{
+	position: absolute;
+}
 
  #divMenu {
         font:bold 15pt Calibri;
