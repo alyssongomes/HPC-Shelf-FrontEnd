@@ -3,6 +3,8 @@
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.theme.css"/>
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-demo.css"/>
+        <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-defaults.css"/>
         <script type ="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
         <script type ="text/javascript" src="js/jquery/jquery-ui.js"></script>
         <script type ="text/javascript" src="js/jsPlumb/dom.jsPlumb-1.7.6-min.js"></script>
@@ -17,14 +19,15 @@
                 </ul>
             </div>
         </div>
-        <div id="quadro2" class="navbar navbar-top navbar-fixed-top" role="navigation" >
+        <div id="quadro2">
         	<div class="container" id ="container">
 	            <h3><center>Aplicação</center></h3>
 	            <h5><center>COLOQUE AKI</center></h5>
-	            <div id="autoScroll2">
+	            <div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
 	            	<div id="sort2" class="connectedSortable" >
 	            	<div id="trash">
-	                	<img alt="lixo" src="img/lixo.png" height="70px" width="70px">
+	                	<img alt="lixo" src="img/lixo.png" height="70px" width="70px" style="float:left;">
+	                	<h3>DESCARTAR</h3>
 	            	</div>	
 	            	</div>
 	            </div>
@@ -37,8 +40,10 @@
         <ul>
             <li>MAKE SOURCE</li>
             <li>MAKE TARGET</li>
-            <!--  <li>DRAGGABLE</li>-->
-            <!-- <li>END POINT</li>-->
+            <li>DRAG SOURCE</li>
+            <li>ADD ATTR</li>
+            <li>DELETE</li>
+            <li>INFORMATIONS</li>
         </ul>
     </div>
     </body>
