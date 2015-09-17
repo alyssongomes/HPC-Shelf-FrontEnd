@@ -3,14 +3,18 @@ var ELEMENT = null;
 $(document).ready(function(){
 	var jsplumb = jsPlumb.getInstance();
 	
+    /* Carrega componentes */
     var sort = $("#sort1");
     loadComponents(sort);
+    /* Fim - Carrega componentes */
 
+    /* Carrega zona de descarte componentes */
     $("#trash").droppable({
         drop: function( event, ui ) {
           deleteElement( ui.draggable, jsplumb );
         }
-      });
+    });
+    /* Fim - Carrega zona de descarte componentes */
     
     $("#submeter").button().click(submitAplication);
     $("#testep").draggable();
@@ -18,61 +22,64 @@ $(document).ready(function(){
     
     /* MENU POP-UP */
     
-    	document.addEventListener("click",
+	document.addEventListener("click",
+        function () {
+            document.getElementById("divMenu").style.visibility = "hidden";
+        }
+    );
+
+    $("#divMenu > ul > li:nth-child(1)").click(
+        function () {
+            createMakeSource($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
+        }
+    );
+    
+    
+    $("#divMenu > ul > li:nth-child(2)").click(
             function () {
-                document.getElementById("divMenu").style.visibility = "hidden";
+            	createSettingPort($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
+            }
+        );
+    
+    $("#divMenu > ul > li:nth-child(3)").click(
+            function () {
+            	createWorkflowPort($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
+            }
+        );
+    
+    $("#divMenu > ul > li:nth-child(4)").click(
+            function () {
+            	if(confirm("Deseja realmente deletar?")){
+            		deleteElement($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
+            	}
+            }
+        );
+    
+    $("#divMenu > ul > li:nth-child(5)").click(
+            function () {
+            	findInfoComponent($("#sort2 div[value="+ELEMENT+"] a").attr("name"));
             }
         );
 
-        $("#divMenu > ul > li:nth-child(1)").click(
-            function () {
-                createMakeSource($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
-            }
-        );
-        
-        
-        $("#divMenu > ul > li:nth-child(2)").click(
-                function () {
-                	createSettingPort($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
-                }
-            );
-        
-        $("#divMenu > ul > li:nth-child(3)").click(
-                function () {
-                	createWorkflowPort($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
-                }
-            );
-        
-        $("#divMenu > ul > li:nth-child(4)").click(
-                function () {
-                	if(confirm("Deseja realmente deletar?")){
-                		deleteElement($("#sort2 div[value="+ELEMENT+"]"),jsplumb);
-                	}
-                }
-            );
-        
-        $("#divMenu > ul > li:nth-child(5)").click(
-                function () {
-                	findInfoComponent($("#sort2 div[value="+ELEMENT+"] a").attr("name"));
-                }
-            );
-    
     /* FIM MENU POP-UP*/
         
         
 	jsplumb.batch(function() {
 		jsplumb.bind("click", function (component, originalEvent) {
+            /* Altera o interesse */
     		if(confirm("Deseja mudar o interesse?")){
     			var inter = prompt("Insira o interesse!","Interesse");
     			var c = component.getOverlay("label");
     			c.setLabel(inter);
     			jsplumb.repaintEverything();
     		}
+            /* Fim - Altera o interesse */
         });
 	})
     
 });
 
+//FUNÇÃO QUE CARREGA OS COMPONENTES ABSTRATOS
 function loadComponents(listSort){
 	 $.ajax({ 
 			url:"php/requisicaoExterna.php", 
@@ -99,6 +106,7 @@ function loadComponents(listSort){
 		}); 
 }
 
+//FUNÇÃO QUE EXIBE OS DETAALHES DO COMPONENTE ABSTRATO
 function findInfoComponent(nameComponent){
     $.ajax({ 
 		url:"php/detalhes.php?name="+nameComponent, 
@@ -157,6 +165,7 @@ function submitAplication(){
     }
 }
 
+//CARREGA COMPONENTE NA ZONA DE MONTAGEM
 function createComponent(element){
 	var cpElement = element.cloneNode(true);
 	var id = identifier();
@@ -167,6 +176,7 @@ function createComponent(element){
 	$("#sort2 > div:not(#trash)").draggable({ cursor:"move" /*, containment: "parent", scroll:true*/  });
 }
 
+//DELETA COMPONENTE
 function deleteElement(element, js){
 	js.remove(element);
 	element.remove();
@@ -209,15 +219,14 @@ function exist(id,list){
 	return false;
 }
 
+
 function createMakeSource(element, js){
 	var exampleGreyEndpointOptions  =  { 
 			endpoint : "Rectangle" , 
-			//paintStyle : {  width : 15 ,  height : 11 ,  fillStyle : '#669'  },
 			paintStyle:{ width:15, height:11, fillStyle:'#666' },
 			connector:"StateMachine",
 			DragOptions: { cursor: 'pointer'},
 			anchor: "AutoDefault", 
-			//connectorStyle  :  {  strokeStyle : "#666"  }, //estilo da linha q conecta
 			isSource : true,
 			scope: "#666",
 			connectorStyle : { strokeStyle:"#666" },
@@ -234,7 +243,7 @@ function createMakeSource(element, js){
 	js.repaintEverything();
 }
 
-
+//FUNÇÃO QUE CRIA PORTA DE AMBIENTE
 function createSettingPort(element, js){
 	var exampleGreyEndpointOptions  =  { 
 			endpoint : "Rectangle" , 
@@ -258,6 +267,7 @@ function createSettingPort(element, js){
 	js.repaintEverything();
 }
 
+//FUNÇÃO QUE CRIA PORTA DE WORKFLOW
 function createWorkflowPort(element, js){
 	var exampleGreyEndpointOptions  =  { 
 			endpoint : "Rectangle" ,
