@@ -74,26 +74,6 @@ $(document).ready(function(){
 });
 
 function loadComponents(listSort){
-	/*
-    var ajax = new XMLHttpRequest;
-    ajax.onreadystatechange = function(){
-        if(ajax.readyState == 4 ){
-                var xml = ajax.responseXML;
-                var components = xml.getElementsByTagName("abstract_component");
-                for(var i=0; i<components.length;i++){
-                    var li = $("<li/>",{ value:i, class:"ui-state-default" });
-                    li.append($("<a/>",{id:components[i].getAttribute("ac_id"),text:components[i].getAttribute("name"), href:"#"}));
-                    li.click(function(){
-                    	createComponent(this);
-                	});
-                    listSort.append(li);
-                }
-        }
-    }
-    ajax.open("POST","php/resposta2.xml");
-    ajax.send(null);
-    return false;
-     */
 	 $.ajax({ 
 			url:"php/requisicaoExterna.php", 
 			type:"POST",
@@ -127,7 +107,6 @@ function findInfoComponent(nameComponent){
 			var ajax = new XMLHttpRequest;
 		    ajax.onreadystatechange = function(){
 		        if(ajax.readyState == 4 ){
-		                //alert(ajax.status+" : "+ajax.statusText);
 		                var xml = ajax.responseXML;
 		                var parameters = "";
 		                var component  = ajax.responseXML.getElementsByTagName("abstract_component").item(0).getAttribute("name");
@@ -150,7 +129,6 @@ function findInfoComponent(nameComponent){
 		                });            
 		        }
 		    }
-		    
 		    ajax.open("GET","php/detalhes.xml");
 		    ajax.send(null);
 		}
@@ -232,24 +210,6 @@ function exist(id,list){
 }
 
 function createMakeSource(element, js){
-	/*element.draggable('disable');
-	jsPlumb.setDraggable(element,false);
-	var exampleGreyEndpointOptions = {
-			endpoint:"Rectangle",
-            paintStyle:{ width:15, height:11, fillStyle:'#666' },
-            connector:"StateMachine",
-            isSource:true,
-            connectorStyle : { strokeStyle:"#666" },*/
-            //overlays:[ /*[ "Diamont", { width:10, length:30, location:50, id:"diamant" } ],*/  /*[ "Label", { label:"Conector", id:"label", location:[0.5, 0.5] } ]*/  ],
-            /*connectorOverlays:[ 
-               	[ "Arrow", { width:30, length:30, location: 0.5, id:"arrow" } ],
-               	[ "Label", { label:"Interesse", id:"label" } ]
-             ],
-             Container: "quadro2",
-             anchor: "Continuous",
-             deleteEndpointsOnDetach : false
-	};       
-	jsPlumb.makeSource(element,exampleGreyEndpointOptions);*/
 	var exampleGreyEndpointOptions  =  { 
 			endpoint : "Rectangle" , 
 			//paintStyle : {  width : 15 ,  height : 11 ,  fillStyle : '#669'  },
