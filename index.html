@@ -1,28 +1,66 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.theme.css"/>
         <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-demo.css"/>
         <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-defaults.css"/>
         <script type ="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
         <script type ="text/javascript" src="js/jquery/jquery-ui.js"></script>
         <script type ="text/javascript" src="js/jsPlumb/dom.jsPlumb-1.7.6-min.js"></script>
-        <script type="text/javascript" src="js/sortDrag.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/component.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="js/main.js" charset="UTF-8"></script>
         <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
     </head>
-    <body  >
+    <body >
+        <!--<div id = "menus"></div>
+        <div id = "tools">
+            <a href="#" id="submeter"> Submeter</a>
+        </div>-->
+
         <div id="quadro1">
-            <h3><center>Componentes Disponiveis</center></h3>
+            <ul>
+                <li><a href="#newComponent">Novo Componente</a></li>
+                <li><a href="#autoScroll">Componentes</a></li>
+                <li><a href="#parameters">Parametros</a></li> 
+            </ul>
+            <div id="newComponent">
+                <h4>Nome do componente: </h4>
+                <input id="nameComponent" /><br/>
+                <h4>Tipo do componente: </h4>
+                <label id="nameSuperType"></label>
+                <a href="#" id="selectType">Selecionar Tipo</a><br/>
+                <h4>Parametros de contexto: </h4>
+                <a href="#" id="addParameter">Adicionar Parametro</a><br/><br/>
+                <table id="listParameters"></table>
+                <h4>Nome da Unidade abstrata: </h4>
+                <input id="nameUnidade"/>
+                <h4>Componentes aninhados: </h4>
+                <a href="#" id="addComponent">Adicionar componente</a><br/><br/>
+                <table id="addsComponents"></table>
+                <br/><br/>
+                <a href="#" id="saveComponent">Salvar Componente</a>
+            </div>
             <div id="autoScroll">
-                <ul id="sort1" class="connectedSortable">
-                </ul>
+                <center>
+                    <ul id="sort1"></ul>
+                    <img id ="esperando" src="img/ajax.gif">
+                </center>
+            </div>
+            <div id="parameters">
+                <label id="InfoComp" style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Componente</label>
+                <br/><br/>
+                <label style="float: left; margin-top: 3px ; font-size: 20;">Super Tipo:</label><br/><br/>
+                <label id="InfoSuper" style=" font-size: 20;">...</label>
+                <br/><br/>
+                <label style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Parametros:</label>
+                <a href="#" id="addPar"> Add Parametro</a>
+                <br/><br/>
+                <table id ="tableParam"></table>
             </div>
         </div>
         <div id="quadro2">
         	<div class="container" id ="container">
 	            <h3><center>Aplicação</center></h3>
-	            <h5><center>COLOQUE AKI</center></h5>
 	            <div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
 	            	<div id="sort2" class="connectedSortable" >
 	            	<div id="trash">
@@ -31,19 +69,55 @@
 	            	</div>	
 	            	</div>
 	            </div>
-	            <br>
-	            <a href="#" id="submeter"> Submeter</a>
             </div>
         </div>
-        <p id="msg"></p>
+        <!--<p id="msg"></p>-->
         <div id="divMenu">
-        <ul>
-            <li>MAKE SOURCE</li>
-            <li>SETTING PORT</li>
-            <li>WORKFLOW PORT</li>
-            <li>DELETE</li>
-            <li>INFORMATIONS</li>
-        </ul>
-    </div>
+            <ul>
+                <li>MAKE SOURCE</li>
+                <li>DELETE</li>
+                <!--<li>INFORMATIONS</li>-->
+            </ul>
+        </div>
+        <div id="dialog-super" title="Selecionar Super Type">
+            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+                <ul id="listSuperComponents"></ul>
+            </div>
+            <div>
+                <center>
+                    <label id="nameSuperComp"></label>
+                </center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+            </div>
+        </div>
+        <div id="dialog-param" title="Definir parametros de contexto">
+            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+                <ul id="listParamComponents"></ul>
+            </div>
+            <div>
+                <center>
+                    <label id="nameParamComp"></label>
+                </center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+                <center>
+                    &nbsp;&nbsp;&nbsp;<input type="checkbox" id="variavel" ><font color = "blue"><strong>Compartilhar variável</strong></font>
+                    <h4>Bound(Limite)</h4><input type="text" id="bound">
+                </center>
+            </div>
+        </div>
+        <div id="dialog-comp" title="Selecionar componentes">
+            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+                <ul id="listNestedComponents"></ul>
+            </div>
+            <div>
+                <center>
+                    <label id="nameNestedComp"></label>
+                </center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+            </div>
+        </div>
     </body>
 </html>
