@@ -1,3 +1,6 @@
+body{
+    background-color: #778899;
+}
 
 #quadro1{
     margin: 3px 3px 1px 1px;
@@ -10,9 +13,10 @@
     background-color: silver; 
     margin: 3px 3px 3px 0; 
     padding: 10px; 
-    width: 880px; 
+    /*width: 880px; */
+    width: 67%;
     float: left; 
-    border-radius: 10px; 
+    /*\border-radius: 10px;*/
     
 }
 
@@ -48,9 +52,23 @@
     overflow: auto;
 }
 
+#containerSuperComp, #containerParamComp , #containerNestComp{
+    float:left; 
+    height: 370px;
+    width: 280px; 
+    overflow: auto;
+}
+
+#containerDetailsSuper, #containerDetailPar, #containerDetailNestComp{
+    float:left; 
+    height: 370px;
+    width: 230px; 
+    overflow: auto;
+}
+
 #autoScroll2{
-    height: 470px; 
-    width: 880px;
+    height: 75%; 
+    width: 100%;
     background-color: silver; 
     overflow: auto;
 }

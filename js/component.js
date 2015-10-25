@@ -1,7 +1,3 @@
-var listComponents = new Array();
-var listParameters = new Array();
-var listNestedComponents = new Array();
-
 // Cria novo componente abstrato na área de trabalho
 function createComponentAbstract(element){
 	var component = {
@@ -14,6 +10,7 @@ function createComponentAbstract(element){
 
 //Carrega os componentes abstratos do catálogo do CORE para tela
 function getAbstractComponents(){
+	var listComponents = new Array();
 	$.ajax({ 
 		//url:"php/loadComponents.php", 
 		url:"php/resposta.xml", 
@@ -21,15 +18,19 @@ function getAbstractComponents(){
 		dataType: "xml",
 		type:"POST",
 		success: function(data) {
-        	var components = data.getElementsByTagName("abstract_component");
-            for(var i=0; i<components.length;i++){
-                var component = { 
-                	name: components[i].getAttribute("name"),
-                	super: components[i].getAttribute("supertype"),
-                	id: components[i].getAttribute("ac_id") 
-                };
-              	listComponents[i] = component;
-            }
+			try{
+	        	var components = data.getElementsByTagName("abstract_component");
+	            for(var i=0; i<components.length;i++){
+	                var component = { 
+	                	name: components[i].getAttribute("name"),
+	                	super: components[i].getAttribute("supertype"),
+	                	id: components[i].getAttribute("ac_id") 
+	                };
+	              	listComponents[i] = component;
+	            }
+        	}catch(error){
+        		return false;
+        	}
 	    }
 	});
 	return listComponents;
@@ -37,15 +38,17 @@ function getAbstractComponents(){
 
 //retorna uma lista com os parametros de contexto do componente abstrato
 function getContextParameters(component){
+	var listParameters = new Array();
 	$.ajax({ 
 		url:"php/details.php?name="+component, 
 		async: false,
 		dataType: "xml",
 		type:"GET",
 		success: function(data) {
+			listParameters[0] = data.getElementsByTagName("supertype").item(0).getAttribute("name");
         	var contextParameter = data.getElementsByTagName("context_parameter");
             for (var i = 0; i < contextParameter.length; i++) {
-              	listParameters[i] = contextParameter.item(i).getAttribute("name");
+              	listParameters[i+1] = contextParameter.item(i).getAttribute("name");
             }
 	    }
 	});
@@ -53,8 +56,26 @@ function getContextParameters(component){
 
 }
 
+function getAbstractsUnits(component){
+	var listAbstractsUnits = new Array();
+    $.ajax({ 
+		url:"php/details.php?name="+component, 
+		dataType: "xml",
+		async: false,
+		type:"GET",
+		success: function(data) {
+        	var abstractsUnits = data.getElementsByTagName("abstract_unit");
+            for (var i = 0; i < abstractsUnits.length; i++) {
+              	listAbstractsUnits[i] = abstractsUnits.item(i).getAttribute("au_name");
+            }
+	    }
+	});
+	return listAbstractsUnits;
+}
+
 //retorna uma lista com os components aninhados de um determinado component
 function getNestedComponents(component){
+	var listNestedComponents = new Array();
     $.ajax({ 
 		url:"php/details.php?name="+component, 
 		dataType: "xml",

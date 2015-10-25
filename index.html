@@ -33,7 +33,9 @@
                 <a href="#" id="addParameter">Adicionar Parametro</a><br/><br/>
                 <table id="listParameters"></table>
                 <h4>Nome da Unidade abstrata: </h4>
-                <input id="nameUnidade"/>
+                <a href="#" id="addUnidade">Adicionar Unidade</a>
+                <input id="nameUnidade"/><br/><br/>
+                <table id="addsUnidades"></table>
                 <h4>Componentes aninhados: </h4>
                 <a href="#" id="addComponent">Adicionar componente</a><br/><br/>
                 <table id="addsComponents"></table>
@@ -71,7 +73,7 @@
 	            </div>
             </div>
         </div>
-        <!--<p id="msg"></p>-->
+        <p id="msg"></p>
         <div id="divMenu">
             <ul>
                 <li>MAKE SOURCE</li>
@@ -80,27 +82,36 @@
             </ul>
         </div>
         <div id="dialog-super" title="Selecionar Super Type">
-            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+            <div id="containerSuperComp">
                 <ul id="listSuperComponents"></ul>
             </div>
-            <div>
+            <div id = "containerDetailsSuper">
                 <center>
                     <label id="nameSuperComp"></label>
                 </center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <center><div id="pararSuper"></div></center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+                <center><div id="nestCompSuper"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
+                <center><div id="unitCompSuper"></div></center>
+
             </div>
         </div>
         <div id="dialog-param" title="Definir parametros de contexto">
-            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+            <div id="containerParamComp">
                 <ul id="listParamComponents"></ul>
             </div>
-            <div>
+            <div id="containerDetailPar">
                 <center>
                     <label id="nameParamComp"></label>
                 </center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <center><div id="pararCompAbs"></div></center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+                <center><div id="nestCompAbs"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
+                <center><div id="unitCompAbs"></div></center>
                 <center>
                     &nbsp;&nbsp;&nbsp;<input type="checkbox" id="variavel" ><font color = "blue"><strong>Compartilhar variável</strong></font>
                     <h4>Bound(Limite)</h4><input type="text" id="bound">
@@ -108,15 +119,19 @@
             </div>
         </div>
         <div id="dialog-comp" title="Selecionar componentes">
-            <div style="float:left; height: 250px; width: 250px; verflow: auto;">
+            <div id="containerNestComp">
                 <ul id="listNestedComponents"></ul>
             </div>
-            <div>
+            <div id="containerDetailNestComp">
                 <center>
                     <label id="nameNestedComp"></label>
                 </center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
+                <center><div id="pararNestComp"></div></center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
+                <center><div id="nestNestedComp"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
+                <center><div id="unitNestedComp"></div></center>
             </div>
         </div>
     </body>
