@@ -1,6 +1,5 @@
 var ELEMENT = null;
 var newComp = null;
-var newAbstractComponent = null;
 
 $(document).ready(function(){
 	init();
@@ -119,11 +118,22 @@ function init() {
         //alignComponents();
     });
     $("#saveComponent").button().click(function(){
-        getNewAbstractComponent($("#newComponent"));
+        //getNewAbstractComponent($("#newComponent"));
+        var a = $("#newComponent").find("label[id=nameSuperType]").find("h3").attr("value");
+        var b = $("#newComponent").find("input[id=nameComponent]").val();
+        if(a == null || b == null){
+            alert("O nome ou o supertipo do componente não foi definido!");
+        }else{
+            getNewAbstractComponent($("#newComponent"));
+        }
     }); 
     $("#addUnidade").button().click(function(){
-        addUnidade($("#addsUnidades"),$("#nameUnidade").val());
-        $("#nameUnidade").val("");
+        if($("#newComponent").find("input[id=nameUnidade]").val() == ""){
+            alert("Insira um nome na unidade!");
+        }else{
+            addUnidade($("#addsUnidades"),$("#nameUnidade").val());
+            $("#nameUnidade").val("");
+        }
     });
 
     loadComponents();
@@ -251,7 +261,8 @@ function newModalComponent(dialogSuper,dialogParam,dialogComp){
             buttons: {
                 "Selecionar": function(){
                     var nome = newSuper.find("label[id=nameSuperComp]").find("h3").attr("value");
-                    novo.find("label[id=nameSuperType]").append("<h3>"+novo.find("label[id=nameSuperType]").attr("value")+"</h3>");
+                    novo.find("label[id=nameSuperType]").find("h3").remove();
+                    novo.find("label[id=nameSuperType]").append("<h3 value="+nome+">"+nome+"</h3>");
                     newSuper.dialog( "close" );
                 },
                 Cancel: function() {
@@ -335,7 +346,6 @@ function newModalComponent(dialogSuper,dialogParam,dialogComp){
                     });
                     linha.append(coluna1);
                     var unidades = newComp.find("div[id=unitNestedComp]").find("input");
-                    alert(unidades.length);
                     for (var i = 0; i < unidades.length; i++) {
                         if(unidades[i].is(':checked') == true){
                             var coluna = $("<td/>",{text: unidades[i].text});
@@ -353,9 +363,23 @@ function newModalComponent(dialogSuper,dialogParam,dialogComp){
         newComp.dialog("open");
     });
     novo.find("a[id=addUnidade]").click(function(){
-        addUnidade(novo.find("table[id=addsUnidades]"),novo.find("input[id=nameUnidade]").val());
-        novo.find("input[id=nameUnidade]").val("");
+        if(novo.find("input[id=nameUnidade]").val() == ""){
+            alert("Insira um nome na unidade!");
+        }else{
+            addUnidade(novo.find("table[id=addsUnidades]"),novo.find("input[id=nameUnidade]").val());
+            novo.find("input[id=nameUnidade]").val("");
+        }
     });
+
+    novo.find("a[id=saveComponent]").click(function(){
+        var a = novo.find("label[id=nameSuperType]").find("h3").attr("value");
+        var b = novo.find("input[id=nameComponent]").val();
+        if(a == null || b == ""){
+            alert("O nome ou o supertipo do componente não foi definido!");
+        }else{
+            getNewAbstractComponent(novo);
+        }
+    })
 
     newComp.click(function() {
         modalNovo.dialog("open");    
@@ -364,11 +388,20 @@ function newModalComponent(dialogSuper,dialogParam,dialogComp){
 }
 
 function getNewAbstractComponent(informationScreen){
+    alert("Entrou no novo componente!");
     var nameComponent = informationScreen.find("input[id=nameComponent]").val();
     var supertype = informationScreen.find("label[id=nameSuperType]").find("h3").attr("value");
-    var contextParameter = parameters(informationScreen.find("table[id=listParameters]").find("tr")); // CRIAR FUNÇÃO QUE RETORNA UM VETOR COM OS PARAMETROS DE CONTEXTO
-    var unitsAbstracts = units(informationScreen.find("table[id=addsUnidades]").find("tr"));// CRIAR FUNÇÃO QUE RETORNA UM VETOR COM AS UNIDADES ABSTRATAS
-    var nestedComponents = nested(informationScreen.find("table[id=addsComponents]").find("tr"));//CRIAR FUNÇÃO QUE RETORNA UM VETOR COM OS COMPONENTES ANINHADOS
+    var contextParameter = parameters(informationScreen.find("table[id=listParameters]").find("tr"));
+    var unitsAbstracts = units(informationScreen.find("table[id=addsUnidades]").find("tr"));
+    var nestedComponents = nested(informationScreen.find("table[id=addsComponents]").find("tr"));
+    var compObj = {
+        name:  nameComponent,
+        super: { name: supertype },
+        parameters: contextParameter,
+        units: unitsAbstracts,
+        inners: nestedComponents 
+    };
+    saveNewAbstractComponent(compObj);
 }
 
 function findInfoComponent(nameComponent){
@@ -421,7 +454,6 @@ function addUnidade(table,text){
     row.append(col);
     row.append(col2);
     table.append(row);
-
 }
 
 function submitAplication(){

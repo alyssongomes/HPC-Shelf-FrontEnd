@@ -1,3 +1,5 @@
+var contextStorm = br_ufc_lia_storm;
+
 // Cria novo componente abstrato na área de trabalho
 function createComponentAbstract(element){
 	var component = {
@@ -92,8 +94,67 @@ function getNestedComponents(component){
 }
 
 //salva os parametros de contexto de um determinado componente
-function saveNewAbstractComponent(component){}
+function saveNewAbstractComponent(componentObj){
+	var context = new Jsonix.Context([contextStorm]);
+	var marshaller = context.createMarshaller();
+	var doc = marshaller.marshalDocument({
+		name:{
+			localPart: 'abstract_component'
+		},
+		value:{
+			name: componentObj.name,
+			supertype: componentObj.super,
+			contextParameter: componentObj.parameters,
+			innerComponent: componentObj.inners,
+			abstractUnit: componentObj.units
+		}
+	});
 
+	var oSerializer = new XMLSerializer();
+	var sXML = oSerializer.serializeToString(doc);
+	alert(sXML);
+	/*$.ajax({
+	    type: 'post',
+	    url : 'writerFile.php',
+	    data: 'newComponent='+sXML,
+	    success : function(txt){
+	        alert("Arquivo escrito!");
+	    }
+	});*/
+}
+
+function parameters(listParameters){
+	var parametersObjs = [];
+	for (var i = 0; i < listParameters.length; i++) {
+		parametersObjs[i] = {
+			name: listParameters[i].childNodes[0].getAttribute("value"),
+			bound: {
+					ccId: parseInt(listParameters[i].childNodes[1].getAttribute("value"))
+				}
+			}	
+	}
+	return parametersObjs;
+}
+
+function units(listUnits){
+	var unistsObjs = [];
+	for (var i = 0; i < listUnits.length; i++) {
+		unistsObjs[i] = {
+			auName: listUnits[i].childNodes[0].getAttribute("value")
+		}
+	};
+	return unistsObjs;
+}
+
+function nested(listNested){
+	var nestedObjs = [];
+	for (var i = 0; i < listNested.length; i++) {
+		nestedObjs[i] = {
+			name: listNested[i].childNodes[0].getAttribute("value")
+		}
+	};
+	return nestedObjs;
+}
 
 // Funções auxiliares
 function identifier(){
@@ -113,27 +174,3 @@ function exist(id,list){
 	return false;
 }
 
-
-function mostra() {
-	var a2 =  getAbstractComponents();
-	for (var i = 0; i < a2.length; i++) {
-		$("#lista").append($("<li/>",{text:a2[i].name}));
-	}
-	return false;
-}
-/*
-function par () {
-	var a3 =  getContextParameters($("#nome").val());
-	for (var i = 0; i < a3.length; i++) {
-		$("#listaP").append($("<li/>",{text:a3[i]}));
-	}
-	return false;
-}
-
-function nes () {
-	var a4 =  getNestedComponents($("#nome").val());
-	for (var i = 0; i < a4.length; i++) {
-		$("#listaC").append($("<li/>",{text:a4[i]}));
-	}
-	return false;
-}*/

@@ -1,13 +1,7 @@
-<html>
-	<head>
-		<script type="text/javascript" src="js/jsonix/Jsonix-min.js"></script>
-		<script type ="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src = "js/component.js"></script>
-		<script type="text/javascript">
-		var br_ufc_lia_storm = {
-			name: 'br_ufc_lia_storm',
-			//defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
-  		typeInfos: [{
+var br_ufc_lia_storm = {
+  name: 'br_ufc_lia_storm',
+  //defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
+  typeInfos: [{
       type: 'classInfo',
       localName: 'ContextContract',
       propertyInfos: [{
@@ -556,20 +550,8 @@
       elementName: 'abstract_component',
       typeInfo: 'br_ufc_lia_storm.AbstractComponentType'
     }]
-	};
+};
 
-	var context = new Jsonix.Context([br_ufc_lia_storm]);
-	var marshaller = context.createMarshaller();
-	
-	var doc = marshaller.marshalString({
-		name:{
-			localPart: "abstract_component"
-		}, value:{}
-	});
-	
-		</script>
-	</head>
-	<body>
-		<h2>Hellow World</h2>
-	</body>
-</html>
+if (typeof require === 'function') {
+  module.exports.br_ufc_lia_storm = br_ufc_lia_storm;
+}

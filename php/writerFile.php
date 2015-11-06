@@ -1,6 +1,6 @@
 <?php
-	$texto = $_POST["components"];
-	if ($arquivo = fopen("out.xml","w")){
+	$texto = $_POST["newComponent"];
+	if ($arquivo = fopen("newComponentAbstract.xml","w")){
 		fputs($arquivo,$texto);
 		fclose($arquivo);
 	}else{
