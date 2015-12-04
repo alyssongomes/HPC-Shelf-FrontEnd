@@ -14,8 +14,8 @@ function createComponentAbstract(element){
 function getAbstractComponents(){
 	var listComponents = new Array();
 	$.ajax({ 
-		//url:"php/loadComponents.php", 
-		url:"php/resposta.xml", 
+		url:"php/mainComponent.php?opcode=loadComponents", 
+		//url:"php/resposta.xml", 
 		async: false,
 		dataType: "xml",
 		type:"POST",
@@ -42,15 +42,17 @@ function getAbstractComponents(){
 function getContextParameters(component){
 	var listParameters = new Array();
 	$.ajax({ 
-		url:"php/details.php?name="+component, 
+		//url:"php/details.php?name="+component,
+		url:"php/mainComponent.php?opcode=details&name="+component,
 		async: false,
 		dataType: "xml",
 		type:"GET",
 		success: function(data) {
 			listParameters[0] = data.getElementsByTagName("supertype").item(0).getAttribute("name");
+			listParameters[1] = data.getElementsByTagName("supertype").item(0).getAttribute("id_ac");
         	var contextParameter = data.getElementsByTagName("context_parameter");
             for (var i = 0; i < contextParameter.length; i++) {
-              	listParameters[i+1] = contextParameter.item(i).getAttribute("name");
+              	listParameters[i+2] = contextParameter.item(i).getAttribute("name");
             }
 	    }
 	});
@@ -61,14 +63,19 @@ function getContextParameters(component){
 function getAbstractsUnits(component){
 	var listAbstractsUnits = new Array();
     $.ajax({ 
-		url:"php/details.php?name="+component, 
+		//url:"php/details.php?name="+component, 
+		url:"php/mainComponent.php?opcode=details&name="+component,
 		dataType: "xml",
 		async: false,
 		type:"GET",
 		success: function(data) {
         	var abstractsUnits = data.getElementsByTagName("abstract_unit");
             for (var i = 0; i < abstractsUnits.length; i++) {
-              	listAbstractsUnits[i] = abstractsUnits.item(i).getAttribute("au_name");
+            	var unit = {
+            		name : abstractsUnits.item(i).getAttribute("au_name"),
+            		id: abstractsUnits.item(i).getAttribute("au_id")
+            	}
+              	listAbstractsUnits[i] = unit;
             }
 	    }
 	});
@@ -79,7 +86,8 @@ function getAbstractsUnits(component){
 function getNestedComponents(component){
 	var listNestedComponents = new Array();
     $.ajax({ 
-		url:"php/details.php?name="+component, 
+		//url:"php/details.php?name="+component, 
+		url:"php/mainComponent.php?opcode=details&name="+component,
 		dataType: "xml",
 		async: false,
 		type:"GET",
@@ -99,6 +107,7 @@ function saveNewAbstractComponent(componentObj){
 	var marshaller = context.createMarshaller();
 	var doc = marshaller.marshalDocument({
 		name:{
+			//namespaceURI: 'http:\/\/storm.lia.ufc.br',
 			localPart: 'abstract_component'
 		},
 		value:{
@@ -106,21 +115,23 @@ function saveNewAbstractComponent(componentObj){
 			supertype: componentObj.super,
 			contextParameter: componentObj.parameters,
 			innerComponent: componentObj.inners,
-			abstractUnit: componentObj.units
+			abstractUnit: componentObj.units,
+			slices: componentObj.slices
 		}
 	});
 
 	var oSerializer = new XMLSerializer();
-	var sXML = oSerializer.serializeToString(doc);
-	alert(sXML);
-	/*$.ajax({
+	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
+	//alert(sXML);
+	$.ajax({
 	    type: 'post',
-	    url : 'writerFile.php',
+	    //url : 'php/writerFile.php',
+	    url : 'php/mainComponent.php?opcode=saveComp',
 	    data: 'newComponent='+sXML,
 	    success : function(txt){
 	        alert("Arquivo escrito!");
 	    }
-	});*/
+	});
 }
 
 function parameters(listParameters){
@@ -129,7 +140,7 @@ function parameters(listParameters){
 		parametersObjs[i] = {
 			name: listParameters[i].childNodes[0].getAttribute("value"),
 			bound: {
-					ccId: parseInt(listParameters[i].childNodes[1].getAttribute("value"))
+					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value"))
 				}
 			}	
 	}
@@ -140,17 +151,43 @@ function units(listUnits){
 	var unistsObjs = [];
 	for (var i = 0; i < listUnits.length; i++) {
 		unistsObjs[i] = {
-			auName: listUnits[i].childNodes[0].getAttribute("value")
+			auName: listUnits[i].firstChild.getAttribute("value")
 		}
 	};
 	return unistsObjs;
+}
+
+function slices(list){
+	var slices = [];
+	for (var j = 0; j < list.length; j++) {
+		slices[j] = {
+			sliceId: parseInt(list[j].getAttribute("id")),
+			innerComponentId: parseInt(list[j].childNodes[1].id)
+		}
+	};
+	return slices;	
+}
+
+function unitsNested(list){
+	var units = [];
+	for (var j = 0; j < list.length; j++) {
+		units[j] = {
+			auName: list[j].getAttribute("value"),
+			auId: parseInt(list[j].getAttribute("id"))
+		}
+	};
+	return units;
 }
 
 function nested(listNested){
 	var nestedObjs = [];
 	for (var i = 0; i < listNested.length; i++) {
 		nestedObjs[i] = {
-			name: listNested[i].childNodes[0].getAttribute("value")
+			name: listNested[i].childNodes[3].getAttribute("value"),
+			supertype: { name:listNested[i].childNodes[4].getAttribute("value"), 
+						idAc: parseInt(listNested[i].childNodes[5].getAttribute("value"))
+					},
+			abstractUnit: unitsNested(listNested[i].getElementsByClassName("slices"))
 		}
 	};
 	return nestedObjs;

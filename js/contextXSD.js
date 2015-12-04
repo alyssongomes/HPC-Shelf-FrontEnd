@@ -1,6 +1,6 @@
 var br_ufc_lia_storm = {
   name: 'br_ufc_lia_storm',
-  //defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
+  defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
   typeInfos: [{
       type: 'classInfo',
       localName: 'ContextContract',
@@ -548,7 +548,7 @@ var br_ufc_lia_storm = {
       typeInfo: 'br_ufc_lia_storm.CandidateListType'
     }, {
       elementName: 'abstract_component',
-      typeInfo: 'br_ufc_lia_storm.AbstractComponentType'
+      typeInfo: 'br_ufc_lia_storm.AbstractComponentType',
     }]
 };
 

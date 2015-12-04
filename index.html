@@ -1,142 +1,26 @@
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="js/jquery/jquery-ui.css"/>
-        <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-demo.css"/>
-        <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-defaults.css"/>
-        <script type="text/javascript" src="js/contextXSD.js"></script>
-        <script type="text/javascript" src="js/jsonix/Jsonix-min.js"></script>
-        <script type ="text/javascript" src="js/jquery/jquery-2.1.4.min.js"></script>
-        <script type ="text/javascript" src="js/jquery/jquery-ui.js"></script>
-        <script type ="text/javascript" src="js/jsPlumb/dom.jsPlumb-1.7.6-min.js"></script>
-        <script type="text/javascript" src="js/component.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="js/main.js" charset="UTF-8"></script>
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
-        <title>HPC-Shelf</title>
-    </head>
-    <body >
-        <!--<div id = "menus"></div>
-        <div id = "tools">
-            <a href="#" id="submeter"> Submeter</a>
-        </div>-->
-
-        <div id="quadro1">
-            <ul>
-                <li><a href="#newComponent">Novo Componente</a></li>
-                <li><a href="#autoScroll">Componentes</a></li>
-                <li><a href="#parameters">Parametros</a></li> 
-            </ul>
-            <div id="newComponent">
-                <h4>Nome do componente: </h4>
-                <input id="nameComponent" /><br/>
-                <h4>Tipo do componente: </h4>
-                <label id="nameSuperType"></label>
-                <a href="#" id="selectType">Selecionar Tipo</a><br/>
-                <h4>Parametros de contexto: </h4>
-                <a href="#" id="addParameter">Adicionar Parametro</a><br/><br/>
-                <table id="listParameters"></table>
-                <h4>Nome da Unidade abstrata: </h4>
-                <a href="#" id="addUnidade">Adicionar Unidade</a>
-                <input id="nameUnidade"/><br/><br/>
-                <table id="addsUnidades"></table>
-                <h4>Componentes aninhados: </h4>
-                <a href="#" id="addComponent">Adicionar componente</a><br/><br/>
-                <table id="addsComponents"></table>
-                <br/><br/>
-                <a href="#" id="saveComponent">Salvar Componente</a>
-            </div>
-            <div id="autoScroll">
-                <center>
-                    <ul id="sort1"></ul>
-                    <img id ="esperando" src="img/ajax.gif">
-                </center>
-            </div>
-            <div id="parameters">
-                <label id="InfoComp" style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Componente</label>
-                <br/><br/>
-                <label style="float: left; margin-top: 3px ; font-size: 20;">Super Tipo:</label><br/><br/>
-                <label id="InfoSuper" style=" font-size: 20;">...</label>
-                <br/><br/>
-                <label style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Parametros:</label>
-                <a href="#" id="addPar"> Add Parametro</a>
-                <br/><br/>
-                <table id ="tableParam"></table>
-            </div>
-        </div>
-        <div id="quadro2">
-        	<div class="container" id ="container">
-	            <h3><center>Aplicação</center></h3>
-	            <div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
-	            	<div id="sort2" class="connectedSortable" >
-	            	<div id="trash">
-	                	<img alt="lixo" src="img/lixo.png" height="70px" width="70px" style="float:left;">
-	                	<h3>DESCARTAR</h3>
-	            	</div>	
-	            	</div>
-	            </div>
-            </div>
-        </div>
-        <p id="msg"></p>
-        <div id="divMenu">
-            <ul>
-                <li>MAKE SOURCE</li>
-                <li>DELETE</li>
-                <!--<li>INFORMATIONS</li>-->
-            </ul>
-        </div>
-        <div id="dialog-super" title="Selecionar Super Type">
-            <div id="containerSuperComp">
-                <ul id="listSuperComponents"></ul>
-            </div>
-            <div id = "containerDetailsSuper">
-                <center>
-                    <label id="nameSuperComp"></label>
-                </center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
-                <center><div id="pararSuper"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
-                <center><div id="nestCompSuper"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
-                <center><div id="unitCompSuper"></div></center>
-
-            </div>
-        </div>
-        <div id="dialog-param" title="Definir parametros de contexto">
-            <div id="containerParamComp">
-                <ul id="listParamComponents"></ul>
-            </div>
-            <div id="containerDetailPar">
-                <center>
-                    <label id="nameParamComp"></label>
-                </center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
-                <center><div id="pararCompAbs"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
-                <center><div id="nestCompAbs"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
-                <center><div id="unitCompAbs"></div></center>
-                <center>
-                    &nbsp;&nbsp;&nbsp;<input type="checkbox" id="variavel" ><font color = "blue"><strong>Compartilhar variável</strong></font>
-                    <h4>Bound(Limite)</h4><input type="text" id="bound">
-                </center>
-            </div>
-        </div>
-        <div id="dialog-comp" title="Selecionar componentes">
-            <div id="containerNestComp">
-                <ul id="listNestedComponents"></ul>
-            </div>
-            <div id="containerDetailNestComp">
-                <center>
-                    <label id="nameNestedComp"></label>
-                </center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
-                <center><div id="pararNestComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
-                <center><div id="nestNestedComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
-                <center><div id="unitNestedComp"></div></center>
-            </div>
-        </div>
-    </body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style2.css"/>
+		<link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+		<title>HPC-Shelf :: Principal</title>
+	</head>
+	<body>
+		<div id="top">
+			<center>
+				<img src="img/logo.png"/>
+				<h1>HPC-<i>Shelf</i></h1>
+			</center>
+		</div>
+		<div id="down">
+			<div id="bts">
+				<div id="btNovo"><a href="cmp_abstract.html"> Criar Componente Qualificador</a></div>
+				<div id="btRegCon"><a href="cmp_concrete.html"> Registrar Componente Concreto</a></div>
+			</div>
+		</div>
+		<div id="rodaPe">
+			<center>
+				<font color="white"><h3>Plataforma de CAD Baseada em componentes paralelos</h3></font>
+			</center>
+		</div>
+	</body>
 </html>

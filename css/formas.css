@@ -1,0 +1,64 @@
+.component {
+	position: absolute;
+	width: 300px;
+	height: 200px;
+	background: cadetblue;
+	-moz-border-radius: 100px / 50px;
+	-webkit-border-radius: 100px / 50px;
+	border-radius: 300px / 200px;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.unit{
+	height: 30px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: white;
+	background: #483D8B;
+	float: left;
+	margin-top: -1px;
+	margin-right: 5px;
+}
+
+.unit h4{
+	vertical-align: middle;
+	display: table-cell;
+	line-height: 30px;
+}
+
+.slice{
+	/*position: absolute;*/
+	height: 30px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	color: white;
+	background: #008B8B;
+	float: left;
+	margin-top: -1px;
+	margin-right: 5px;
+}
+
+.slice h4{
+	vertical-align: middle;
+	display: table-cell;
+	line-height: 30px;
+}
+
+.componentNested{
+	position: absolute;
+	width: 200px;
+	height: 100px;
+	background: #2F4F4F;
+	-moz-border-radius: 100px / 50px;
+	-webkit-border-radius: 100px / 50px;
+	border-radius: 100px / 50px;
+	box-shadow: 5px 5px 5px #888888;
+}
+
+.endPointPar{
+	background-color: silver;
+	color: black;
+}
+

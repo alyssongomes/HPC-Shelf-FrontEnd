@@ -4,7 +4,7 @@ body{
 
 #quadro1{
     margin: 3px 3px 1px 1px;
-    height: 500px;
+    width: 28%;
     float: left;
     border-radius: 10px; 
 }
@@ -13,10 +13,8 @@ body{
     background-color: silver; 
     margin: 3px 3px 3px 0; 
     padding: 10px; 
-    /*width: 880px; */
     width: 69%;
     float: left; 
-    /*\border-radius: 10px;*/
     
 }
 
@@ -26,11 +24,24 @@ body{
 }
 
 #tools{
-    background-color: cadetblue; 
+    background-color: cadetblue;
     margin: 3px 3px 3px 0; 
     padding: 10px 0px 10px 5px;
     width: 100%;
     border-radius: 5px;    
+}
+
+#tools > img{
+    position: relative;
+    width: 10%;
+    height: 10%;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#tools > h1{
+    color: black;
 }
 
 #menus{
@@ -42,13 +53,13 @@ body{
 }
 
 #autoScroll{
-    height: 400px;
+    height: 80%;
     width: auto; 
     overflow: auto;
 }
 
 #newComponent{
-    height: 400px;
+    height: 80%;
     overflow: auto;
 }
 
@@ -67,15 +78,9 @@ body{
 }
 
 #autoScroll2{
-    height: 75%; 
+    height: 80%; 
     width: 100%;
     background-color: silver; 
-    overflow: auto;
-}
-
-#sort2{
-	height: 450px; 
-    width: 750px;
     overflow: auto;
 }
 
