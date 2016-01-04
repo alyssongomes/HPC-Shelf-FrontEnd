@@ -11,7 +11,7 @@
         <script type ="text/javascript" src="js/jsPlumb/dom.jsPlumb-1.7.6-min.js"></script>
         <script type="text/javascript" src="js/component.js" charset="UTF-8"></script>
         <script type="text/javascript" src="js/cmpAbs.js" charset="UTF-8"></script>
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style-abstract.css"/>
         <link rel="stylesheet" type="text/css" href="css/formas.css"/>
         <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
         <title>HPC-Shelf</title>
@@ -44,7 +44,7 @@
                         <legend><h3 color="white">Propriedades</h3></legend>
                         <h4>Unidades abstrata: </h4>
                         <table id="addsUnidades"></table>
-                        <h4>Parametros de contexto: </h4>
+                        <h4>Parâmetros de contexto: </h4>
                         <table id="listParameters"></table>
                         <h4>Componentes aninhados: </h4>
                         <table id="addsComponents">
@@ -96,13 +96,13 @@
         <div id="divMenu">
             <ul>
                 <li>ADD UNIDADE ABSTRATA</li>
-                <li>ADD PARAMETROS CONTEXTO</li>
+                <li>ADD PARÂMETROS CONTEXTO</li>
                 <li>ADD COMPONENTE ANINHADO</li>
                 <li>CRIAR NOVO COMPONENTE ANINHADO</li>
                 <li>DELETE</li>
             </ul>
         </div>
-        
+
         <div id="dialog-super" title="Selecionar Super Type">
             <div id="containerSuperComp">
                 <ul id="listSuperComponents"></ul>
@@ -117,6 +117,12 @@
                 <center><div id="nestCompSuper"></div></center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
                 <center><div id="unitCompSuper"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Fatias</h4></font>
+    						<center><div id="slicesCompSuper"></div></center>
+    						<font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Qualidade</h4></font>
+    						<center><div id="qualytiCompSuper"></div></center>
+    						<font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Custo</h4></font>
+    						<center><div id="costCompSuper"></div></center>
 
             </div>
         </div>
@@ -148,6 +154,12 @@
                 <center><div id="nestNestedComp"></div></center>
                 <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
                 <center><div id="unitNestedComp"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Fatias</h4></font>
+                <center><div id="slicesNestedComp"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Qualidade</h4></font>
+                <center><div id="qualytiNestedComp"></div></center>
+                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Custo</h4></font>
+                <center><div id="costNestedComp"></div></center>
             </div>
         </div>
     </body>

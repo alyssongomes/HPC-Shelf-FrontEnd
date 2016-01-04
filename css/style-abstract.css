@@ -1,21 +1,22 @@
 body{
     background-color: #778899;
+    margin: 0px;
 }
 
 #quadro1{
     margin: 3px 3px 1px 1px;
     width: 28%;
     float: left;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
-#quadro2{ 
-    background-color: silver; 
-    margin: 3px 3px 3px 0; 
-    padding: 10px; 
+#quadro2{
+    background-color: silver;
+    margin: 3px 3px 3px 0;
+    padding: 10px;
     width: 69%;
-    float: left; 
-    
+    float: left;
+
 }
 
 #trash{
@@ -25,10 +26,10 @@ body{
 
 #tools{
     background-color: cadetblue;
-    margin: 3px 3px 3px 0; 
+    margin: 3px 3px 3px 0;
     padding: 10px 0px 10px 5px;
     width: 100%;
-    border-radius: 5px;    
+    border-radius: 5px;
 }
 
 #tools > img{
@@ -48,13 +49,13 @@ body{
     background-color: black;
     width: 100%;
     height: 20px;
-    margin: 3px 3px 3px 0; 
+    margin: 3px 3px 3px 0;
     padding: 10px 0px 10px 5px;
 }
 
 #autoScroll{
     height: 80%;
-    width: auto; 
+    width: auto;
     overflow: auto;
 }
 
@@ -64,41 +65,41 @@ body{
 }
 
 #containerSuperComp, #containerParamComp , #containerNestComp{
-    float:left; 
+    float:left;
     height: 370px;
-    width: 280px; 
+    width: 280px;
     overflow: auto;
 }
 
 #containerDetailsSuper, #containerDetailPar, #containerDetailNestComp{
-    float:left; 
+    float:left;
     height: 370px;
-    width: 230px; 
+    width: 230px;
     overflow: auto;
 }
 
 #autoScroll2{
-    height: 80%; 
+    height: 80%;
     width: 100%;
-    background-color: silver; 
+    background-color: silver;
     overflow: auto;
 }
 
 #parameters{
-    height: 400px; 
+    height: 400px;
     overflow: auto;
 }
 
-ul { 
-    list-style-type: none; 
+ul {
+    list-style-type: none;
     margin: 0;
-    padding: 0; 
+    padding: 0;
     margin-bottom: 5px;
 }
 
-li { 
+li {
     margin: 5px;
-    padding: 5px; 
+    padding: 5px;
     width: auto;
     border-radius: 2px;
     text-align: center;

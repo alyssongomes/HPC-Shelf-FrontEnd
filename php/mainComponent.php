@@ -14,11 +14,16 @@
 			echo $opComp->loadComponents();
 			break;
 
+		case 'contracts':
+			$acId = $_GET["acId"];
+			echo $opComp->listContract($acId);
+			break;
+
 		case 'saveComp':
 			$xml = $_POST["newComponent"];
 			$opComp->saveXMLComponent($xml);
 			break;
-		
+
 		default:
 			echo "<p>Operação Inválida!</p>";
 			break;

@@ -18,7 +18,7 @@ function init() {
             updateSlicesNested(info, true);
         });
     });
-    
+
     $("#quadro1").tabs();
     $("#trash").droppable({
         drop: function( event, ui ) {
@@ -80,7 +80,7 @@ function init() {
     /*FIM MODAIS*/
 
 
-    /* MENU POP-UP */    
+    /* MENU POP-UP */
     document.addEventListener("click",
         function () {
             document.getElementById("divMenu").style.visibility = "hidden";
@@ -104,7 +104,7 @@ function init() {
             dialogComp.dialog("open");
         }
     );
-    
+
     $("#divMenu > ul > li:nth-child(5)").click(
         function () {
             if(confirm("Deseja realmente deletar?")){
@@ -112,7 +112,7 @@ function init() {
             }
         }
     );
-    
+
     /* FIM MENU POP-UP*/
 
 
@@ -142,8 +142,8 @@ function init() {
             $("#nameComponent").val("");
             $("#nameSuperType > h3").remove();
             newComp = true;
-        //  }   
-    }); 
+        //  }
+    });
     /*FIM BOTÕES*/
 
     loadCompModal();
@@ -160,10 +160,10 @@ function createNewComponent(name, supertype){
     $("#sort2").append(div);
     $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
     jsPlumb.makeTarget(div,{
-        isTarget: true, 
-        endpoint:"Rectangle", 
+        isTarget: true,
+        endpoint:"Rectangle",
         endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
-        anchor: "Continuous" 
+        anchor: "Continuous"
     });
     jsPlumb.draggable(div);
 }
@@ -197,12 +197,12 @@ function addUnits(element, js){
 
 function addParameter(element, js){
 
-    var idPar = identifier($("#listParameters").find("tr"));   
+    var idPar = identifier($("#listParameters").find("tr"));
     var tabParam = $("#listParameters");
     var tam = tabParam.find("tr").length;
 
     var linha  = $("<tr/>",{id: idPar});
-    var coluna1 = $("<td/>",{id:0,text: $("#containerDetailPar").find("input[id=name]").val(),value:$("#containerDetailPar").find("input[id=name]").val(), style:"width: 70px; color: #FFFFFF;", width: 150}).append("<p hidden value='"+$("#containerDetailPar").find("h3").attr("value")+"'></p>");                    
+    var coluna1 = $("<td/>",{id:0,text: $("#containerDetailPar").find("input[id=name]").val(),value:$("#containerDetailPar").find("input[id=name]").val(), style:"width: 70px; color: #FFFFFF;", width: 150}).append("<p hidden value='"+$("#containerDetailPar").find("h3").attr("value")+"'></p>");
     var coluna2 = $("<td/>",{id:0, text: $("#variavel").is(':checked')==true? "Compar.":"Local", value: $("#bound").val(),style:"color: blue;", width: 70 });
     var lineDelete = $("<td/>",{id:0, text: "DEL", style: "color: red;"}).click(function(){
         $("#listParameters").find("tr[id="+idPar+"]").remove();
@@ -214,12 +214,12 @@ function addParameter(element, js){
     tabParam.append(linha);
     $("#variavel").attr("checked",false);
     $("#bound > h3").remove();
-    $("#containerDetailPar").find("input[id=name]").val("");  
+    $("#containerDetailPar").find("input[id=name]").val("");
 }
 
 function addComponentNested(element, js, name, supertype, id, idSuper){
 
-    var slices = $("#dialog-comp").find("div[id='unitNestedComp']").find("input:checked");    
+    var slices = $("#dialog-comp").find("div[id='unitNestedComp']").find("input:checked");
     if(slices.length == 0){
         alert("Nenhuma unidade foi selecionada");
         dialogComp.dialog("open");
@@ -253,8 +253,8 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
         line.append("<p hidden id='id' value="+id+"></p>");
         tableCompNested.append(line);
 
-        addSlice(element, div, slices,js);    
-        
+        addSlice(element, div, slices,js);
+
     }
 }
 
@@ -268,18 +268,18 @@ function addSlice(elementTarget, elementSource, slices, js){
     divSlice.append(nameUniSlice);
     divSlice.append("<p hidden id='id' value='"+slice.id+"'></p>");
     elementTarget.append(divSlice);*/
-    
+
     //var divUnid = $("<div/>",{class:'slice' /*,id: idUnit*/});
     /*var nameUni = $("<h4/>",{value: slice.name, style:"width:50px;", text:"Slice "+tam});
     divUnid.append(nameUni);
     divUnid.append("<p hidden id='id' value='"+slice.id+"'></p>");
     elementSource.append(divUnid);*/
 
-    
+
     var jsplumb = jsPlumb.getInstance();
 
     for (var i = 0; i < slices.length; i++) {
-        var slice = { name:slices[i].getAttribute("value"), id:slices[i].getAttribute("id") };    
+        var slice = { name:slices[i].getAttribute("value"), id:slices[i].getAttribute("id") };
         /*var line = $("<tr/>");
         line.append($("<td/>",{id: slice.id, value: slice.name, text: slice.name, style:"color: white; width:150px;"}));
         line.append($("<td/>",{text: "Slice "+tam , style:"color: white;"}));
@@ -296,7 +296,7 @@ function addSlice(elementTarget, elementSource, slices, js){
             anchor: "Continuous"
         });*/
         jsPlumb.addEndpoint ( elementSource, {
-            endpoint : "Rectangle" , 
+            endpoint : "Rectangle" ,
             endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
             connector:"StateMachine",
             isSource : true,
@@ -328,10 +328,10 @@ function addSlice(elementTarget, elementSource, slices, js){
         connector:"StateMachine",
         deleteEndpointsOnDetach: false,
         reattach: true,
-        anchor: ["Bottom","Top"] 
+        anchor: ["Bottom","Top"]
         scope: "#666",
         connectorStyle : { strokeStyle:"#666" },
-        connectorOverlays:[ 
+        connectorOverlays:[
             [ "Arrow", { width:20, length:20, location: 0.75, id:"arrow" } ]
          ],
         Container: "quadro2",
@@ -399,7 +399,7 @@ function loadCompModal () {
             $("#nameSuperComp > p").remove();
             $("#nameSuperComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
             $("#nameSuperComp").append("<p value='"+this.firstChild.getAttribute("id")+"'></p>");
-            loadDetaisComp($("#nameSuperComp") ,this.firstChild.text,$("#pararSuper"),$("#nestCompSuper"),$("#unitCompSuper"),$("#nameSuperComp"));
+            loadDetaisComp($("#nameSuperComp") ,this.firstChild.text,$("#pararSuper"),$("#nestCompSuper"),$("#unitCompSuper"),$("#nameSuperComp"), $("#slicesCompSuper"), $("#qualytiCompSuper"), $("#costCompSuper"));
         });
         $("#listSuperComponents").append(li);
 
@@ -419,19 +419,25 @@ function loadCompModal () {
             $("#nameNestedComp > p").remove();
             $("#nameNestedComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
             $("#nameNestedComp").append("<p hidden id='"+this.firstChild.getAttribute("id")+"' value='"+this.firstChild.getAttribute("value")+"'></p>");
-            loadDetaisComp($("#nameNestedComp"), this.firstChild.text,$("#pararNestComp"),$("#nestNestedComp"),$("#unitNestedComp"),$("#nameNestedComp"));
+            loadDetaisComp($("#nameNestedComp"), this.firstChild.text,$("#pararNestComp"),$("#nestNestedComp"),$("#unitNestedComp"),$("#nameNestedComp"),$("#slicesNestedComp"), $("#qualytiNestedComp"), $("#costNestedComp"));
         });
         $("#listNestedComponents").append(liC);
     }
 }
 
-function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name) {
+function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name, listSlices, listQualities, listCosts) {
     listParar.empty();
     listNestedComp.empty();
     listAbsUnit.empty();
+		listSlices.empty();
+    listQualities.empty();
+    listCosts.empty();
     var parar = getContextParameters(component);
     var nested = getNestedComponents(component);
     var unit = getAbstractsUnits(component);
+		var slice = getSlicesComponent(component);
+    var quality = getQualityParameter(component);
+    var cost = getCostParameter(component);
 
     viewComp.append("<p id='idSuper' value='"+parar[1]+"'></p>");
 
@@ -447,15 +453,28 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     for (var i = 0; i < unit.length; i++) {
         listAbsUnit.append("<input type='checkbox' value='"+unit[i].name+"' id='"+unit[i].id+"'/><strong>"+unit[i].name+"<strong/></br>");
     };
+
+		for (var i = 0; i < slice.length; i++) {
+        listSlices.append("<h4>"+slice[i].name+"<h4>");
+    };
+
+    for (var i = 0; i < quality.length; i++) {
+        listQualities.append("<h4>"+quality[i].name+"<h4>");
+    };
+
+    for (var i = 0; i < cost.length; i++) {
+			listCosts.append("<h4>"+cost[i].name+"<h4>");
+        //listAbsUnit.append("<input type='checkbox' value='"+unit[i].name+"' id='"+unit[i].id+"'/><strong>"+unit[i].name+"<strong/></br>");
+    };
 }
 
 function showMenu(idelement) {
     ELEMENT = idelement;
-    
+
     var X = event.clientX;
     var Y = event.clientY;
     var menu = document.getElementById("divMenu");
-        
+
     menu.style.top = Y.toString() + "px";
     menu.style.left = X.toString() + "px";
     menu.style.visibility = "visible";

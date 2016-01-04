@@ -13,9 +13,9 @@ function createComponentAbstract(element){
 //Carrega os componentes abstratos do catálogo do CORE para tela
 function getAbstractComponents(){
 	var listComponents = new Array();
-	$.ajax({ 
-		url:"php/mainComponent.php?opcode=loadComponents", 
-		//url:"php/resposta.xml", 
+	$.ajax({
+		url:"php/mainComponent.php?opcode=loadComponents",
+		//url:"php/resposta.xml",
 		async: false,
 		dataType: "xml",
 		type:"POST",
@@ -23,10 +23,10 @@ function getAbstractComponents(){
 			try{
 	        	var components = data.getElementsByTagName("abstract_component");
 	            for(var i=0; i<components.length;i++){
-	                var component = { 
+	                var component = {
 	                	name: components[i].getAttribute("name"),
 	                	super: components[i].getAttribute("supertype"),
-	                	id: components[i].getAttribute("ac_id") 
+	                	id: components[i].getAttribute("ac_id")
 	                };
 	              	listComponents[i] = component;
 	            }
@@ -34,14 +34,15 @@ function getAbstractComponents(){
         		return false;
         	}
 	    }
+	}).fail(function() {
+		alert("Falhou!");
 	});
 	return listComponents;
 }
-
 //retorna uma lista com os parametros de contexto do componente abstrato
 function getContextParameters(component){
 	var listParameters = new Array();
-	$.ajax({ 
+	$.ajax({
 		//url:"php/details.php?name="+component,
 		url:"php/mainComponent.php?opcode=details&name="+component,
 		async: false,
@@ -62,8 +63,8 @@ function getContextParameters(component){
 
 function getAbstractsUnits(component){
 	var listAbstractsUnits = new Array();
-    $.ajax({ 
-		//url:"php/details.php?name="+component, 
+    $.ajax({
+		//url:"php/details.php?name="+component,
 		url:"php/mainComponent.php?opcode=details&name="+component,
 		dataType: "xml",
 		async: false,
@@ -81,12 +82,11 @@ function getAbstractsUnits(component){
 	});
 	return listAbstractsUnits;
 }
-
 //retorna uma lista com os components aninhados de um determinado component
 function getNestedComponents(component){
 	var listNestedComponents = new Array();
-    $.ajax({ 
-		//url:"php/details.php?name="+component, 
+    $.ajax({
+		//url:"php/details.php?name="+component,
 		url:"php/mainComponent.php?opcode=details&name="+component,
 		dataType: "xml",
 		async: false,
@@ -99,6 +99,72 @@ function getNestedComponents(component){
 	    }
 	});
 	return listNestedComponents;
+}
+
+function getSlicesComponent(component) {
+		var listslicesComponents = new Array();
+		$.ajax({
+		//url:"php/details.php?name="+component,
+		url:"php/mainComponent.php?opcode=details&name="+component,
+		dataType: "xml",
+		async: false,
+		type:"GET",
+		success: function(data) {
+					var slicesNestedComponents = data.getElementsByTagName("slices");
+						for (var i = 0; i < slicesNestedComponents.length; i++) {
+								listslicesComponents[i] = {
+									name: slicesNestedComponents.item(i).getAttribute("name"),
+									sliceId: slicesNestedComponents.item(i).getAttribute("slice_id"),
+									idCmp: slicesNestedComponents.item(i).getAttribute("inner_component_id")
+								};
+						}
+			}
+	});
+	return listslicesComponents;
+}
+
+function getQualityParameter(component) {
+	var listQualityComponents = new Array();
+	$.ajax({
+		//url:"php/details.php?name="+component,
+		url:"php/mainComponent.php?opcode=details&name="+component,
+		dataType: "xml",
+		async: false,
+		type:"GET",
+		success: function(data) {
+					var qualityComponents = data.getElementsByTagName("quality_parameters");
+						for (var i = 0; i < qualityComponents.length; i++) {
+								listQualityComponents[i] = {
+									name: qualityComponents.item(i).getAttribute("name"),
+									qpId: qualityComponents.item(i).getAttribute("qp_id"),
+									kindId: qualityComponents.item(i).getAttribute("kind_id")
+								};
+						}
+			}
+	});
+	return listQualityComponents;
+}
+
+function getCostParameter(component) {
+	var listCostParameters = new Array();
+	$.ajax({
+		//url:"php/details.php?name="+component,
+		url:"php/mainComponent.php?opcode=details&name="+component,
+		dataType: "xml",
+		async: false,
+		type:"GET",
+		success: function(data) {
+					var costParameters = data.getElementsByTagName("cost_parameters");
+						for (var i = 0; i < costParameters.length; i++) {
+								listCostParameters[i] = {
+									name: costParameters.item(i).getAttribute("name"),
+									copId: costParameters.item(i).getAttribute("cop_id"),
+									kindId: costParameters.item(i).getAttribute("kind_id")
+								};
+						}
+			}
+	});
+	return listCostParameters;
 }
 
 //salva os parametros de contexto de um determinado componente
@@ -142,7 +208,7 @@ function parameters(listParameters){
 			bound: {
 					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value"))
 				}
-			}	
+			}
 	}
 	return parametersObjs;
 }
@@ -165,7 +231,7 @@ function slices(list){
 			innerComponentId: parseInt(list[j].childNodes[1].id)
 		}
 	};
-	return slices;	
+	return slices;
 }
 
 function unitsNested(list){
@@ -184,7 +250,7 @@ function nested(listNested){
 	for (var i = 0; i < listNested.length; i++) {
 		nestedObjs[i] = {
 			name: listNested[i].childNodes[3].getAttribute("value"),
-			supertype: { name:listNested[i].childNodes[4].getAttribute("value"), 
+			supertype: { name:listNested[i].childNodes[4].getAttribute("value"),
 						idAc: parseInt(listNested[i].childNodes[5].getAttribute("value"))
 					},
 			abstractUnit: unitsNested(listNested[i].getElementsByClassName("slices"))
@@ -210,4 +276,3 @@ function exist(id,list){
 	}
 	return false;
 }
-

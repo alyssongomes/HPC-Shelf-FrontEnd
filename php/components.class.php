@@ -8,8 +8,8 @@ class Component{
 		header('Access-Control-Allow-Origin: *');
 		try{
 		    $xml = file_get_contents("http://storm.lia.ufc.br:8080/axis2/services/CoreServices?list");
-		    $xml = str_replace("<ns:listResponse xmlns:ns=\"http://WServices.storm.ufc.br\"><ns:return>","", $xml);
-		    $xml = str_replace("</ns:return></ns:listResponse>", "", $xml);
+		    $xml = str_replace("<ns:listResponse xmlns:ns=\"http://webservices.storm.ufc.br\"><ns:return>","", $xml);
+		    $xml = str_replace("</ns:return></ns:listResponse>","", $xml);
 		    $xml = htmlspecialchars_decode($xml);
 		   	$xml = html_entity_decode($xml);
 		    return $xml;
@@ -22,8 +22,22 @@ class Component{
 		try{
 			header('Access-Control-Allow-Origin: *');
 		    $xml = file_get_contents("http://storm.lia.ufc.br:8080/axis2/services/CoreServices/getAbstractComponent?name=".$name);
-		    $xml = str_replace("<ns:getAbstractComponentResponse xmlns:ns=\"http://WServices.storm.ufc.br\"><ns:return>","", $xml);
+		    $xml = str_replace("<ns:getAbstractComponentResponse xmlns:ns=\"http://webservices.storm.ufc.br\"><ns:return>","", $xml);
 		    $xml = str_replace("</ns:return></ns:getAbstractComponentResponse>", "", $xml);
+		    $xml = htmlspecialchars_decode($xml);
+		    $xml = html_entity_decode($xml);
+		    return $xml;
+	    } catch(Exception $e){
+			echo 'Exceção capturada: '.$e->getMessage()."\n";
+		}
+	}
+
+	function listContract($acId){
+		try{
+			header('Access-Control-Allow-Origin: *');
+		    $xml = file_get_contents("http://storm.lia.ufc.br:8080/axis2/services/CoreServices/listContract?ac_id=".$acId);
+		    $xml = str_replace("<ns:listContractResponse xmlns:ns=\"http://webservices.storm.ufc.br\"><ns:return>","", $xml);
+		    $xml = str_replace("</ns:return></ns:listContractResponse>", "", $xml);
 		    $xml = htmlspecialchars_decode($xml);
 		    $xml = html_entity_decode($xml);
 		    return $xml;
@@ -40,6 +54,8 @@ class Component{
 		echo "Não pode ser editado!<br>";
 		}
 	}
+
+
 }
 
 ?>
