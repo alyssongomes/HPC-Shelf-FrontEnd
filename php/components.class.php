@@ -47,11 +47,70 @@ class Component{
 	}
 
 	function saveXMLComponent($xml){
-		if ($arquivo = fopen("newComponentAbstract.xml","w")){
+		try{
+			header('Access-Control-Allow-Origin: *');
+			//$xml = str_replace("#", "<", $xml);
+			//$xml = str_replace("@", ">", $xml);
+			//$xml = str_replace(" ", "%", $xml);
+			//$xml = htmlspecialchars_decode($xml);
+		    //$xml = html_entity_decode($xml);
+		    //$xml = 
+		    //$xml = "http://storm.lia.ufc.br:8080/axis2/services/CoreServices/addAbstractComponent?cmp=".$xml;
+			//$result = file_get_contents($xml);
+			/*echo $xml;
+			if($arquivo = fopen("newComponentAbstract.xml","w")){
+				fputs($arquivo,$xml);
+				fclose($arquivo);
+				echo $result;
+			}else{
+				echo "Não pode ser editado!<br>";
+			}*/
+			//return $result;
+			$content = http_build_query(array(
+				'cmp'=> $xml
+			));
+
+			$context = stream_context_create(array(
+				'http' => array(
+					'method' => 'POST',
+					'content' => $content
+				)
+			));
+
+			$result = file_get_contents("http://storm.lia.ufc.br:8080/axis2/services/CoreServices/addAbstractComponent", null,$context);
+			echo $result;
+			/*if ($arquivo = fopen("newComponentAbstract.xml","w")){
+				fputs($arquivo,$xml);
+				fclose($arquivo);
+				echo "resultado: ".$result;
+			}else{
+				echo "Não pode ser editado!<br>";
+			}*/
+		}catch(Exception $e){
+			echo 'Exceção capturada: '.$e->getMessage()."\n";
+		}
+	}
+
+	function saveXMLContract($xml){
+		$content = http_build_query(array(
+			'cmp'=> $xml
+		));
+
+		$context = stream_context_create(array(
+			'http' => array(
+				'method' => 'POST',
+				'content' => $content
+			)
+		));
+
+		$result = file_get_contents("http://storm.lia.ufc.br:8080/axis2/services/CoreServices/addContextContract", null,$context);
+		echo $result;
+
+		if ($arquivo = fopen("newContract.xml","w")){
 			fputs($arquivo,$xml);
 			fclose($arquivo);
 		}else{
-		echo "Não pode ser editado!<br>";
+			echo "Não pode ser editado!<br>";
 		}
 	}
 

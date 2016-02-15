@@ -74,7 +74,7 @@ body{
 #containerDetailsSuper, #containerDetailPar, #containerDetailNestComp{
     float:left;
     height: 370px;
-    width: 230px;
+    width: 338px;
     overflow: auto;
 }
 

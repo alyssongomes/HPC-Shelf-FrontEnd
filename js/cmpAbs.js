@@ -30,7 +30,7 @@ function init() {
     var dialogSuper = $( "#dialog-super" ).dialog({
         autoOpen: false,
         height: 500,
-        width: 550,
+        width: 650,
         modal: true,
         buttons: {
             "Selecionar": function(){
@@ -49,7 +49,7 @@ function init() {
     var dialogParam = $( "#dialog-param" ).dialog({
         autoOpen: false,
         height: 500,
-        width: 550,
+        width: 650,
         modal: true,
         buttons: {
             "Selecionar": function(){
@@ -65,7 +65,7 @@ function init() {
     var dialogComp = $( "#dialog-comp" ).dialog({
         autoOpen: false,
         height: 500,
-        width: 550,
+        width: 650,
         modal: true,
         buttons: {
             "Selecionar": function(){
@@ -105,7 +105,7 @@ function init() {
         }
     );
 
-    $("#divMenu > ul > li:nth-child(5)").click(
+    $("#divMenu > ul > li:nth-child(4)").click(
         function () {
             if(confirm("Deseja realmente deletar?")){
                 deleteElement($("#sort2 div[id='"+ELEMENT+"']"),jsplumb);
@@ -202,8 +202,10 @@ function addParameter(element, js){
     var tam = tabParam.find("tr").length;
 
     var linha  = $("<tr/>",{id: idPar});
-    var coluna1 = $("<td/>",{id:0,text: $("#containerDetailPar").find("input[id=name]").val(),value:$("#containerDetailPar").find("input[id=name]").val(), style:"width: 70px; color: #FFFFFF;", width: 150}).append("<p hidden value='"+$("#containerDetailPar").find("h3").attr("value")+"'></p>");
-    var coluna2 = $("<td/>",{id:0, text: $("#variavel").is(':checked')==true? "Compar.":"Local", value: $("#bound").val(),style:"color: blue;", width: 70 });
+    var coluna1 = $("<td/>",{id:0,text: $("#containerDetailPar").find("input[id=name]").val(),value:$("#containerDetailPar").find("input[id=name]").val(), style:"width: 70px; color: #FFFFFF;", width: 150})
+        .append("<p hidden value='"+$("#containerDetailPar").find("select").find("option:selected").attr("id")+"'></p>")
+        .append("<p hidden value='"+$("#containerDetailPar").find("select").find("option:selected").attr("value")+"'></p>");
+    var coluna2 = $("<td/>",{id:0, text: $("#variavel").val() == ""? "Local":"Compar.", title:$("#variavel").val(), value: $("#bound").val(),style:"color: blue;", width: 70 });
     var lineDelete = $("<td/>",{id:0, text: "DEL", style: "color: red;"}).click(function(){
         $("#listParameters").find("tr[id="+idPar+"]").remove();
         jsPlumb.deleteEndpoint(ep);
@@ -212,8 +214,9 @@ function addParameter(element, js){
     linha.append(coluna2);
     linha.append(lineDelete);
     tabParam.append(linha);
-    $("#variavel").attr("checked",false);
+    $("#variavel").val("");
     $("#bound > h3").remove();
+    $("#bound > select").remove();
     $("#containerDetailPar").find("input[id=name]").val("");
 }
 
@@ -391,7 +394,14 @@ function addNewAbstractComponent(){
 // FUNÇÕES PARA CARREGAR INFORMAÇÕES NA INTERFACE
 function loadCompModal () {
     var listComponents = getAbstractComponents();
-    for(var i=0; i<listComponents.length;i++){
+    if(listComponents.length == 0){
+        var li = $("<li/>");
+        li.append($("<p/>",{text:"Não foi possui carregar os componentes", style:"color:red"}));
+        $("#listSuperComponents").append(li);
+        $("#listParamComponents").append(li);
+        $("#listNestedComponents").append(li);
+    }else{
+        for(var i=0; i<listComponents.length;i++){
         var li = $("<li/>",{ value:i, class:"ui-state-default" });
         li.append($("<a/>",{id:listComponents[i].id,text:listComponents[i].name, value: listComponents[i].super, href:"#"}));
         li.click(function(){
@@ -407,7 +417,14 @@ function loadCompModal () {
         liP.append($("<a/>",{id:listComponents[i].id,text:listComponents[i].name, value: listComponents[i].super, href:"#"}));
         liP.click(function(){
             $("#bound > h3").remove();
+            $("#bound > select").remove();
             $("#bound").append("<h3 value='"+this.firstChild.getAttribute("id")+"'>"+this.firstChild.text+"</h3>");
+            var select = $("<select>",{style:"width:250px;"});
+            var contracts = getListContracts(parseInt(this.firstChild.getAttribute("id")));
+            for (var i = 0; i < contracts.length; i++) {
+                select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
+            };
+            $("#bound").append(select);
         });
         $("#listParamComponents").append(liP);
 
@@ -423,6 +440,7 @@ function loadCompModal () {
         });
         $("#listNestedComponents").append(liC);
     }
+    }    
 }
 
 function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name, listSlices, listQualities, listCosts) {
@@ -435,7 +453,7 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     var parar = getContextParameters(component);
     var nested = getNestedComponents(component);
     var unit = getAbstractsUnits(component);
-		var slice = getSlicesComponent(component);
+	var slice = getSlicesComponent(component);
     var quality = getQualityParameter(component);
     var cost = getCostParameter(component);
 
@@ -443,11 +461,11 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
 
 
     for (var i = 2; i < parar.length; i++) {
-        listParar.append("<h4>"+parar[i]+"<h4>");
+        listParar.append("<h4>"+parar[i].name+"<h4>");
     };
 
     for (var i = 0; i < nested.length; i++) {
-        listNestedComp.append("<h4>"+nested[i]+"<h4>");
+        listNestedComp.append("<h4>"+nested[i].name+"<h4>");
     };
 
     for (var i = 0; i < unit.length; i++) {

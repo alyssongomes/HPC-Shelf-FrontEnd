@@ -19,9 +19,14 @@
 			echo $opComp->listContract($acId);
 			break;
 
-		case 'saveComp':
+		case 'saveComponent':
 			$xml = $_POST["newComponent"];
 			$opComp->saveXMLComponent($xml);
+			break;
+
+		case 'saveContract':
+			$xml = $_POST["newContract"];
+			$opComp->saveXMLContract($xml);
 			break;
 
 		default:

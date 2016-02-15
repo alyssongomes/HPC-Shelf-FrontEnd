@@ -40,16 +40,16 @@ var br_ufc_lia_storm = {
           typeInfo: 'br_ufc_lia_storm.CostArgumentType'
         }, {
           type: 'element',
+          name: 'innerComponentsResolved',
+          collection: true,
+          elementName: 'inner_components_resolved',
+          typeInfo: 'br_ufc_lia_storm.CandidateListType'
+        }, {
+          type: 'element',
           name: 'innerComponents',
           collection: true,
           elementName: 'inner_components',
           typeInfo: 'br_ufc_lia_storm.ContextContract'
-        }, {
-          type: 'element',
-          name: 'qualityFunctions',
-          collection: true,
-          elementName: 'quality_functions',
-          typeInfo: 'br_ufc_lia_storm.QualityFunctionType'
         }, {
           name: 'ccName',
           typeInfo: 'String',
@@ -60,6 +60,11 @@ var br_ufc_lia_storm = {
           typeInfo: 'Int',
           attributeName: 'cc_id',
           type: 'attribute'
+        }, {
+          name: 'ownerId',
+          typeInfo: 'Int',
+          attributeName: 'owner_id',
+          type: 'attribute'
         }]
     }, {
       type: 'classInfo',
@@ -69,6 +74,79 @@ var br_ufc_lia_storm = {
           name: 'candidate',
           collection: true,
           elementName: 'candidate',
+          typeInfo: 'br_ufc_lia_storm.ContextContract'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'UnitFileType',
+      propertyInfos: [{
+          name: 'filename',
+          typeInfo: 'String',
+          attributeName: 'filename',
+          type: 'attribute'
+        }, {
+          name: 'extension',
+          typeInfo: 'String',
+          attributeName: 'extension',
+          type: 'attribute'
+        }, {
+          name: 'buildCfg',
+          typeInfo: 'String',
+          attributeName: 'build_cfg',
+          type: 'attribute'
+        }, {
+          name: 'version',
+          typeInfo: 'Int',
+          attributeName: 'version',
+          type: 'attribute'
+        }, {
+          name: 'filetype',
+          typeInfo: 'Int',
+          attributeName: 'filetype',
+          type: 'attribute'
+        }, {
+          name: 'uid',
+          typeInfo: 'Int',
+          attributeName: 'uid',
+          type: 'attribute'
+        }, {
+          name: 'path',
+          typeInfo: 'String',
+          attributeName: 'path',
+          type: 'attribute'
+        }, {
+          name: 'fileId',
+          typeInfo: 'Int',
+          attributeName: 'file_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ConcreteUnitType',
+      propertyInfos: [{
+          name: 'uId',
+          typeInfo: 'Int',
+          attributeName: 'u_id',
+          type: 'attribute'
+        }, {
+          name: 'auId',
+          typeInfo: 'Int',
+          attributeName: 'au_id',
+          type: 'attribute'
+        }, {
+          name: 'ccId',
+          typeInfo: 'Int',
+          attributeName: 'cc_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ContractList',
+      propertyInfos: [{
+          type: 'element',
+          name: 'contract',
+          collection: true,
+          elementName: 'contract',
           typeInfo: 'br_ufc_lia_storm.ContextContract'
         }]
     }, {
@@ -87,9 +165,9 @@ var br_ufc_lia_storm = {
           typeInfo: 'br_ufc_lia_storm.ContextParameterType'
         }, {
           type: 'element',
-          name: 'innerComponent',
+          name: 'innerComponents',
           collection: true,
-          elementName: 'inner_component',
+          elementName: 'inner_components',
           typeInfo: 'br_ufc_lia_storm.AbstractComponentType'
         }, {
           type: 'element',
@@ -138,27 +216,13 @@ var br_ufc_lia_storm = {
         }]
     }, {
       type: 'classInfo',
-      localName: 'AbstractUnitType',
-      propertyInfos: [{
-          name: 'auName',
-          typeInfo: 'String',
-          attributeName: 'au_name',
-          type: 'attribute'
-        }, {
-          name: 'abstractComponentName',
-          typeInfo: 'String',
-          attributeName: 'abstract_component_name',
-          type: 'attribute'
-        }, {
-          name: 'auId',
-          typeInfo: 'Int',
-          attributeName: 'au_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
       localName: 'QualityArgumentType',
       propertyInfos: [{
+          type: 'element',
+          name: 'function',
+          elementName: 'function',
+          typeInfo: 'br_ufc_lia_storm.QualityFunctionType'
+        }, {
           name: 'qpId',
           typeInfo: 'Int',
           attributeName: 'qp_id',
@@ -168,15 +232,6 @@ var br_ufc_lia_storm = {
           typeInfo: 'Double',
           attributeName: 'value',
           type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'PlatformProfileType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'platformContract',
-          elementName: 'platform_contract',
-          typeInfo: 'br_ufc_lia_storm.ContextContract'
         }]
     }, {
       type: 'classInfo',
@@ -236,68 +291,6 @@ var br_ufc_lia_storm = {
           name: 'kindId',
           typeInfo: 'Int',
           attributeName: 'kind_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'RankingFunctionTermType',
-      propertyInfos: [{
-          name: 'order',
-          typeInfo: 'Int',
-          attributeName: 'order',
-          type: 'attribute'
-        }, {
-          name: 'cpId',
-          typeInfo: 'Int',
-          attributeName: 'cp_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'ContextParameterType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'bound',
-          elementName: 'bound',
-          typeInfo: 'br_ufc_lia_storm.ContextContract'
-        }, {
-          type: 'element',
-          name: 'contextVariable',
-          elementName: 'context_variable',
-          typeInfo: 'br_ufc_lia_storm.ContextContract'
-        }, {
-          type: 'element',
-          name: 'value',
-          elementName: 'value',
-          typeInfo: 'String'
-        }, {
-          type: 'element',
-          name: 'contextArgument',
-          elementName: 'context_argument',
-          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
-        }, {
-          name: 'name',
-          typeInfo: 'String',
-          attributeName: 'name',
-          type: 'attribute'
-        }, {
-          name: 'cpId',
-          typeInfo: 'Int',
-          attributeName: 'cp_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'CostFunctionTermType',
-      propertyInfos: [{
-          name: 'order',
-          typeInfo: 'Int',
-          attributeName: 'order',
-          type: 'attribute'
-        }, {
-          name: 'cpId',
-          typeInfo: 'Int',
-          attributeName: 'cp_id',
           type: 'attribute'
         }]
     }, {
@@ -374,7 +367,7 @@ var br_ufc_lia_storm = {
           type: 'element',
           name: 'value',
           elementName: 'value',
-          typeInfo: 'String'
+          typeInfo: 'br_ufc_lia_storm.ContextArgumentValueType'
         }, {
           name: 'ccId',
           typeInfo: 'Int',
@@ -439,6 +432,153 @@ var br_ufc_lia_storm = {
         }]
     }, {
       type: 'classInfo',
+      localName: 'RankingArgumentType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'function',
+          elementName: 'function',
+          typeInfo: 'br_ufc_lia_storm.RankingFunctionType'
+        }, {
+          name: 'rankId',
+          typeInfo: 'Int',
+          attributeName: 'rank_id',
+          type: 'attribute'
+        }, {
+          name: 'value',
+          typeInfo: 'Double',
+          attributeName: 'value',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'AbstractUnitType',
+      propertyInfos: [{
+          name: 'auName',
+          typeInfo: 'String',
+          attributeName: 'au_name',
+          type: 'attribute'
+        }, {
+          name: 'acId',
+          typeInfo: 'Int',
+          attributeName: 'ac_id',
+          type: 'attribute'
+        }, {
+          name: 'auId',
+          typeInfo: 'Int',
+          attributeName: 'au_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'PlatformProfileType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'platformContract',
+          elementName: 'platform_contract',
+          typeInfo: 'br_ufc_lia_storm.ContextContract'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'RankingFunctionTermType',
+      propertyInfos: [{
+          name: 'order',
+          typeInfo: 'Int',
+          attributeName: 'order',
+          type: 'attribute'
+        }, {
+          name: 'cpId',
+          typeInfo: 'Int',
+          attributeName: 'cp_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ContextParameterType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'bound',
+          elementName: 'bound',
+          typeInfo: 'br_ufc_lia_storm.ContextContract'
+        }, {
+          type: 'element',
+          name: 'boundValue',
+          elementName: 'bound_value',
+          typeInfo: 'String'
+        }, {
+          type: 'element',
+          name: 'contextVariableRequired',
+          elementName: 'context_variable_required',
+          typeInfo: 'String'
+        }, {
+          type: 'element',
+          name: 'contextArgument',
+          elementName: 'context_argument',
+          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
+        }, {
+          type: 'element',
+          name: 'contextVariableProvided',
+          elementName: 'context_variable_provided',
+          typeInfo: 'String'
+        }, {
+          type: 'element',
+          name: 'contextVariableRequiredId',
+          elementName: 'context_variable_required_id',
+          typeInfo: 'Int'
+        }, {
+          name: 'name',
+          typeInfo: 'String',
+          attributeName: 'name',
+          type: 'attribute'
+        }, {
+          name: 'cpId',
+          typeInfo: 'Int',
+          attributeName: 'cp_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ContextArgumentValueType',
+      propertyInfos: [{
+          name: 'value',
+          typeInfo: 'String',
+          attributeName: 'value',
+          type: 'attribute'
+        }, {
+          name: 'dataType',
+          typeInfo: 'String',
+          attributeName: 'data_type',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'CostFunctionTermType',
+      propertyInfos: [{
+          name: 'order',
+          typeInfo: 'Int',
+          attributeName: 'order',
+          type: 'attribute'
+        }, {
+          name: 'cpId',
+          typeInfo: 'Int',
+          attributeName: 'cp_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ComputationalSystemType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'contextContract',
+          elementName: 'context_contract',
+          typeInfo: 'br_ufc_lia_storm.ContextContract'
+        }, {
+          name: 'session',
+          typeInfo: 'Int',
+          attributeName: 'session',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
       localName: 'ConcreteComponentType',
       propertyInfos: [{
           type: 'element',
@@ -491,6 +631,11 @@ var br_ufc_lia_storm = {
       type: 'classInfo',
       localName: 'CostArgumentType',
       propertyInfos: [{
+          type: 'element',
+          name: 'function',
+          elementName: 'function',
+          typeInfo: 'br_ufc_lia_storm.CostFunctionType'
+        }, {
           name: 'copId',
           typeInfo: 'Int',
           attributeName: 'cop_id',
@@ -525,33 +670,30 @@ var br_ufc_lia_storm = {
           attributeName: 'kind_id',
           type: 'attribute'
         }]
-    }, {
-      type: 'classInfo',
-      localName: 'RankingArgumentType',
-      propertyInfos: [{
-          name: 'rankId',
-          typeInfo: 'Int',
-          attributeName: 'rank_id',
-          type: 'attribute'
-        }, {
-          name: 'value',
-          typeInfo: 'Double',
-          attributeName: 'value',
-          type: 'attribute'
-        }]
     }],
   elementInfos: [{
       elementName: 'context_contract',
       typeInfo: 'br_ufc_lia_storm.ContextContract'
     }, {
-      elementName: 'candidateList',
+      elementName: 'candidate_list',
       typeInfo: 'br_ufc_lia_storm.CandidateListType'
     }, {
+      elementName: 'unit_file',
+      typeInfo: 'br_ufc_lia_storm.UnitFileType'
+    }, {
+      elementName: 'concrete_unit',
+      typeInfo: 'br_ufc_lia_storm.ConcreteUnitType'
+    }, {
+      elementName: 'contract_list',
+      typeInfo: 'br_ufc_lia_storm.ContractList'
+    }, {
       elementName: 'abstract_component',
-      typeInfo: 'br_ufc_lia_storm.AbstractComponentType',
+      typeInfo: 'br_ufc_lia_storm.AbstractComponentType'
+    }, {
+      elementName: 'computational_system',
+      typeInfo: 'String'
     }]
 };
-
 if (typeof require === 'function') {
   module.exports.br_ufc_lia_storm = br_ufc_lia_storm;
 }

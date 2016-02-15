@@ -18,7 +18,7 @@ function getAbstractComponents(){
 		//url:"php/resposta.xml",
 		async: false,
 		dataType: "xml",
-		type:"POST",
+		type:"GET",
 		success: function(data) {
 			try{
 	        	var components = data.getElementsByTagName("abstract_component");
@@ -37,8 +37,10 @@ function getAbstractComponents(){
 	}).fail(function() {
 		alert("Falhou!");
 	});
+
 	return listComponents;
 }
+
 //retorna uma lista com os parametros de contexto do componente abstrato
 function getContextParameters(component){
 	var listParameters = new Array();
@@ -53,12 +55,20 @@ function getContextParameters(component){
 			listParameters[1] = data.getElementsByTagName("supertype").item(0).getAttribute("id_ac");
         	var contextParameter = data.getElementsByTagName("context_parameter");
             for (var i = 0; i < contextParameter.length; i++) {
-              	listParameters[i+2] = contextParameter.item(i).getAttribute("name");
+              	listParameters[i+2] = {
+              		name: contextParameter.item(i).getAttribute("name"),
+              		cpId: contextParameter.item(i).getAttribute("cp_id"),
+              	}
+              	if(contextParameter.item(i).getElementsByTagName("bound").length != 0){
+              		listParameters[i+2].bound = {
+              			ccId: contextParameter.item(i).getElementsByTagName("bound").item(0).getAttribute("cc_id"),
+              			ccName: contextParameter.item(i).getElementsByTagName("bound").item(0).getAttribute("cc_name")
+              		}
+              	}
             }
 	    }
 	});
 	return listParameters;
-
 }
 
 function getAbstractsUnits(component){
@@ -82,6 +92,7 @@ function getAbstractsUnits(component){
 	});
 	return listAbstractsUnits;
 }
+
 //retorna uma lista com os components aninhados de um determinado component
 function getNestedComponents(component){
 	var listNestedComponents = new Array();
@@ -94,7 +105,10 @@ function getNestedComponents(component){
 		success: function(data) {
         	var nestedComponents = data.getElementsByTagName("inner_components");
             for (var i = 0; i < nestedComponents.length; i++) {
-              	listNestedComponents[i] = nestedComponents.item(i).getAttribute("name");
+              	listNestedComponents[i] = {
+              		name: nestedComponents.item(i).getAttribute("name"),
+              		id: nestedComponents.item(i).getAttribute("id_ac")
+              	}
             }
 	    }
 	});
@@ -102,23 +116,23 @@ function getNestedComponents(component){
 }
 
 function getSlicesComponent(component) {
-		var listslicesComponents = new Array();
-		$.ajax({
-		//url:"php/details.php?name="+component,
-		url:"php/mainComponent.php?opcode=details&name="+component,
-		dataType: "xml",
-		async: false,
-		type:"GET",
-		success: function(data) {
-					var slicesNestedComponents = data.getElementsByTagName("slices");
-						for (var i = 0; i < slicesNestedComponents.length; i++) {
-								listslicesComponents[i] = {
-									name: slicesNestedComponents.item(i).getAttribute("name"),
-									sliceId: slicesNestedComponents.item(i).getAttribute("slice_id"),
-									idCmp: slicesNestedComponents.item(i).getAttribute("inner_component_id")
-								};
-						}
-			}
+	var listslicesComponents = new Array();
+	$.ajax({
+	//url:"php/details.php?name="+component,
+	url:"php/mainComponent.php?opcode=details&name="+component,
+	dataType: "xml",
+	async: false,
+	type:"GET",
+	success: function(data) {
+				var slicesNestedComponents = data.getElementsByTagName("slices");
+					for (var i = 0; i < slicesNestedComponents.length; i++) {
+							listslicesComponents[i] = {
+								name: slicesNestedComponents.item(i).getAttribute("name"),
+								sliceId: slicesNestedComponents.item(i).getAttribute("slice_id"),
+								idCmp: slicesNestedComponents.item(i).getAttribute("inner_component_id")
+							};
+					}
+		}
 	});
 	return listslicesComponents;
 }
@@ -187,15 +201,16 @@ function saveNewAbstractComponent(componentObj){
 	});
 
 	var oSerializer = new XMLSerializer();
-	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
-	//alert(sXML);
+	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+oSerializer.serializeToString(doc);
+	sXML = sXML.replace("<abstract_component","<abstract_component xmlns=\"http://storm.lia.ufc.br\"");
+	alert(sXML);
 	$.ajax({
 	    type: 'post',
-	    //url : 'php/writerFile.php',
-	    url : 'php/mainComponent.php?opcode=saveComp',
+	    async: false,
+	    url : 'php/mainComponent.php?opcode=saveComponent',
 	    data: 'newComponent='+sXML,
-	    success : function(txt){
-	        alert("Arquivo escrito!");
+	    success : function(result){
+	        alert("Arquivo escrito!"+result);
 	    }
 	});
 }
@@ -206,7 +221,8 @@ function parameters(listParameters){
 		parametersObjs[i] = {
 			name: listParameters[i].childNodes[0].getAttribute("value"),
 			bound: {
-					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value"))
+					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value")),
+					ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
 				}
 			}
 	}
