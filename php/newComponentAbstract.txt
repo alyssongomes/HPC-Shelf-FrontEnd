@@ -1,1 +1,0 @@
-#?xml version="1.0" encoding="UTF-8"?@<abstract_component xmlns="http://storm.lia.ufc.br" name="NovoTeste3"><supertype name="Platform" id_ac="1"/></abstract_component>

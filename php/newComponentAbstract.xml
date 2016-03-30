@@ -1,1 +1,0 @@
-http://storm.lia.ufc.br:8080/axis2/services/CoreServices/addAbstractComponent?cmp=<?xml version="1.0" encoding="UTF-8"?><abstract_component xmlns="http://storm.lia.ufc.br" name="NovoTeste3"><supertype name="MulticoreSupport" id_ac="39"/></abstract_component>
