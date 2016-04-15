@@ -10,28 +10,4 @@
 	    	<page-encoding>UTF-8</page-encoding>
 		</jsp-property-group>
 	</jsp-config>
-	<servlet>
-		<servlet-name>servlet-abs-cmp</servlet-name>
-		<servlet-class>br.ufc.front.servlet.AbstractComponentServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>servlet-abs-cmp</servlet-name>
-		<url-pattern>/abstractComponent</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>servlet-ctt-ctx</servlet-name>
-		<servlet-class>br.ufc.front.servlet.ContextContractServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>servlet-ctt-ctx</servlet-name>
-		<url-pattern>/contextContract</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>servlet-unit-file</servlet-name>
-		<servlet-class>br.ufc.front.servlet.UnitFileServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>servlet-unit-file</servlet-name>
-		<url-pattern>/unitFile</url-pattern>
-	</servlet-mapping>
 </web-app>

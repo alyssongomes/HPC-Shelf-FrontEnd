@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Root {
 	
-	private List<AbstractComponent> abstract_component = new ArrayList();
+	private List<AbstractComponent> abstract_component = new ArrayList<>();
 
 	public Root(List<AbstractComponent> abstract_component) {
 		super();

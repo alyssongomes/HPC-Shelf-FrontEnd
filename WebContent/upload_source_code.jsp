@@ -1,14 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import="br.ufc.front.controller.AbstractComponentController" %>
+<%@ page import="br.ufc.front.model.mapping.AbstractComponent" %>
+<%@ page import="java.util.List"%>
+<%@ page import="org.apache.commons.fileupload.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%
+	AbstractComponentController acc = new AbstractComponentController();
+	List<AbstractComponent> lac = acc.getListAbstractComponents().getAbstractComponent();
+%>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<script type ="text/javascript" src="js/lib/jquery/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="js/lib/jsonix/Jsonix-min.js"></script>
-		<script type="text/javascript" src="js/contextXSD.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="js/context-xsd.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="js/lib/jfilestyle/jquery-filestyle.min.js"></script>
 		<script type ="text/javascript" src="js/lib/jquery/jquery-ui.js"></script>
 		<script type ="text/javascript" src="js/unit-file-controller.js"></script>
+		<script type="text/javascript" src="js/component-controller.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/jquery-filestyle.min.css"/>
 		<link rel="stylesheet" type="text/css" href="js/lib/jquery/jquery-ui.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style-main.css"/>
@@ -27,21 +35,30 @@
 		<div id="down">
 			<center>
 				<div id="file-upload" style="width: 700px;	height: 250px;	background-color: gray;	border-radius: 10px;">
-					<br>
-					<input type='file' class='jfilestyle' data-buttonText='Carregar código-fonte' />
-					<button type="submit" id="submet" style="margin-left:10px;">ENVIAR</button>
-					<br>
-					<br>
-					<label>Versão </label><input style="margin-right: 10px; margin-bottom: 10px;" type="text" id="version"/>
-					<label>File Type </label><input style="margin-right: 10px; margin-bottom: 10px;" type="text" id="filetype"/><br><br>
-					<label>Build </label><input style="margin-right: 10px; " type="text" id="build"/>
-					<label>Path </label><input style="margin-right: 10px;" type="text" id="path"/><br>
-					
-					<div id="info" style="text-align: left; margin-left: 50px;" >
-						<h3 id="filename" hidden >Nome...</h3>
-						<h3 id="filesize" hidden>Tamanho...</h3>
-						<h3 id="filextension" hidden>Extenção...</h3>
-					</div>
+					<form action="/HPC-Shelf-FrontEnd/unitFile" method="post" enctype="multipart/form-data">
+						<br>
+						<input type='file' name="file" class='jfilestyle' data-buttonText='Carregar código-fonte' />
+						<button type="submit" id="submet" style="margin-left:10px;">ENVIAR</button>
+						<br>
+						<br>
+						<label>Versão </label><input style="margin-right: 10px; margin-bottom: 10px;" type="text" name="version"/>
+						<label>File Type </label><input style="margin-right: 10px; margin-bottom: 10px;" type="text" name="filetype"/><br><br>
+						<label>Build </label><input style="margin-right: 10px; " type="text" name="build"/>
+						<label>Path </label><input style="margin-right: 10px;" type="text" name="path"/><br>
+						<br><br>
+						
+						<select id="components" title="Selecione um componente" style="margin-right: 20px;">
+							<%	for(AbstractComponent ac: lac){ %>
+								<option id="<%= ac.getId() %>" value="<%= ac.getName() %>"><%= ac.getName() %></option>
+		            		<%	}  	%>
+						</select>
+								
+						<select id="units" title="Selecione uma unidade" style="margin-right: 20px;"></select>		
+						<input name="uid" type="text" />
+						<input name="filename" type="text" hidden />
+						<input name="filextension" type="text" hidden/>
+						
+					</form>
 				</div>
 			</center>
 		</div>

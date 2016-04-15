@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "unit_file_type")
-@XmlRootElement(name="unit_file_type")
+@XmlRootElement(name="unit_file")
 public class UnitFileType {
 
     @XmlAttribute(name = "filename")

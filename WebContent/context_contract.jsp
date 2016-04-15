@@ -1,5 +1,4 @@
 <%@ page import="br.ufc.front.controller.AbstractComponentController" %>
-<%@ page import="br.ufc.front.model.mapping.AbstractComponentType" %>
 <%@ page import="br.ufc.front.model.mapping.AbstractComponent" %>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
@@ -19,7 +18,7 @@
 		<script type ="text/javascript" src="js/lib/jquery/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/lib/jsonix/Jsonix-min.js"></script>
 		<script type="text/javascript" src="js/lib/jfilestyle/jquery-filestyle.min.js"></script>
-		<script type="text/javascript" src="js/contextXSD.js"></script>
+		<script type="text/javascript" src="js/context-xsd.js"></script>
 		<script type="text/javascript" src="js/component-controller.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="js/contract-controller.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="js/context-contract.js"></script>

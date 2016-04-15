@@ -51,7 +51,7 @@ function getAbstractsUnits(abstractsUnits){
     	listAbstractsUnits[i] = {
     		name : abstractsUnits.item(i).getAttribute("au_name"),
     		id: abstractsUnits.item(i).getAttribute("au_id")
-    	}
+    	};
     }
 	return listAbstractsUnits;
 }
@@ -101,6 +101,20 @@ function getCostParameter(costParameters) {
 		};
 	}
 	return listCostParameters;
+}
+
+function getAbstractUnitsComponent(component) {
+	var units = null;
+	$.ajax({
+		url:"/HPC-Shelf-FrontEnd/abstractComponent?action=get&cmp="+component,
+		async: false,
+		dataType: "xml",
+		type:"POST",
+		success: function (data) {
+			units = getAbstractsUnits(data.getElementsByTagName("abstract_unit"));
+	    }
+	});
+	return units;
 }
 
 //Sujeito a exclusão

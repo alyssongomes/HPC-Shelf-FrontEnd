@@ -2,7 +2,6 @@
 <!--<jsp:useBean id="acc2" class="br.ufc.front.controller.AbstractComponentController" />
 <c:set var="lac2" value="acc.listAbstractComponents.abstractComponent" />-->
 <%@ page import="br.ufc.front.controller.AbstractComponentController" %>
-<%@ page import="br.ufc.front.model.mapping.AbstractComponentType" %>
 <%@ page import="br.ufc.front.model.mapping.AbstractComponent" %>
 <%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
@@ -17,7 +16,7 @@
         <link rel="stylesheet" type="text/css" href="js/lib/jquery/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-demo.css"/>
         <link rel="stylesheet" type="text/css" href="css/jsPlumbToolkit-defaults.css"/>
-        <script type="text/javascript" src="js/contextXSD.js"></script>
+        <script type="text/javascript" src="js/context-xsd.js"></script>
         <script type="text/javascript" src="js/lib/jsonix/Jsonix-min.js"></script>
         <script type ="text/javascript" src="js/lib/jquery/jquery-2.1.4.min.js"></script>
         <script type ="text/javascript" src="js/lib/jquery/jquery-ui.js"></script>
