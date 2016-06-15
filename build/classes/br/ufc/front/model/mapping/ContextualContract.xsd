@@ -101,7 +101,7 @@
     		<element name="abstract_component"
     			type="tns:abstract_component_type" maxOccurs="1" minOccurs="1">
     		</element>
-    		<element name="platform" type="tns:context_contract"
+    		<element name="platform" type="tns:platform_profile_type"
     			maxOccurs="1" minOccurs="0">
     		</element>
     		<element name="quality_arguments"
@@ -156,16 +156,22 @@
 
     <complexType name="platform_profile_type">
     	<sequence>
-    		<element name="platform_contract" type="tns:context_contract"></element>
+    		<element name="platform_contract"
+    			type="tns:context_contract">
+    		</element>
     	</sequence>
+    	<attribute name="network_ip_address" type="string"></attribute>
     </complexType>
 
     <element name="candidate_list" type="tns:candidate_list_type"></element>
     
     <complexType name="candidate_list_type">
     	<sequence>
-    		<element name="candidate" type="tns:context_contract" maxOccurs="unbounded" minOccurs="0"></element>
+    		<element name="candidate" type="tns:context_contract"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
     	</sequence>
+    	<attribute name="user_id" type="int"></attribute>
     </complexType>
 
     <complexType name="quality_function_type">
@@ -324,10 +330,15 @@
 
     <complexType name="computational_system_type">
     	<sequence>
-    		<element name="context_contract" type="tns:context_contract"></element>
+    		<element name="context_contract"
+    			type="tns:context_contract">
+    		</element>
     	</sequence>
     	<attribute name="session" type="int"></attribute>
+    	<attribute name="network_address" type="string"></attribute>
     </complexType>
 
-    <element name="computational_system" type="string"></element>
+    <element name="computational_system"
+    	type="tns:computational_system_type">
+    </element>
 </schema>

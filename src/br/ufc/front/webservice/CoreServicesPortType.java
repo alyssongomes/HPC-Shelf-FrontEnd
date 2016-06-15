@@ -31,8 +31,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:getContextContract")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetContextContract")
-    @ResponseWrapper(localName = "getContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetContextContractResponse")
+    @RequestWrapper(localName = "getContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextContract")
+    @ResponseWrapper(localName = "getContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextContractResponse")
     public String getContextContract(
         @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
         Integer id);
@@ -45,8 +45,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:getContextParameter")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetContextParameter")
-    @ResponseWrapper(localName = "getContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetContextParameterResponse")
+    @RequestWrapper(localName = "getContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameter")
+    @ResponseWrapper(localName = "getContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameterResponse")
     public String getContextParameter(
         @WebParam(name = "name", targetNamespace = "http://webservices.storm.ufc.br")
         String name);
@@ -59,8 +59,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:instantiateACK")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "instantiateACK", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.InstantiateACK")
-    @ResponseWrapper(localName = "instantiateACKResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.InstantiateACKResponse")
+    @RequestWrapper(localName = "instantiateACK", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.InstantiateACK")
+    @ResponseWrapper(localName = "instantiateACKResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.InstantiateACKResponse")
     public String instantiateACK(
         @WebParam(name = "address", targetNamespace = "http://webservices.storm.ufc.br")
         String address);
@@ -73,8 +73,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:resolve")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "resolve", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.Resolve")
-    @ResponseWrapper(localName = "resolveResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ResolveResponse")
+    @RequestWrapper(localName = "resolve", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.Resolve")
+    @ResponseWrapper(localName = "resolveResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ResolveResponse")
     public String resolve(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp);
@@ -87,8 +87,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:addQualityFunction")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addQualityFunction", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddQualityFunction")
-    @ResponseWrapper(localName = "addQualityFunctionResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddQualityFunctionResponse")
+    @RequestWrapper(localName = "addQualityFunction", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddQualityFunction")
+    @ResponseWrapper(localName = "addQualityFunctionResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddQualityFunctionResponse")
     public Integer addQualityFunction(
         @WebParam(name = "func", targetNamespace = "http://webservices.storm.ufc.br")
         String func);
@@ -101,8 +101,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:getProfile")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getProfile", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetProfile")
-    @ResponseWrapper(localName = "getProfileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetProfileResponse")
+    @RequestWrapper(localName = "getProfile", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfile")
+    @ResponseWrapper(localName = "getProfileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfileResponse")
     public String getProfile(
         @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
         Integer id);
@@ -111,15 +111,29 @@ public interface CoreServicesPortType {
      * 
      * @param cmp
      * @return
-     *     returns java.lang.Boolean
+     *     returns java.lang.Integer
      */
     @WebMethod(action = "urn:addConcreteUnit")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addConcreteUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddConcreteUnit")
-    @ResponseWrapper(localName = "addConcreteUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddConcreteUnitResponse")
-    public Boolean addConcreteUnit(
+    @RequestWrapper(localName = "addConcreteUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnit")
+    @ResponseWrapper(localName = "addConcreteUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnitResponse")
+    public Integer addConcreteUnit(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp);
+
+    /**
+     * 
+     * @param cst
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:getStatus")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "getStatus", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetStatus")
+    @ResponseWrapper(localName = "getStatusResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetStatusResponse")
+    public String getStatus(
+        @WebParam(name = "cst", targetNamespace = "http://webservices.storm.ufc.br")
+        String cst);
 
     /**
      * 
@@ -128,9 +142,23 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:list")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "list", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.List")
-    @ResponseWrapper(localName = "listResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ListResponse")
+    @RequestWrapper(localName = "list", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.List")
+    @ResponseWrapper(localName = "listResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ListResponse")
     public String list();
+
+    /**
+     * 
+     * @param cst
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:instantiate")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "instantiate", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.Instantiate")
+    @ResponseWrapper(localName = "instantiateResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.InstantiateResponse")
+    public String instantiate(
+        @WebParam(name = "cst", targetNamespace = "http://webservices.storm.ufc.br")
+        String cst);
 
     /**
      * 
@@ -140,8 +168,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:deploy")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "deploy", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.Deploy")
-    @ResponseWrapper(localName = "deployResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.DeployResponse")
+    @RequestWrapper(localName = "deploy", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.Deploy")
+    @ResponseWrapper(localName = "deployResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.DeployResponse")
     public String deploy(
         @WebParam(name = "candidateList", targetNamespace = "http://webservices.storm.ufc.br")
         String candidateList);
@@ -154,8 +182,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:cancelSession")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "cancelSession", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.CancelSession")
-    @ResponseWrapper(localName = "cancelSessionResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.CancelSessionResponse")
+    @RequestWrapper(localName = "cancelSession", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.CancelSession")
+    @ResponseWrapper(localName = "cancelSessionResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.CancelSessionResponse")
     public Boolean cancelSession(
         @WebParam(name = "sessionID", targetNamespace = "http://webservices.storm.ufc.br")
         Integer sessionID);
@@ -169,8 +197,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:addUnitFile")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addUnitFile", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddUnitFile")
-    @ResponseWrapper(localName = "addUnitFileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddUnitFileResponse")
+    @RequestWrapper(localName = "addUnitFile", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddUnitFile")
+    @ResponseWrapper(localName = "addUnitFileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddUnitFileResponse")
     public Boolean addUnitFile(
         @WebParam(name = "data", targetNamespace = "http://webservices.storm.ufc.br")
         byte[] data,
@@ -185,67 +213,39 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:addInnerComponent")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addInnerComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddInnerComponent")
-    @ResponseWrapper(localName = "addInnerComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddInnerComponentResponse")
+    @RequestWrapper(localName = "addInnerComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddInnerComponent")
+    @ResponseWrapper(localName = "addInnerComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddInnerComponentResponse")
     public Boolean addInnerComponent(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp);
 
     /**
      * 
-     * @param uri
+     * @param cst
      * @return
      *     returns java.lang.Boolean
      */
     @WebMethod(action = "urn:releasePlatform")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "releasePlatform", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ReleasePlatform")
-    @ResponseWrapper(localName = "releasePlatformResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ReleasePlatformResponse")
+    @RequestWrapper(localName = "releasePlatform", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ReleasePlatform")
+    @ResponseWrapper(localName = "releasePlatformResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ReleasePlatformResponse")
     public Boolean releasePlatform(
-        @WebParam(name = "uri", targetNamespace = "http://webservices.storm.ufc.br")
-        String uri);
+        @WebParam(name = "cst", targetNamespace = "http://webservices.storm.ufc.br")
+        String cst);
 
     /**
      * 
      * @param cmp
      * @return
      *     returns java.lang.Boolean
-     */
-    @WebMethod(action = "urn:setObsolete")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "setObsolete", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.SetObsolete")
-    @ResponseWrapper(localName = "setObsoleteResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.SetObsoleteResponse")
-    public Boolean setObsolete(
-        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
-        String cmp);
-
-    /**
-     * 
-     * @param cmp
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod(action = "urn:addContextParameter")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddContextParameter")
-    @ResponseWrapper(localName = "addContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddContextParameterResponse")
-    public Boolean addContextParameter(
-        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
-        String cmp);
-
-    /**
-     * 
-     * @param cmp
-     * @return
-     *     returns java.lang.Boolean
-     * @throws CoreServicesParserConfigurationException_Exception
      * @throws CoreServicesSAXException_Exception
      * @throws CoreServicesIOException_Exception
+     * @throws CoreServicesParserConfigurationException_Exception
      */
     @WebMethod(action = "urn:addContextContract")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddContextContract")
-    @ResponseWrapper(localName = "addContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddContextContractResponse")
+    @RequestWrapper(localName = "addContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContract")
+    @ResponseWrapper(localName = "addContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContractResponse")
     public Boolean addContextContract(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp)
@@ -257,15 +257,43 @@ public interface CoreServicesPortType {
      * @param cmp
      * @return
      *     returns java.lang.Boolean
-     * @throws CoreServicesParserConfigurationException_Exception
+     */
+    @WebMethod(action = "urn:addContextParameter")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "addContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextParameter")
+    @ResponseWrapper(localName = "addContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextParameterResponse")
+    public Boolean addContextParameter(
+        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
+        String cmp);
+
+    /**
+     * 
+     * @param cmp
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod(action = "urn:setObsolete")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "setObsolete", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsolete")
+    @ResponseWrapper(localName = "setObsoleteResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsoleteResponse")
+    public Boolean setObsolete(
+        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
+        String cmp);
+
+    /**
+     * 
+     * @param cmp
+     * @return
+     *     returns java.lang.Boolean
      * @throws CoreServicesSAXException_Exception
-     * @throws CoreServicesDBHandlerException_Exception
      * @throws CoreServicesIOException_Exception
+     * @throws CoreServicesDBHandlerException_Exception
+     * @throws CoreServicesParserConfigurationException_Exception
      */
     @WebMethod(action = "urn:addAbstractComponent")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addAbstractComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddAbstractComponent")
-    @ResponseWrapper(localName = "addAbstractComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddAbstractComponentResponse")
+    @RequestWrapper(localName = "addAbstractComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddAbstractComponent")
+    @ResponseWrapper(localName = "addAbstractComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddAbstractComponentResponse")
     public Boolean addAbstractComponent(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp)
@@ -280,8 +308,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:addAbstractUnit")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addAbstractUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddAbstractUnit")
-    @ResponseWrapper(localName = "addAbstractUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.AddAbstractUnitResponse")
+    @RequestWrapper(localName = "addAbstractUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddAbstractUnit")
+    @ResponseWrapper(localName = "addAbstractUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddAbstractUnitResponse")
     public Integer addAbstractUnit(
         @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
         String cmp);
@@ -294,8 +322,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:getAbstractComponentByID")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getAbstractComponentByID", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetAbstractComponentByID")
-    @ResponseWrapper(localName = "getAbstractComponentByIDResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetAbstractComponentByIDResponse")
+    @RequestWrapper(localName = "getAbstractComponentByID", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByID")
+    @ResponseWrapper(localName = "getAbstractComponentByIDResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByIDResponse")
     public String getAbstractComponentByID(
         @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
         Integer id);
@@ -309,8 +337,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:listContract")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "listContract", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ListContract")
-    @ResponseWrapper(localName = "listContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.ListContractResponse")
+    @RequestWrapper(localName = "listContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ListContract")
+    @ResponseWrapper(localName = "listContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ListContractResponse")
     public String listContract(
         @WebParam(name = "ac_id", targetNamespace = "http://webservices.storm.ufc.br")
         Integer acId)
@@ -325,8 +353,8 @@ public interface CoreServicesPortType {
      */
     @WebMethod(action = "urn:getAbstractComponent")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getAbstractComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetAbstractComponent")
-    @ResponseWrapper(localName = "getAbstractComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "ws2.GetAbstractComponentResponse")
+    @RequestWrapper(localName = "getAbstractComponent", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponent")
+    @ResponseWrapper(localName = "getAbstractComponentResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentResponse")
     public String getAbstractComponent(
         @WebParam(name = "name", targetNamespace = "http://webservices.storm.ufc.br")
         String name);

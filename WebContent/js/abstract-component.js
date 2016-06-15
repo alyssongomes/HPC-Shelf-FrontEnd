@@ -54,7 +54,6 @@ function init() {
         buttons: {
             "Selecionar": function(){
                 addParameter($("#sort2 div[id='"+ELEMENT+"']"),jsplumb);
-
             },
             Cancel: function() {
                 dialogParam.dialog( "close" );
@@ -104,15 +103,7 @@ function init() {
             dialogComp.dialog("open");
         }
     );
-
-    $("#divMenu > ul > li:nth-child(4)").click(
-        function () {
-            if(confirm("Deseja realmente deletar?")){
-                deleteElement($("#sort2 div[id='"+ELEMENT+"']"),jsplumb);
-            }
-        }
-    );
-
+    
     /* FIM MENU POP-UP*/
 
 
@@ -306,11 +297,15 @@ function updateSlicesNested(conn, remove){
 }
 
 function deleteElement(element, js){
-    jsPlumb.remove(element);
-    element.remove();
-    $("#addsUnidades").find("tr").remove();
-    $("#listParameters").find("tr").remove();
-    $("#addsComponents").find("tr").remove();
+	var name = element.find("p[id=name]").attr("value");
+	var nameComponenteOnForm = $("#newComponent").find("form").find("fieldset").find("div[id=newComp]").find("#name").attr("value");
+	if(name != nameComponenteOnForm){
+		jsPlumb.remove(element);
+	    element.remove();
+	    $("#addsUnidades").find("tr").remove();
+	    $("#listParameters").find("tr").remove();
+	    $("#addsComponents").find("tr").remove();
+	}
 }
 
 //Sujeito a exclusão
@@ -339,11 +334,11 @@ function addNewAbstractComponent(){
 
 // FUNÇÕES PARA CARREGAR INFORMAÇÕES NA INTERFACE
 function loadCompModal () {
-	
+
 	var listLinksComponentsSupertype = $("#listSuperComponents > li");
 	var listLinksComponentsParameters = $("#listParamComponents > li");
 	var listLinksComponentsInners = $("#listNestedComponents > li");
-	
+
 	if (listLinksComponentsInners != null && listLinksComponentsParameters != null && listLinksComponentsInners != null) {
 		for (var i = 0; i < listLinksComponentsSupertype.length; i++) {
 			listLinksComponentsInners[i].onclick = function() {
@@ -372,21 +367,21 @@ function loadCompModal () {
 	            loadDetaisComp($("#nameSuperComp") ,this.firstChild.text,$("#pararSuper"),$("#nestCompSuper"),$("#unitCompSuper"),$("#nameSuperComp"), $("#slicesCompSuper"), $("#qualytiCompSuper"), $("#costCompSuper"));
 			};
 		}
-	} 
+	}
 }
 
 function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name, listSlices, listQualities, listCosts) {
-    
+
 	listParar.empty();
     listNestedComp.empty();
     listAbsUnit.empty();
 	listSlices.empty();
     listQualities.empty();
     listCosts.empty();
-    
+
     var cmp = getAbstractComponent(component);
 
-    var parar = cmp.contextParameters; 
+    var parar = cmp.contextParameters;
     var nested = cmp.innerComponents;
     var unit = cmp.abstractUnits;
 	var slice = cmp.slices;

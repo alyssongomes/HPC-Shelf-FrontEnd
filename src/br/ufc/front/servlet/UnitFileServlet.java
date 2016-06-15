@@ -65,6 +65,7 @@ public class UnitFileServlet extends HttpServlet{
             stream.aliasAttribute(UnitFileType.class,"uid" , "uid");
             stream.aliasAttribute(UnitFileType.class,"path" , "path");
             String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+stream.toXML(uft).replace("/>", " xmlns=\"http://storm.lia.ufc.br\" />").replace("unit__file", "unit_file");
+            //System.out.println(xml);
 
 			Boolean result = service.getCoreServicesHttpSoap11Endpoint().addUnitFile(file, xml);
 			if(result){

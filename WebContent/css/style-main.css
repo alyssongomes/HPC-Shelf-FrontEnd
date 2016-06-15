@@ -24,19 +24,20 @@ body{
 	left: 12%;
 }
 
-#btNovo, #btRegCon, #btUpFile{
+#btNovo, #btRegCon, #btUpFile, #btRunCmp{
 	margin-left: 20px;
 	display: table;
 	position: relative;
 	border-radius: 10px;
 	background-color: #00CED1;
-	width: 300px;
+	width: 250px;
 	height: 50px;
 	float: left;
 	text-align: center;
 }
 
-#btNovo > a, #btRegCon > a, #btUpFile > a{
+#btNovo > a, #btRegCon > a, #btUpFile > a, #btRunCmp > a{
 	display: table-cell;
 	vertical-align: middle;
+	color: black;
 }

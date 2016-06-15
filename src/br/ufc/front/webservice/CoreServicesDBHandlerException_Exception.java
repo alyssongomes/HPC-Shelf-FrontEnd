@@ -45,7 +45,7 @@ public class CoreServicesDBHandlerException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: ws2.CoreServicesDBHandlerException
+     *     returns fault bean: webservice.CoreServicesDBHandlerException
      */
     public CoreServicesDBHandlerException getFaultInfo() {
         return faultInfo;

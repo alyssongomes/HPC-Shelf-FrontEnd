@@ -24,6 +24,14 @@ public class AbstractComponentServlet extends HttpServlet{
 		service = new CoreServices();
 		
 		switch (request.getParameter("action")) {
+		case "list":
+			try {
+				String components = service.getCoreServicesHttpSoap11Endpoint().list();
+				out.println(components);
+			} catch (Exception e) {
+				System.out.println("Erro no servlet-abstract-component:"+e.toString());
+			}
+			break;
 		case "get":	
 			try {
 				String component = service.getCoreServicesHttpSoap11Endpoint().getAbstractComponent(request.getParameter("cmp"));

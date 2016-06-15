@@ -45,7 +45,7 @@ public class CoreServicesSAXException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: ws2.CoreServicesSAXException
+     *     returns fault bean: webservice.CoreServicesSAXException
      */
     public CoreServicesSAXException getFaultInfo() {
         return faultInfo;

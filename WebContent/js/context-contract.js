@@ -69,6 +69,9 @@ function init(){
   /* FIM MODAIS */
 
   /*INICIO BOTÕES*/
+	$("#save").button().click(function(){
+		downloadContract();
+	});
 	$("#submet").button().click(function(){
 		registerContract();
 	});
@@ -134,8 +137,8 @@ function loadComponentAbstract(details){
 		var linha = "<tr>"+
 			"<td hidden value='"+units[i].childNodes.item(1).getAttribute("value")+"'><h3>"+units[i].childNodes.item(1).getAttribute("value")+"</h3></td>"+
 			"<td value='"+units[i].childNodes.item(0).getAttribute("value")+"'><h3>"+units[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
-			"<td><input type='file' class='jfilestyle' data-buttonText='Carregar código-fonte'></td>"
-		+"</tr>";
+			//"<td><input type='file' class='jfilestyle' data-buttonText='Carregar código-fonte'></td>"
+		"</tr>";
 		$("#tabUniAbs").append(linha);
 	}
 
@@ -207,6 +210,22 @@ function registerContract() {
 	};
 	console.log(contractObj);
 	saveNewContract(contractObj);
+}
+
+function downloadContract() {
+	var form = $("#formulario");
+	var contractObj = {
+		name: form.find("#ccNm").find("#ccName").val(),
+		arguments: getContextArguments(form.find("#tabParCont")),
+		component:getAbstractComponentRegister(form.find("#cmpSelected")),
+		platform: getPlatform(),
+		qualities: null,
+		ranking: null,
+		costs: null,
+		inners: getInnerComponents(form.find("#tabCmpAni"))
+	};
+	console.log(contractObj);
+	downloadNewContract(contractObj);
 }
 
 // GETS

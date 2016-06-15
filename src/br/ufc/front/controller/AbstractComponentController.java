@@ -18,7 +18,7 @@ public class AbstractComponentController {
 		service = new CoreServices();
 		
 		try {
-			InputStream content = new ByteArrayInputStream(service.getCoreServicesHttpSoap11Endpoint().list().getBytes());
+			InputStream content = new ByteArrayInputStream(service.getCoreServicesHttpSoap11Endpoint().list().replace("ac_id", "id").getBytes());
 			
 			XStream stream = new XStream(new DomDriver());
 			stream.alias("root", Root.class);

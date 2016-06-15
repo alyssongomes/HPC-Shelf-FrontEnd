@@ -45,7 +45,7 @@ public class CoreServicesParserConfigurationException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: ws2.CoreServicesParserConfigurationException
+     *     returns fault bean: webservice.CoreServicesParserConfigurationException
      */
     public CoreServicesParserConfigurationException getFaultInfo() {
         return faultInfo;

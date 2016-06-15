@@ -45,7 +45,7 @@ public class CoreServicesIOException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: ws2.CoreServicesIOException
+     *     returns fault bean: webservice.CoreServicesIOException
      */
     public CoreServicesIOException getFaultInfo() {
         return faultInfo;

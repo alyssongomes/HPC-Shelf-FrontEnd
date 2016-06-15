@@ -11,7 +11,6 @@ package br.ufc.front.model.mapping;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -41,7 +40,6 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "unit_file_type")
-@XmlRootElement(name="unit_file")
 public class UnitFileType {
 
     @XmlAttribute(name = "filename")
