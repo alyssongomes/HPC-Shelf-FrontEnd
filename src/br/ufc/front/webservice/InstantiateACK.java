@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -39,7 +39,7 @@ public class InstantiateACK {
     protected JAXBElement<String> address;
 
     /**
-     * Obtém o valor da propriedade address.
+     * Gets the value of the address property.
      * 
      * @return
      *     possible object is
@@ -51,7 +51,7 @@ public class InstantiateACK {
     }
 
     /**
-     * Define o valor da propriedade address.
+     * Sets the value of the address property.
      * 
      * @param value
      *     allowed object is

@@ -39,20 +39,6 @@ public interface CoreServicesPortType {
 
     /**
      * 
-     * @param name
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "urn:getContextParameter")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameter")
-    @ResponseWrapper(localName = "getContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameterResponse")
-    public String getContextParameter(
-        @WebParam(name = "name", targetNamespace = "http://webservices.storm.ufc.br")
-        String name);
-
-    /**
-     * 
      * @param address
      * @return
      *     returns java.lang.String
@@ -95,34 +81,6 @@ public interface CoreServicesPortType {
 
     /**
      * 
-     * @param id
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "urn:getProfile")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getProfile", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfile")
-    @ResponseWrapper(localName = "getProfileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfileResponse")
-    public String getProfile(
-        @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
-        Integer id);
-
-    /**
-     * 
-     * @param cmp
-     * @return
-     *     returns java.lang.Integer
-     */
-    @WebMethod(action = "urn:addConcreteUnit")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addConcreteUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnit")
-    @ResponseWrapper(localName = "addConcreteUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnitResponse")
-    public Integer addConcreteUnit(
-        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
-        String cmp);
-
-    /**
-     * 
      * @param cst
      * @return
      *     returns java.lang.String
@@ -137,14 +95,17 @@ public interface CoreServicesPortType {
 
     /**
      * 
+     * @param cmp
      * @return
-     *     returns java.lang.String
+     *     returns java.lang.Integer
      */
-    @WebMethod(action = "urn:list")
+    @WebMethod(action = "urn:addConcreteUnit")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "list", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.List")
-    @ResponseWrapper(localName = "listResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ListResponse")
-    public String list();
+    @RequestWrapper(localName = "addConcreteUnit", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnit")
+    @ResponseWrapper(localName = "addConcreteUnitResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddConcreteUnitResponse")
+    public Integer addConcreteUnit(
+        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
+        String cmp);
 
     /**
      * 
@@ -235,22 +196,17 @@ public interface CoreServicesPortType {
 
     /**
      * 
-     * @param cmp
+     * @param ccId
      * @return
-     *     returns java.lang.Boolean
-     * @throws CoreServicesSAXException_Exception
-     * @throws CoreServicesIOException_Exception
-     * @throws CoreServicesParserConfigurationException_Exception
+     *     returns java.lang.String
      */
-    @WebMethod(action = "urn:addContextContract")
+    @WebMethod(action = "urn:exportContextContract")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "addContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContract")
-    @ResponseWrapper(localName = "addContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContractResponse")
-    public Boolean addContextContract(
-        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
-        String cmp)
-        throws CoreServicesIOException_Exception, CoreServicesParserConfigurationException_Exception, CoreServicesSAXException_Exception
-    ;
+    @RequestWrapper(localName = "exportContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ExportContextContract")
+    @ResponseWrapper(localName = "exportContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ExportContextContractResponse")
+    public String exportContextContract(
+        @WebParam(name = "cc_id", targetNamespace = "http://webservices.storm.ufc.br")
+        Integer ccId);
 
     /**
      * 
@@ -271,24 +227,10 @@ public interface CoreServicesPortType {
      * @param cmp
      * @return
      *     returns java.lang.Boolean
-     */
-    @WebMethod(action = "urn:setObsolete")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "setObsolete", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsolete")
-    @ResponseWrapper(localName = "setObsoleteResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsoleteResponse")
-    public Boolean setObsolete(
-        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
-        String cmp);
-
-    /**
-     * 
-     * @param cmp
-     * @return
-     *     returns java.lang.Boolean
-     * @throws CoreServicesSAXException_Exception
-     * @throws CoreServicesIOException_Exception
-     * @throws CoreServicesDBHandlerException_Exception
      * @throws CoreServicesParserConfigurationException_Exception
+     * @throws CoreServicesSAXException_Exception
+     * @throws CoreServicesDBHandlerException_Exception
+     * @throws CoreServicesIOException_Exception
      */
     @WebMethod(action = "urn:addAbstractComponent")
     @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
@@ -316,20 +258,6 @@ public interface CoreServicesPortType {
 
     /**
      * 
-     * @param id
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "urn:getAbstractComponentByID")
-    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
-    @RequestWrapper(localName = "getAbstractComponentByID", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByID")
-    @ResponseWrapper(localName = "getAbstractComponentByIDResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByIDResponse")
-    public String getAbstractComponentByID(
-        @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
-        Integer id);
-
-    /**
-     * 
      * @param acId
      * @return
      *     returns java.lang.String
@@ -347,6 +275,20 @@ public interface CoreServicesPortType {
 
     /**
      * 
+     * @param id
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:getAbstractComponentByID")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "getAbstractComponentByID", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByID")
+    @ResponseWrapper(localName = "getAbstractComponentByIDResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetAbstractComponentByIDResponse")
+    public String getAbstractComponentByID(
+        @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
+        Integer id);
+
+    /**
+     * 
      * @param name
      * @return
      *     returns java.lang.String
@@ -358,5 +300,91 @@ public interface CoreServicesPortType {
     public String getAbstractComponent(
         @WebParam(name = "name", targetNamespace = "http://webservices.storm.ufc.br")
         String name);
+
+    /**
+     * 
+     * @param acId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:exportComponentSignature")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "exportComponentSignature", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ExportComponentSignature")
+    @ResponseWrapper(localName = "exportComponentSignatureResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ExportComponentSignatureResponse")
+    public String exportComponentSignature(
+        @WebParam(name = "ac_id", targetNamespace = "http://webservices.storm.ufc.br")
+        Integer acId);
+
+    /**
+     * 
+     * @param name
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:getContextParameter")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "getContextParameter", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameter")
+    @ResponseWrapper(localName = "getContextParameterResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetContextParameterResponse")
+    public String getContextParameter(
+        @WebParam(name = "name", targetNamespace = "http://webservices.storm.ufc.br")
+        String name);
+
+    /**
+     * 
+     * @param id
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:getProfile")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "getProfile", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfile")
+    @ResponseWrapper(localName = "getProfileResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.GetProfileResponse")
+    public String getProfile(
+        @WebParam(name = "id", targetNamespace = "http://webservices.storm.ufc.br")
+        Integer id);
+
+    /**
+     * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "urn:list")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "list", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.List")
+    @ResponseWrapper(localName = "listResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.ListResponse")
+    public String list();
+
+    /**
+     * 
+     * @param cmp
+     * @return
+     *     returns java.lang.Boolean
+     * @throws CoreServicesParserConfigurationException_Exception
+     * @throws CoreServicesSAXException_Exception
+     * @throws CoreServicesIOException_Exception
+     */
+    @WebMethod(action = "urn:addContextContract")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "addContextContract", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContract")
+    @ResponseWrapper(localName = "addContextContractResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.AddContextContractResponse")
+    public Boolean addContextContract(
+        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
+        String cmp)
+        throws CoreServicesIOException_Exception, CoreServicesParserConfigurationException_Exception, CoreServicesSAXException_Exception
+    ;
+
+    /**
+     * 
+     * @param cmp
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod(action = "urn:setObsolete")
+    @WebResult(targetNamespace = "http://webservices.storm.ufc.br")
+    @RequestWrapper(localName = "setObsolete", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsolete")
+    @ResponseWrapper(localName = "setObsoleteResponse", targetNamespace = "http://webservices.storm.ufc.br", className = "webservice.SetObsoleteResponse")
+    public Boolean setObsolete(
+        @WebParam(name = "cmp", targetNamespace = "http://webservices.storm.ufc.br")
+        String cmp);
 
 }

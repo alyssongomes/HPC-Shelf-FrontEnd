@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de SAXException complex type.
+ * <p>Java class for SAXException complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="SAXException">
@@ -45,7 +45,7 @@ public class SAXException {
     protected JAXBElement<String> message;
 
     /**
-     * Obtém o valor da propriedade cause.
+     * Gets the value of the cause property.
      * 
      * @return
      *     possible object is
@@ -57,7 +57,7 @@ public class SAXException {
     }
 
     /**
-     * Define o valor da propriedade cause.
+     * Sets the value of the cause property.
      * 
      * @param value
      *     allowed object is
@@ -69,7 +69,7 @@ public class SAXException {
     }
 
     /**
-     * Obtém o valor da propriedade exception.
+     * Gets the value of the exception property.
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class SAXException {
     }
 
     /**
-     * Define o valor da propriedade exception.
+     * Sets the value of the exception property.
      * 
      * @param value
      *     allowed object is
@@ -93,7 +93,7 @@ public class SAXException {
     }
 
     /**
-     * Obtém o valor da propriedade message.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class SAXException {
     }
 
     /**
-     * Define o valor da propriedade message.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is

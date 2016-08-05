@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -36,7 +36,7 @@ public class CancelSession {
     protected Integer sessionID;
 
     /**
-     * Obtém o valor da propriedade sessionID.
+     * Gets the value of the sessionID property.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class CancelSession {
     }
 
     /**
-     * Define o valor da propriedade sessionID.
+     * Sets the value of the sessionID property.
      * 
      * @param value
      *     allowed object is

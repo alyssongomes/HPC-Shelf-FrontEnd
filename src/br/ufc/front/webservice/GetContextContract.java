@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -36,7 +36,7 @@ public class GetContextContract {
     protected Integer id;
 
     /**
-     * Obtém o valor da propriedade id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class GetContextContract {
     }
 
     /**
-     * Define o valor da propriedade id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is

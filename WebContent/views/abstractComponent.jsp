@@ -1,190 +1,249 @@
-<%--@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"--%>
-<!--<jsp:useBean id="acc2" class="br.ufc.front.controller.AbstractComponentController" />
-<c:set var="lac2" value="acc.listAbstractComponents.abstractComponent" />-->
-<%@ page import="br.ufc.front.controller.AbstractComponentController" %>
-<%@ page import="br.ufc.front.model.mapping.AbstractComponent" %>
-<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
-<%
-	AbstractComponentController acc = new AbstractComponentController();
-	List<AbstractComponent> lac = acc.getListAbstractComponents().getAbstractComponent();
-%>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
-        <link rel="stylesheet" type="text/css" href="../js/lib/jquery/jquery-ui.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/jsPlumbToolkit-demo.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/jsPlumbToolkit-defaults.css"/>
-        <script type="text/javascript" src="../js/xsd/context-xsd.js"></script>
-        <script type="text/javascript" src="../lib/jsonix/Jsonix-min.js"></script>
-        <script type ="text/javascript" src="../lib/jquery/jquery-2.1.4.min.js"></script>
-        <script type ="text/javascript" src="../lib/jquery/jquery-ui.min.js"></script>
-        <script type ="text/javascript" src="../lib/jsplumb/dom.jsPlumb-1.7.6-min.js"></script>
-        <script type="text/javascript" src="../js/controller/component-controller.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="../js/controller/contract-controller.js" charset="UTF-8"></script>
-        <script type="text/javascript" src="../js/abstract-component.js" charset="UTF-8"></script>
-        <link rel="stylesheet" type="text/css" href="../css/style-abstract.css"/>
-        <link rel="stylesheet" type="text/css" href="../css/formas.css"/>
-        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="../resources/css/jsPlumbToolkit-defaults.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/style-abstract.css"/>
+        <link rel="stylesheet" type="text/css" href="../resources/css/formas.css"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+        <script type="text/javascript" src="../resources/js/xsd/context-xsd.js"></script>
+        <script type="text/javascript" src="../resources/lib/jsonix/Jsonix-min.js"></script>
+        <script type ="text/javascript" src="../resources/lib/jquery/jquery-2.1.4.min.js"></script>
+        <script type ="text/javascript" src="../resources/lib/jquery/jquery-ui.min.js"></script>
+        <script type ="text/javascript" src="../resources/lib/jsplumb/dom.jsPlumb-1.7.6-min.js"></script>
+        <script type="text/javascript" src="../resources/js/services/component-service.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../resources/js/services/contract-service.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../resources/js/controllers/component-controller.js" charset="UTF-8"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="shortcut icon" href="../resources/img/logo.png" type="image/x-icon" />
         <title>HPC-Shelf</title>
     </head>
-    <body >
-        <div id="quadro1">
-            <ul>
-                <li><a href="#newComponent">Novo Componente</a></li>
-                <!--<li><a href="#autoScroll">Componentes</a></li>
-                <li><a href="#parameters">Parametros</a></li> -->
-            </ul>
+    <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); overflow: hidden;">
+    	<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../resources/img/logo.png"/></a>
+		    	</div>
+		    	<ul id="nav" class="nav navbar-nav">
+					<li><a href="../index.html">Home</a></li>
+					<li><a id="navNewCmp" href="#" data-toggle="modal" data-target="#modalNewComp">Novo Componente</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modalEditeComp">Editar Componente</a></li>
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+					<h4 class="navbar-text ">Componentes Abstratos</h4>
+		    	</ul>
+			</div>
+		</nav>
+        
+        <div id="init" class="jumbotron" style="width:700px; height: 350px; position:absolute; top: 20%; left: 23%; padding-top:3%; padding-left: 5%; padding-right: 5%;">
+			<h1>Bem-vindo!</h1>
+			<p>Este espaço é destina a criação e edição de componente abstratos, você pode começar agora clicando no botão "Começar". Bom trabalho!</p>
+	  		<p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modalNewComp">Começar</a></p>
+        </div>
+        
+        <div id="quadro1" hidden="true" class="jumbotron">
+        	<center><h4><b>Propriedades</b></h4></center>
+        	<div id="newComp"></div>
             <div id="newComponent">
-                <form >
-                    <h4>Nome do componente: </h4>
-                    <input id="nameComponent" /><br/>
-                    <h4>Tipo do componente: </h4>
-                    <label id="nameSuperType"></label>
-                    <a href="#" id="selectType">Selecionar Tipo</a><br/></br>
-                    <a href="#" id="saveComponent">Criar Componente</a>
-                    <button href="#" id="cancelComponent" >Cancelar</button>
-                    <br/></br>
-                    <fieldset>
-                        <div id="newComp"></div>
-                        <legend><h3 color="white">Propriedades</h3></legend>
-                        <h4>Unidades abstrata: </h4>
-                        <table id="addsUnidades"></table>
-                        <h4>Parâmetros de contexto: </h4>
-                        <table id="listParameters"></table>
-                        <h4>Componentes aninhados: </h4>
-                        <table id="addsComponents">
-                           <!-- <tr bgcolor="white">
-                                <td width= "195px" height="15px"><strong><center>COMPONENTE<center></strong></td>
-                                <td width= "110px"><strong>UNIDADES</strong></td>
-                                <td width= "50px" bgcolor="red"><strong>FUNÃÃO</strong></td>
-                            </tr>-->
-                        </table>
-                        <h4>Fatias: </h4>
-                        <table id="listSlices"></table>
-                        <h4>Parâmetros de Custo: </h4>
-                        <h4>Parâmetros de Qualidade: </h4>
-                    </fieldset>
-                    <br/><br/>
-                    <button href="#" id="submitComponent">Submeter</button>
+                <form>
+                    <h4><b>Unidades abstrata:</b></h4>
+                    <table class="table table-hover" id="addsUnidades"><thead><tr><th>Nome</th><th>Ass.</th><th>Excluir</th></thead></table>
+                    <h4><b>Parâmetros de contexto:</b></h4>
+                    <table class="table table-hover" id="listParameters"><thead><tr><th>Nome</th><th>Comp.</th><th>Excluir</th></thead></table>
+                    <h4><b>Componentes aninhados:</b></h4>
+                    <table class="table table-hover" id="addsComponents"><thead><tr><th>Nome</th><th>Supertipo</th><th>Excluir</th></thead></table>
+                    <h4><b>Fatias:</b></h4>
+                    <table class="table table-hover" id="listSlices"><thead><tr><th>Nome</th><th>Componente</th></thead></table>
+                    <h4><b>Parâmetros de Custo:</b></h4>
+                    <h4><b>Parâmetros de Qualidade:</b></h4>
                 </form>
             </div>
-           <!-- <div id="autoScroll">
-                <center>
-                    <ul id="sort1"></ul>
-                    <img id ="esperando" src="img/ajax.gif">
-                </center>
-            </div>
-            <div id="parameters">
-                <label id="InfoComp" style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Componente</label>
-                <br/><br/>
-                <label style="float: left; margin-top: 3px ; font-size: 20;">Super Tipo:</label><br/><br/>
-                <label id="InfoSuper" style=" font-size: 20;">...</label>
-                <br/><br/>
-                <label style="float: left; margin: 3px 5px 5px 5px; font-size: 20;">Parametros:</label>
-                <a href="#" id="addPar"> Add Parametro</a>
-                <br/><br/>
-                <table id ="tableParam"></table>
-            </div>-->
+            <br>
+            <center><button href="#" class="btn btn-primary" id="submitComponent">Submeter</button></center>
         </div>
-        <div id="quadro2">
-        	<div class="container" id ="container">
-	            <h3><center>Aplicação</center></h3>
+        
+        <div id="quadro2" hidden="true">
 	            <div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
 	            	<div id="sort2" class="connectedSortable" >
 	            	<div id="trash">
-	                	<img alt="lixo" src="../img/lixo.png" height="70px" width="70px" style="float:left;">
+	                	<img alt="lixo" src="../resources/img/lixo.png" height="70px" width="70px" style="float:left;">
 	                	<h3>LIXEIRA</h3>
-	            	</div>
 	            	</div>
 	            </div>
             </div>
         </div>
         
-        <div id="dialog-super" title="Selecionar Supertype">
-            <div id="containerSuperComp">
-            	<ul id="listSuperComponents">
-            	 <%	for(AbstractComponent ac: lac){ %>
-						<li class="ui-state-default"><a id="<%= ac.getId() %>" value="<%= ac.getName() %>" href="#" ><%= ac.getName() %></a></li>
-            	<%	}  	%>
-            		<!--  <c:forEach var="ac" items="${lac}">
-            			<li class="ui-state-default"><a  value="<c:out value="${ac.name}"/>" href="#"><c:out value="${ac.name}"/></a></li>
-            		</c:forEach>-->
-                </ul>
-            </div>
-            <div id = "containerDetailsSuper">
-                <center>
-                    <label id="nameSuperComp"></label>
-                </center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
-                <center><div id="pararSuper"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
-                <center><div id="nestCompSuper"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
-                <center><div id="unitCompSuper"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Fatias</h4></font>
-				<center><div id="slicesCompSuper"></div></center>
-				<font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Qualidade</h4></font>
-				<center><div id="qualytiCompSuper"></div></center>
-				<font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Custo</h4></font>
-				<center><div id="costCompSuper"></div></center>
-            </div>
-        </div>
-        <div id="dialog-param" title="Definir parametros de contexto">
-            <div id="containerParamComp">
-                <h4>Selecione um Bound</h4>
-                <ul id="listParamComponents">
-                <%	for(AbstractComponent ac: lac){ %>
-						<li class="ui-state-default"><a id="<%= ac.getId() %>" value="<%= ac.getName() %>" href="#" ><%= ac.getName() %></a></li>
-            	<%	}  	%>
-                </ul>
-            </div>
-            <div id="containerDetailPar">
-                <center>
-                    <label id="nameParamComp"></label>
-                    <h4>Nome do Parametro</h4><input type="text" id="name"><br/><br/>
-                    <font color = "blue"><strong>Informações do fornecedor(Variavel Compartilhada)</strong></font><!-- variable provided -->
-                    <textarea id="variavel" rows="5" cols="30" style="resize: none"></textarea>
-                    <h4>Bound(Limite)</h4><label id="bound"></label>
-                </center>
-            </div>
-        </div>
-        <div id="dialog-comp" title="Selecionar componentes">
-            <div id="containerNestComp">
-                <ul id="listNestedComponents">
-                 <%	for(AbstractComponent ac: lac){ %>
-						<li class="ui-state-default"><a id="<%= ac.getId() %>" value="<%= ac.getName() %>" href="#" ><%= ac.getName() %></a></li>
-            	<%	}  	%>	
-                </ul>
-            </div>
-            <div id="containerDetailNestComp">
-                <center>
-                    <label id="nameNestedComp"></label>
-                </center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parametros de Contexto</h4></font>
-                <center><div id="pararNestComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Componentes aninhados</h4></font>
-                <center><div id="nestNestedComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Unidades Abstratas</h4></font>
-                <center><div id="unitNestedComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Fatias</h4></font>
-                <center><div id="slicesNestedComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Qualidade</h4></font>
-                <center><div id="qualytiNestedComp"></div></center>
-                <font color="red"><h4>&nbsp;&nbsp;&nbsp;Parâmetros de Custo</h4></font>
-                <center><div id="costNestedComp"></div></center>
-            </div>
-        </div>
-        
         <p id="msg"></p> 
+        
         <div id="divMenu">
             <ul>
                 <li>ADD UNIDADE ABSTRATA</li>
                 <li>ADD PARÂMETROS CONTEXTO</li>
                 <li>ADD COMPONENTE ANINHADO</li>
-
             </ul>
         </div>
+        
+        <div id="modalNewComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Crie um novo componente</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h4>Nome do componente: </h4>
+                <input class="form-control" id="nameComponent" /><br>
+                <h4>Tipo do componente: </h4>
+                <label id="nameSuperType"></label><br>
+                <a href="#" id="sselectType" data-toggle="modal" data-target="#modalSuperComp" >Selecionar Tipo</a><br/></br>
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveComponent">Criar Componente</a>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		      </div>
+		    </div>
+		  </div>
+        </div>
+        
+        <div id="modalSuperComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listSuperComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameSuperComp"></label></center>
+			                <h4><b>Parâmetros de Contexto</b></h4>
+			                <table class="table table-striped" id="pararSuper"></table>
+			                <h4><b>Componentes aninhados</b></h4>
+			                <table class="table table-striped" id="nestCompSuper"></table>
+			                <h4><b>Unidades Abstratas</b></h4>
+			                <table class="table table-striped" id="unitCompSuper"></table>
+			                <h4><b>Fatias</b></h4>
+			                <table class="table table-striped" id="slicesCompSuper"></table>
+			                <h4><b>Parâmetros de Qualidade</b></h4>
+			                <table class="table table-striped" id="qualytiCompSuper"></table>
+			                <h4><b>Parâmetros de Custo</b></h4>
+			                <table class="table table-striped" id="costCompSuper"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveSuperComp">Concluir</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalNestedComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listNestedComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameNestedComp"></label></center>
+			                <h4><b>Parâmetros de Contexto</b></h4>
+			                <table class="table table-striped" id="pararNestComp"></table>
+			                <h4><b>Componentes aninhados</b></h4>
+			                <table class="table table-striped" id="nestNestedComp"></table>
+			                <h4><b>Unidades Abstratas</b></h4>
+			                <table class="table table-striped" id="unitNestedComp"></table>
+			                <h4><b>Fatias</b></h4>
+			                <table class="table table-striped" id="slicesNestedComp"></table>
+			                <h4><b>Parâmetros de Qualidade</b></h4>
+			                <table class="table table-striped" id="qualytiNestedComp"></table>
+			                <h4><b>Parâmetros de Custo</b></h4>
+			                <table class="table table-striped" id="costNestedComp"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveNestedComp">Adicionar Componente</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+    
+    	<div id="modalParamComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Defina um limite</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listParamComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <label id="nameParamComp"></label>
+		                    <h4>Nome do Parametro</h4>
+		                    <input class="form-control" type="text" id="namePar"><br>
+		                    <strong>Informações do fornecedor(Variavel Compartilhada)</strong><!-- variable provided -->
+		                    <textarea class="form-control" id="variavel" rows="5" cols="30" style="resize: none"></textarea>
+		                    <h4>Bound(Limite)</h4><label id="bound"></label>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveParamComp">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+    
+		<div id="modalEditeComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente para Editar</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listEditeComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameEditComp"></label></center>
+			                <h4><b>Parâmetros de Contexto</b></h4>
+			                <table class="table table-striped" id="pararEditComp"></table>
+			                <h4><b>Componentes aninhados</b></h4>
+			                <table class="table table-striped" id="nestEditComp"></table>
+			                <h4><b>Unidades Abstratas</b></h4>
+			                <table class="table table-striped" id="unitEditComp"></table>
+			                <h4><b>Fatias</b></h4>
+			                <table class="table table-striped" id="slicesEditComp"></table>
+			                <h4><b>Parâmetros de Qualidade</b></h4>
+			                <table class="table table-striped" id="qualytiEditComp"></table>
+			                <h4><b>Parâmetros de Custo</b></h4>
+			                <table class="table table-striped" id="costEditComp"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="openEditComp">Editar Componente</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+    
+    
     </body>
 </html>

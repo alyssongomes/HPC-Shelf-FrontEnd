@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -43,7 +43,7 @@ public class AddUnitFile {
     protected JAXBElement<String> xml;
 
     /**
-     * Obtém o valor da propriedade data.
+     * Gets the value of the data property.
      * 
      * @return
      *     possible object is
@@ -55,7 +55,7 @@ public class AddUnitFile {
     }
 
     /**
-     * Define o valor da propriedade data.
+     * Sets the value of the data property.
      * 
      * @param value
      *     allowed object is
@@ -67,7 +67,7 @@ public class AddUnitFile {
     }
 
     /**
-     * Obtém o valor da propriedade xml.
+     * Gets the value of the xml property.
      * 
      * @return
      *     possible object is
@@ -79,7 +79,7 @@ public class AddUnitFile {
     }
 
     /**
-     * Define o valor da propriedade xml.
+     * Sets the value of the xml property.
      * 
      * @param value
      *     allowed object is

@@ -1,30 +1,58 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/style-main.css"/>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
-		<link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
-		<script src="js/lib/jquery/jquery-2.1.4.min.js"></script>
-		<script src="js/lib/bootstrap/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="resources/css/style-main.css"/>
+		<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.css"></link>
+		<link rel="shortcut icon" href="resources/img/logo.png" type="image/x-icon" />
+		<script src="resources/lib/jquery/jquery-2.1.4.min.js"></script>
+		<!--  <script src="resources/lib/bootstrap/bootstrap.js"></script>-->
 		<title>HPC-Shelf :: Principal</title>
 	</head>
-	<body>
+	<body  style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); overflow: hidden;" >
 		<div id="top">
 			<center>
-				<img src="img/logo.png"/>
+				<img src="resources/img/logo.png"/>
 				<font color="white"> <h1>HPC-<i>Shelf</i></h1></font>
 			</center>
 		</div>
 		<div id="down">
 			<div id="bts">
-				<div id="btNovo" class="btn btn-info btn-lg"><a href="views/abstractComponent.jsp"> Criar Componente<br/> Abstrato</a></div>
-				<div id="btRegCon" class="btn btn-info btn-lg"><a href="views/contextContract.jsp"> Criar Contrato<br/> Contextual</a></div>
-				<div id="btUpFile" class="btn btn-info btn-lg"><a href="views/uploadSourceCode.jsp"> Upload<br/> source-code</a></div>
-				<div id="btRunCmp" class="btn btn-info btn-lg"><a href="views/executeComponent.jsp"> Executar<br/> Componente</a></div>
+				<a href="views/abstractComponent.jsp">
+					<div class="funcao" align="center">
+						<img style="border-radius: 5px;" src="resources/img/cmp.png" width="170px" height="150px" />
+						<font color="white" >
+							<font size="3" face="Arial" color="white"><h4>Criar Componente Abstrato</h4></font>
+						</font>
+					</div>
+				</a>
+				<a href="views/contextContract.jsp">
+					<div class="funcao" align="center">
+						<img style="border-radius: 5px;" src="resources/img/ctt.png" width="170px" height="150px" />
+						<font color="white" > 
+							<font size="3" face="Arial" color="white"><h4>Criar Contrato Contextual</h4></font>
+						</font>
+					</div>
+				</a>
+				<a href="views/uploadSourceCode.jsp">
+					<div class="funcao" align="center">
+						<img style="border-radius: 5px;" src="resources/img/file.png" width="170px" height="150px" />
+						<font color="white" >  
+							<font size="3" face="Arial" color="white"><h4>Upload source-code</h4></font>
+						</font>
+					</div>
+				</a>
+				<a href="views/executeComponent.jsp">
+					<div class="funcao" align="center">
+					<img style="border-radius: 5px;" src="resources/img/exe.png" width="170px" height="150px" />
+						<font color="white" >  
+							<font size="3" face="Arial" color="white"><h4>Executar Componente</h4></font>
+						</font>
+					</div>
+				</a>
 			</div>
 		</div>
 		<div id="rodaPe">
 			<center>
-				<font color="white"><h3>Plataforma de CAD Baseada em componentes paralelos</h3></font>
+				<font color="white"><h3>Plataforma de CAD HPC-Shelf</h3></font>
 			</center>
 		</div>
 	</body>

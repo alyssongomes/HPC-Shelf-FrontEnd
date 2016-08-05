@@ -9,9 +9,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java de anonymous complex type.
+ * <p>Java class for anonymous complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -38,7 +38,7 @@ public class ListContract {
     protected Integer acId;
 
     /**
-     * Obtém o valor da propriedade acId.
+     * Gets the value of the acId property.
      * 
      * @return
      *     possible object is
@@ -50,7 +50,7 @@ public class ListContract {
     }
 
     /**
-     * Define o valor da propriedade acId.
+     * Sets the value of the acId property.
      * 
      * @param value
      *     allowed object is
