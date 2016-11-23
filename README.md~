@@ -1,3 +1,13 @@
 # HPC-Shelf FrontEnd
+<<<<<<< HEAD
 Repositório contendo a implementação da interface web do Front-End do HPC-Shelf
 # Hospedado em: [HPC-Shelf FrontEnd](http://storm.lia.ufc.br:8080/HPC-Shelf-FrontEnd-Core/index.html)
+=======
+Repositório contendo a implementação da interface web do Front-End da Plataforma de Computação de Alto Desempenho HPC-Shelf
+# Hospedado em: [HPC-Shelf FrontEnd](http://storm.lia.ufc.br:8080/HPC-Shelf-FrontEnd/)
+>>>>>>> 16960b97291d3919a656246c47beeadad4648ab2
+#Tecnologias
+* Java EE
+* JavaScript (Jquery, jsPlumb, Jsonix)
+* HTML/CSS
+* Bootstrap
