@@ -34,8 +34,10 @@ public class ContextContractController extends HttpServlet{
 			
 			break;
 		case "save":
-			try {				
+			try {
+				System.out.println(request.getParameter("con"));
 				Boolean result = service.getCoreServicesHttpSoap11Endpoint().addContextContract(request.getParameter("con"));
+				System.out.println(result);
 				
 				out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				if(result){	

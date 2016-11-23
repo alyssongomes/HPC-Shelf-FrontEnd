@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
+import javax.servlet .ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +64,7 @@ public class UnitFileController extends HttpServlet{
             stream.aliasAttribute(UnitFileType.class,"uid" , "uid");
             stream.aliasAttribute(UnitFileType.class,"path" , "path");
             String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+stream.toXML(uft).replace("/>", " xmlns=\"http://storm.lia.ufc.br\" />").replace("unit__file", "unit_file");
-            //System.out.println(xml);
+            System.out.println(xml);
 
 			Boolean result = service.getCoreServicesHttpSoap11Endpoint().addUnitFile(file, xml);
 			if(result){
@@ -74,7 +74,7 @@ public class UnitFileController extends HttpServlet{
 		} catch (Exception e) {
 			System.out.println("Erro no servlet-unit-file: "+e.toString());
 		}
-		response.sendRedirect("upload_source_code.jsp?ack="+ack);
+		response.sendRedirect("views/uploadSourceCode.jsp?ack="+ack);
 	}
 }
 

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../resources/css/jquery-filestyle.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../resources/lib/jfilestyle/jquery-filestyle.min.css"/>
 		<link rel="stylesheet" type="text/css" href="../resources/css/style-main.css"/>
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		
@@ -31,7 +31,7 @@
 		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../resources/img/logo.png"/></a>
 		    	</div>
 		    	<ul class="nav navbar-nav">
-					<li class="active"><a href="../index.html">Home</a></li>
+					<li><a href="../index.html">Home</a></li>
 					
 		    	</ul>
 		    	<ul id="nav" class="nav navbar-nav navbar-right">
@@ -59,15 +59,13 @@
 						<div class="col-sm-3">
 							<input class="form-control" style="margin-right: 10px;" type="text" name="path" placeholder="Path"/><br>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<select class="form-control" id="components" title="Selecione um componente" style="margin-right: 20px;"></select>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-6">
 							<select class="form-control" id="units" title="Selecione uma unidade" style="margin-right: 20px;"></select>
 						</div>		
-						<div class="col-sm-4">
-							<input name="uid" type="text" class="form-control" disabled="disabled" placeholder="Id da Unidade"/>
-						</div>
+						<input name="uid" type="text" hidden/>
 						<input name="filename" type="text" hidden />
 						<input name="filextension" type="text" hidden/>
 						<center>

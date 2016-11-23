@@ -8,18 +8,20 @@ body{
 #main{
   position: absolute;
   margin-left: 6.5%;
-  top: 6%;
+  margin-right: 6.5%;
+  top: 12%;
   width: 87%;
-  height: 90%;
-  background-color: silver;
-  border-radius: 10px;
+  height: 85%;
+  background-color: #F0F8FF;
+  /*border-radius: 10px;*/
   box-shadow: 5px 5px 5px #888888;
+  padding: 30px;
 }
 
 #formulario{
-  padding-left: 20px;
-  height: 75%;
-  width: 95%;
+  padding-left: 30px;
+  height: 80%;
+  width: 97%;
   overflow: auto;
 }
 
@@ -52,6 +54,7 @@ body{
     padding-left: 10px;
 }
 
+/*
 ul {
     list-style-type: none;
     margin: 0;
@@ -66,10 +69,8 @@ li {
     border-radius: 2px;
     text-align: center;
 }
+*/
 
-td{
-  color: white;
-}
 
 td > h3{
   color: black;

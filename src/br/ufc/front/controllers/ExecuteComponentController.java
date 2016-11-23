@@ -1,7 +1,12 @@
 package br.ufc.front.controllers;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +31,8 @@ public class ExecuteComponentController extends HttpServlet{
 		switch(request.getParameter("action")){
 		case "resolve":
 			try {
+				System.out.println(request.getParameter("con"));
 				String contracts = service.getCoreServicesHttpSoap11Endpoint().resolve(request.getParameter("con"));
-				//System.out.println(contracts);
 				stfx.toFile(contracts, "candidates");
 				out.println(contracts);
 			} catch (Exception e) {
@@ -36,15 +41,30 @@ public class ExecuteComponentController extends HttpServlet{
 			break;
 		case "deploy":
 			try {
-				String computation = service.getCoreServicesHttpSoap11Endpoint().deploy(request.getParameter("list"));
-				stfx.toFile(computation, "system");
-				out.println(computation);
+				System.out.println(request.getParameter("list").getBytes().length);
+				StringBuffer c =  new StringBuffer();
+				c.append(request.getParameter("list"));
+				//String candidates = URLDecoder.decode(request.getParameter("list"), "UTF-8");
+				//System.out.println("Lista "+c);
+				
+				OutputStream os = new FileOutputStream("teste.xml",false);
+				OutputStreamWriter osw = new OutputStreamWriter(os);
+				BufferedWriter bw = new BufferedWriter(osw);
+				
+				bw.write(c.toString());
+				bw.newLine();
+				bw.close();
+				
+				
+				String computation = service.getCoreServicesHttpSoap11Endpoint().deploy(c.toString());
+				System.out.println(computation);
+				/*stfx.toFile(computation, "system");
+				out.println(computation);*/
 			} catch (Exception e) {
 				System.out.println("Erro no servlet-execute-component: "+e.toString());
 			}	
 			break;
 		case "instant":
-			//System.out.println(request.getParameter("sys"));
 			try {
 				String computation = service.getCoreServicesHttpSoap11Endpoint().instantiate(request.getParameter("sys"));
 				System.out.println(computation);
@@ -54,11 +74,10 @@ public class ExecuteComponentController extends HttpServlet{
 			}
 			break;
 		case "destroy":
-			//System.out.println(request.getParameter("sys"));
 			try {
 				Boolean result = service.getCoreServicesHttpSoap11Endpoint().releasePlatform(request.getParameter("sys"));
 				System.out.println(result);
-				out.println(result==true? "Destruiu.":"Erro.");
+				out.println(result==true? "Liberada e Encerrada!":"Erro ao Liberar!");
 			} catch (Exception e) {
 				System.out.println("Erro no servlet-execute-component: "+e.toString());
 			}

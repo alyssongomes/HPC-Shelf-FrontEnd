@@ -3,63 +3,139 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<link rel="stylesheet" type="text/css" href="../resources/lib/jfilestyle/jquery-filestyle.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../resources/css/style-main.css"/>
+		<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+		<link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+		
 		<script type ="text/javascript" src="../resources/lib/jquery/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="../resources/lib/jfilestyle/jquery-filestyle.min.js"></script>
 		<script type ="text/javascript" src="../resources/lib/jquery/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="../resources/js/xsd/context-xsd.js"></script>
         <script type="text/javascript" src="../resources/lib/jsonix/Jsonix-min.js"></script>
+        <script type="text/javascript" src="../resources/js/services/component-service.js"></script>
+		<script type="text/javascript" src="../resources/js/services/contract-service.js"></script>
 		<script type="text/javascript" src="../resources/js/services/execute-service.js"></script>
 		<script type="text/javascript" src="../resources/js/controllers/execute-controller.js"></script>
-		<link rel="stylesheet" type="text/css" href="../resources/css/jquery-filestyle.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../resources/lib/jquery/jquery-ui.min.css"/>
-		<link rel="stylesheet" type="text/css" href="../resources/css/style-main.css"/>
+		<!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+		<script src="../resources/lib/bootstrap/bootstrap.min.js"></script>
+		
 		<link rel="shortcut icon" href="../resources/img/logo.png" type="image/x-icon" />
+		
 		<title>Execução de Componente Abstrato</title>
 	</head>
-	<body>
-		<div id="top">
+	<body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../resources/img/logo.png"/></a>
+		    	</div>
+		    	<ul class="nav navbar-nav">
+					<li><a href="../index.html">Home</a></li>
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+		    		<h4 class="navbar-text">Execução de Componentes</h4>
+		    	</ul>
+			</div>
+		</nav> 
+		  
+		<div id="down" style="margin-top:5%; margin-bottom:5%;">
 			<center>
-				<img src="../resources/img/logo.png"/>
-				<font color="white"> <h1>HPC-<i>Shelf</i></h1></font>
-				<font color="white"><h2>Execução de Componente</h2></font>
-			</center>
-		</div>
-		  <div id="down">
-			<center>
-				<div id="file-upload" style="width: 800px;	height: auto;	background-color: gray;	border-radius: 10px;">
+				<div id="file-upload" style="width: 800px;	height: auto;	background-color: #F0F8FF;	border-radius: 5px; box-shadow: 5px 5px 5px #888888;">
 						<br/>
 						<br/>
-						<input type='file' name="file" class='jfilestyle' data-buttonText='Carregar Contrato Contextual' />
+						<div style="margin-left:5%; margin-right:5%; margin-bottom:2%;" class="panel panel-default">
+						  <div style="background-color: #696969; color: white;" class="panel-heading"><b>Escolha um contrato existente</b></div>
+						  <div class="panel-body">
+						    <div class="col-sm-5">
+								<select class="form-control" id="components" title="Selecione um componente" style="margin-right: 20px;"></select>
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control" id="contracts" title="Selecione um contrato" style="margin-right: 20px;"></select>
+							</div>
+							<input type="radio" name="contrato" id="existing" style="float:left;">
+						  </div>
+						</div>
+						<div style=" margin-left:5%; margin-right:5%; margin-bottom:2%;" class="panel panel-default">
+						  <div style="background-color: #696969; color: white;" class="panel-heading"><b>Submeta um contrato</b></div>
+						  <div class="panel-body">
+							<input type='file' name="file" style="float:left;" />
+							<input type="radio" name="contrato" checked="checked" id="new">    
+						  </div>
+						</div>
+						
 						<!-- RETORNA A LISTA DE CANDIDATOS DA RESOLUÇÃO DO CONTRATO CONTEXTUAL -->
-						<center><button id="resolve" style="margin-left:10px; margin-top: 10px;">Resolver Contrato</button></center>
+						<center><button id="resolve" class="btn btn-primary" style="margin-left:10px; margin-top: 10px;">Resolver Contrato</button></center>
 						<a id="linkCandidates" title="Clique aqui para baixar a lista de candidatos"><h3>Lista de candidatos</h3></a>
 						<div id="accordion-resizer" style=" width:620px; margin-bottom: 10px; padding: 10px;">
-							<div id="candidatos" align="left">
-							</div>
+							<ul style="list-style-type: none;" id="candidatos" align="left" title="Ordene a lista de candidatos para definir a prioridade">
+							</ul>
 						</div>
 						<!-- FAZ O DEPLOY DA APLICAÇÃO EM SEGUIDA CHAMA O INSTANTIATE -> instantiate(deploy) -> EXECUÇÃO DO COMPONENTE -->
-						<button id="deploy" style="margin-left:10px; margin-top: 10px;">Implantar</button>
+						<button id="deploy" class="btn btn-primary" style="margin-left:10px; margin-top: 10px;">Implantar</button>
 						<a id="linkComputacional" title="Clique aqui para baixar o arquivo que descreve o sistema computacional"><h3>Sistema Computacional</h3></a>
-						<div style=" width:520px; height:50px; overflow:auto;">
-							<table width="500px" border="0px" id="deployTab">
-							<tr align="center" bgcolor="#6495ED">
-								<td><b>Sessão</b></td>
-								<td><b>Endereço da Plataforma</b></td>
-							</tr>
-						</table>
+						<div style=" width:520px;"  class="panel panel-default">
+							<div id="deployTab" class="panel-body">
+								
+							</div>
 						</div>
 						<h4>Status da Instancia</h4>
 						<div style=" width:520px; height:80px; overflow:auto; margin-left: 40px;" align="left" id="status"></div>
-						<button id="destroy" style="margin-left:10px; margin-top: 10px; margin-bottom: 10px;">Encerrar e liberar plataformas</button>
-						
+						<button id="destroy" class="btn btn-primary" style="margin-left:10px; margin-top: 10px; margin-bottom: 10px;">Encerrar e liberar plataformas</button>
 				</div>
 			</center>
 		</div>
-		<br/>
-		<div id="rodaPe">
+		
+		<div id="modalLoadResolve" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Aguarde a resolução do contrato...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+        <div id="modalLoadDeploy" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Aguarde a implantação do componente...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+        <div id="modalLoadDestroy" class="modal fade" role="dialog" >
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Aguarde a liberação da plataforma...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+        <div id="modalLoadContracts" class="modal fade" role="dialog" >
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Consultando contratos...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+		
+		
+		<footer id="rodaPe" style="position: fixed; bottom: 0px;">
 			<center>
-				<font color="white"><h3>Plataforma de CAD Baseada em componentes paralelos</h3></font>
+				<font color="white"><h4>Plataforma de CAD HPC-Shelf</h4></font>
 			</center>
-		</div>
+		</footer>
 	</body>
 </html>

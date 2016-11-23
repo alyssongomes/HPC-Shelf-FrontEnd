@@ -1,6 +1,6 @@
 var br_ufc_lia_storm = {
   name: 'br_ufc_lia_storm',
-  //defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
+  defaultElementNamespaceURI: 'http:\/\/storm.lia.ufc.br',
   typeInfos: [{
       type: 'classInfo',
       localName: 'ContextContract',
@@ -25,19 +25,19 @@ var br_ufc_lia_storm = {
           name: 'qualityArguments',
           collection: true,
           elementName: 'quality_arguments',
-          typeInfo: 'br_ufc_lia_storm.QualityArgumentType'
+          typeInfo: 'br_ufc_lia_storm.CalculatedArgumentType'
         }, {
           type: 'element',
           name: 'rankingArguments',
           collection: true,
           elementName: 'ranking_arguments',
-          typeInfo: 'br_ufc_lia_storm.RankingArgumentType'
+          typeInfo: 'br_ufc_lia_storm.CalculatedArgumentType'
         }, {
           type: 'element',
           name: 'costArguments',
           collection: true,
           elementName: 'cost_arguments',
-          typeInfo: 'br_ufc_lia_storm.CostArgumentType'
+          typeInfo: 'br_ufc_lia_storm.CalculatedArgumentType'
         }, {
           type: 'element',
           name: 'innerComponentsResolved',
@@ -52,9 +52,16 @@ var br_ufc_lia_storm = {
           typeInfo: 'br_ufc_lia_storm.ContextContract'
         }, {
           type: 'element',
-          name: 'concreteUnit',
-          elementName: 'concrete_unit',
+          name: 'concreteUnits',
+          collection: true,
+          elementName: 'concrete_units',
           typeInfo: 'br_ufc_lia_storm.ConcreteUnitType'
+        }, {
+          type: 'element',
+          name: 'contextArgumentsRequired',
+          collection: true,
+          elementName: 'context_arguments_required',
+          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
         }, {
           name: 'ccName',
           typeInfo: 'String',
@@ -190,13 +197,19 @@ var br_ufc_lia_storm = {
           name: 'qualityParameters',
           collection: true,
           elementName: 'quality_parameters',
-          typeInfo: 'br_ufc_lia_storm.QualityParameterType'
+          typeInfo: 'br_ufc_lia_storm.CalculatedParameterType'
         }, {
           type: 'element',
           name: 'costParameters',
           collection: true,
           elementName: 'cost_parameters',
-          typeInfo: 'br_ufc_lia_storm.CostParameterType'
+          typeInfo: 'br_ufc_lia_storm.CalculatedParameterType'
+        }, {
+          type: 'element',
+          name: 'rankingParameters',
+          collection: true,
+          elementName: 'ranking_parameters',
+          typeInfo: 'br_ufc_lia_storm.CalculatedParameterType'
         }, {
           type: 'element',
           name: 'slices',
@@ -233,6 +246,18 @@ var br_ufc_lia_storm = {
           elementName: 'context_contract',
           typeInfo: 'br_ufc_lia_storm.ContextContract'
         }, {
+          type: 'element',
+          name: 'port',
+          collection: true,
+          elementName: 'port',
+          typeInfo: 'String'
+        }, {
+          type: 'element',
+          name: 'files',
+          collection: true,
+          elementName: 'files',
+          typeInfo: 'br_ufc_lia_storm.UnitFileType'
+        }, {
           name: 'session',
           typeInfo: 'Int',
           attributeName: 'session',
@@ -241,241 +266,6 @@ var br_ufc_lia_storm = {
           name: 'networkAddress',
           typeInfo: 'String',
           attributeName: 'network_address',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'QualityArgumentType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'function',
-          elementName: 'function',
-          typeInfo: 'br_ufc_lia_storm.QualityFunctionType'
-        }, {
-          name: 'qpId',
-          typeInfo: 'Int',
-          attributeName: 'qp_id',
-          type: 'attribute'
-        }, {
-          name: 'value',
-          typeInfo: 'Double',
-          attributeName: 'value',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'QualityFunctionType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'functionParameters',
-          collection: true,
-          elementName: 'function_parameters',
-          typeInfo: 'br_ufc_lia_storm.QualityFunctionTermType'
-        }, {
-          type: 'element',
-          name: 'functionArguments',
-          collection: true,
-          elementName: 'function_arguments',
-          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
-        }, {
-          name: 'functionId',
-          typeInfo: 'Int',
-          attributeName: 'function_id',
-          type: 'attribute'
-        }, {
-          name: 'functionName',
-          typeInfo: 'String',
-          attributeName: 'function_name',
-          type: 'attribute'
-        }, {
-          name: 'functionValue',
-          typeInfo: 'String',
-          attributeName: 'function_value',
-          type: 'attribute'
-        }, {
-          name: 'ccId',
-          typeInfo: 'Int',
-          attributeName: 'cc_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'CostParameterType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'costArgument',
-          elementName: 'cost_argument',
-          typeInfo: 'br_ufc_lia_storm.CostArgumentType'
-        }, {
-          name: 'name',
-          typeInfo: 'String',
-          attributeName: 'name',
-          type: 'attribute'
-        }, {
-          name: 'copId',
-          typeInfo: 'Int',
-          attributeName: 'cop_id',
-          type: 'attribute'
-        }, {
-          name: 'kindId',
-          typeInfo: 'Int',
-          attributeName: 'kind_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'QualityFunctionTermType',
-      propertyInfos: [{
-          name: 'order',
-          typeInfo: 'Int',
-          attributeName: 'order',
-          type: 'attribute'
-        }, {
-          name: 'cpId',
-          typeInfo: 'Int',
-          attributeName: 'cp_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'SliceType',
-      propertyInfos: [{
-          name: 'sliceId',
-          typeInfo: 'Int',
-          attributeName: 'slice_id',
-          type: 'attribute'
-        }, {
-          name: 'innerComponentId',
-          typeInfo: 'Int',
-          attributeName: 'inner_component_id',
-          type: 'attribute'
-        }, {
-          name: 'innerUnityId',
-          typeInfo: 'Int',
-          attributeName: 'inner_unity_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'QualityParameterType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'qualityArgument',
-          elementName: 'quality_argument',
-          typeInfo: 'br_ufc_lia_storm.QualityArgumentType'
-        }, {
-          name: 'name',
-          typeInfo: 'String',
-          attributeName: 'name',
-          type: 'attribute'
-        }, {
-          name: 'qpId',
-          typeInfo: 'Int',
-          attributeName: 'qp_id',
-          type: 'attribute'
-        }, {
-          name: 'kindId',
-          typeInfo: 'Int',
-          attributeName: 'kind_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'ContextArgumentType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'cpId',
-          elementName: 'cp_id',
-          typeInfo: 'Int'
-        }, {
-          type: 'element',
-          name: 'contextContract',
-          elementName: 'context_contract',
-          typeInfo: 'br_ufc_lia_storm.ContextContract'
-        }, {
-          type: 'element',
-          name: 'value',
-          elementName: 'value',
-          typeInfo: 'br_ufc_lia_storm.ContextArgumentValueType'
-        }, {
-          name: 'ccId',
-          typeInfo: 'Int',
-          attributeName: 'cc_id',
-          type: 'attribute'
-        }, {
-          name: 'variableCpId',
-          typeInfo: 'Int',
-          attributeName: 'variable_cp_id',
-          type: 'attribute'
-        }, {
-          name: 'boundCcId',
-          typeInfo: 'Int',
-          attributeName: 'bound_cc_id',
-          type: 'attribute'
-        }, {
-          name: 'caId',
-          typeInfo: 'Int',
-          attributeName: 'ca_id',
-          type: 'attribute'
-        }, {
-          name: 'kind',
-          typeInfo: 'Int',
-          attributeName: 'kind',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'RankingFunctionType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'functionParameters',
-          collection: true,
-          elementName: 'function_parameters',
-          typeInfo: 'br_ufc_lia_storm.RankingFunctionTermType'
-        }, {
-          type: 'element',
-          name: 'functionArguments',
-          collection: true,
-          elementName: 'function_arguments',
-          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
-        }, {
-          name: 'functionId',
-          typeInfo: 'Int',
-          attributeName: 'function_id',
-          type: 'attribute'
-        }, {
-          name: 'functionName',
-          typeInfo: 'String',
-          attributeName: 'function_name',
-          type: 'attribute'
-        }, {
-          name: 'functionValue',
-          typeInfo: 'String',
-          attributeName: 'function_value',
-          type: 'attribute'
-        }, {
-          name: 'ccId',
-          typeInfo: 'Int',
-          attributeName: 'cc_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'RankingArgumentType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'function',
-          elementName: 'function',
-          typeInfo: 'br_ufc_lia_storm.RankingFunctionType'
-        }, {
-          name: 'rankId',
-          typeInfo: 'Int',
-          attributeName: 'rank_id',
-          type: 'attribute'
-        }, {
-          name: 'value',
-          typeInfo: 'Double',
-          attributeName: 'value',
           type: 'attribute'
         }]
     }, {
@@ -499,6 +289,20 @@ var br_ufc_lia_storm = {
         }]
     }, {
       type: 'classInfo',
+      localName: 'CalculatedFunctionTermType',
+      propertyInfos: [{
+          name: 'order',
+          typeInfo: 'Int',
+          attributeName: 'order',
+          type: 'attribute'
+        }, {
+          name: 'cpId',
+          typeInfo: 'Int',
+          attributeName: 'cp_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
       localName: 'PlatformProfileType',
       propertyInfos: [{
           type: 'element',
@@ -510,14 +314,65 @@ var br_ufc_lia_storm = {
           typeInfo: 'String',
           attributeName: 'network_ip_address',
           type: 'attribute'
+        }, {
+          name: 'port',
+          typeInfo: 'String',
+          attributeName: 'port',
+          type: 'attribute'
         }]
     }, {
       type: 'classInfo',
-      localName: 'RankingFunctionTermType',
+      localName: 'CalculatedArgumentType',
       propertyInfos: [{
-          name: 'order',
+          type: 'element',
+          name: 'function',
+          elementName: 'function',
+          typeInfo: 'br_ufc_lia_storm.CalculatedFunctionType'
+        }, {
+          name: 'calcId',
           typeInfo: 'Int',
-          attributeName: 'order',
+          attributeName: 'calc_id',
+          type: 'attribute'
+        }, {
+          name: 'value',
+          typeInfo: 'Double',
+          attributeName: 'value',
+          type: 'attribute'
+        }, {
+          name: 'kindId',
+          typeInfo: 'Int',
+          attributeName: 'kind_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'CalculatedFunctionType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'functionParameters',
+          collection: true,
+          elementName: 'function_parameters',
+          typeInfo: 'br_ufc_lia_storm.CalculatedFunctionTermType'
+        }, {
+          type: 'element',
+          name: 'functionArguments',
+          collection: true,
+          elementName: 'function_arguments',
+          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
+        }, {
+          name: 'functionId',
+          typeInfo: 'Int',
+          attributeName: 'function_id',
+          type: 'attribute'
+        }, {
+          name: 'functionValue',
+          typeInfo: 'String',
+          attributeName: 'function_value',
+          type: 'attribute'
+        }, {
+          name: 'ccId',
+          typeInfo: 'Int',
+          attributeName: 'cc_id',
           type: 'attribute'
         }, {
           name: 'cpId',
@@ -568,6 +423,11 @@ var br_ufc_lia_storm = {
           typeInfo: 'Int',
           attributeName: 'cp_id',
           type: 'attribute'
+        }, {
+          name: 'kind',
+          typeInfo: 'Int',
+          attributeName: 'kind',
+          type: 'attribute'
         }]
     }, {
       type: 'classInfo',
@@ -585,16 +445,99 @@ var br_ufc_lia_storm = {
         }]
     }, {
       type: 'classInfo',
-      localName: 'CostFunctionTermType',
+      localName: 'CalculatedParameterType',
       propertyInfos: [{
-          name: 'order',
+          type: 'element',
+          name: 'calculatedArgument',
+          elementName: 'calculated_argument',
+          typeInfo: 'br_ufc_lia_storm.CalculatedArgumentType'
+        }, {
+          name: 'name',
+          typeInfo: 'String',
+          attributeName: 'name',
+          type: 'attribute'
+        }, {
+          name: 'calcId',
           typeInfo: 'Int',
-          attributeName: 'order',
+          attributeName: 'calc_id',
+          type: 'attribute'
+        }, {
+          name: 'kindId',
+          typeInfo: 'Int',
+          attributeName: 'kind_id',
+          type: 'attribute'
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'SliceType',
+      propertyInfos: [{
+          name: 'sliceId',
+          typeInfo: 'Int',
+          attributeName: 'slice_id',
+          type: 'attribute'
+        }, {
+          name: 'innerComponentName',
+          typeInfo: 'String',
+          attributeName: 'inner_component_name',
+          type: 'attribute'
+        }, {
+          name: 'innerUnityName',
+          typeInfo: 'String',
+          attributeName: 'inner_unity_name',
+          type: 'attribute'
+        },{
+          type: 'element',
+          name: 'innerComponentId',
+          elementName: 'inner_component_id',
+          typeInfo: 'Int'
+        },{
+          type: 'element',
+          name: 'innerUnitId',
+          elementName: 'inner_unit_id',
+          typeInfo: 'Int'	
+        }]
+    }, {
+      type: 'classInfo',
+      localName: 'ContextArgumentType',
+      propertyInfos: [{
+          type: 'element',
+          name: 'sharedVariableCpId',
+          elementName: 'shared_variable_cp_id',
+          typeInfo: 'Int'
+        }, {
+          type: 'element',
+          name: 'contextContract',
+          elementName: 'context_contract',
+          typeInfo: 'br_ufc_lia_storm.ContextContract'
+        }, {
+          type: 'element',
+          name: 'value',
+          elementName: 'value',
+          typeInfo: 'br_ufc_lia_storm.ContextArgumentValueType'
+        }, {
+          name: 'ccId',
+          typeInfo: 'Int',
+          attributeName: 'cc_id',
           type: 'attribute'
         }, {
           name: 'cpId',
           typeInfo: 'Int',
           attributeName: 'cp_id',
+          type: 'attribute'
+        }, {
+          name: 'boundCcId',
+          typeInfo: 'Int',
+          attributeName: 'bound_cc_id',
+          type: 'attribute'
+        }, {
+          name: 'caId',
+          typeInfo: 'Int',
+          attributeName: 'ca_id',
+          type: 'attribute'
+        }, {
+          name: 'kind',
+          typeInfo: 'Int',
+          attributeName: 'kind',
           type: 'attribute'
         }]
     }, {
@@ -610,85 +553,6 @@ var br_ufc_lia_storm = {
           name: 'contextContract',
           elementName: 'context_contract',
           typeInfo: 'br_ufc_lia_storm.ContextContract'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'CostFunctionType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'functionParameters',
-          collection: true,
-          elementName: 'function_parameters',
-          typeInfo: 'br_ufc_lia_storm.CostFunctionTermType'
-        }, {
-          type: 'element',
-          name: 'functionArguments',
-          collection: true,
-          elementName: 'function_arguments',
-          typeInfo: 'br_ufc_lia_storm.ContextArgumentType'
-        }, {
-          name: 'functionId',
-          typeInfo: 'Int',
-          attributeName: 'function_id',
-          type: 'attribute'
-        }, {
-          name: 'functionName',
-          typeInfo: 'String',
-          attributeName: 'function_name',
-          type: 'attribute'
-        }, {
-          name: 'functionValue',
-          typeInfo: 'String',
-          attributeName: 'function_value',
-          type: 'attribute'
-        }, {
-          name: 'ccId',
-          typeInfo: 'Int',
-          attributeName: 'cc_id',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'CostArgumentType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'function',
-          elementName: 'function',
-          typeInfo: 'br_ufc_lia_storm.CostFunctionType'
-        }, {
-          name: 'copId',
-          typeInfo: 'Int',
-          attributeName: 'cop_id',
-          type: 'attribute'
-        }, {
-          name: 'value',
-          typeInfo: 'Double',
-          attributeName: 'value',
-          type: 'attribute'
-        }]
-    }, {
-      type: 'classInfo',
-      localName: 'RankingParameterType',
-      propertyInfos: [{
-          type: 'element',
-          name: 'rankingArgument',
-          elementName: 'ranking_argument',
-          typeInfo: 'br_ufc_lia_storm.RankingArgumentType'
-        }, {
-          name: 'name',
-          typeInfo: 'String',
-          attributeName: 'name',
-          type: 'attribute'
-        }, {
-          name: 'rankId',
-          typeInfo: 'Int',
-          attributeName: 'rank_id',
-          type: 'attribute'
-        }, {
-          name: 'kindId',
-          typeInfo: 'Int',
-          attributeName: 'kind_id',
-          type: 'attribute'
         }]
     }],
   elementInfos: [{

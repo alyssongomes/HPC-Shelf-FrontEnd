@@ -12,7 +12,7 @@ public class SaveToFileXML {
 	public void toFile(String content, String nameFile){
 		try{
 			String pat = getClass().getResource("").toString().replace("file:", "");
-			String pat2 = pat.substring(0,pat.length()-38);
+			String pat2 = pat.substring(0,pat.length()-35);
 			Path file = Paths.get(pat2+"/resources/file");
 			
 			OutputStream os = new FileOutputStream(file.toString()+"/"+nameFile+".xml",false);

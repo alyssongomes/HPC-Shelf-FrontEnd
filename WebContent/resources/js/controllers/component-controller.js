@@ -1,5 +1,6 @@
 var ELEMENT = null;
 var newComp = false;
+var jsplumb = null;
 
 $(document).ready(function(){
 	init();
@@ -8,7 +9,7 @@ $(document).ready(function(){
 //Inicializar componentes da página
 function init() {
 	
-    var jsplumb = jsPlumb.getInstance();
+    jsplumb = jsPlumb.getInstance();
 
     jsPlumb.batch(function(){
         jsPlumb.bind("connection",function(info,originalEvent){
@@ -45,8 +46,22 @@ function init() {
             $("#modalParamComp").modal();
         }
     );
-
+    
     $("#divMenu > ul > li:nth-child(3)").click(
+        function () {
+            //$("#modalParamComp").modal();
+        	alert("ADD parâmetros de qualidade");
+        }
+    );
+    
+    $("#divMenu > ul > li:nth-child(4)").click(
+        function () {
+            //$("#modalParamComp").modal();
+            alert("ADD parâmetros de custo");
+        }
+    );
+
+    $("#divMenu > ul > li:nth-child(5)").click(
         function () {
         	$("#modalNestedComp").modal();
         	
@@ -64,25 +79,26 @@ function init() {
         $("#listParameters").find("tr:not(:first-child)").remove();
         $("#addsComponents").find("tr:not(:first-child)").remove();
     });
+    
     $("#submitComponent").click(function(){
         addNewAbstractComponent();
     });
-    $("#saveComponent").button().click(function(){
-        /*if(newComp){
-            alert("Um novo componente já existe!");
-        }else{*/
-    		$("#init").hide();
-    		$("#quadro1").show("fast");
-    		$("#quadro2").show("fast");
-            createNewComponent($("#nameComponent").val(),$("#nameSuperComp > h3").attr("value"));
-            $("#newComp").append("<p id='name' hidden value='"+$("#nameComponent").val()+"'></p>");
-            $("#newComp").append("<p id='super' hidden value='"+$("#nameSuperComp > h3").attr("value")+"'></p>");
-            $("#newComp").append("<p id='idSuper' hidden value='"+$("#nameSuperComp > p").attr("value")+"'></p>");
-            $("#nameComponent").val("");
-            $("#nameSuperType > h3").remove();
-            $("#navNewCmp").hide();
-            newComp = true;
-        //  }
+    
+    $("#saveComponent").click(function(){
+    	$("#navEditCmp").hide();
+    	$("#navNewCmp").hide();
+		$("#init").hide();
+		$("#quadro1").show("fast");
+		$("#quadro2").show("fast");
+        createNewComponent($("#nameComponent").val(),$("#nameSuperComp > h3").attr("value"));
+        $("#newComp").append("<p id='name' hidden value='"+$("#nameComponent").val()+"'></p>");
+        $("#newComp").append("<p id='super' hidden value='"+$("#nameSuperComp > h3").attr("value")+"'></p>");
+        $("#newComp").append("<p id='idSuper' hidden value='"+$("#nameSuperComp > p").attr("value")+"'></p>");
+        $("#nameComponent").val("");
+        $("#nameSuperType > h3").remove();
+        newComp = true;
+        $("#saveUpdate").css("visibility","hidden");
+        
     });
     
     $("#saveSuperComp").click(function() {
@@ -94,15 +110,48 @@ function init() {
     
     $("#saveNestedComp").click(function() {
     	addComponentNested($("#sort2 div[id='"+ELEMENT+"']"),jsplumb, $("#nameNestedComp > h3").attr("value"), $("#nameNestedComp > p").attr("value"), $("#nameNestedComp > p").attr("id"), $("#nameNestedComp").find("p[id='idSuper']").attr("value") );
-	})
+	});
 	
 	$("#saveParamComp").click(function() {
 		addParameter($("#sort2 div[id='"+ELEMENT+"']"),jsplumb);
 	});
     
     $("#openEditComp").click(function(){
+    	$("#unitEditComp").find("input").each(function(){
+    		$(this).prop("checked",true);
+    		$(this).attr("checked","checked");
+    	});
+    	$("#navEditCmp").hide();
+    	$("#navNewCmp").hide();
+    	$("#divMenu > ul > li:last-child").remove();
+    	$("#submitComponent").css("visibility","hidden");
     	openComponent();
     });
+    
+    $("#opcaoLimite").click(function(){
+    	var op = $("#opcaoLimite").find("option:selected").attr("value");
+    	if(op === "contract"){
+    		alert("Selecione um componente!");
+    		$("#boundValue").css("visibility","hidden");
+    		$("#bound").show("fast");
+    	}else{
+    		$("#bound").hide();
+    		$("#boundValue").css("visibility","visible");
+    	}
+    });
+    
+    $("#saveUpdate").click(function(){
+    	componentUpdate = {
+			name:  $("div[id="+ELEMENT+"]").find("p[id=name]").attr("value"),
+			idAc:  $("div[id="+ELEMENT+"]").find("p[id=idAc]").attr("value"),
+	        super: { name: $("div[id="+ELEMENT+"]").find("p[id=supertype]").attr("value"), idAc: parseInt($("div[id="+ELEMENT+"]").find("p[id=idSuper]").attr("value"))  },
+	        parameters: getContextParameters(),
+	        units: getAbstractsUnits()
+    	}
+    	console.log(componentUpdate);
+    });
+    
+    
     
     /*FIM BOTÕES*/
     
@@ -111,13 +160,146 @@ function init() {
 }
 
 // FUNÇÕES PARA MANINPULAÇÃO DOS ELEMENTOS NA TELA
+function openComponent() {
+	//var component = getAbstractComponent($("#nameEditComp > h3").attr("value"));
+	var component = {
+		name:"Teste",
+		idAc : 777,
+		supertype: {name:"Superteste",idAc:999},
+		contextParameter:[
+		  {name:"par-1"},
+		  {name:"par-2"},
+		  {name:"par-3"}
+		],
+		abstractUnit:[
+		  {auName:"unid-1"},
+		  {auName:"unid-2"},
+		  {auName:"unid-3"}
+		],
+		innerComponents:[
+		  {name:"inner-1",acId: 1,supertype:{name:"super-inner-1"}},
+		  {name:"inner-2",acId: 2,supertype:{name:"super-inner-2"}},
+		  {name:"inner-3",acId: 3,supertype:{name:"super-inner-3"}},
+		  {name:"inner-4",acId: 4,supertype:{name:"super-inner-1"}},
+		  {name:"inner-5",acId: 5,supertype:{name:"super-inner-2"}},
+		  {name:"inner-6",acId: 6,supertype:{name:"super-inner-3"}}
+		],
+		slices:[
+		  {sliceId:1,innerUnityName:"slice-1",innerComponentName:"inner-1"},
+		  {sliceId:2,innerUnityName:"slice-2",innerComponentName:"inner-2"},
+		  {sliceId:3,innerUnityName:"slice-3",innerComponentName:"inner-3"},
+		  {sliceId:4,innerUnityName:"slice-4",innerComponentName:"inner-3"},
+		  {sliceId:5,innerUnityName:"slice-5",innerComponentName:"inner-2"},
+		  {sliceId:6,innerUnityName:"slice-6",innerComponentName:"inner-1"},
+		  {sliceId:7,innerUnityName:"slice-7",innerComponentName:"inner-4"},
+		  {sliceId:8,innerUnityName:"slice-8",innerComponentName:"inner-4"},
+		  {sliceId:9,innerUnityName:"slice-9",innerComponentName:"inner-5"},
+		  {sliceId:10,innerUnityName:"slice-10",innerComponentName:"inner-6"}
+		]
+	};
+	
+	createNewComponent(component.name, component.supertype.name);
+	$("div[id="+component.name+"]").append("<p id= 'idAc' hidden value='"+component.idAc+"'></p>");
+	$("div[id="+component.name+"]").append("<p id= 'idSuper' hidden value='"+component.supertype.idAc+"'></p>");
+	
+	
+	ELEMENT = component.name;
+	var element = $("#sort2 > div[id="+ELEMENT+"]");
+	console.log(element);
+	
+	$("#init").hide();
+	$("#modalEditeComp").hide();
+	$("#quadro1").show("fast");
+	$("#quadro2").show("fast");
+	
+	
+	if(component.contextParameter != null){
+		var tabParam = $("#listParameters");
+		for(var i=0; i < component.contextParameter.length; i++){
+			var linha  = $("<tr/>",{id: i});
+		    var coluna1 = $("<td/>",{id:0,text:component.contextParameter[i].name, colspan:3 ,style:"width: 70px;", width: 150})
+			linha.append(coluna1);
+			tabParam.append(linha);
+		}
+	}
+	
+	if(component.abstractUnit != null){
+		 var tabUnit = $("#addsUnidades");
+		 for(var i=0; i < component.abstractUnit.length; i++){
+			 var linha = $("<tr/>",{id:i});
+			 linha.append($("<td/>",{text:component.abstractUnit[i].auName, style:"width:200px"}));
+			 linha.append($("<td/>",{text: "Unit "+i, colspan:2, style:"width:80px"}));
+			 tabUnit.append(linha);
+			 
+			 var div = $("<div/>",{value:'units', class:'unit'});
+			 var nameUni = $("<h4/>",{style:"width:50px;", text:"Unit "+i});
+			 div.append(nameUni);
+			 element.append(div);
+		}
+	}
+	
+	if(component.innerComponents != null){
+		var tableCompNested = $("#addsComponents");
+		for(var i = 0; i < component.innerComponents.length; i++){
+			var div = $("<div/>",{ id: i, class:"componentNested"});
+			var localY = parseInt(element.offset().top);
+	        var localX = parseInt(element.offset().left);
+	        div.css("top",(localY+150)+"px").css("left",(localX+20)+"px");
+			div.append($("<h3/>",{ text: component.innerComponents[i].name, align:"center", style:"color: white;"}));
+			div.append($("<h5/>",{ text: ""+component.innerComponents[i].supertype.name+"", align:"center", style:"color:white;" }));
+			$("#sort2").append(div);
+	        $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
+	        
+	        var line = $("<tr/>", {id: i});
+	        line.append($("<td/>",{text: component.innerComponents[i].name, style:"width:150px"}));
+	        line.append($("<td/>",{text: component.innerComponents[i].supertype.name, colspan:3,style:"width:100px"}));
+	        tableCompNested.append(line);
+	        
+	        var endpoint = {
+	            endpoint : "Rectangle" ,
+	            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
+	            connector:"StateMachine",
+	            isTarget : true,
+	            anchor: "Continuous"
+        	}
+	        
+	        for(var j = 0; j < component.slices.length; j++){
+	        	if(component.innerComponents[i].name === component.slices[j].innerComponentName){
+	        		
+	        		jsPlumb.connect({
+	        		    source:div,
+	        		    target:element,
+	        		    endpoint : "Rectangle" ,
+			            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
+			            connector:"StateMachine",
+			            anchor: "Continuous",
+			            deleteEndpointsOnDetach : false,
+			            reattach:true,
+			            overlays: [
+			                [ "Label", { location:0.10, length:80, label: component.slices[j].innerUnityName, cssClass: "endPointPar" } ]
+			            ],
+			            parameters:{
+			                "nameSlice": component.slices[j].innerUnityName,
+			                "idSlice": component.slices[j].sliceId,
+			                "component": component.innerComponents[i].name,
+			                "idComponent": component.innerComponents[i].acId
+			            	}
+	        		});
+	        		jsPlumb.draggable(div);
+	        	}
+	        	jsPlumb.repaintEverything();
+	        }
+		}
+	}
+}
+
 function createNewComponent(name, supertype){
     var div = $("<div/>",{ id: name, class:"component", oncontextmenu:"showMenu('"+name+"'); return false;"});
     div.css("top","200px");
     div.append($("<h3/>",{ text: name, align:"center"}));
     div.append("<p id= 'name' hidden value='"+name+"'></p>");
     div.append("<p id= 'supertype' hidden value='"+supertype+"'></p>");
-    div.append($("<h5/>",{ text: "<<"+supertype+">>", align:"center"}));
+    div.append($("<h5/>",{ text: ""+supertype+"", align:"center"}));
     $("#sort2").append(div);
     $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
     jsPlumb.makeTarget(div,{
@@ -127,10 +309,6 @@ function createNewComponent(name, supertype){
         anchor: "Continuous"
     });
     jsPlumb.draggable(div);
-}
-
-function openComponent() {
-	alert("Editar o componente selecionado!");
 }
 
 function addUnits(element, js){
@@ -149,7 +327,8 @@ function addUnits(element, js){
         var linha = $("<tr/>",{id:idUnit});
         linha.append($("<td/>",{text:unidade, value:unidade,style:"width:200px"}));
         linha.append($("<td/>",{text: "Unit "+number, style:"width:80px"}));
-        var lineDelete = $("<td/>",{text:"DEL", style:"color: red;"});
+        var lineDelete = $("<td/>");
+        lineDelete.append($("<span/>",{class:"label label-danger", text:"DEL", style:"cursor:Pointer;"}))
         lineDelete.click(function(){
             $("#addsUnidades").find("tr[id="+idUnit+"]").remove();
             element.find("div[id="+idUnit+"]").remove();
@@ -168,9 +347,12 @@ function addParameter(element, js){
     var linha  = $("<tr/>",{id: idPar});
     var coluna1 = $("<td/>",{id:0,text: $("input[id=namePar]").val(),value:$("input[id=namePar]").val(), style:"width: 70px;", width: 150})
         .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("id")+"'></p>")
-        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("value")+"'></p>");
+        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("value")+"'></p>")
+        .append("<p hidden value='"+$("#boundValue").val()+"'></p>");
     var coluna2 = $("<td/>",{id:0, text: $("#variavel").val() == ""? "Local":"Compar.", title:$("#variavel").val(), value: $("#bound").val(),style:"color: blue;", width: 70 });
-    var lineDelete = $("<td/>",{id:0, text: "DEL", style: "color: red;"}).click(function(){
+    var lineDelete = $("<td/>");
+    lineDelete.append($("<span/>",{class:"label label-danger", text:"DEL", style:"cursor:Pointer;"}))
+    lineDelete.click(function(){
         $("#listParameters").find("tr[id="+idPar+"]").remove();
         jsPlumb.deleteEndpoint(ep);
     })
@@ -197,7 +379,7 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
         div.append($("<h3/>",{ text: name, align:"center", style:"color: white;"}));
         div.append("<p id= 'name' hidden value='"+name+"'></p>");
         div.append("<p id= 'supertype' hidden value='"+supertype+"'></p>");
-        div.append($("<h5/>",{ text: "<<"+supertype+">>", align:"center", }));
+        div.append($("<h5/>",{ text: ""+supertype+"", align:"center", style:"color:white;" }));
         $("#sort2").append(div);
         $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
 
@@ -205,7 +387,9 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
         var line = $("<tr/>", {id: id});
         line.append($("<td/>",{text: name, style:"width:150px"}));
         line.append($("<td/>",{text: supertype, style:"width:100px"}));
-        var lineDelete = $("<td/>",{text: "DEL", style:"color:red;"}).click(function(){
+        var lineDelete = $("<td/>");
+        lineDelete.append($("<span/>",{class:"label label-danger", text:"DEL", style:"cursor:Pointer;"}))
+        lineDelete.click(function(){
             jsPlumb.remove($("#autoScroll2").find("div[id='"+id+"']"));
 
             $("#autoScroll2").find("div[id='"+id+"']").remove();
@@ -225,27 +409,28 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
 }
 
 function addSlice(elementTarget, elementSource, slices, js){
-
-    var jsplumb = jsPlumb.getInstance();
-
+	
+	var jsplumb = jsPlumb.getInstance();
+	
     for (var i = 0; i < slices.length; i++) {
         var slice = { name:slices[i].getAttribute("value"), id:slices[i].getAttribute("id") };
             jsPlumb.addEndpoint ( elementSource, {
-            endpoint : "Rectangle" ,
-            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
-            connector:"StateMachine",
-            isSource : true,
-            anchor: "Continuous",
-            overlays: [
-                [ "Label", { location: [0.5, -0.5], label: slice.name, cssClass: "endPointPar" } ]
-            ],
-            parameters:{
-                "nameSlice": slice.name,
-                "idSlice": slice.id,
-                "component": elementSource.find("p[id='name']").attr("value"),
-                "idComponent": elementSource.attr("id")
-            }
-        });
+		            endpoint : "Rectangle" ,
+		            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
+		            connector:"StateMachine",
+		            isSource : true,
+		            anchor: "Continuous",
+		            overlays: [
+		                [ "Label", { location: [0.5, -0.5], label: slice.name, cssClass: "endPointPar" } ]
+		            ],
+		            parameters:{
+		                "nameSlice": slice.name,
+		                "idSlice": slice.id,
+		                "component": elementSource.find("p[id='name']").attr("value"),
+		                "idComponent": elementSource.attr("id")
+		            }
+	        	}
+            );
         jsPlumb.draggable(elementSource);
     };
     jsPlumb.repaintEverything();
@@ -260,8 +445,8 @@ function updateSlicesNested(conn, remove){
         var nameSlice = conn.connection.getParameter("nameSlice");
         var compSlice = conn.connection.getParameter("component");
         var line = $("<tr/>", {id: conn.connection.getParameter("idSlice")});
-        line.append($("<td/>",{value:nameSlice, text:nameSlice, style:"color:white; width: 150px;"}));
-        line.append($("<td/>",{ id: conn.connection.getParameter("idComponent"), value: compSlice, text:compSlice, style:"color:white; width: 50px;"}));
+        line.append($("<td/>",{value:nameSlice, text:nameSlice, style:"width: 150px;"}));
+        line.append($("<td/>",{ id: conn.connection.getParameter("idComponent"), value: compSlice, text:compSlice, style:"width: 50px;"}));
         tableSlices.append(line);
 
         var linha = $("#addsComponents").find("tr[id='"+ conn.connection.getParameter("idComponent") +"']");
@@ -281,17 +466,18 @@ function deleteElement(element, js){
 	}
 }
 
-//Sujeito a exclusão
 function addNewAbstractComponent(){
+	$("#modalSubmit").modal({backdrop: 'static', keyboard: false});
+	
     var nameComponent = $("#newComp").find("p[id='name']").attr("value");;
 
     var supertype = $("#newComp").find("p[id='super']").attr("value");
     var idsupertype = $("#newComp").find("p[id='idSuper']").attr("value");
 
-    var contextParameter = parameters($("#listParameters").find("tr"));
-    var unitsAbstracts = units($("#addsUnidades").find("tr"));
-    var unislices = slices($("#listSlices").find("tr"));
-    var nestedComponents = nested($("#addsComponents").find("tr"));
+    var contextParameter = parameters($("#listParameters").find("tr:not(:first)"));
+    var unitsAbstracts = units($("#addsUnidades").find("tr:not(:first)"));
+    var unislices = slices($("#listSlices").find("tr:not(:first)"));
+    var nestedComponents = nested($("#addsComponents").find("tr:not(:first)"));
     var compObj = {
         name:  nameComponent,
         super: { name: supertype, idAc: parseInt(idsupertype)  },
@@ -301,7 +487,20 @@ function addNewAbstractComponent(){
         slices: unislices
     };
     console.log(compObj);
-    //saveNewAbstractComponent(compObj);
+    saveNewAbstractComponent(compObj, function(result){
+    	try {
+    		result = result.getElementsByTagName("result").item(0).getAttribute("value");
+    		if(result === "true"){
+    			alert("Componente registrado com sucesso!");
+    			location.reload();
+    		}else{
+    			alert("Componente não pode ser registrado!");
+    		}
+		} catch (e) {
+			alert("[ERROR]: Não foi possível carregar a resposta - "+e);
+		}
+		$("#modalSubmit").modal('hide');
+    });
 }
 
 
@@ -327,11 +526,19 @@ function loadCompModal () {
 	            $("#bound > select").remove();
 	            $("#bound").append("<h3 value='"+this.firstChild.getAttribute("id")+"'>"+this.firstChild.text+"</h3>");
 	            var select = $("<select>",{class:"form-control" ,style:"width:250px;"});
-	            var contracts = getListContracts(parseInt(this.firstChild.getAttribute("id")));
-	            for (var i = 0; i < contracts.length; i++) {
-	                select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
-	            };
-	            $("#bound").append(select);
+	            $("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+	            getListContracts(parseInt(this.firstChild.getAttribute("id")),function(list){
+	            	if(list != undefined){
+	            		var contracts = list;
+		            	for (var i = 0; i < contracts.length; i++) {
+			                select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
+			            };
+			            $("#bound").append(select);
+	            	}else{
+	            		alert("Este parâmetro não possue contratos");
+	            	}
+	            	$("#modalLoadContracts").modal('hide');
+	            });
 			};
 			listLinksComponentsSupertype[i].onclick = function() {
 				$("#nameSuperComp > h3").remove();
@@ -395,7 +602,7 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     if(slice != null){
     	listSlices.append("<thead><tr><td><b>Nome da Fatia</b></td></tr></thead>");
     	for (var i = 0; i < slice.length; i++) {
-            listSlices.append("<tr><td>"+slice[i].name+"</td></tr>");
+            listSlices.append("<tr><td>"+slice[i].innerUnityName+"</td></tr>");
         }
     }
     
@@ -467,17 +674,27 @@ function identifier(listIds){
 }
 
 // FUNÇÕES PARA DEFINIR OS ATRIBUTOS DO OBJETO COMPONENTE
+/* 
+ 	kind: 1 é parametro contextual
+	kinId:  2 qualidade
+	kindId: 3 custo
+	kindId: 4 ranking
+ */
 function parameters(listParameters){
 	var parametersObjs = [];
-	for (var i = 1; i < listParameters.length; i++) {
-		console.log(listParameters[i]);
+	for (var i = 0; i < listParameters.length; i++) {
 		parametersObjs[i] = {
 			name: listParameters[i].childNodes[0].getAttribute("value"),
-			bound: {
-					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value")),
-					ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
-				}
+			kind: 1
+		}
+		if($("#opcaoLimite").find("option:selected").attr("value") === "contract"){
+			parametersObjs[i].bound = {
+				ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value")),
+				ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
 			}
+		}else{
+			parametersObjs[i].boundValue = listParameters[i].firstChild.getElementsByTagName("p").item(2).getAttribute("value")
+		}
 	}
 	return parametersObjs;
 }
@@ -496,8 +713,10 @@ function slices(list){
 	var slices = [];
 	for (var j = 0; j < list.length; j++) {
 		slices[j] = {
-			sliceId: parseInt(list[j].getAttribute("id")),
-			innerComponentId: parseInt(list[j].childNodes[1].id)
+			innerUnityName: list[j].childNodes[0].getAttribute("value"),
+			innerComponentName: list[j].childNodes[1].getAttribute("value"),
+			innerComponentId: parseInt(list[j].childNodes[1].getAttribute("id")),
+			innerUnitId: parseInt(list[j].getAttribute("id"))
 		}
 	};
 	return slices;
@@ -519,11 +738,55 @@ function nested(listNested){
 	for (var i = 0; i < listNested.length; i++) {
 		nestedObjs[i] = {
 			name: listNested[i].childNodes[3].getAttribute("value"),
-			supertype: { name:listNested[i].childNodes[4].getAttribute("value"),
-						idAc: parseInt(listNested[i].childNodes[5].getAttribute("value"))
-					},
+			supertype: { 
+				name:listNested[i].childNodes[4].getAttribute("value"),
+				idAc: parseInt(listNested[i].childNodes[5].getAttribute("value"))
+			},
 			abstractUnit: unitsNested(listNested[i].getElementsByClassName("slices"))
 		}
 	};
 	return nestedObjs;
 }
+
+/* Implementar:
+ * -> addContextParameter
+ * -> addAbstractUnit
+ */
+
+function getContextParameters(){
+	var listParameters = $("#listParameters > tbody > tr");
+	var parametersObjs = [];
+	for (var i = 0; i < listParameters.length; i++) {
+		if(listParameters[i].childNodes.length === 3){
+			obj = {
+				name: listParameters[i].childNodes[0].getAttribute("value"),
+				kind: 1
+			}
+			if($("#opcaoLimite").find("option:selected").attr("value") === "contract"){
+				obj.bound = {
+					ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value")),
+					ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
+				}
+			}else{
+				obj.boundValue = listParameters[i].firstChild.getElementsByTagName("p").item(2).getAttribute("value")
+			}
+			parametersObjs.push(obj);
+		}
+	}
+	console.log(parametersObjs);
+	return parametersObjs;
+}
+
+function getAbstractsUnits(){
+	var units = $("#addsUnidades > tbody > tr");
+	var newUnits = [];
+	for (var i = 0; i < units.length; i++) {
+		if(units[i].getElementsByTagName("span").length > 0){
+			newUnits.push({auName: units[i].childNodes[0].getAttribute("value")});
+			
+		}
+	}
+	console.log(newUnits);
+	return newUnits;
+}
+ 

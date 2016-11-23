@@ -53,7 +53,7 @@
 }
 
 #newComponent{
-    height: 80%;
+    height: 77%;
     overflow: auto;
 }
 
@@ -116,5 +116,5 @@ li:not(li:[id=nav]){
 }
 
 #divMenu > ul > li:hover {
-    background-color:rgba(133, 192, 242, 0.7);
+    background-color:#babdb6;
 }

@@ -3,81 +3,38 @@ $(document).ready(function(){
 });
 
 function init(){
-  /* INICIO MODAIS */
-  	var dialogComp = $( "#dialog-cmp" ).dialog({
-	    autoOpen: false,
-	    height: 500,
-	    width: 600,
-	    modal: true,
-	    buttons: {
-          	"Selecionar": function(){
-              	if($("#nameComp").find("h3").attr("value") == null ){
-                  	alert("Selecione um Componente!");
-              	}else{
-					loadComponentAbstract($("#containerDetailsComp").clone(true));
-					dialogComp.dialog( "close" );
-				}
-          	},
-          	Cancel: function() {
-              	dialogComp.dialog( "close" );
-				//window.history.back();
-          	}
-    	}
- 	});
-
-  	dialogComp.dialog("open");
-
-	var dialogPla = $( "#dialog-plt" ).dialog({
-		  autoOpen: false,
-		  height: 500,
-		  width: 850,
-		  modal: true,
-		  buttons: {
-		      "Selecionar": function(){
-		          if($("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value") == null ){
-		              alert("Selecione uma Plataforma!");
-		          }else{
-						/*$("#cmpPlt").find("h3[id=namePlt]").remove();
-						$("#cmpPlt").find("p[id=ccId]").remove();
-						$("#cmpPlt").find("select").remove();
-						$("#cmpPlt").find("br").remove();
-						$("#cmpPlt").find("#platform").before("<h3 style='color:black;' id='namePlt' value="+$("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value")+">"+$("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value")+"</h3>");
-						$("#cmpPlt").find("#platform").before("<p hidden id='idAc' value="+$("#containerDetailsComp-plt").find("#nameComp").find("p[id=ccId]").attr("value")+"></h3>");
-						var select = $("<select>",{style:"width:250px;"});
-						var contracts = getListContracts(parseInt($("#containerDetailsComp-plt").find("#nameComp").find("p[id=ccId]").attr("value")));
-						for (var i = 0; i < contracts.length; i++) {
-							select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
-						};
-						$("#cmpPlt").find("#platform").before(select);
-						$("#cmpPlt").find("#platform").before("<br><br>");*/
-		        	  	$("#cmpPlt").find("h2[id=name-contract-platform]").remove();
-		        	  	var form = $("#containerDetailsComp-plt");
-		        		var op = form.find("#select-type").find("option:selected").attr("value");
-		        		if(op == "new"){
-		        			$("#cmpPlt").find("#platform").before("<h2 id='name-contract-platform'>"+$("#div-new-contract-platform").find("#name-new-contract").val()+"</h2>");
-		        		}else{
-		        			$("#cmpPlt").find("#platform").before("<h2 id='name-contract-platform'>"+form.find("#opstions-contract").find("option:selected").attr("value")+"</h2>");
-		        		}
-						dialogPla.dialog( "close" );
-					}
-		      },
-		      Cancel: function() {
-		        dialogPla.dialog( "close" );
-		      }
-		  }
-  	});
-  /* FIM MODAIS */
 
   /*INICIO BOTÕES*/
-	$("#save").button().click(function(){
+	$("#save").click(function(){
 		downloadContract();
 	});
-	$("#submet").button().click(function(){
+	$("#submit").click(function(){
 		registerContract();
 	});
-  	$("#clean").button();
-	$("#platform").button().click(function() {
-		dialogPla.dialog("open");
+  	//$("#clean").button();
+	$("#openComponent").click(function(){
+		if($("#nameComp").find("h3").attr("value") == null ){
+          	alert("Selecione um Componente!");
+      	}else{
+			loadComponentAbstract($("#containerDetailsComp").clone(true));
+			$("#init").hide();
+			$("#main").show("fast");
+		}
+	});
+	
+	$("#selectPlatform").click(function(){
+		if($("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value") == null ){
+            alert("Selecione uma Plataforma!");
+        }else{
+			$("#cmpPlt").find("h2[id=name-contract-platform]").remove();
+		  	var form = $("#containerDetailsComp-plt");
+			var op = form.find("#select-type").find("option:selected").attr("value");
+			if(op == "new"){
+				$("#cmpPlt").find("#platform").before("<h2 id='name-contract-platform'>"+$("#div-new-contract-platform").find("#name-new-contract").val()+"</h2>");
+			}else{
+				$("#cmpPlt").find("#platform").before("<h2 id='name-contract-platform'>"+form.find("#opstions-contract").find("option:selected").attr("value")+"</h2>");
+			}
+        }
 	});
   /* FIM BOTÕES */
 	
@@ -86,51 +43,19 @@ function init(){
 }
 
 function loadComponentAbstract(details){
-	$("#cmpSelected").append("<h2 id='name' value='"+details.find("#nameComp").find("h3").attr("value")+"'>"+details.find("#nameComp").find("h3").attr("value")+"</h2>");
-	$("#cmpSelected").append("<p id='idAc' value='"+details.find("#nameComp").find("p[id=idAc]").attr("value")+"'></p>");
-	$("#cmpSelected").append("<p id='idAcSuper' value='"+details.find("#nameComp").find("p[id=idSuper]").attr("value")+"'></p>");
+	
+	$("#cmpSelected").append("<h2 id='name' value='"+$("#nameComp").find("h3").attr("value")+"'><b>"+$("#nameComp").find("h3").attr("value")+"</b></h2>");
+	$("#cmpSelected").append("<p id='idAc' value='"+$("#nameComp").find("p[id=idAc]").attr("value")+"'></p>");
+	$("#cmpSelected").append("<p id='idAcSuper' value='"+$("#nameComp").find("p[id=idSuper]").attr("value")+"'></p>");
 
 	var param = $("#parar").find("tr:not(:first)");
 	for (var i = 0; i < param.length; i++) {
 		var linha = "<tr id='"+i+"'>"+
-			"<td id='"+param[i].childNodes.item(0).getAttribute("id")+"' value='"+param[i].childNodes.item(0).getAttribute("value")+"'><h3>"+param[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
-			"<td width='250px'><select id='"+param[i].childNodes.item(0).getAttribute("id")+"' style='width:250px'><optgroup hidden label='"+i+"'><option optgroup='"+i+"' class ='ui-selectmenu-button' value='cp_id'>Identificador</option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+
+			"<td width='300px' id='"+param[i].childNodes.item(0).getAttribute("id")+"' value='"+param[i].childNodes.item(0).getAttribute("value")+"'><h3>"+param[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
+			"<td width='250px'><select class='form-control' onclick='actionParameter("+i+")' id='"+param[i].childNodes.item(0).getAttribute("id")+"' style='width:250px'><optgroup label='"+i+"'><option optgroup='"+i+"' value='cp_id'>Identificador</option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+
 			"<td><p hidden id='bound' value='"+param[i].childNodes.item(1).childNodes.item(0).getAttribute("value")+"'></td>"+
 		+"</tr>";
 		$("#tabParCont").append(linha);
-		$("#tabParCont").find("tr[id='"+i+"']").find("td:nth(1)").find("select").selectmenu({
-			change: function( event, data ) {
-				if(data.item.value === 'cp_id'){
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					var colum = $("<td/>",{style:"width:250px"});
-					var select = $("#listComp-ops").clone(true);
-					colum.append(select.css("visibility","visible"));
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").append(colum);
-
-					//select.selectmenu();//.selectmenu("menuWidget");//.addClass("overflow");
-				}else if(data.item.value === 'contract'){
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					console.log(this.getAttribute("id"));
-					var listContract = getListContracts(this.getAttribute("id"));
-					var select = $("<select/>",{id:"listContracts", style:"width:250px"});
-					//select.find("option").remove();
-					for (var i = 0; i < listContract.length; i++) {
-						select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
-					}
-					var colum = $("<td/>",{style:"width:250px"});
-					colum.append(select.css("visibility","visible"));
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").append(colum);
-
-				}else {
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").append("<td><input type='text' name='valor' value='Valor'/></td>");
-					$("#tabParCont").find("tr[id='"+data.item.optgroup+"']").append("<td><input type='text' name='dataType' value='Tipo de valor'/></td>");
-				}
-			}
-		});
 	}
 
 
@@ -146,20 +71,24 @@ function loadComponentAbstract(details){
 
 
 	var nests = $("#nest").find("tr:not(:first)");
-	for (var i = 0; i < nests.length; i++) {
-		var contracts = getListContracts(parseInt(nests[i].childNodes.item(1).getAttribute("value")));
-		var opts = "";
-		for (var j = 0; j < contracts.length; j++) {
-			opts += "<option class ='ui-selectmenu-button' id='"+contracts[j].ccId+"' value='"+contracts[j].ccName+"'>"+contracts[j].ccName+"</option>";
+	if(nests.length != 0){
+		$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+		for (var i = 0; i < nests.length; i++) {
+			getListContracts(parseInt(nests[i].childNodes.item(1).getAttribute("value")),function(list){
+				var contracts = list;
+				var opts = "";
+				for (var j = 0; j < contracts.length; j++) {
+					opts += "<option class ='ui-selectmenu-button' id='"+contracts[j].ccId+"' value='"+contracts[j].ccName+"'>"+contracts[j].ccName+"</option>";
+				}
+				var linha = "<tr>"+
+					"<td style='width:200' value='"+nests[i].firstChild.getAttribute("value")+"'><h3>"+nests[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
+					"<td style='width:50' value='"+nests[i].childNodes.item(1).getAttribute("value")+"'></td>"+
+					"<td><select class='form-control' style='width:250'>"+opts+"</select></td>"
+				+"</tr>";
+				$("#tabCmpAni").append(linha);
+				$("#modalLoadContracts").modal('hide');
+			});
 		}
-		var linha = "<tr>"+
-			"<td style='width:200' value='"+nests[i].firstChild.getAttribute("value")+"'><h3>"+nests[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
-			"<td style='width:50' value='"+nests[i].childNodes.item(1).getAttribute("value")+"'></td>"+
-			"<td><select style='width:250'>"+opts+"</select></td>"
-			//"<td value='"+param[i].childNodes.item(0).getAttribute("value")+"'><h2>"+param[i].childNodes.item(0).getAttribute("value")+"</h2><td>"
-		+"</tr>";
-		$("#tabCmpAni").append(linha);
-		$("#tabCmpAni").find("select").selectmenu();
 	}
 
 
@@ -199,51 +128,67 @@ function loadComponentAbstract(details){
 }
 
 function registerContract() {
+	$("#modalSubmit").modal({backdrop: 'static', keyboard: false});
 	var form = $("#formulario");
+	var main = $("#main");
 	var contractObj = {
 		name: form.find("#ccNm").find("#ccName").val(),
 		arguments: getContextArguments(form.find("#tabParCont")),
-		component:getAbstractComponentRegister(form.find("#cmpSelected")),
-		platform: getPlatform(),
+		component:getAbstractComponentRegister(main.find("#cmpSelected")),
+		platformContract: getPlatform(),
 		qualities: null,
 		ranking: null,
 		costs: null,
 		inners: getInnerComponents(form.find("#tabCmpAni"))
 	};
-	console.log(contractObj);
-	saveNewContract(contractObj);
+	
+	saveNewContract(contractObj,function(result){
+		try{
+			result = result.getElementsByTagName("result").item(0).getAttribute("value");
+			console.log(result);
+			alert(result);
+			if(result === "true"){
+				alert("Contrato Submetido com sucesso!");
+			}else{
+				alert("O contrato não foi Submetido com sucesso!");
+			}
+			$("#modalSubmit").modal('hide');
+		}catch (e) {
+			alert("[ERROR]: Não foi possível carregar a resposta - "+e);
+		}
+	});
 }
 
 function downloadContract() {
 	var form = $("#formulario");
+	var main = $("#main");
 	var contractObj = {
 		name: form.find("#ccNm").find("#ccName").val(),
 		arguments: getContextArguments(form.find("#tabParCont")),
-		component:getAbstractComponentRegister(form.find("#cmpSelected")),
-		platform: getPlatform(),
+		component:getAbstractComponentRegister(main.find("#cmpSelected")),
+		platformContract: getPlatform(),
 		qualities: null,
 		ranking: null,
 		costs: null,
 		inners: getInnerComponents(form.find("#tabCmpAni"))
 	};
-	console.log(contractObj);
-	downloadNewContract(contractObj);
+	//downloadNewContract(contractObj);
 }
 
 // GETS
 function getPlatform(){
-	var platform = null;
 	var form = $("#containerDetailsComp-plt");
 	var op = form.find("#select-type").find("option:selected").attr("value");
 	if(op == "select"){
-		platform = {
+		var contextContract = {
 			ccName: form.find("#opstions-contract").find("option:selected").attr("value"),
 			ccId: parseInt(form.find("#opstions-contract").find("option:selected").attr("id"))
-		};
-	}else{
-		platform = {
+		}
+		return contextContract;
+	}else if(op == "new"){
+		var contextContract = {
 			ccName: $("#div-new-contract-platform").find("#name-new-contract").val(),
-			contextArguments: getContextArgumentsPlatform(),
+			contextArgumentsProvided: getContextArgumentsPlatform(),
 			abstractComponent: {
 				name: form.find("#nameComp").find("h3").attr("value"),
 				idAc: parseInt(form.find("#nameComp").find("p[id=ccId]").attr("value")),
@@ -255,9 +200,11 @@ function getPlatform(){
 			costArguments: ,
 			innerComponents:*/ 
 		};
+		return contextContract;
+	}else{
+		return null;
 	}
 	
-	return platform;
 }
 
 function getAbstractComponentRegister(formComponent){
@@ -295,12 +242,13 @@ function getContextArguments(formContextArguments){
 		};
 		var op = rows[i].childNodes.item(1).childNodes.item(0).options.selectedIndex;
 		if(op === 0){
-			argument.cpId = parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id);
+			//argument.cpId = parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id);
 		}else if(op === 1){
 			argument.contextContract = { 
 				ccId: parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id), 
 				ccName: rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].value
 			};
+			argument.value = null;
 		}else{
 			argument.value = {
 				value: rows[i].childNodes.item(3).childNodes.item(0).value,
@@ -308,6 +256,8 @@ function getContextArguments(formContextArguments){
 			};
 		}
 		arguments[i] = argument;
+		arguments[i].cpId = parseInt(rows[i].childNodes.item(0).id);
+		arguments[i].kind = 1;
 	}
 	return arguments;
 }
@@ -345,7 +295,7 @@ function getContextArgumentsPlatform(){
 function loadCompModal () {
 	
 	var listLinksComponents = $("#listComponents > li");	
-	var listLinkComponentsPlatform = $("#containerComp-plt").find("#listComponents").find("li");
+	var listLinkComponentsPlatform = $("#listPltComponents").find("li");
 	
 	if(listLinkComponentsPlatform != null && listLinksComponents != null){
 		for (var i = 0; i < listLinksComponents.length; i++) {
@@ -369,34 +319,14 @@ function loadCompModal () {
 		        $("#containerDetailsComp-plt").find("#nameComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
 		        $("#containerDetailsComp-plt").find("#nameComp").append("<p id='ccId' value='"+this.firstChild.getAttribute("id")+"'></p>");
 		        $("#select-type").css("visibility","visible");
-		        $("#select-type").selectmenu({change: function(event, data) {
-		        	if(data.item.value === 'select'){
-		        		$("#div-select-contract > br").remove();
-		        		$("#div-select-contract > select").remove();
-		        		
-		        		var select = $("<select>",{id:"opstions-contract",style:"width:250px;"});
-						var contracts = getListContracts($("#containerDetailsComp-plt").find("#nameComp").find("p[id=ccId]").attr("value"));
-						for (var i = 0; i < contracts.length; i++) {
-							select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
-						};
-						
-						$("#div-select-contract").append("<br><br>");
-						$("#div-select-contract").append(select);
-						$("#div-new-contract-platform").css("visibility","hidden");
-		        	}else{
-		        		$("#div-new-contract-platform").css("visibility","visible");
-		        		$("#div-select-contract > br").remove();
-		        		$("#div-select-contract > select").remove();
-		        		loadDetaisCompPlatform($("#containerDetailsComp-plt").find("#nameComp") ,
-		        				$("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value"),
-								$("#containerDetailsComp-plt").find("#parar"),
-								$("#containerDetailsComp-plt").find("#nest"),
-								$("#containerDetailsComp-plt").find("#unit"),
-								$("#containerDetailsComp-plt").find("#slices"),
-								$("#containerDetailsComp-plt").find("#quality"),
-								$("#containerDetailsComp-plt").find("#cost"));
+		        var combPlt = document.getElementById("select-type");
+		        combPlt.onclick = function(){
+		        	if(combPlt.selectedIndex === 1){
+		        		selectContractPlt();
+		        	}else if(combPlt.selectedIndex === 2 ){
+		        		newContractPlt();
 		        	}
-		        }});
+		        }
 			}
 		}
 	}
@@ -412,6 +342,7 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     listSlices.find("tr:not(:first)").remove();
     
     var cmp = getAbstractComponent(component);
+    console.log(cmp);
     
     var parar = cmp.contextParameter;
     var nested = cmp.innerComponents;
@@ -442,8 +373,8 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     if(unit != null){
 	    for (var i = 0; i < unit.length; i++) {
 	        listAbsUnit.append("<tr>"+
-	          "<td value='"+unit[i].name+"'>"+unit[i].name+"</td>"+
-	          "<td value='"+unit[i].id+"'>"+unit[i].id+"</td>"
+	          "<td value='"+unit[i].auName+"'>"+unit[i].auName+"</td>"+
+	          "<td value='"+unit[i].auId+"'>"+unit[i].auId+"</td>"
 	        +"</tr>");
 	    }
     }
@@ -451,7 +382,7 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     if(slice != null){
 	    for (var i = 0; i < slice.length; i++) {
 	        listSlices.append("<tr>"+
-	          "<td value='"+slice[i].name+"'>"+slice[i].name+"</td>"+
+	          "<td value='"+slice[i].innerUnityName+"'>"+slice[i].innerUnityName+"</td>"+
 	          "<td value='"+slice[i].sliceId+"'>"+slice[i].sliceId+"</td>"+
 	          "<td value='"+slice[i].idCmp+"'>"+slice[i].idCmp+"</td>"
 	        +"</tr>");
@@ -489,99 +420,79 @@ function loadDetaisCompPlatform (viewComp, component, listParar, listNestedComp,
     
     var cmp = getAbstractComponent(component);
     
-    var parar = cmp.contextParameters; 
+    var parar = cmp.contextParameter; 
     var nested = cmp.innerComponents;
-    var unit = cmp.abstractUnits;
+    var unit = cmp.abstractUnit;
 	var slice = cmp.slices;
     var quality = cmp.qualityParameters;
     var cost = cmp.costParameters;
 
     viewComp.append("<p id='idSuper' value='"+cmp.supertype.idAc+"'></p>");
+    
+    if(parar != null){
+    	for (var i = 0; i < parar.length; i++) {
+        	var ccId = parar[i].bound == null ? "": parar[i].bound.ccId;
+            listParar.append("<tr id="+i+">"+
+        		"<td id='"+parar[i].cpId+"' value='"+parar[i].name+"'>"+parar[i].name+"</td>"+
+        		"<td><p hidden id='bound' value='"+ccId+"'></p></td>"+
+        		"<td width='200px'><select onclick='actionParameterPlt("+i+")' id='"+parar[i].cpId+"' style='width:200px' class='form-control'><optgroup  label='"+i+"'><option optgroup='"+i+"' value='cp_id'>Identificador</option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+    		
+            	"</tr>");
+        };
+    }
+    
+    if(nested != null){
+    	for (var i = 0; i < nested.length; i++) {
+            listNestedComp.append("<tr>"+
+            	"<td value='"+nested[i].name+"'>"+nested[i].name+"</td><td value='"+nested[i].id+"'>"+nested[i].id+"</td></tr>");
+        };
+    }
 
-    for (var i = 0; i < parar.length; i++) {
-    	var ccId = parar[i].bound == null ? "": parar[i].bound.ccId;
-        listParar.append("<tr id="+i+">"+
-    		"<td id='"+parar[i].cpId+"' value='"+parar[i].name+"'>"+parar[i].name+"</td>"+
-    		"<td><p hidden id='bound' value='"+ccId+"'></p></td>"+
-    		"<td width='200px'><select id='"+parar[i].cpId+"' style='width:200px'><optgroup  label='"+i+"'><option optgroup='"+i+"' value='cp_id'>Identificador</option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+    		
-        	"</tr>");
-        
-        listParar.find("tr[id='"+i+"']").find("td:nth(2)").find("select").selectmenu({change: function(event, data) {
-	        	if(data.item.value === 'cp_id'){
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					var colum = $("<td/>",{style:"width:200px"});
-					var select = $("#listComp-ops").clone(true);
-					colum.append(select.css("visibility","visible"));
-					listParar.find("tr[id='"+data.item.optgroup+"']").append(colum);
-		
-				}else if(data.item.value === 'contract'){
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					console.log(cmp.idAc);
-					var listContract = getListContracts(cmp.idAc);
-					var select = $("<select/>",{id:"listContracts", style:"width:200px"});
-					//select.find("option").remove();
-					for (var i = 0; i < listContract.length; i++) {
-						select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
-					}
-					var colum = $("<td/>",{style:"width:250px"});
-					colum.append(select.css("visibility","visible"));
-					listParar.find("tr[id='"+data.item.optgroup+"']").append(colum);
-		
-				}else {
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					listParar.find("tr[id='"+data.item.optgroup+"']").find("td:nth(3)").remove();
-					listParar.find("tr[id='"+data.item.optgroup+"']").append("<td><input type='text' name='valor' value='Valor'/></td>");
-					listParar.find("tr[id='"+data.item.optgroup+"']").append("<td><input type='text' name='dataType' value='Tipo de valor'/></td>");
-				}
-			}
-        });
-   
-    };
-
-    for (var i = 0; i < nested.length; i++) {
-        listNestedComp.append("<tr>"+
-        	"<td value='"+nested[i].name+"'>"+nested[i].name+"</td><td value='"+nested[i].id+"'>"+nested[i].id+"</td></tr>");
-    };
-
-    for (var i = 0; i < unit.length; i++) {
-        listAbsUnit.append("<tr>"+
-          "<td value='"+unit[i].name+"'>"+unit[i].name+"</td>"+
-          "<td value='"+unit[i].id+"'>"+unit[i].id+"</td>"
-        +"</tr>");
-    };
-
-    for (var i = 0; i < slice.length; i++) {
-        listSlices.append("<tr>"+
-          "<td value='"+slice[i].name+"'>"+slice[i].name+"</td>"+
-          "<td value='"+slice[i].sliceId+"'>"+slice[i].sliceId+"</td>"+
-          "<td value='"+slice[i].idCmp+"'>"+slice[i].idCmp+"</td>"
-        +"</tr>");
-    };
-
-    for (var i = 0; i < quality.length; i++) {
-        listQualities.append("<tr>"+
-          "<td value='"+quality[i].name+"'>"+quality[i].name+"</td>"+
-          "<td value='"+quality[i].qpId+"'>"+quality[i].qpId+"</td>"+
-          "<td value='"+quality[i].kindId+"'>"+quality[i].kindId+"</td>"
-        +"</tr>");
-    };
-
-    for (var i = 0; i < cost.length; i++) {
-        listCosts.append("<tr>"+
-          "<td value='"+cost[i].name+"'>"+cost[i].name+"</td>"+
-          "<td value='"+cost[i].copId+"'>"+cost[i].copId+"</td>"+
-          "<td value='"+cost[i].kindId+"'>"+cost[i].kindId+"</td>"
-        +"</tr>");
-    };
+    if(unit != null){
+    	for (var i = 0; i < unit.length; i++) {
+            listAbsUnit.append("<tr>"+
+              "<td value='"+unit[i].name+"'>"+unit[i].name+"</td>"+
+              "<td value='"+unit[i].id+"'>"+unit[i].id+"</td>"
+            +"</tr>");
+        };
+    }
+    
+    if(slice != null){
+    	for (var i = 0; i < slice.length; i++) {
+            listSlices.append("<tr>"+
+              "<td value='"+slice[i].name+"'>"+slice[i].name+"</td>"+
+              "<td value='"+slice[i].sliceId+"'>"+slice[i].sliceId+"</td>"+
+              "<td value='"+slice[i].idCmp+"'>"+slice[i].idCmp+"</td>"
+            +"</tr>");
+        };
+    }
+    
+    if(quality != null){
+    	for (var i = 0; i < quality.length; i++) {
+            listQualities.append("<tr>"+
+              "<td value='"+quality[i].name+"'>"+quality[i].name+"</td>"+
+              "<td value='"+quality[i].qpId+"'>"+quality[i].qpId+"</td>"+
+              "<td value='"+quality[i].kindId+"'>"+quality[i].kindId+"</td>"
+            +"</tr>");
+        };
+    }
+    
+    if(cost != null){
+    	for (var i = 0; i < cost.length; i++) {
+            listCosts.append("<tr>"+
+              "<td value='"+cost[i].name+"'>"+cost[i].name+"</td>"+
+              "<td value='"+cost[i].copId+"'>"+cost[i].copId+"</td>"+
+              "<td value='"+cost[i].kindId+"'>"+cost[i].kindId+"</td>"
+            +"</tr>");
+        };
+    }
+    
 }
 
 function initListComponents(){
 	var list = getListAbstractComponents();
 	var listOps = $("#listComp-ops");
 	var listComp = $("#listComponents");
-	var listPlt = $("#containerComp-plt").find("#listComponents");
+	var listPlt = $("#listPltComponents");
 	
 	for (var i = 0; i < list.length; i++) {
 		listOps.append($("<option>",{id:list[i].acId , value:list[i].name, text:list[i].name}));
@@ -592,12 +503,131 @@ function initListComponents(){
 	}
 }
 
-function dialogModel(dialog) {
-	var dialogCmp = dialog.clone(true).dialog({
-      autoOpen: false,
-      height: 500,
-      width: 600,
-      modal: true,
-  });
-	return dialogCmp;
+function selectContractPlt() {
+	$("#div-select-contract > br").remove();
+	$("#div-select-contract > select").remove();
+	
+	var select = $("<select>",{class:"form-control",id:"opstions-contract",style:"width:250px;"});
+	$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+	getListContracts($("#containerDetailsComp-plt").find("#nameComp").find("p[id=ccId]").attr("value"),function(list){
+		if(list != undefined){
+			var contracts = list;
+			for (var i = 0; i < contracts.length; i++) {
+				select.append($("<option>",{text:contracts[i].ccName ,value:contracts[i].ccName ,id:contracts[i].ccId}));
+			};
+			
+			$("#div-select-contract").append("<br>");
+			$("#div-select-contract").append(select);
+			$("#div-new-contract-platform").css("visibility","hidden");
+		}else{
+			alert("Este componente não possui contratos!");
+		}
+		$("#modalLoadContracts").modal('hide');
+	});
+}
+
+function newContractPlt(){
+	$("#div-new-contract-platform").css("visibility","visible");
+	$("#div-select-contract > br").remove();
+	$("#div-select-contract > select").remove();
+	loadDetaisCompPlatform($("#containerDetailsComp-plt").find("#nameComp") ,
+			$("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value"),
+			$("#containerDetailsComp-plt").find("#parar"),
+			$("#containerDetailsComp-plt").find("#nest"),
+			$("#containerDetailsComp-plt").find("#unit"),
+			$("#containerDetailsComp-plt").find("#slices"),
+			$("#containerDetailsComp-plt").find("#quality"),
+			$("#containerDetailsComp-plt").find("#cost"));
+}
+
+function actionParameter(ind){
+	var opt = $("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(1)").find("select option:selected").val();
+	if(opt === 'cp_id'){
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+		var select = $("#listComp-ops").clone(true);
+		select.addClass("form-control");
+		colum.append(select.css("visibility","visible"));
+		$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
+
+		//select.selectmenu();//.selectmenu("menuWidget");//.addClass("overflow");
+	}else if(opt === 'contract'){
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		var op = $("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(1)").find("select").attr("id");
+		$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+		getListContracts(op, function(list){
+			if(list != undefined){
+				var listContract = list;
+				
+				var select = $("<select/>",{id:"listContracts", style:"width:250px", class:"form-control"});
+				//select.find("option").remove();
+				if(listContract === null){
+					alert("Não possui contratos!");
+				}else{
+					for (var i = 0; i < listContract.length; i++) {
+						select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
+					}
+					var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+					colum.append(select.css("visibility","visible"));
+					$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
+				}
+			}else{
+				alert("Este parâmetro não possui contratos");
+			}
+			$("#modalLoadContracts").modal('hide');
+		});
+	}else {
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
+		$("#tabParCont").find("tr[id='"+ind+"']").append("<td style='width:200px; padding-left: 10px;' ><input type='text' class='form-control' name='valor' placeholder='Valor'/></td>");
+		$("#tabParCont").find("tr[id='"+ind+"']").append("<td style='width:200px; padding-left: 10px;' ><input type='text' class='form-control' name='dataType' placeholder='Tipo de valor'/></td>");
+	}
+}
+
+function actionParameterPlt(ind){
+	var opt = $("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(2)").find("select option:selected").val();
+	if(opt === 'cp_id'){
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+		var select = $("#listComp-ops").clone(true);
+		select.addClass("form-control");
+		colum.append(select.css("visibility","visible"));
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").append(colum);
+
+		//select.selectmenu();//.selectmenu("menuWidget");//.addClass("overflow");
+	}else if(opt === 'contract'){
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		var op = $("#div-new-contract-platform").find("#parar").find("tr[id='"+ind+"']").find("td:nth(2)").find("select").attr("id");
+		$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+		getListContracts(op,function(list){
+			if(list != undefined){
+				var listContract = list;
+				var select = $("<select/>",{id:"listContracts", style:"width:250px", class:"form-control"});
+				//select.find("option").remove();
+				if(listContract === null){
+					alert("Não possui contratos!");
+				}else{
+					for (var i = 0; i < listContract.length; i++) {
+						select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
+					}
+					var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+					colum.append(select.css("visibility","visible"));
+					$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").append(colum);
+				}
+			}else{
+				alert("Este parâmetro não possui contratos!");
+			}
+			$("#modalLoadContracts").modal('hide');
+		});
+
+	}else {
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").find("td:nth(3)").remove();
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").append("<td style='padding-left: 10px;' ><input type='text' style='width:200px;' class='form-control' name='valor' placeholder='Valor'/></td>");
+		$("#div-new-contract-platform").find("#parar").find("tr[id="+ind+"]").append("<td style='padding-left: 10px;' ><input type='text' style='width:200px;' class='form-control' name='dataType' placeholder='Tipo de valor'/></td>");
+	}
 }

@@ -1,7 +1,6 @@
 /**
  *  Controlador da função de envio de arquivos
  */
-var contextStorm = br_ufc_lia_storm;
 
 $(document).ready(function(){
 	init();
@@ -9,7 +8,10 @@ $(document).ready(function(){
 	var url   = window.location.search.replace("?", "");
 	var items = url.split("&");
 	if(items[0].split("=")[1] != undefined){
-		alert(items[0].split("=")[1]);
+		if(items[0].split("=")[1] === "true")
+			alert("Arquivo enviado com sucesso!");
+		else
+			alert("O arquivo não pode ser enviado!");
 	}
 	
 });

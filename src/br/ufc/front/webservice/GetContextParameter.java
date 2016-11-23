@@ -1,5 +1,6 @@
 
 package br.ufc.front.webservice;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

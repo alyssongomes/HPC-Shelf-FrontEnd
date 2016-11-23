@@ -24,22 +24,22 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ConvertContextContractCmp_QNAME = new QName("http://webservices.storm.ufc.br", "cmp");
     private final static QName _CoreServicesDBHandlerExceptionDBHandlerException_QNAME = new QName("http://webservices.storm.ufc.br", "DBHandlerException");
-    private final static QName _GetContextContractResponseReturn_QNAME = new QName("http://webservices.storm.ufc.br", "return");
-    private final static QName _AddConcreteUnitCmp_QNAME = new QName("http://webservices.storm.ufc.br", "cmp");
+    private final static QName _SortCandidatesResponseReturn_QNAME = new QName("http://webservices.storm.ufc.br", "return");
+    private final static QName _InstantiateACKAddress_QNAME = new QName("http://webservices.storm.ufc.br", "address");
+    private final static QName _CoreServicesParserConfigurationExceptionParserConfigurationException_QNAME = new QName("http://webservices.storm.ufc.br", "ParserConfigurationException");
+    private final static QName _CoreServicesSAXExceptionSAXException_QNAME = new QName("http://webservices.storm.ufc.br", "SAXException");
     private final static QName _SAXExceptionException_QNAME = new QName("http://sax.xml.org/xsd", "exception");
     private final static QName _SAXExceptionMessage_QNAME = new QName("http://sax.xml.org/xsd", "message");
     private final static QName _SAXExceptionCause_QNAME = new QName("http://sax.xml.org/xsd", "cause");
+    private final static QName _AddQualityFunctionFunc_QNAME = new QName("http://webservices.storm.ufc.br", "func");
+    private final static QName _CoreServicesIOExceptionIOException_QNAME = new QName("http://webservices.storm.ufc.br", "IOException");
     private final static QName _DeployCandidateList_QNAME = new QName("http://webservices.storm.ufc.br", "candidateList");
-    private final static QName _CoreServicesSAXExceptionSAXException_QNAME = new QName("http://webservices.storm.ufc.br", "SAXException");
+    private final static QName _GetStatusCst_QNAME = new QName("http://webservices.storm.ufc.br", "cst");
+    private final static QName _GetAbstractComponentName_QNAME = new QName("http://webservices.storm.ufc.br", "name");
     private final static QName _AddUnitFileXml_QNAME = new QName("http://webservices.storm.ufc.br", "xml");
     private final static QName _AddUnitFileData_QNAME = new QName("http://webservices.storm.ufc.br", "data");
-    private final static QName _InstantiateCst_QNAME = new QName("http://webservices.storm.ufc.br", "cst");
-    private final static QName _AddQualityFunctionFunc_QNAME = new QName("http://webservices.storm.ufc.br", "func");
-    private final static QName _GetContextParameterName_QNAME = new QName("http://webservices.storm.ufc.br", "name");
-    private final static QName _InstantiateACKAddress_QNAME = new QName("http://webservices.storm.ufc.br", "address");
-    private final static QName _CoreServicesParserConfigurationExceptionParserConfigurationException_QNAME = new QName("http://webservices.storm.ufc.br", "ParserConfigurationException");
-    private final static QName _CoreServicesIOExceptionIOException_QNAME = new QName("http://webservices.storm.ufc.br", "IOException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservice
@@ -158,6 +158,14 @@ public class ObjectFactory {
      */
     public AddInnerComponent createAddInnerComponent() {
         return new AddInnerComponent();
+    }
+
+    /**
+     * Create an instance of {@link SortCandidatesResponse }
+     * 
+     */
+    public SortCandidatesResponse createSortCandidatesResponse() {
+        return new SortCandidatesResponse();
     }
 
     /**
@@ -281,6 +289,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ConvertContextContract }
+     * 
+     */
+    public ConvertContextContract createConvertContextContract() {
+        return new ConvertContextContract();
+    }
+
+    /**
      * Create an instance of {@link AddAbstractComponentResponse }
      * 
      */
@@ -369,19 +385,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddContextContractResponse }
-     * 
-     */
-    public AddContextContractResponse createAddContextContractResponse() {
-        return new AddContextContractResponse();
-    }
-
-    /**
      * Create an instance of {@link AddContextParameterResponse }
      * 
      */
     public AddContextParameterResponse createAddContextParameterResponse() {
         return new AddContextParameterResponse();
+    }
+
+    /**
+     * Create an instance of {@link AddContextContractResponse }
+     * 
+     */
+    public AddContextContractResponse createAddContextContractResponse() {
+        return new AddContextContractResponse();
     }
 
     /**
@@ -417,19 +433,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ListContractResponse }
-     * 
-     */
-    public ListContractResponse createListContractResponse() {
-        return new ListContractResponse();
-    }
-
-    /**
      * Create an instance of {@link ExportContextContractResponse }
      * 
      */
     public ExportContextContractResponse createExportContextContractResponse() {
         return new ExportContextContractResponse();
+    }
+
+    /**
+     * Create an instance of {@link ListContractResponse }
+     * 
+     */
+    public ListContractResponse createListContractResponse() {
+        return new ListContractResponse();
     }
 
     /**
@@ -481,11 +497,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SortCandidates }
+     * 
+     */
+    public SortCandidates createSortCandidates() {
+        return new SortCandidates();
+    }
+
+    /**
      * Create an instance of {@link CoreServicesDBHandlerException }
      * 
      */
     public CoreServicesDBHandlerException createCoreServicesDBHandlerException() {
         return new CoreServicesDBHandlerException();
+    }
+
+    /**
+     * Create an instance of {@link ConvertContextContractResponse }
+     * 
+     */
+    public ConvertContextContractResponse createConvertContextContractResponse() {
+        return new ConvertContextContractResponse();
     }
 
     /**
@@ -513,6 +545,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = ConvertContextContract.class)
+    public JAXBElement<String> createConvertContextContractCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, ConvertContextContract.class, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DBHandlerException }{@code >}}
      * 
      */
@@ -525,18 +566,63 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetContextContractResponse.class)
-    public JAXBElement<String> createGetContextContractResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetContextContractResponse.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = SortCandidatesResponse.class)
+    public JAXBElement<String> createSortCandidatesResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, SortCandidatesResponse.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddConcreteUnit.class)
-    public JAXBElement<String> createAddConcreteUnitCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddConcreteUnit.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetStatusResponse.class)
+    public JAXBElement<String> createGetStatusResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetStatusResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "address", scope = InstantiateACK.class)
+    public JAXBElement<String> createInstantiateACKAddress(String value) {
+        return new JAXBElement<String>(_InstantiateACKAddress_QNAME, String.class, InstantiateACK.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddAbstractComponent.class)
+    public JAXBElement<String> createAddAbstractComponentCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddAbstractComponent.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "ParserConfigurationException", scope = CoreServicesParserConfigurationException.class)
+    public JAXBElement<Object> createCoreServicesParserConfigurationExceptionParserConfigurationException(Object value) {
+        return new JAXBElement<Object>(_CoreServicesParserConfigurationExceptionParserConfigurationException_QNAME, Object.class, CoreServicesParserConfigurationException.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SAXException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "SAXException", scope = CoreServicesSAXException.class)
+    public JAXBElement<SAXException> createCoreServicesSAXExceptionSAXException(SAXException value) {
+        return new JAXBElement<SAXException>(_CoreServicesSAXExceptionSAXException_QNAME, SAXException.class, CoreServicesSAXException.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ListContractResponse.class)
+    public JAXBElement<String> createListContractResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ListContractResponse.class, value);
     }
 
     /**
@@ -570,6 +656,123 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddInnerComponent.class)
+    public JAXBElement<String> createAddInnerComponentCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddInnerComponent.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ResolveResponse.class)
+    public JAXBElement<String> createResolveResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ResolveResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetContextParameterResponse.class)
+    public JAXBElement<String> createGetContextParameterResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetContextParameterResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ExportComponentSignatureResponse.class)
+    public JAXBElement<String> createExportComponentSignatureResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ExportComponentSignatureResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetAbstractComponentResponse.class)
+    public JAXBElement<String> createGetAbstractComponentResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetAbstractComponentResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ExportContextContractResponse.class)
+    public JAXBElement<String> createExportContextContractResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ExportContextContractResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "func", scope = AddQualityFunction.class)
+    public JAXBElement<String> createAddQualityFunctionFunc(String value) {
+        return new JAXBElement<String>(_AddQualityFunctionFunc_QNAME, String.class, AddQualityFunction.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetAbstractComponentByIDResponse.class)
+    public JAXBElement<String> createGetAbstractComponentByIDResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetAbstractComponentByIDResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddContextParameter.class)
+    public JAXBElement<String> createAddContextParameterCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddContextParameter.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "IOException", scope = CoreServicesIOException.class)
+    public JAXBElement<IOException> createCoreServicesIOExceptionIOException(IOException value) {
+        return new JAXBElement<IOException>(_CoreServicesIOExceptionIOException_QNAME, IOException.class, CoreServicesIOException.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = SetObsolete.class)
+    public JAXBElement<String> createSetObsoleteCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, SetObsolete.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddContextContract.class)
+    public JAXBElement<String> createAddContextContractCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddContextContract.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = InstantiateACKResponse.class)
+    public JAXBElement<String> createInstantiateACKResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, InstantiateACKResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "candidateList", scope = Deploy.class)
     public JAXBElement<String> createDeployCandidateList(String value) {
         return new JAXBElement<String>(_DeployCandidateList_QNAME, String.class, Deploy.class, value);
@@ -579,36 +782,72 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetAbstractComponentByIDResponse.class)
-    public JAXBElement<String> createGetAbstractComponentByIDResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetAbstractComponentByIDResponse.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cst", scope = GetStatus.class)
+    public JAXBElement<String> createGetStatusCst(String value) {
+        return new JAXBElement<String>(_GetStatusCst_QNAME, String.class, GetStatus.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetContextParameterResponse.class)
-    public JAXBElement<String> createGetContextParameterResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetContextParameterResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SAXException }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "SAXException", scope = CoreServicesSAXException.class)
-    public JAXBElement<SAXException> createCoreServicesSAXExceptionSAXException(SAXException value) {
-        return new JAXBElement<SAXException>(_CoreServicesSAXExceptionSAXException_QNAME, SAXException.class, CoreServicesSAXException.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddAbstractUnit.class)
+    public JAXBElement<String> createAddAbstractUnitCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddAbstractUnit.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = DeployResponse.class)
-    public JAXBElement<String> createDeployResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, DeployResponse.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ConvertContextContractResponse.class)
+    public JAXBElement<String> createConvertContextContractResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ConvertContextContractResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "name", scope = GetAbstractComponent.class)
+    public JAXBElement<String> createGetAbstractComponentName(String value) {
+        return new JAXBElement<String>(_GetAbstractComponentName_QNAME, String.class, GetAbstractComponent.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = InstantiateResponse.class)
+    public JAXBElement<String> createInstantiateResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, InstantiateResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetProfileResponse.class)
+    public JAXBElement<String> createGetProfileResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetProfileResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cst", scope = Instantiate.class)
+    public JAXBElement<String> createInstantiateCst(String value) {
+        return new JAXBElement<String>(_GetStatusCst_QNAME, String.class, Instantiate.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "candidateList", scope = SortCandidates.class)
+    public JAXBElement<String> createSortCandidatesCandidateList(String value) {
+        return new JAXBElement<String>(_DeployCandidateList_QNAME, String.class, SortCandidates.class, value);
     }
 
     /**
@@ -633,126 +872,27 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cst", scope = Instantiate.class)
-    public JAXBElement<String> createInstantiateCst(String value) {
-        return new JAXBElement<String>(_InstantiateCst_QNAME, String.class, Instantiate.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddAbstractComponent.class)
-    public JAXBElement<String> createAddAbstractComponentCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddAbstractComponent.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ExportComponentSignatureResponse.class)
-    public JAXBElement<String> createExportComponentSignatureResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, ExportComponentSignatureResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddContextContract.class)
-    public JAXBElement<String> createAddContextContractCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddContextContract.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetAbstractComponentResponse.class)
-    public JAXBElement<String> createGetAbstractComponentResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetAbstractComponentResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "func", scope = AddQualityFunction.class)
-    public JAXBElement<String> createAddQualityFunctionFunc(String value) {
-        return new JAXBElement<String>(_AddQualityFunctionFunc_QNAME, String.class, AddQualityFunction.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
     @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "name", scope = GetContextParameter.class)
     public JAXBElement<String> createGetContextParameterName(String value) {
-        return new JAXBElement<String>(_GetContextParameterName_QNAME, String.class, GetContextParameter.class, value);
+        return new JAXBElement<String>(_GetAbstractComponentName_QNAME, String.class, GetContextParameter.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = InstantiateResponse.class)
-    public JAXBElement<String> createInstantiateResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, InstantiateResponse.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddConcreteUnit.class)
+    public JAXBElement<String> createAddConcreteUnitCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, AddConcreteUnit.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = Resolve.class)
-    public JAXBElement<String> createResolveCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, Resolve.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddContextParameter.class)
-    public JAXBElement<String> createAddContextParameterCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddContextParameter.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ListResponse.class)
-    public JAXBElement<String> createListResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, ListResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddInnerComponent.class)
-    public JAXBElement<String> createAddInnerComponentCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddInnerComponent.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ResolveResponse.class)
-    public JAXBElement<String> createResolveResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, ResolveResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "address", scope = InstantiateACK.class)
-    public JAXBElement<String> createInstantiateACKAddress(String value) {
-        return new JAXBElement<String>(_InstantiateACKAddress_QNAME, String.class, InstantiateACK.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = DeployResponse.class)
+    public JAXBElement<String> createDeployResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, DeployResponse.class, value);
     }
 
     /**
@@ -761,106 +901,34 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cst", scope = ReleasePlatform.class)
     public JAXBElement<String> createReleasePlatformCst(String value) {
-        return new JAXBElement<String>(_InstantiateCst_QNAME, String.class, ReleasePlatform.class, value);
+        return new JAXBElement<String>(_GetStatusCst_QNAME, String.class, ReleasePlatform.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cst", scope = GetStatus.class)
-    public JAXBElement<String> createGetStatusCst(String value) {
-        return new JAXBElement<String>(_InstantiateCst_QNAME, String.class, GetStatus.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = Resolve.class)
+    public JAXBElement<String> createResolveCmp(String value) {
+        return new JAXBElement<String>(_ConvertContextContractCmp_QNAME, String.class, Resolve.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = SetObsolete.class)
-    public JAXBElement<String> createSetObsoleteCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, SetObsolete.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetContextContractResponse.class)
+    public JAXBElement<String> createGetContextContractResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, GetContextContractResponse.class, value);
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "cmp", scope = AddAbstractUnit.class)
-    public JAXBElement<String> createAddAbstractUnitCmp(String value) {
-        return new JAXBElement<String>(_AddConcreteUnitCmp_QNAME, String.class, AddAbstractUnit.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ExportContextContractResponse.class)
-    public JAXBElement<String> createExportContextContractResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, ExportContextContractResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ListContractResponse.class)
-    public JAXBElement<String> createListContractResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, ListContractResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "name", scope = GetAbstractComponent.class)
-    public JAXBElement<String> createGetAbstractComponentName(String value) {
-        return new JAXBElement<String>(_GetContextParameterName_QNAME, String.class, GetAbstractComponent.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "ParserConfigurationException", scope = CoreServicesParserConfigurationException.class)
-    public JAXBElement<Object> createCoreServicesParserConfigurationExceptionParserConfigurationException(Object value) {
-        return new JAXBElement<Object>(_CoreServicesParserConfigurationExceptionParserConfigurationException_QNAME, Object.class, CoreServicesParserConfigurationException.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = InstantiateACKResponse.class)
-    public JAXBElement<String> createInstantiateACKResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, InstantiateACKResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetStatusResponse.class)
-    public JAXBElement<String> createGetStatusResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetStatusResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link IOException }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "IOException", scope = CoreServicesIOException.class)
-    public JAXBElement<IOException> createCoreServicesIOExceptionIOException(IOException value) {
-        return new JAXBElement<IOException>(_CoreServicesIOExceptionIOException_QNAME, IOException.class, CoreServicesIOException.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = GetProfileResponse.class)
-    public JAXBElement<String> createGetProfileResponseReturn(String value) {
-        return new JAXBElement<String>(_GetContextContractResponseReturn_QNAME, String.class, GetProfileResponse.class, value);
+    @XmlElementDecl(namespace = "http://webservices.storm.ufc.br", name = "return", scope = ListResponse.class)
+    public JAXBElement<String> createListResponseReturn(String value) {
+        return new JAXBElement<String>(_SortCandidatesResponseReturn_QNAME, String.class, ListResponse.class, value);
     }
 
 }

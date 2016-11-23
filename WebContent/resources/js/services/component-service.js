@@ -3,7 +3,7 @@ var contextStorm = br_ufc_lia_storm;
 function getListAbstractComponents() {
 	var abstractComponent = [];
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd/abstractComponent?action=list",
+		url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=list",
 		async: false,
 		dataType: "xml",
 		type:"POST",
@@ -24,52 +24,71 @@ function getListAbstractComponents() {
 function getAbstractComponent(component){
 	var abstractComponent = null;
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd/abstractComponent?action=get&cmp="+component,
+		url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=get&cmp="+component,
 		async: false,
 		dataType: "xml",
 		type:"POST",
 		success: function (data) {
 			var str = new XMLSerializer().serializeToString(data);
-			str = str.replace("xmlns=\"http://storm.lia.ufc.br\"","");
 			var context = new Jsonix.Context([contextStorm]);
 			var unmarshaller = context.createUnmarshaller();
 			abstractComponent = unmarshaller.unmarshalString(str).value;
-
 	    }
 	});
 	return abstractComponent;
 }
 
-function saveNewAbstractComponent(componentObj){
+function saveNewAbstractComponent(componentObj, callback){
 	var context = new Jsonix.Context([contextStorm]);
 	var marshaller = context.createMarshaller();
 	var doc = marshaller.marshalDocument({
 		name:{
-			//namespaceURI: 'http:\/\/storm.lia.ufc.br',
+			namespaceURI: 'http:\/\/storm.lia.ufc.br',
 			localPart: 'abstract_component'
 		},
 		value:{
 			name: componentObj.name,
 			supertype: componentObj.super,
 			contextParameter: componentObj.parameters,
-			innerComponent: componentObj.inners,
+			innerComponents: componentObj.inners,
 			abstractUnit: componentObj.units,
 			slices: componentObj.slices
 		}
 	});
-
 	var oSerializer = new XMLSerializer();
 	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
-	sXML = sXML.replace("<abstract_component","<abstract_component xmlns=\"http://storm.lia.ufc.br\"");
-	alert(sXML);
-	$.ajax({
+	console.log(sXML);
+	/*$.ajax({
 	    type: 'post',
-	    async: false,
-	    url : '/HPC-Shelf-FrontEnd/abstractComponent?action=save',
+	    url : '/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=save',
 	    data: 'cmp='+sXML,
 	    dataType: "xml",
 	    success : function(result){
-	        alert("Resultado: "+result.getElementsByTagName("result").item(0).getAttribute("value"));
+	    	callback(result);
+	    }
+	});*/
+}
+
+function addContextParameter(component, callback){
+	$.ajax({
+		url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=addContextParameter&cmp="+component,
+		//async: false,
+		dataType: "xml",
+		type:"POST",
+		success: function (data) {
+			callback(data);
+	    }
+	});
+}
+
+function addAbstractUnit(component, callback){
+	$.ajax({
+		url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=addAbstractUnit&cmp="+component,
+		//async: false,
+		dataType: "xml",
+		type:"POST",
+		success: function (data) {
+			callback(data);
 	    }
 	});
 }

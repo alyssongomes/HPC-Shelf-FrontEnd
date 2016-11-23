@@ -28,45 +28,59 @@
 		    	</div>
 		    	<ul id="nav" class="nav navbar-nav">
 					<li><a href="../index.html">Home</a></li>
-					<li><a id="navNewCmp" href="#" data-toggle="modal" data-target="#modalNewComp">Novo Componente</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modalEditeComp">Editar Componente</a></li>
+					<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Componente<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+			          		<li><a id="navNewCmp" href="#" data-toggle="modal" data-target="#modalNewComp">Novo Componente</a></li>
+							<li><a id="navEditCmp" href="#" data-toggle="modal" data-target="#modalEditeComp">Editar Componente</a></li>	
+			        	</ul>
+					</li>
 		    	</ul>
 		    	<ul id="nav" class="nav navbar-nav navbar-right">
 					<h4 class="navbar-text ">Componentes Abstratos</h4>
 		    	</ul>
 			</div>
 		</nav>
-        
-        <div id="init" class="jumbotron" style="width:700px; height: 350px; position:absolute; top: 20%; left: 23%; padding-top:3%; padding-left: 5%; padding-right: 5%;">
+        <div id="init" class="jumbotron center-block" style="width:700px; height: 350px; margin-top:10%; padding-top:3%; padding-left: 5%; padding-right: 5%;">
 			<h1>Bem-vindo!</h1>
-			<p>Este espaço é destina a criação e edição de componente abstratos, você pode começar agora clicando no botão "Começar". Bom trabalho!</p>
+			<p>Este ambiente é destina a criação e edição de componente abstratos, você pode começar agora clicando no botão "Começar". Bom trabalho!</p>
 	  		<p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modalNewComp">Começar</a></p>
         </div>
         
-        <div id="quadro1" hidden="true" class="jumbotron">
-        	<center><h4><b>Propriedades</b></h4></center>
-        	<div id="newComp"></div>
-            <div id="newComponent">
-                <form>
-                    <h4><b>Unidades abstrata:</b></h4>
-                    <table class="table table-hover" id="addsUnidades"><thead><tr><th>Nome</th><th>Ass.</th><th>Excluir</th></thead></table>
-                    <h4><b>Parâmetros de contexto:</b></h4>
-                    <table class="table table-hover" id="listParameters"><thead><tr><th>Nome</th><th>Comp.</th><th>Excluir</th></thead></table>
-                    <h4><b>Componentes aninhados:</b></h4>
-                    <table class="table table-hover" id="addsComponents"><thead><tr><th>Nome</th><th>Supertipo</th><th>Excluir</th></thead></table>
-                    <h4><b>Fatias:</b></h4>
-                    <table class="table table-hover" id="listSlices"><thead><tr><th>Nome</th><th>Componente</th></thead></table>
-                    <h4><b>Parâmetros de Custo:</b></h4>
-                    <h4><b>Parâmetros de Qualidade:</b></h4>
-                </form>
-            </div>
-            <br>
-            <center><button href="#" class="btn btn-primary" id="submitComponent">Submeter</button></center>
-        </div>
+        	<div  id="quadro1" hidden="true" class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><b>Propriedades</b></h3>
+			  </div>
+			  <div class="panel-body">
+			    <div id="newComp"></div>
+	            <div id="newComponent">
+	                <form>
+	                    <h4 style="color: #0789ba;"><b>Unidades abstrata:</b></h4>
+	                    <table class="table table-hover" id="addsUnidades"><thead><tr><th>Nome</th><th>Ass.</th><th>Excluir</th></thead></table>
+	                    <h4 style="color: #0789ba;" ><b>Parâmetros de contexto:</b></h4>
+	                    <table class="table table-hover" id="listParameters"><thead><tr><th>Nome</th><th>Comp.</th><th>Excluir</th></thead></table>
+	                    <h4 style="color: #0789ba;" ><b>Componentes aninhados:</b></h4>
+	                    <table class="table table-hover" id="addsComponents"><thead><tr><th>Nome</th><th>Supertipo</th><th>Excluir</th></thead></table>
+	                    <h4 style="color: #0789ba;" ><b>Fatias:</b></h4>
+	                    <table class="table table-hover" id="listSlices"><thead><tr><th>Nome</th><th>Componente</th></thead></table>
+	                    <h4 style="color: #0789ba;" ><b>Parâmetros de Custo:</b></h4>
+	                    <table class="table table-hover" id="listCost"><thead><tr><th>Nome</th></thead></table>
+	                    <h4 style="color: #0789ba;" ><b>Parâmetros de Qualidade:</b></h4>
+	                    <table class="table table-hover" id="listQuality"><thead><tr><th>Nome</th></thead></table>
+	                </form>
+	            </div>
+			  </div>
+			  <div class="panel-footer">
+			  	<center>
+			  		<button href="#" class="btn btn-primary" id="submitComponent">Submeter</button>
+			  		<button href="#" class="btn btn-success" id="saveUpdate">Salvar Modificações</button>
+			  	</center>
+			  </div>
+			</div>
         
         <div id="quadro2" hidden="true">
-	            <div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
-	            	<div id="sort2" class="connectedSortable" >
+			<div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
+	            <div id="sort2" class="connectedSortable" >
 	            	<div id="trash">
 	                	<img alt="lixo" src="../resources/img/lixo.png" height="70px" width="70px" style="float:left;">
 	                	<h3>LIXEIRA</h3>
@@ -80,7 +94,9 @@
         <div id="divMenu">
             <ul>
                 <li>ADD UNIDADE ABSTRATA</li>
-                <li>ADD PARÂMETROS CONTEXTO</li>
+                <li>ADD PARÂMETROS DE CONTEXTO</li>
+                <li>ADD PARÂMETROS DE QUALIDADE</li>
+                <li>ADD PARÂMETROS DE CUSTO</li>
                 <li>ADD COMPONENTE ANINHADO</li>
             </ul>
         </div>
@@ -195,9 +211,16 @@
 			                <label id="nameParamComp"></label>
 		                    <h4>Nome do Parametro</h4>
 		                    <input class="form-control" type="text" id="namePar"><br>
-		                    <strong>Informações do fornecedor(Variavel Compartilhada)</strong><!-- variable provided -->
+		                    <strong>Informações do fornecedor</strong><!-- variable provided -->
 		                    <textarea class="form-control" id="variavel" rows="5" cols="30" style="resize: none"></textarea>
-		                    <h4>Bound(Limite)</h4><label id="bound"></label>
+		                    <h4>Limite</h4>
+		                    <select class="form-control" id="opcaoLimite">
+		                    	<option value="contract">Por Contrato</option>
+		                    	<option value="number">Por valor numérico</option>
+		                    </select>
+		                    <label id="bound"></label>
+		                    <br>
+		                    <input style="visibility: hidden;" class="form-control" type="text" placeholder="Valor numérico" id="boundValue"/>
 			            </div>
 					</div>
 					<div class="modal-footer">
@@ -218,7 +241,8 @@
 		            <div class="modal-body">
 		            	<p><b>Catálogo</b></p>
 			            <div style=" width:250px; height:400px; overflow: auto;">
-			                <ul id="listEditeComponents"></ul>
+			                <ul id="listEditeComponents">
+			                </ul>
 			            </div>
 			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
 			                <center><label id="nameEditComp"></label></center>
@@ -243,7 +267,27 @@
 	            </div>			
 			</div>
         </div>
-    
-    
+        
+    	<div id="modalSubmit" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Aguarde a submissão do componente...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+    	<div id="modalLoadContracts" class="modal fade" role="dialog" >
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../resources/img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Consultando contratos...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
     </body>
 </html>
