@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <style type="text/css">
+            .main{
+                background-color:darkslategray; 
+                box-shadow: 5px 5px 5px #888888; 
+                width: 30%; height: 50%; 
+                border-radius: 10px; 
+                padding:1% 5% 0% 5%; 
+                position:relative;
+                top:25%; left:35%;
+            }
+            body{
+                background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+            }
+        </style>
+        <title>Tela de Acesso</title>
+    </head>
+    <body>
+        <div class="main">
+            <center><h3 style="color:white;">Tela de Acesso</h3></center>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">@</span>
+              <input type="text" class="form-control" placeholder="Usuário" aria-describedby="basic-addon1"/>
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">***</span>
+              <input type="password" class="form-control" placeholder="Senha" aria-describedby="basic-addon1"/>
+            </div>
+            <br/>
+            <select class="form-control">
+                <option>Especialista</option>
+                <option>Montador</option>
+                <option>Desenvolvedor</option>
+                <option>Mantenedor</option>
+            </select>
+            <br/>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <a href="/home" class="btn btn-default"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Logar</a>
+              </div>
+              <div class="btn-group" role="group">
+                <a class="btn btn-default"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> Limpar</a>
+              </div>
+            </div>
+            <br/>
+            <center><a href="#" style="color:white;">Inscrever-me</a></center>
+          
+        </div>
+    </body>
+</html>

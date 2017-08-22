@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/SAFe_architecture_V4"
+	xmlns:tns="http://www.example.org/SAFe_architecture_V4"
+	elementFormDefault="qualified"
+	xmlns:Q1="http://www.example.org/instantiator">
+
+	<import schemaLocation="instantiator.xsd"
+		namespace="http://www.example.org/instantiator">
+	</import>
+
+	<element name="architecture" type="tns:Architecture"></element>
+
+	<complexType name="Architecture">
+		<sequence>
+			<element name="application" type="tns:Component"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="workflow" type="tns:Worker" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="body" type="tns:Body" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="env_binding" type="tns:BindingEnvironment"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="task_binding" type="tns:BindingTask"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="application_name" type="string"></attribute>
+	</complexType>
+
+	<complexType name="Component">
+		<sequence>
+			<element name="uses_port" type="tns:PortEnvironmentUses"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="provides_port"
+				type="tns:PortEnvironmentProvides" maxOccurs="unbounded"
+				minOccurs="0">
+			</element>
+			<element name="contract" type="tns:Contract" maxOccurs="1"
+				minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="id" type="int"></attribute>
+		<attribute name="address" type="string" use="optional"></attribute>
+	</complexType>
+
+	<complexType name="Body">
+		<choice maxOccurs="unbounded" minOccurs="1">
+			<element name="computation" type="tns:Computation"></element>
+			<element name="repository" type="tns:Repository"></element>
+			<element name="connector" type="tns:Connector"></element>
+			<element name="platform" type="tns:Platform"></element>
+		</choice>
+	</complexType>
+
+
+	<complexType name="BindingEnvironment">
+		<sequence>
+			<element name="uses_port" type="tns:PortEnvironmentUses"
+				maxOccurs="1" minOccurs="1">
+			</element>
+			<element name="provides_port"
+				type="tns:PortEnvironmentProvides" maxOccurs="1" minOccurs="1">
+			</element>
+		</sequence>
+		<attribute name="id" type="int"></attribute>
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+
+	<complexType name="BindingTask">
+		<sequence>
+			<element name="left_peer" type="tns:PortTask" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="right_peer" type="tns:PortTask" maxOccurs="1"
+				minOccurs="1">
+			</element>
+		</sequence>
+		<attribute name="id" type="int"></attribute>
+	</complexType>
+
+	<complexType name="Computation">
+		<complexContent>
+			<extension base="tns:Worker"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Repository">
+		<complexContent>
+			<extension base="tns:Component"></extension>
+		</complexContent>
+	</complexType>
+
+
+
+	<complexType name="Connector">
+		<complexContent>
+			<extension base="tns:Worker"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Platform">
+		<complexContent>
+			<extension base="tns:Component"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Worker">
+		<complexContent>
+			<extension base="tns:Component">
+				<sequence>
+					<element name="task_port" type="tns:PortTask"
+						maxOccurs="unbounded" minOccurs="0">
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="PortEnvironment">
+		<complexContent>
+			<extension base="tns:Port"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="PortTask">
+		<complexContent>
+			<extension base="tns:Port">
+				<sequence>
+					<element name="action" type="tns:Action"
+						maxOccurs="unbounded" minOccurs="0">
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Port">
+		<attribute name="id" type="int"></attribute>
+		<attribute name="id_component" type="int"></attribute>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="wsdl_path" type="string"></attribute>
+	</complexType>
+
+	<complexType name="PortEnvironmentUses">
+		<complexContent>
+			<extension base="tns:PortEnvironment"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="PortEnvironmentProvides">
+		<complexContent>
+			<extension base="tns:PortEnvironment"></extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Contract">
+		<choice>
+			<element name="uri" type="anyURI"></element>
+			<element name="instantiation_type" type="Q1:InstanceType"></element>
+		</choice>
+		<attribute name="id" type="int" use="required"></attribute>
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+
+	<complexType name="Action">
+		<attribute name="id" type="int"></attribute>
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+
+
+
+</schema>

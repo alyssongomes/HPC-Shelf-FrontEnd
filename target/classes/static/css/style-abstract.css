@@ -1,0 +1,116 @@
+
+#quadro1{
+    margin-top: 55px;
+    margin-right: 5px;
+    margin-left: 15px;
+    width: 28%;
+    height: 86.5%;
+    float: left;
+}
+
+#quadro2{
+	margin-left: 10px;
+	margin-top: 55px;
+    width: 69%;
+    float: left;
+    height:550px;
+
+}
+
+#trash{
+	width: 200px;
+}
+
+#tools{
+    background-color: cadetblue;
+    margin: 3px 3px 3px 0;
+    padding: 10px 0px 10px 5px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#tools > img{
+    position: relative;
+    width: 10%;
+    height: 10%;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#tools > h1{
+    color: black;
+}
+
+#autoScroll{
+    height: 80%;
+    width: auto;
+    overflow: auto;
+}
+
+#newComponent{
+    height: 98%;
+    overflow: auto;
+}
+
+#autoScroll2{
+    height: 480px;
+    width: 100%;
+    /*background-color: silver;*/
+    overflow: auto;
+}
+
+#parameters{
+    height: 400px;
+    overflow: auto;
+}
+
+ul:not(ul:[id=nav]){
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+li:not(li:[id=nav]){
+	margin: 5px;
+	padding: 5px;
+    width: auto;
+    border-radius: 2px;
+    text-align: center;
+}
+
+#sort2 > div{
+	position: absolute;
+}
+
+#divMenu{
+    font:bold 15pt Calibri;
+    border:1px black;
+    width:220px;
+    padding:0;
+    position:absolute;
+    background:rgba(133, 192, 242, 0.54);
+    background-position:-1100px -200px;
+    visibility:hidden;
+}
+
+#divMenu ul{
+    list-style-type:none;
+    margin:0;
+    line-height:20px;
+    padding:0;
+    text-align:center;
+}
+
+#divMenu > ul > li {
+	cursor:pointer;
+}
+
+#divMenu > ul > li:nth-child(n < 3) {
+    border-bottom:1px dotted;
+}
+
+#divMenu > ul > li:hover {
+    background-color:#babdb6;
+}

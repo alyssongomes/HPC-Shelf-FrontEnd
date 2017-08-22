@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../lib/jquery/jquery-ui.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/build-workflow.css"/>
+        <!--<script type ="text/javascript" src="libs/jQuery/jquery-2.1.4.min.js"></script>
+		<script type ="text/javascript" src="libs/jQuery/jquery-ui.js"></script>-->
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type ="text/javascript" src="../lib/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../lib/zTree_v3/js/jquery.ztree.core.js"></script>
+        <script type="text/javascript" src="../lib/zTree_v3/js/jquery.ztree.excheck.js"></script>
+	    <script type="text/javascript" src="../lib/zTree_v3/js/jquery.ztree.exedit.js"></script>
+        <script src="../js/xsd/safe_architecture_v4-xsd.js"></script>
+        <script src="../js/xsd/instantiator-xsd.js"></script>
+        <script src="../js/xsd/safe_workflow_v4-xsd.js"></script>
+        <script src="../lib/jsonix/Jsonix-min.js"></script>
+        <script src="../lib/ContextMenu/jquery.contextMenu.js"></script>
+        <script src="../lib/ContextMenu/jquery.ui.position.js"></script>
+        <script src="../js/services/converters/workflow.js"></script>
+        <script src="../js/services/converters/architecture.js"></script>
+        <script src="../js/services/workflow-service.js"></script>
+        <script type="text/javascript" src="../js/controllers/workflow-controller.js"></script>
+        <title>Construção do Workflow</title>
+    </head>
+    <!-- <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">-->
+    <body style="background: #87CEFA;">
+        <nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><b>WORK</b><!--<img width="50px" style="margin-top: -13px; float: left;" src="../resources/img/logo.png"/>--></a>
+		    	</div>
+		    	<ul class="nav navbar-nav">
+					<li><a href="/home">Home</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Arquivo<span class="caret"></span></a>
+			          	<ul class="dropdown-menu">
+			          		<li><a id="new-workflow" href="#" data-toggle="modal" data-target=""><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Novo</a></li>
+			          		<li role="separator" class="divider"></li>
+			          		<li><a id="save-workflow" href="#" ><span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>Baixar Workflow</a></li>
+			            	<li class="dropdown-submenu">
+                                <a class="test" href="#" id="save"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Carregar<span class="caret"></span></a>
+                                <ul class="dropdown-menu" >
+                                    <li>
+                                        <a id="load-architecture" href="#" ><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Arquitetura</a>
+                                        <input type="file" id="file-architecture" style="display:none" accept="text/xml" />
+                                    </li>
+                                    <li>
+                                        <a id="load-workflow" href="#" ><span class="glyphicon glyphicon-console" aria-hidden="true"></span> Workflow</a>
+                                        <input type="file" id="file-workflow" style="display:none" accept="text/xml" />
+                                    </li>        
+                                </ul>
+                            </li>
+			          	</ul>
+			        </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Saída<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="clean-out" href="#" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Limpar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html">Ajuda</a></li>
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+		    		<h4 class="navbar-text">Workflow</h4>
+		    	</ul>
+			</div>
+		</nav>
+        <section>
+            <div style="height:500px;">
+                <center>
+                    <div id="main">
+                        <!-- EDITOR - INÍCIO -->
+                        <div id="editor">
+                            <ul style="height:12.5%; overflow-x: auto;">
+                                <li class="aba"><a href="#work_1" onclick='setCurrentPage(1)'><span class="glyphicon glyphicon-console"></span> work_1</a><span class="glyphicon glyphicon-remove-circle ui-icon-close" value='1'></span></li>
+                            </ul>
+                            <div id="work_1">
+                                <div class="flow-editable">
+                                     <ul id="tree_1" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- EDITOR - FIM -->
+                        <!-- CONTEXTO - INÍCIO -->
+                        <div id="context">
+                            <ul style="height:12.5%;">
+                                <li><a href="#proper-flow"><span class="glyphicon glyphicon-list-alt"></span> Propriedade</a></li>
+                                <li><a href="#proper-arch"><span class="glyphicon glyphicon-tasks"></span> Arquitetura</a></li>
+                            </ul>
+                            <div id="proper-flow">
+                                <div id="panel-context-flow">
+                                    <div id="del-type-task" class="col-sm-12" style="margin-top:2%;">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Tipo</div>
+                                            <div class="panel-body">
+                                                Tipo de Tarefa
+                                                <select id="type-task" class="col-sm-5 form-control" title="Selecione um tipo de task" style="margin-bottom: 15px;">
+                                                    <option value="invoke_oper">INVOKE</option>
+                                                    <option value="skip_oper">SKIP</option>
+                                                    <option value="break_oper">BREAK</option>
+                                                    <option value="continue_oper">CONTINUE</option>
+                                                    <option value="start_oper">START</option>
+                                                    <option value="wait_oper">WAIT</option>
+                                                    <option value="cancel_oper">CANCEL</option>
+                                                    <option value="activate_oper">ACTIVATE</option>
+                                                    <option value="sequence_oper">SEQUENCE</option>
+                                                    <option value="parallel_oper">PARALLEL</option>
+                                                    <option value="choice_oper">CHOICE</option>
+                                                    <option value="select">SELECT</option>
+                                                    <option value="iterate_oper">ITERATE</option>
+                                                    <option value="action">ACTION</option>
+                                                    <option value="arg">ARGUMENT</option>
+                                                </select>
+                                                <button id="btn-apply-type-task" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-invoke-oper" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><p>Invoke</p></div>
+                                            <div class="panel-body">
+                                                Tipo de Ação
+                                                <select id="action" class="form-control" title="Selecione um tipo de ação" style="margin-bottom: 15px;">
+                                                    <option value="resolve">resolve</option>
+                                                    <option value="deploy">deploy</option>
+                                                    <option value="instantiate">instantiate</option>
+                                                    <option value="compute">compute</option>
+                                                    <option value="connect">connect</option>
+                                                </select>
+                                                Componente
+                                                <select id="components" class="form-control" style="margin-bottom: 15px;"></select>
+                                                <button id="btn-apply-invoke" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-iterate-opr" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Iterate</div>
+                                            <div class="panel-body">
+                                                Rótulo
+                                                <input class="form-control" id="iter-label" type="text"/>
+                                                Número Máximo
+                                                <input class="form-control" id="max" type="number" min="1" style="margin-bottom:15px;"/>
+                                                <button id="btn-apply-iterate" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-choice-opr" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Choice</div>
+                                            <div class="panel-body">
+                                                Chosen
+                                                <input class="form-control" id="chosen" type="text" style="margin-bottom:15px;"/>
+                                                <button id="btn-apply-choice" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-select" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Select</div>
+                                            <div class="panel-body">
+                                                Ação
+                                                <select id="select-actions" class="form-control" title="Selecione a ação" style="margin-bottom:15px;"></select>
+                                                <button id="btn-apply-select" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-arg" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Argumentos</div>
+                                            <div class="panel-body">
+                                                Tipo
+                                                <select class="form-control" id="type">
+                                                    <option value="STRING">STRING</option>
+                                                    <option value="INTEGER">INTEGER</option>
+                                                    <option value="DOUBLE">DOUBLE</option>
+                                                </select>
+                                                Valor
+                                                <input class="form-control" id="value-arg" type="text" style="margin-bottom:15px;"/>
+                                                <button id="btn-apply-arg" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-oper-prim" class="col-sm-12">
+                                         <div class="panel panel-default">
+                                            <div class="panel-heading">Operações Primitivas</div>
+                                            <div class="panel-body">
+                                                Id do Manipulador
+                                                <input class="form-control" id="handle-id" type="text" style="margin-bottom:15px;"/>
+                                                <button id="btn-apply-prim" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="del-base" class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">Base</div>
+                                            <div class="panel-body">
+                                                Ordem
+                                                <input class="form-control" id="order" type="number" min="1"/>
+                                                Valor
+                                                <input class="form-control" id="value" type="text"/>
+                                                Nome da operação
+                                                <input class="form-control" id="oper_name" type="text"/>
+                                                Nível
+                                                <input class="form-control" id="level" type="number"/>
+                                                Rótulo da Base
+                                                <input class="form-control" id="base_label" type="text" style="margin-bottom:15px;"/>
+                                                <button id="btn-apply-base" class="col-sm-3 btn btn-primary ">Aplicar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="proper-arch">
+                                <div id="panel-context-arch">
+                                    <ul id="arch" class="ztree"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CONTEXTO - FIM -->
+                        <!-- SAÍDA - INÍCIO -->         
+                        <div id="console">
+                            <ul>
+                                <li><a href="#div-exit"><span class="glyphicon glyphicon-log-out"></span> Saída</a></li>
+                            </ul>
+                            <div id="div-exit">
+                                <div id="panel-console-exit" class="panel-console-exit" ></div>
+                            </div>
+                        </div>
+                        <!-- SAÍDA - FIM -->
+                    </div>
+                </center>
+            </div>
+        </section>
+    </body>
+</html>

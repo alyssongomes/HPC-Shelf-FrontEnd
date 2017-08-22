@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/instantiator" xmlns:tns="http://www.example.org/instantiator" elementFormDefault="qualified">
+
+    <element name="application" type="tns:InstanceType"></element>
+
+    <complexType name="ComponentFunctorApplicationType">
+    	<sequence>
+    		<element name="argument"
+    			type="tns:ContextArgumentType" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="component_ref" type="string"></attribute>
+    </complexType>
+
+
+    <complexType name="ContextParameterType">
+    	<sequence>
+    		<element name="argument" type="tns:ContextArgumentType"></element>
+    	</sequence>
+    	<attribute name="parameter_id" type="string"></attribute>
+    </complexType>
+
+    <complexType name="NodeMappingType">
+    	<attribute name="unit_id" type="string" use="required"></attribute>
+    	<attribute name="unit_index" type="int"></attribute>
+    	<attribute name="node" type="int"></attribute>
+    </complexType>
+
+    <complexType name="UnitMappingType">
+    	<sequence>
+    		<element name="node" type="int" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    	<attribute name="unit_id" type="string" use="required"></attribute>
+    	<attribute name="unit_index" type="int" use="optional"
+    		default="0">
+    	</attribute>
+    </complexType>
+
+    <attribute name="NewAttribute" type="string"></attribute>
+
+
+    <complexType name="InstanceType">
+    	<sequence>
+    		<element name="contextual_type"
+    			type="tns:ComponentFunctorApplicationType">
+    		</element>
+    		<element name="unit_mapping" type="tns:UnitMappingType"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    		<element name="facet_address" type="tns:FacetAddressType" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    	<attribute name="instance_ref" type="string"></attribute>
+    </complexType>
+
+    <complexType name="ContextArgumentType">
+    	<choice>
+    		<element name="type"
+    			type="tns:ComponentFunctorApplicationType">
+    		</element>
+    		<element name="variable" type="string"></element>
+    	</choice>
+    	<attribute name="parameter_id" type="string"></attribute>
+    </complexType>
+
+    <complexType name="FacetAddressType">
+    	<attribute name="address" type="string"></attribute>
+    	<attribute name="port" type="int"></attribute>
+    </complexType>
+</schema>

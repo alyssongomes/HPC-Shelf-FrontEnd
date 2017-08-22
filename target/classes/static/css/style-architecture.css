@@ -1,0 +1,111 @@
+body{
+	background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+}
+
+#paleta{
+	width: 12%;
+	float: left;
+	margin: 10px;
+	margin-top: 4.5%;
+}
+
+#paleta > div[class=panel-body] > div{
+	width: 100%;
+	margin-bottom: 2%;
+}
+
+#workspace{
+	position:absolute;
+	margin-top: 10px;
+	margin-left: 14%;
+	width: 60%;
+	height: 85%;
+	float: left;
+	margin-top: 4.5%;
+}
+
+#workspace-body{
+	overflow: auto;
+	height: 92%;
+	width: 100%;
+}
+
+
+#properties{
+	position:absolute;
+	margin-top: 10px;
+	margin-left: 75%;
+	width: 24%;
+	height: 85%;
+	margin-top: 4.5%;
+}
+
+#properties-body{
+	height: 92%;
+	overflow: auto;
+}
+
+.workflow{
+	position: absolute;
+	background-image: url("../img/workflow.png");
+	background-size: 180px;
+	background-repeat:no-repeat;
+	background-position:center;
+	width: 150px;
+	height: 150px;
+}
+
+
+.computation{
+	position: absolute;
+	background-image: url("../img/computation.png");
+	background-size: 130px;
+	background-repeat:no-repeat;
+	background-position:center;
+	width: 110px;
+	height: 130px;
+}
+
+.repository{
+	position: absolute;
+	background-image: url("../img/repository.png");
+	background-size: 100px;
+	background-repeat:no-repeat;
+	background-position:center;
+	width: 110px;
+	height: 120px;
+}
+
+.connector{
+	position: absolute;
+	background-image: url("../img/connector.png");
+	background-size: 90px;
+	background-repeat:no-repeat;
+	width: 100px;
+	height: 100px;
+}
+
+.platform{
+	position: absolute;
+	background-image: url("../img/platform.png");
+	background-size: 120px;
+	background-repeat:no-repeat;
+	width: 120px;
+	height: 120px;
+}
+
+.workflow > h4, .computation > h4, .repository > h4, .connector > h4, .platform > h4 {
+	font-weight: bold;
+	position: absolute;
+	top: 30%;
+	left: 15%;
+	text-align: center;
+}
+
+.connector > h4{
+	color: #87CEEB;
+}
+
+.repository > h4{
+	color: #87CEEB;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="/css/style-main.css"/>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon" />
+		<script src="/lib/jquery/jquery-2.1.4.min.js"></script>
+		<!--  <script src="resources/lib/bootstrap/bootstrap.js"></script>-->
+		<title>HPC-Shelf :: Principal</title>
+	</head>
+	<!-- <body  style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">-->
+	<body style="background: #87CEFA;">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../img/logo.png"/></a>
+		    	</div>
+		    	<ul id="nav" class="nav navbar-nav">
+		    		<li><a href="/settings">Gerenciar Preferencias</a></li>
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+					<h4 class="navbar-text ">IShelf</h4>
+					<li><a href="#">Log out</a></li>
+		    	</ul>
+			</div>
+		</nav>
+	
+		<div id="top">
+			<center><img src="/img/index.png"/></center>
+		</div>
+		
+		<center>
+			<div id="down">
+				<div class="bts">
+					<a id="cmp" href="/component">
+						<div class="funcao" align="center">
+							<img style="border-radius: 5px;" src="/img/cmp.png" width="170px" height="150px" />
+							<font color="white" >
+								<font size="3" face="Arial" color="white"><h4>Criar Componente <br/> Abstrato</h4></font>
+							</font>
+						</div>
+					</a>
+					<a href="/contract">
+						<div class="funcao" align="center">
+							<img style="border-radius: 5px;" src="/img/ctt.png" width="170px" height="150px" />
+							<font color="white" > 
+								<font size="3" face="Arial" color="white"><h4>Criar Contrato <br/> Contextual</h4></font>
+							</font>
+						</div>
+					</a>
+					<a href="/upload">
+						<div class="funcao" align="center">
+							<img style="border-radius: 5px;" src="/img/file.png" width="170px" height="150px" />
+							<font color="white" >  
+								<font size="3" face="Arial" color="white"><h4>Upload <br/> source-code</h4></font>
+							</font>
+						</div>
+					</a>
+					<a href="/execute">
+						<div class="funcao" align="center">
+						<img style="border-radius: 5px;" src="/img/exe.png" width="170px" height="150px" />
+							<font color="white" >  
+								<font size="3" face="Arial" color="white"><h4>Executar <br/> Componente</h4></font>
+							</font>
+						</div>
+					</a>
+					<center>
+						<div class="btn">
+							<a href="/architecture">
+								<div class="funcao" align="center">
+								<img style="border-radius: 5px;" src="/img/architecture.png" width="170px" height="150px" />
+									<font color="white" >  
+										<font size="3" face="Arial" color="white"><h4>Criar Arquitetura</h4></font>
+									</font>
+								</div>
+							</a>
+							<a href="/workflow">
+								<div class="funcao" align="center">
+								<img style="border-radius: 5px;" src="/img/cmp.png" width="170px" height="150px" />
+									<font color="white" >  
+										<font size="3" face="Arial" color="white"><h4>Criar Workflow</h4></font>
+									</font>
+								</div>
+							</a>
+						</div>
+					</center>
+				</div>
+			</div>
+		</center>
+		
+		<script>
+		    $("#menu-toggle").click(function(e) {
+		        e.preventDefault();
+		        $("#wrapper").toggleClass("toggled");
+		    });
+		</script>
+		
+	</body>
+</html>

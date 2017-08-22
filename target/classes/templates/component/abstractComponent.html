@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="../css/jsPlumbToolkit-defaults.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/style-abstract.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/formas.css"/>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../lib/ContextMenu/css/jquery.contextMenu.css"/>
+        
+        <script type="text/javascript" src="../js/xsd/context-xsd.js"></script>
+        <script type="text/javascript" src="../lib/jsonix/Jsonix-min.js"></script>
+        <!-- <script type ="text/javascSript" src="../lib/jquery/jquery-2.1.4.min.js" charset="UTF-8"></script>
+        <script type ="text/javascript" src="../lib/jquery/jquery-ui.min.js" charset="UTF-8"></script>-->
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  		<script type="text/javascript" src="../lib/ContextMenu/jquery.contextMenu.js"></script>
+        <script type ="text/javascript" src="../lib/jsplumb/dom.jsPlumb-1.7.6-min.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/services/component-service.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/services/contract-service.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="../js/controllers/component-controller.js" charset="UTF-8"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+        <title>HPC-Shelf</title>
+    </head>
+    <body style="background: #87CEFA; overflow: hidden;">
+    	<nav class="navbar navbar-inverse navbar-fixed-top">
+		  <div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../img/logo.png"/></a>
+		    	</div>
+		    	<ul id="nav" class="nav navbar-nav">
+					<li><a href="/home">Home</a></li>
+					<li class="dropdown" >
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Componente<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+			          		<li><a id="navNewCmp" href="#" >Novo Componente</a></li>
+							<li><a id="navEditCmp" href="#" >Editar Componente</a></li>
+							<li><a id="submitComponent" href="#">Salvar Componente</a></li>
+							<li><a id="saveUpdate" href="#" >Salvar Modificações</a></li>	
+			        	</ul>
+					</li>
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+					<h4 class="navbar-text ">Componentes Abstratos</h4>
+		    	</ul>
+			</div>
+		</nav>
+        <div id="init" class="jumbotron center-block" style="width:700px; height: 350px; margin-top:10%; padding-top:3%; padding-left: 5%; padding-right: 5%;">
+			<h1>Bem-vindo!</h1>
+			<p>Este ambiente destina a criação e edição de componente abstratos, você pode começar agora clicando no botão "Começar". Bom trabalho!</p>
+	  		<p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modalNewComp">Começar</a></p>
+        </div>
+        
+        	
+        
+        <div id="quadro2" hidden="true" class="panel panel-default">
+	      <div class="panel-heading">
+		    <h3 class="panel-title">Component</h3>
+		  </div>
+		  <div class="panel-body">
+			<div id="autoScroll2"  class="jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" >
+	            <div id="sort2" class="connectedSortable" >
+	            	<div id="trash">
+	                	<img alt="lixo" src="../img/lixo.png" height="70px" width="70px" style="float:left;"/>
+	                	<h3>LIXEIRA</h3>
+	            	</div>
+	            </div>
+            </div>
+           </div>
+        </div>
+        
+        <div  id="quadro1" hidden="true" class="panel panel-primary">
+			  <div class="panel-heading">
+			    <h3 class="panel-title"><b>Propriedades</b></h3>
+			  </div>
+			  <div class="panel-body" style="height:500px; overflow:auto;">
+			    <div id="newComp"></div>
+	            <div id="newComponent">
+	                <form>
+	                    <h4 style="color: #0789ba;">Unidades abstrata</h4>
+	                    <table class="table table-hover" id="addsUnidades"><thead><tr><th>Nome</th><th>Ass.</th><th></th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Parâmetros de contexto</h4>
+	                    <table class="table table-hover" id="listParameters"><thead><tr><th>Nome</th><th>Comp.</th><th></th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Componentes aninhados</h4>
+	                    <table class="table table-hover" id="addsComponents"><thead><tr><th>Nome</th><th>Supertipo</th><th></th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Fatias</h4>
+	                    <table class="table table-hover" id="listSlices"><thead><tr><th>Nome</th><th>Componente</th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Parâmetros de Custo</h4>
+	                    <table class="table table-hover" id="listCost"><thead><tr><th>Nome</th><th>Função</th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Parâmetros de Qualidade</h4>
+	                    <table class="table table-hover" id="listQuality"><thead><tr><th>Nome</th><th>Função</th></tr></thead></table>
+	                    <h4 style="color: #0789ba;" >Parâmetros de Ranking</h4>
+	                    <table class="table table-hover" id="listRanking"><thead><tr><th>Nome</th><th>Função</th></tr></thead></table>
+	                </form>
+	            </div>
+			  </div>
+			</div>
+        
+        <p id="msg"></p> 
+        
+        <div id="modalNewComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Crie um novo componente</h4>
+		      </div>
+		      <div class="modal-body">
+		        <h4>Nome do componente: </h4>
+                <input class="form-control" id="nameComponent" /><br/>
+                <h4>Tipo de Componente </h4>
+                <select class="form-control" id="typeComponent">
+                	<option value="1" >QUALIFIER</option>
+                	<option value="2" >PLATFORM</option>
+                	<option value="3" >DATASTRUCTURE</option>
+                	<option value="4" >COMPUTATION</option>
+                	<option value="5" >CONNECTOR</option>
+                	<option value="7" >DATASOURCE</option>
+                </select>
+                <br/>
+                <h4>Supertipo: </h4>
+                <label id="nameSuperType"></label>
+                <br/>
+                <a href="#" id="sselectType" data-toggle="modal" data-target="#modalSuperComp" >Selecionar Tipo</a><br/><br/>
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveComponent">Criar Componente</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+		      </div>
+		    </div>
+		  </div>
+        </div>
+        
+        <div id="modalSuperComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listSuperComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameSuperComp"></label></center>
+			                <h4>Parâmetros de Contexto</h4>
+			                <table class="table table-striped" id="pararSuper"></table>
+			                <h4>Componentes aninhados</h4>
+			                <table class="table table-striped" id="nestCompSuper"></table>
+			                <h4>Unidades Abstratas</h4>
+			                <table class="table table-striped" id="unitCompSuper"></table>
+			                <h4>Fatias</h4>
+			                <table class="table table-striped" id="slicesCompSuper"></table>
+			                <h4>Parâmetros de Qualidade</h4>
+			                <table class="table table-striped" id="qualytiCompSuper"></table>
+			                <h4>Parâmetros de Custo</h4>
+			                <table class="table table-striped" id="costCompSuper"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveSuperComp">Concluir</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalNestedComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listNestedComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameNestedComp"></label></center>
+			                <h4>Parâmetros de Contexto</h4>
+			                <table class="table table-striped" id="pararNestComp"></table>
+			                <h4>Componentes aninhados</h4>
+			                <table class="table table-striped" id="nestNestedComp"></table>
+			                <h4>Unidades Abstratas</h4>
+			                <table class="table table-striped" id="unitNestedComp"></table>
+			                <h4>Fatias</h4>
+			                <table class="table table-striped" id="slicesNestedComp"></table>
+			                <h4>Parâmetros de Qualidade</h4>
+			                <table class="table table-striped" id="qualytiNestedComp"></table>
+			                <h4>Parâmetros de Custo</h4>
+			                <table class="table table-striped" id="costNestedComp"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveNestedComp">Adicionar Componente</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+    
+    	<div id="modalParamComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Defina um limite</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listParamComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <label id="nameParamComp"></label>
+		                    <h4>Nome do Parametro</h4>
+		                    <input class="form-control" type="text" id="namePar"/>
+		                    <h4>Variância</h4>
+		                    <select class="form-control" id="typeVariance">
+			                	<option value="1" >Invariância</option>
+			                	<option value="2" >Contravariância</option>
+			                	<option value="3" >covariância</option>
+			                	<option value="4" >Aumentando</option>
+			                	<option value="5" >Diminuindo</option>
+			                </select>
+		                    <h4>Limite</h4>
+		                    <select class="form-control" id="opcaoLimite">
+		                    	<option value="contract">Por Contrato</option>
+		                    	<option value="number">Por valor</option>
+		                    </select>
+		                    <label id="bound"></label>
+		                    <h4>Domínio Numérico</h4>
+		                    <select class="form-control" id="numericDomain">
+		                    	<option>Selecione um domínio</option>
+		                    	<option value="1">Direto</option>
+		                    	<option value="2">Invertido</option>
+		                    </select>
+		                    <br/>
+		                    <input style="visibility: hidden;" class="form-control" type="text" placeholder="Valor" id="boundValue" />
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveParamComp">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+    
+		<div id="modalEditeComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Selecione um componente para Editar</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listEditeComponents">
+			                </ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameEditComp"></label></center>
+			                <h4>Parâmetros de Contexto</h4>
+			                <table class="table table-striped" id="pararEditComp"></table>
+			                <h4>Componentes aninhados</h4>
+			                <table class="table table-striped" id="nestEditComp"></table>
+			                <h4>Unidades Abstratas</h4>
+			                <table class="table table-striped" id="unitEditComp"></table>
+			                <h4>Fatias</h4>
+			                <table class="table table-striped" id="slicesEditComp"></table>
+			                <h4>Parâmetros de Qualidade</h4>
+			                <table class="table table-striped" id="qualytiEditComp"></table>
+			                <h4>Parâmetros de Custo</h4>
+			                <table class="table table-striped" id="costEditComp"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="openEditComp">Editar Componente</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalParamQuality" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parametro de Qualidade</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<h5>Nome do Parametro</h5>
+			            	<input id="name-par-quality" class="form-control" type="text"/>
+			            	<h5>Tipo</h5> <!-- VERIFICAR QUE TIPO É ESSE -->
+			            	<select id="kind-quality" class="form-control"></select>
+			            	<br/>
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-quality" class="form-control" type="number" step="any" />
+								<h5>Tipo</h5>
+								<input id="kind-argument-quality" class="form-control" type="text" />
+								<h5>Parâmetro de Contexto</h5>
+								<select id="cp-argument-quality" class="form-control"></select>		    
+							  </div>
+							</div>
+							<div class="panel panel-default">
+							  <div class="panel-heading">Função</div>
+							  <div class="panel-body">    
+							    <h5>Função</h5>
+							    <input id="function-value-quality" class="form-control" />
+							    <h5>Parâmetro de Contexto</h5>
+								<select id="cp-function-quality" class="form-control"></select>
+							    <h5>Contrato</h5>
+								<select id="contract-function-quality" class="form-control"></select>
+								<br/>
+								<table class="table table-hover" id="termsQuality">
+									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead>
+									<tbody></tbody>
+								</table>
+							  </div>
+							</div>
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParQuality">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalParamCost" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parametro de Custo</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<h5>Nome do Parametro</h5>
+			            	<input id="name-par-cost" class="form-control" type="text"/>
+			            	<h5>Tipo</h5><!-- VERIFICAR QUE TIPO É ESSE -->
+			            	<select id="kind-cost" class="form-control"></select>
+			            	<br/>
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-cost" class="form-control" type="number" step="any" />
+								<h5>Tipo</h5>
+								<input id="kind-argument-cost" class="form-control" type="text" />
+								<h5>Parâmetro de Contexto</h5>
+								<select id="cp-argument-cost" class="form-control"></select>		    
+							  </div>
+							</div>
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Função</div>
+							  <div class="panel-body">    
+							    <h5>Função</h5>
+							    <input id="function-value-cost" class="form-control" />
+							    <h5>Parâmetro de Contexto</h5>
+								<select id="cp-function-cost" class="form-control"></select>
+							    <h5>Contrato</h5>
+								<select id="contract-function-cost" class="form-control"></select>
+								<br/>
+								<table class="table table-hover" id="termsCost">
+									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead>
+									<tbody></tbody>
+								</table>
+							  </div>
+							</div>
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParCost">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalParamRanking" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parametro de Ranking</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<h5>Nome do Parametro</h5>
+			            	<input id="name-par-ranking" class="form-control" type="text"/>
+			            	<h5>Kind</h5>
+			            	<select id="kind-ranking" class="form-control"></select>
+			            	<br/>
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-ranking" class="form-control" type="number" step="any" />
+								<h5>Tipo</h5>
+								<input id="kind-argument-ranking" class="form-control" type="text" />
+								<h5>Parâmetro de Contexto</h5>
+								<select id="cp-argument-ranking" class="form-control"></select>		    
+							  </div>
+							</div>
+							<div class="panel panel-default">
+							  <div class="panel-heading">Função</div>
+							  <div class="panel-body">    
+							    <h5>Função</h5>
+							    <input id="function-value-ranking" class="form-control" />
+							    <h5>Parâmetro de Contexto</h5>
+								<select id="cp-function-ranking" class="form-control"></select>
+							    <h5>Contrato</h5>
+								<select id="contract-function-ranking" class="form-control"></select>
+								<br/>
+								<table class="table table-hover" id="termsRanking">
+									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead>
+									<tbody></tbody>
+								</table>
+							  </div>
+							</div>
+							<!-- <div class="panel panel-default">
+							  <div class="panel-heading">Parâmtros</div>
+							  <div class="panel-body">    
+							  	<h5>Componente</h5>
+								<select id="component-par-ranking" class="form-control"></select>		    
+							  </div>
+							</div>-->
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParRanking">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalCreateContract" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+		            <div class="modal-body">
+		            	<h4>Deseja criar um contrato a partir deste componente?</h4>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="yes">Sim</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="no">Não, Obrigado!</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        
+        
+    	<div id="modalSubmit" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Aguarde a submissão do componente...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+    	<div id="modalLoadContracts" class="modal fade" role="dialog" >
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Consultando contratos...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+    </body>
+</html>

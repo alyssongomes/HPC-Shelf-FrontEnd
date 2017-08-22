@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/SAFe_workflow_V4"
+	xmlns:tns="http://www.example.org/SAFe_workflow_V4" elementFormDefault="qualified">
+
+	<element name="workflow" type="tns:XML_SAFe_Operation"></element>
+
+	<complexType name="XML_SAFe_Operation">
+		<complexContent>
+			<extension base="tns:XML_SAFe_Base">
+				<choice>
+					<element name="skip_oper" type="tns:XML_SAFe_Base"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="break_oper" type="tns:XML_SAFe_Base"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="continue_oper" type="tns:XML_SAFe_Base"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="start_oper" type="tns:XML_SAFe_Prim_Oper"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="wait_oper" type="tns:XML_SAFe_Prim_Oper"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="cancel_oper" type="tns:XML_SAFe_Prim_Oper"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="invoke_oper" maxOccurs="1" minOccurs="1"
+						type="tns:XML_SAFe_Action">
+					</element>
+					<element name="sequence_oper" type="tns:XML_SAFe_Comp_Oper"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="parallel_oper" type="tns:XML_SAFe_Comp_Oper"
+						maxOccurs="1" minOccurs="1">
+					</element>
+					<element name="choice_oper" maxOccurs="1" minOccurs="1" type="tns:choice_operComplexType">
+					</element>
+					<element name="iterate_oper" maxOccurs="1" minOccurs="1">
+						<complexType>
+							<complexContent>
+								<extension base="tns:XML_SAFe_Base">
+									<sequence>
+										<element name="operation"
+											type="tns:XML_SAFe_Operation" maxOccurs="unbounded"
+											minOccurs="1">
+										</element>
+									</sequence>
+									<attribute name="max" type="int">
+									</attribute>
+									<attribute name="iter_label"
+										type="string">
+									</attribute>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+				</choice>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+
+	<complexType name="XML_SAFe_Base">
+		<attribute name="order" type="int"></attribute>
+		<attribute name="value" type="string"></attribute>
+		<attribute name="oper_name" type="string"></attribute>
+		<attribute name="level" type="int"></attribute>
+        <attribute name="base_label" type="string"></attribute>
+    </complexType>
+
+	<complexType name="XML_SAFe_Action">
+		<complexContent>
+			<extension base="tns:XML_SAFe_Base">
+				<sequence>
+					<element name="arg" type="tns:argType" maxOccurs="unbounded" minOccurs="0"></element>
+				</sequence>
+				<attribute name="action" type="tns:ActionType"
+					use="required">
+				</attribute>
+				<attribute name="id" type="string" use="required"></attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="XML_SAFe_Prim_Oper">
+		<complexContent>
+			<extension base="tns:XML_SAFe_Base">
+				<sequence>
+
+					<element name="action" type="tns:XML_SAFe_Action" nillable="true"></element>
+
+				</sequence>
+				<attribute name="handle_id" type="string" use="optional"></attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="XML_SAFe_Comp_Oper">
+		<complexContent>
+			<extension base="tns:XML_SAFe_Base">
+				<sequence>
+					<element name="operation" type="tns:XML_SAFe_Operation"
+						maxOccurs="unbounded" minOccurs="1"></element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<simpleType name="ActionType">
+		<restriction base="string">
+			<enumeration value="resolve" />
+			<enumeration value="instantiate" />
+			<enumeration value="compute" />
+			<enumeration value="connect" />
+			<enumeration value="deploy" />
+		</restriction>
+	</simpleType>
+	<complexType name="choice_operComplexType">
+		<complexContent>
+			<extension base="tns:XML_SAFe_Base">
+				<sequence>
+					<element minOccurs="1" maxOccurs="unbounded"
+						name="select">
+						<complexType>
+							<complexContent>
+								<extension base="tns:XML_SAFe_Base">
+									<sequence>
+										<element minOccurs="1"
+											maxOccurs="unbounded" name="operation"
+											type="tns:XML_SAFe_Operation">
+										</element>
+									</sequence>
+									<attribute name="action_id"
+										type="string">
+									</attribute>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+				</sequence>
+				<attribute name="chosen" type="string"></attribute>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+	<complexType name="argType">
+		<attribute name="value" type="string"></attribute>
+		<attribute name="type" type="tns:ArgSimpleType"></attribute>
+	</complexType>
+
+	<simpleType name="ArgSimpleType">
+		<restriction base="string">
+			<enumeration value="INTEGER"/>
+			<enumeration value="DOUBLE"></enumeration>
+			<enumeration value="STRING"></enumeration>
+		</restriction>
+	</simpleType>
+</schema>
