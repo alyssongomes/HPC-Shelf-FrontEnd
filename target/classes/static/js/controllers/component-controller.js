@@ -1,4 +1,7 @@
 var ELEMENT = null;
+var SUPERCMP = null;
+var CONTEXT_PARAMETERS = [];
+var CONTEXT_PARAMETERS_INNER = []
 var newComp = false;
 var jsplumb = null;
 
@@ -20,6 +23,8 @@ function init() {
 	
 	$("#submitComponent").hide();
 	$("#saveUpdate").hide();
+	$("#navEditCmp").hide();
+	$("#divNumericDomain").hide();
 	
 	var url   = window.location.search.replace("?", "");
 	var items = url.split("&");
@@ -102,7 +107,7 @@ function init() {
     });
     
     $("#saveComponent").click(function(){
-    	if($("#nameComponent").val() != ""){
+    	if($("#nameComponent").val() != "" && $("#nameSuperType").text() != ""){
 			$("#init").hide();
 			$("#quadro1").show("fast");
 			$("#quadro2").show("fast");
@@ -111,13 +116,20 @@ function init() {
 	        $("#newComp").append("<p id='super' hidden value='"+$("#nameSuperComp > h3").attr("value")+"'></p>");
 	        $("#newComp").append("<p id='typeCmp' hidden value='"+$("#typeComponent").val()+"'></p>");
 	        $("#newComp").append("<p id='idSuper' hidden value='"+$("#nameSuperComp > p").attr("value")+"'></p>");
-	        $("#nameComponent").val("");
+	        //$("#nameComponent").val("");
 	        $("#nameSuperType > h3").remove();
 	        newComp = true;
+	        ELEMENT = $("#nameComponent").val();
 	        $("#saveUpdate").css("visibility","hidden");
 	        $("#submitComponent").show();
+	        if(SUPERCMP.contextParameter != null){
+		        for(var i=0; i < SUPERCMP.contextParameter.length;i++){
+		        	CONTEXT_PARAMETERS.push(SUPERCMP.contextParameter[i]);
+		        }
+		        loadParameters();
+	        }
     	}else{
-    		alert("O componente deve ter um nome!");
+    		alert("O componente deve ter um nome e um super tipo!");
     	}
     });
     
@@ -154,8 +166,10 @@ function init() {
     		alert("Selecione um componente!");
     		$("#boundValue").css("visibility","hidden");
     		$("#bound").show("fast");
+    		$("#divNumericDomain").hide();
     	}else{
     		$("#bound").hide();
+    		$("#divNumericDomain").show()
     		$("#boundValue").css("visibility","visible");
     	}
     });
@@ -206,6 +220,9 @@ function init() {
     $("#no").click(function(){
     	location.reload();
     });
+    $("#addAbstractUnit").click(function(){
+    	addUnits($("#sort2 div[id='"+ELEMENT+"']"),jsplumb);
+    });
     /*FIM BOTÕES*/
     
     initListComponents();
@@ -223,9 +240,14 @@ function openEditComp(){
 }
 
 function updateTerms(table, terms){
+	var options = "";
+	for(var i=0;i< CONTEXT_PARAMETERS.length;i++)
+		options += "<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>";
+	for(var i=0;i< CONTEXT_PARAMETERS_INNER.length;i++)
+		options += "<option value="+CONTEXT_PARAMETERS_INNER[i].cpId+">"+CONTEXT_PARAMETERS_INNER[i].name+" - "+CONTEXT_PARAMETERS_INNER[i].acName+"</option>";
 	table.find("tbody > tr").remove();
 	for(var i=0;i<terms.length;i++){
-		table.find("tbody").append("<tr><td>"+terms[i]+"</td><td><select class='form-control'><option value='1'>SMP</option></select></td></tr>");
+		table.find("tbody").append("<tr><td>"+terms[i]+"</td><td><select class='form-control'>"+options+"</select></td></tr>");
 	}
 }
 
@@ -387,7 +409,7 @@ function createNewComponent(name, supertype){
         callback: function(key, options) {
         	switch(key){
         		case "unit":
-        			addUnits($("#sort2 div[id='"+name+"']"),jsplumb);
+        			$("#modalAbstractUnit").modal();
         			break;
         		case "parContext":
         			$("#modalParamComp").modal();
@@ -412,9 +434,9 @@ function createNewComponent(name, supertype){
             "unit": {name: "Unidade Abstrata"},
             "sep1": "---------",
             "parContext": {name: "Parâmetro de Contexto"},
+            "parCost": {name: "Parâmetro de Custo"},
             "parQuality": {name: "Parâmetro de Qualidade"},
             "parRank": {name: "Parâmetro de Ranking"},
-            "parCost": {name: "Parâmetro de Custo"},
             "sep2": "---------",
             "inner": {name: "Componente Aninhado"}
         }
@@ -424,9 +446,12 @@ function createNewComponent(name, supertype){
 }
 
 function addUnits(element, js){
-    var unidade = prompt("Nome da Unidade Abstrata:","Unidade");
+    //var unidade = prompt("Nome da Unidade Abstrata:","Unidade");
+	console.log(element);
+	console.log(js);
+	var unidade = $("#nameAbstractUnit").val();
 
-    if(unidade != null){
+    if(unidade != null && unidade != "" && unidade != undefined){
         var idUnit = identifier($("#addsUnidades").find("tr"));
 
         var div = $("<div/>",{value:'units', class:'unit', id: idUnit});
@@ -447,175 +472,219 @@ function addUnits(element, js){
         });
         linha.append(lineDelete);
         $("#addsUnidades").append(linha);
+    }else{
+    	alert("Informe o nome da unidade!");
     }
+    $("#nameAbstractUnit").val("");
 }
 
 function addParameter(element, js){
+	if($("input[id=namePar]").val() != ""){
 
-    var idPar = identifier($("#listParameters").find("tr"));
-    var tabParam = $("#listParameters");
-    var tam = tabParam.find("tr").length;
-
-    var linha  = $("<tr/>",{id: idPar});
-    var coluna1 = $("<td/>",{id:0,text: $("input[id=namePar]").val(),value:$("input[id=namePar]").val(), style:"width: 70px;", width: 150})
-        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("id")+"'></p>")
-        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("value")+"'></p>")
-        .append("<p hidden value='"+$("#boundValue").val()+"'></p>");
-    var coluna2 = $("<td/>",{id:0, text: $("#variavel").val() == ""? "Local":"Compar.", title:$("#variavel").val(), value: $("#bound").val(),style:"color: blue;", width: 70 });
-    var lineDelete = $("<td/>");
-    lineDelete.append($("<span/>",{class:"label label-danger", text:"DEL", style:"cursor:Pointer;"}))
-    lineDelete.click(function(){
-        $("#listParameters").find("tr[id="+idPar+"]").remove();
-        jsPlumb.deleteEndpoint(ep);
-    })
-    linha.append(coluna1);
-    linha.append(coluna2);
-    linha.append(lineDelete);
-    tabParam.append(linha);
-    $("#variavel").val("");
-    $("#bound > h3").remove();
-    $("#bound > select").remove();
-    $("#containerDetailPar").find("input[id=name]").val("");
+	    var idPar = identifier($("#listParameters").find("tr"));
+	    var tabParam = $("#listParameters");
+	    var tam = tabParam.find("tr").length;
+	    var name = $("input[id=namePar]").val();
+	
+	    var linha  = $("<tr/>",{id: idPar});
+	    var coluna1 = $("<td/>",{id:0,text: name,value:name, style:"width: 70px;", width: 150})
+	        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("id")+"'></p>")
+	        .append("<p hidden value='"+$("#bound").find("select").find("option:selected").attr("value")+"'></p>")
+	        .append("<p hidden value='"+$("#boundValue").val()+"'></p>")
+	        .append("<p hidden value='"+$("#typeVariance").val()+"'></p>")
+	        .append("<p hidden value='"+$("#numericDomain").val()+"'></p>");
+	    var lineDelete = $("<td/>");
+	    lineDelete.append($("<span/>",{class:"label label-danger", text:"DEL", style:"cursor:Pointer;"}))
+	    lineDelete.click(function(){
+	        $("#listParameters").find("tr[id="+idPar+"]").remove();
+	        jsPlumb.deleteEndpoint(ep);
+	        
+	        for(var i=0;i < CONTEXT_PARAMETERS.length;i++){
+	        	if(CONTEXT_PARAMETERS[i].name === name){
+	        		CONTEXT_PARAMETERS.splice(i,1);
+	        	}
+	        }
+	        loadParameters();
+	    })
+	    linha.append(coluna1);
+	    //linha.append(coluna2);
+	    linha.append(lineDelete);
+	    tabParam.append(linha);
+	    
+	    CONTEXT_PARAMETERS.push({
+	    	name: $("input[id=namePar]").val(),
+	    	kind: 1,
+	    });
+	    loadParameters();
+	    
+	    $("#variavel").val("");
+	    $("#bound > h3").remove();
+	    $("#bound > select").remove();
+	    $("#containerDetailPar").find("input[id=name]").val("");
+	}else{
+		alert("Informe o nome do parâmetro!");
+	}
 }
 
 function addParameterQuality(){
 	var name = $("#name-par-quality").val();
 	var func = $("#function-value-quality").val();
-	//Object Parameter Quality
-	var quality = {
-		name: name,
-		kindId:$("#kind-quality").val()==null? undefined:parseInt($("#kind-quality").val()),
-		calculatedArgument:{
-			value:$("#value-argument-quality").val()==null? undefined:parseFloat($("#value-argument-quality").val()),
-			kindId:$("#kind-argument-quality").val()==null? undefined:parseInt($("#kind-argument-quality").val()),
-			cpId:$("#cp-argument-quality").val()==null? undefined:parseInt($("#cp-argument-quality").val()),
-			'function':{
-				functionValue:$("#function-value-quality").val()==null? undefined: $("#function-value-quality").val(),
-				cpId: $("#cp-function-quality").val()==null? undefined:parseInt($("#cp-function-quality").val()),
-				ccId: $("#contract-function-quality").val()==null? undefined: parseInt($("#contract-function-quality").val()),
+	if(name != ""){
+		//Object Parameter Quality
+		var quality = {
+			name: name,
+			//kindId:$("#kind-quality").val()===null? undefined:parseInt($("#kind-quality").val()),
+			kindId: 2,
+			calculatedArgument:{
+				value:$("#value-argument-quality").val()===null || $("#value-argument-quality").val()===""? undefined:parseFloat($("#value-argument-quality").val()),
+				kindId:$("#kind-argument-quality").val()===null || $("#kind-argument-quality").val()===""? undefined:parseInt($("#kind-argument-quality").val()),
+				cpId:$("#cp-argument-quality").val()===null || $("#cp-argument-quality").val()===""? undefined:parseInt($("#cp-argument-quality").val())
+			}
+		};
+		
+		if($("#function-value-quality").val()!=null && $("#function-value-quality").val()!=""){
+			
+			quality.calculatedArgument['function'] = {
+				functionValue:$("#function-value-quality").val(),
 				functionParameters:[],
-				//functionArguments:[]
+			}
+			
+			var table = $("#termsQuality > tbody > tr");
+			for(var i=0;i<table.length;i++){
+				var select = table[i].cells[1].firstChild.selectedIndex;
+				quality.calculatedArgument['function'].functionParameters.push({
+					order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
+					cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+				});
 			}
 		}
-	};
-	var table = $("#termsQuality > tbody > tr");
-	for(var i=0;i<table.length;i++){
-		var select = table[i].cells[1].firstChild.selectedIndex;
-		quality.calculatedArgument['function'].functionParameters.push({
-			order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
-			cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+		
+		var idQ = identifier($("#listQuality").find("tr"));
+		var l = $("<tr/>",{id:idQ, 'data-json':JSON.stringify(quality)});
+		l.append($("<td>",{text:name}));
+		l.append($("<td>",{text:func}));
+		var ld = $("<td/>");
+		var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
+		ld.click(function(){
+			$("#listQuality > tbody").find("tr[id="+idQ+"]").remove();
 		});
+		ld.append(s);
+		l.append(ld);
+		$("#listQuality").append(l);
+		
+		
+		//LIMPAR CAMPOS
+		cleanField($("#name-par-quality"), $("#function-value-quality"), $("#kind-quality"), $("#value-argument-quality"), $("#kind-argument-quality"), $("#cp-argument-quality"), $("#contract-function-quality"),$("#cp-function-quality"),$("#termsQuality > tbody > tr"));
+	}else{
+		alert("Informe o nome do parâmetro!");
 	}
-	
-	var idQ = identifier($("#listQuality").find("tr"));
-	var l = $("<tr/>",{id:idQ, 'data-json':JSON.stringify(quality)});
-	l.append($("<td>",{text:name}));
-	l.append($("<td>",{text:func}));
-	var ld = $("<td/>");
-	var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
-	ld.click(function(){
-		$("#listQuality > tbody").find("tr[id="+idQ+"]").remove();
-	});
-	ld.append(s);
-	l.append(ld);
-	$("#listQuality").append(l);
-	
-	
-	//LIMPAR CAMPOS
-	cleanField($("#name-par-quality"), $("#function-value-quality"), $("#kind-quality"), $("#value-argument-quality"), $("#kind-argument-quality"), $("#cp-argument-quality"), $("#contract-function-quality"),$("#cp-function-quality"),$("#termsQuality > tbody > tr"));
 }
 
 function addParameterCost(){
 	var name = $("#name-par-cost").val();
 	var func = $("#function-value-cost").val();
 	//Object Parameter Cost
-	var cost = {
-		name: name,
-		kindId: $("#kind-cost").val()==null? undefined:parseInt($("#kind-cost").val()),
-		calculatedArgument:{
-			value:$("#value-argument-cost").val()==null? undefined:parseFloat($("#value-argument-cost").val()),
-			kindId: $("#kind-argument-cost").val()==null? undefined:parseInt($("#kind-argument-cost").val()),
-			cpId: $("#cp-argument-cost").val()==null? undefined:parseInt($("#cp-argument-cost").val()),
-			'function':{
-				functionValue:$("#function-value-cost").val()==null? undefined:$("#function-value-cost").val(),
-				ccId: $("#contract-function-cost").val()==null? undefined: parseInt($("#contract-function-cost").val()),
-				cpId: $("#cp-function-quality").val()==null? undefined:parseInt($("#cp-function-quality").val()),
+	if(name != ""){
+		var cost = {
+			name: name,
+			//kindId: $("#kind-cost").val()===null? undefined:parseInt($("#kind-cost").val()),
+			kindId: 3,
+			calculatedArgument:{
+				value:$("#value-argument-cost").val()===null? undefined:parseFloat($("#value-argument-cost").val()),
+				kindId: $("#kind-argument-cost").val()===null? undefined:parseInt($("#kind-argument-cost").val()),
+				cpId: $("#cp-argument-cost").val()===null? undefined:parseInt($("#cp-argument-cost").val())
+			}
+		};
+		
+		if($("#function-value-cost").val() != null && $("#function-value-cost").val() != ""){
+
+			cost.calculatedArgument['function'] = {
+				functionValue:$("#function-value-cost").val(),
 				functionParameters:[],
-				//functionArguments:[]
+			}
+		
+			var table = $("#termsCost > tbody > tr");
+			for(var i=0;i<table.length;i++){
+				var select = table[i].cells[1].firstChild.selectedIndex;
+				cost.calculatedArgument['function'].functionParameters.push({
+					order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
+					cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+				});
 			}
 		}
-	};
-	var table = $("#termsCost > tbody > tr");
-	for(var i=0;i<table.length;i++){
-		var select = table[i].cells[1].firstChild.selectedIndex;
-		cost.calculatedArgument['function'].functionParameters.push({
-			order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
-			cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+		
+		var idC = identifier($("#listCost").find("tr"));
+		var l = $("<tr/>",{id:idC, 'data-json':JSON.stringify(cost)});
+		l.append($("<td>",{text:name}));
+		l.append($("<td>",{text:func}));
+		var ld = $("<td/>");
+		var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
+		ld.click(function(){
+			$("#listCost > tbody").find("tr[id="+idC+"]").remove();
 		});
+		ld.append(s);
+		l.append(ld);
+		$("#listCost").append(l);
+		
+		//LIMPAR CAMPOS
+		cleanField($("#name-par-cost"), $("#function-value-cost"), $("#kind-cost"), $("#value-argument-cost"), $("#kind-argument-cost"), $("#cp-argument-cost"), $("#contract-function-cost"),$("#cp-function-cost"),$("#termsCost > tbody > tr"));
+	}else{
+		alert("Informe o nome do parâmetro!");
 	}
-	
-	var idC = identifier($("#listCost").find("tr"));
-	var l = $("<tr/>",{id:idC, 'data-json':JSON.stringify(cost)});
-	l.append($("<td>",{text:name}));
-	l.append($("<td>",{text:func}));
-	var ld = $("<td/>");
-	var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
-	ld.click(function(){
-		$("#listCost > tbody").find("tr[id="+idC+"]").remove();
-	});
-	ld.append(s);
-	l.append(ld);
-	$("#listCost").append(l);
-	
-	//LIMPAR CAMPOS
-	cleanField($("#name-par-cost"), $("#function-value-cost"), $("#kind-cost"), $("#value-argument-cost"), $("#kind-argument-cost"), $("#cp-argument-cost"), $("#contract-function-cost"),$("#cp-function-cost"),$("#termsCost > tbody > tr"));
 }
 
 function addParameterRanking(){
 	var name = $("#name-par-ranking").val();
 	var func = $("#function-value-ranking").val();
-	
-	//Object Parameter Ranking
-	var ranking = {
-		name: name,
-		kindId: $("#kind-ranking").val()==null? undefined:parseInt($("#kind-ranking").val()),
-		calculatedArgument:{
-			value:$("#value-argument-ranking").val()==null? undefined:parseFloat($("#value-argument-ranking").val()),
-			kindId: $("#kind-argument-ranking").val()==null? undefined:parseInt($("#kind-argument-ranking").val()),
-			cpId: $("#cp-argument-ranking").val()==null? undefined:parseInt($("#cp-argument-ranking").val()),
-			'function':{
-				functionValue:$("#function-value-ranking").val()==null? undefined:$("#function-value-ranking").val(),
-				ccId: $("#contract-function-ranking").val()==null? undefined:parseInt($("#contract-function-ranking").val()),
-				cpId: $("#cp-function-ranking").val()==null? undefined:parseInt($("#cp-function-ranking").val()),
+	if(name != ""){
+		//Object Parameter Ranking
+		var ranking = {
+			name: name,
+			//kindId: $("#kind-ranking").val()===null? undefined:parseInt($("#kind-ranking").val()),
+			kindId:4,
+			calculatedArgument:{
+				value:$("#value-argument-ranking").val()===null? undefined:parseFloat($("#value-argument-ranking").val()),
+				kindId: $("#kind-argument-ranking").val()===null? undefined:parseInt($("#kind-argument-ranking").val()),
+				cpId: $("#cp-argument-ranking").val()===null? undefined:parseInt($("#cp-argument-ranking").val()),
+			}
+		};
+		
+		
+		if($("#function-value-ranking").val()!=null && $("#function-value-ranking").val()!=""){
+			
+			ranking.calculatedArgument['function'] = {
+				functionValue:$("#function-value-ranking").val()===null || $("#function-value-ranking").val()===""? undefined:$("#function-value-ranking").val(),
 				functionParameters:[],
-				//functionArguments:[]
+			}
+		
+			var table = $("#termsRanking > tbody > tr");
+			for(var i=0;i<table.length;i++){
+				var select = table[i].cells[1].firstChild.selectedIndex;
+				ranking.calculatedArgument['function'].functionParameters.push({
+					order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
+					cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+				});
 			}
 		}
-	};
-	var table = $("#termsRanking > tbody > tr");
-	for(var i=0;i<table.length;i++){
-		var select = table[i].cells[1].firstChild.selectedIndex;
-		ranking.calculatedArgument['function'].functionParameters.push({
-			order:parseInt(table[i].cells[0].firstChild.nodeValue.replace("v",""))+1,
-			cpId:parseInt(table[i].cells[1].firstChild.options[select].value)
+		
+		var idR = identifier($("#listRanking").find("tr"));
+		var l = $("<tr/>",{id:idR, 'data-json':JSON.stringify(ranking)});
+		l.append($("<td>",{text:name}));
+		l.append($("<td>",{text:func}));
+		var ld = $("<td/>");
+		var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
+		ld.click(function(){
+			$("#listRanking > tbody").find("tr[id="+idR+"]").remove();
 		});
+		ld.append(s);
+		l.append(ld);
+		$("#listRanking").append(l);
+		
+		//LIMPAR CAMPOS
+		cleanField($("#name-par-ranking"), $("#function-value-ranking"), $("#kind-ranking"), $("#value-argument-ranking"), $("#kind-argument-ranking"), $("#cp-argument-ranking"), $("#contract-function-ranking"),$("#cp-function-ranking"),$("#termsRanking > tbody > tr"));
+	}else{
+		alert("Informe o nome do parâmetro!");
 	}
-	
-	var idR = identifier($("#listRanking").find("tr"));
-	var l = $("<tr/>",{id:idR, 'data-json':JSON.stringify(ranking)});
-	l.append($("<td>",{text:name}));
-	l.append($("<td>",{text:func}));
-	var ld = $("<td/>");
-	var s = $("<span/>",{class:"label label-danger",text:"DEL", style:"cursor:Pointer;"});
-	ld.click(function(){
-		$("#listRanking > tbody").find("tr[id="+idR+"]").remove();
-	});
-	ld.append(s);
-	l.append(ld);
-	$("#listRanking").append(l);
-	
-	//LIMPAR CAMPOS
-	cleanField($("#name-par-ranking"), $("#function-value-ranking"), $("#kind-ranking"), $("#value-argument-ranking"), $("#kind-argument-ranking"), $("#cp-argument-ranking"), $("#contract-function-ranking"),$("#cp-function-ranking"),$("#termsRanking > tbody > tr"));
 }
 
 function addComponentNested(element, js, name, supertype, id, idSuper){
@@ -646,6 +715,12 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
 
             $("#autoScroll2").find("div[id='"+id+"']").remove();
             $("#addsComponents").find("tr[id='"+id+"']").remove();
+            
+            CONTEXT_PARAMETERS_INNER = CONTEXT_PARAMETERS_INNER.filter(function(element){
+            	return parseInt(element.acId) != parseInt(id);
+            });
+            
+            loadParameters();
         });
         line.append(lineDelete);
 
@@ -656,7 +731,17 @@ function addComponentNested(element, js, name, supertype, id, idSuper){
         tableCompNested.append(line);
 
         addSlice(element, div, slices,js);
+        
+        $("#modalLoadComponent").modal({backdrop: 'static', keyboard: false});
+        var innerCmp = getAbstractComponent(name);
+        $("#modalLoadComponent").modal('hide');
+        for(var i =0; i< innerCmp.contextParameter.length;i++){
+        	innerCmp.contextParameter[i].acId = innerCmp.idAc;
+        	innerCmp.contextParameter[i].acName = innerCmp.name;
+            CONTEXT_PARAMETERS_INNER.push(innerCmp.contextParameter[i]);     	
+        }
 
+        loadParameters();
     }
 }
 
@@ -730,8 +815,6 @@ function cleanField(name, functionValue, kind, valueArgument, kindArgument, cpAr
 	valueArgument.val("");
 	kindArgument.val("");
 	cpArgument.val("");
-	contractFunction.val("");
-	cpFunction.val("");
 	lineTerms.remove();
 }
 
@@ -764,7 +847,7 @@ function getRankingParameters(){
 }
 
 function addNewAbstractComponent(){
-	//$("#modalSubmit").modal({backdrop: 'static', keyboard: false});
+	$("#modalSubmit").modal({backdrop: 'static', keyboard: false});
 	
     var nameComponent = $("#newComp").find("p[id='name']").attr("value");;
 
@@ -784,9 +867,10 @@ function addNewAbstractComponent(){
     var compObj = {
         name: nameComponent,
         kind: parseInt($("#typeComponent").val()),
-        //'super': { name: supertype, idAc: parseInt(idsupertype)  },
-        'super': { name: "Hue", idAc: 1  },//o supertipo deve ser obrigatório
+        'super': { name: supertype, idAc: parseInt(idsupertype)  },
+        //'super': { name: "Hue", idAc: 1  },//o supertipo deve ser obrigatório
         parameters: contextParameter.length===0? undefined:contextParameter,
+        //path: $("#pathComponent").val(),
         units: unitsAbstracts.length===0? undefined:unitsAbstracts,
         inners: nestedComponents.length===0? undefined:nestedComponents,
         slices: unislices.length===0? undefined:unislices,
@@ -809,6 +893,9 @@ function addNewAbstractComponent(){
 			alert("[ERROR]: Não foi possível carregar a resposta - "+e);
 		}
 		$("#modalSubmit").modal('hide');
+    }, function (result){
+    	alert("Não foi possível cadastrar seu componente!");
+    	$("#modalSubmit").modal('hide');
     });
 }
 
@@ -828,7 +915,7 @@ function loadCompModal () {
 	            $("#nameNestedComp > p").remove();
 	            $("#nameNestedComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
 	            $("#nameNestedComp").append("<p hidden id='"+this.firstChild.getAttribute("id")+"' value='"+this.firstChild.getAttribute("value")+"'></p>");
-	            loadDetaisComp($("#nameNestedComp"), this.firstChild.text,$("#pararNestComp"),$("#nestNestedComp"),$("#unitNestedComp"),$("#nameNestedComp"),$("#slicesNestedComp"), $("#qualytiNestedComp"), $("#costNestedComp"));
+	            loadDetaisComp($("#nameNestedComp"), this.firstChild.text,$("#pararNestComp"),$("#nestNestedComp"),$("#unitNestedComp"),$("#nameNestedComp"),$("#slicesNestedComp"), $("#qualytiNestedComp"), $("#costNestedComp"), $("#rankingNestedComp"));
 			};
 			listLinksComponentsParameters[i].onclick = function() {
 				$("#bound > h3").remove();
@@ -847,36 +934,44 @@ function loadCompModal () {
 	            		alert("Este parâmetro não possue contratos");
 	            	}
 	            	$("#modalLoadContracts").modal('hide');
-	            });
+	            }, function(error){
+					alert("Não foi possível carregar os contratos!");
+					console.log(error);
+					$("#modalLoadContracts").modal('hide');
+				});
 			};
 			listLinksComponentsSupertype[i].onclick = function() {
 				$("#nameSuperComp > h3").remove();
 	            $("#nameSuperComp > p").remove();
 	            $("#nameSuperComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
 	            $("#nameSuperComp").append("<p value='"+this.firstChild.getAttribute("id")+"'></p>");
-	            loadDetaisComp($("#nameSuperComp") ,this.firstChild.text,$("#pararSuper"),$("#nestCompSuper"),$("#unitCompSuper"),$("#nameSuperComp"), $("#slicesCompSuper"), $("#qualytiCompSuper"), $("#costCompSuper"));
+	            SUPERCMP = loadDetaisComp($("#nameSuperComp") ,this.firstChild.text,$("#pararSuper"),$("#nestCompSuper"),$("#unitCompSuper"),$("#nameSuperComp"), $("#slicesCompSuper"), $("#qualytiCompSuper"), $("#costCompSuper"), $("#rankingCompSuper"));
 			};
 			listLinksComponentsEdite[i].onclick = function(){
 				$("#nameEditComp > h3").remove();
 	            $("#nameEditComp > p").remove();
 	            $("#nameEditComp").append("<h3 value='"+this.firstChild.text+"'>"+this.firstChild.text+"</h3>");
 	            $("#nameEditComp").append("<p value='"+this.firstChild.getAttribute("id")+"'></p>");
-	            loadDetaisComp($("#nameEditComp") ,this.firstChild.text,$("#pararEditComp"),$("#nestEditComp"),$("#unitEditComp"),$("#nameEditComp"), $("#slicesEditComp"), $("#qualytiEditComp"), $("#costEditComp"));
+	            loadDetaisComp($("#nameEditComp") ,this.firstChild.text,$("#pararEditComp"),$("#nestEditComp"),$("#unitEditComp"),$("#nameEditComp"), $("#slicesEditComp"), $("#qualytiEditComp"), $("#costEditComp"), $("#rankingEditComp"));
 			};
 		}
 	}
 }
 
-function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name, listSlices, listQualities, listCosts) {
-
+function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbsUnit, name, listSlices, listQualities, listCosts, listRanking) {
+	
+	$("#modalLoadComponent").modal({backdrop: 'static', keyboard: false});
+	
 	listParar.empty();
     listNestedComp.empty();
     listAbsUnit.empty();
 	listSlices.empty();
     listQualities.empty();
     listCosts.empty();
-
+    listRanking.empty();
+    
     var cmp = getAbstractComponent(component);
+    $("#modalLoadComponent").modal('hide');
     
     var parar = cmp.contextParameter;
     var nested = cmp.innerComponents;
@@ -884,50 +979,81 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
 	var slice = cmp.slices;
     var quality = cmp.qualityParameters;
     var cost = cmp.costParameters;
+    var ranking = cmp.rankingParameters;
 
     viewComp.append("<p id='idSuper' value='"+cmp.supertype.idAc+"'></p>");
     
     if(parar != null){
-    	listParar.append("<thead><tr><td><b>Nome do Parâmetro</b></td></tr></thead>");
+    	listParar.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < parar.length; i++) {
             listParar.append("<tr><td>"+parar[i].name+"</td></tr>");
         }
     }
     
     if(nested != null){
-    	listNestedComp.append("<thead><tr><td><b>Nome do Componente</b></td></tr></thead>");
+    	listNestedComp.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < nested.length; i++) {
             listNestedComp.append("<tr><td>"+nested[i].name+"</td></tr>");
         }
     }
 
     if(unit != null){
-    	listAbsUnit.append("<thead><tr><td><b>Nome da Unidade</b></td></tr></thead>");
+    	listAbsUnit.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < unit.length; i++) {
-            listAbsUnit.append("<tr><td><input type='checkbox' value='"+unit[i].auName+"' id='"+unit[i].auId+"'/>"+unit[i].auName+"</td></tr>");
+            listAbsUnit.append("<tr><td><input style='margin:0 12px 0 0;  vertical-align: middle; position: relative;top: -1px;' type='checkbox' value='"+unit[i].auName+"' id='"+unit[i].auId+"'/>"+unit[i].auName+"</td></tr>");
         }
     }
     
     if(slice != null){
-    	listSlices.append("<thead><tr><td><b>Nome da Fatia</b></td></tr></thead>");
+    	listSlices.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < slice.length; i++) {
             listSlices.append("<tr><td>"+slice[i].innerUnityName+"</td></tr>");
         }
     }
     
     if(quality != null){
-    	listQualities.append("<thead><tr><td><b>Nome do Parâmetro</b></td></tr></thead>");
+    	listQualities.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < quality.length; i++) {
             listQualities.append("<tr><td>"+quality[i].name+"<tr><td>");
         }
     }
     
     if(cost != null){
-    	listCosts.append("<thead><tr><td><b>Nome do Parâmetro</b></td></tr></thead>");
+    	listCosts.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
     	for (var i = 0; i < cost.length; i++) {
     		listCosts.append("<tr><td>"+cost[i].name+"</td></tr>");
         }
     }
+    
+    if(ranking != null){
+    	listRanking.append("<thead><tr><td><b>Nome</b></td></tr></thead>");
+    	for(var i=0; i < ranking.length; i++){
+    		listRanking.append("<tr><td>"+ranking[i].name+"</td></tr>");
+    	}
+    }
+    
+    return cmp;
+}
+
+
+function loadParameters(){
+	if(SUPERCMP != null){
+		$("#cp-argument-quality").find("option").remove();
+		$("#cp-argument-cost").find("option").remove();
+		$("#cp-argument-ranking").find("option").remove();
+		
+		for(var i=0; i< CONTEXT_PARAMETERS.length; i++){
+			$("#cp-argument-quality").append("<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>");
+			$("#cp-argument-cost").append("<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>");
+			$("#cp-argument-ranking").append("<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>");
+		}
+		
+		for(var i=0; i< CONTEXT_PARAMETERS_INNER.length; i++){
+			$("#cp-argument-quality").append("<option value="+CONTEXT_PARAMETERS_INNER[i].cpId+">"+CONTEXT_PARAMETERS_INNER[i].name+" - "+CONTEXT_PARAMETERS_INNER[i].acName+"</option>");
+			$("#cp-argument-cost").append("<option value="+CONTEXT_PARAMETERS_INNER[i].cpId+">"+CONTEXT_PARAMETERS_INNER[i].name+" - "+CONTEXT_PARAMETERS_INNER[i].acName+"</option>");
+			$("#cp-argument-ranking").append("<option value="+CONTEXT_PARAMETERS_INNER[i].cpId+">"+CONTEXT_PARAMETERS_INNER[i].name+" - "+CONTEXT_PARAMETERS_INNER[i].acName+"</option>");
+		}
+	}
 }
 
 function initListComponents(){
@@ -964,18 +1090,14 @@ function identifier(listIds){
 }
 
 // FUNÇÕES PARA DEFINIR OS ATRIBUTOS DO OBJETO COMPONENTE
-/* 
- 	kind: 1 é parametro contextual
-	kinId:  2 qualidade
-	kindId: 3 custo
-	kindId: 4 ranking
- */
+
 function parameters(listParameters){
 	var parametersObjs = [];
 	for (var i = 0; i < listParameters.length; i++) {
 		parametersObjs[i] = {
 			name: listParameters[i].childNodes[0].getAttribute("value"),
-			kind: 1
+			kind: 1,
+			varience: listParameters[i].firstChild.getElementsByTagName("p").item(3).getAttribute("value")
 		}
 		if($("#opcaoLimite").find("option:selected").attr("value") === "contract"){
 			parametersObjs[i].bound = {
@@ -983,7 +1105,8 @@ function parameters(listParameters){
 				ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
 			}
 		}else{
-			parametersObjs[i].boundValue = listParameters[i].firstChild.getElementsByTagName("p").item(2).getAttribute("value")
+			parametersObjs[i].boundValue = listParameters[i].firstChild.getElementsByTagName("p").item(2).getAttribute("value");
+			parametersObjs[i].boundValueDomain = listParameters[i].firstChild.getElementsByTagName("p").item(4).getAttribute("value")
 		}
 	}
 	return parametersObjs;

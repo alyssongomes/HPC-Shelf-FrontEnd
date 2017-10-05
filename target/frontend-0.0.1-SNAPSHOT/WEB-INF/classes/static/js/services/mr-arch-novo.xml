@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><tns:architecture xmlns:tns="http://www.example.org/SAFe_architecture_V4" xmlns:tns1="http://www.example.org/instantiator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/SAFe_architecture_V4 SAFe_architecture_V4.xsd">
+
+
+	<tns:application id="0" name="Application"/>
+		
+
+	<tns:workflow id="1" name="Workflow">
+		<tns:task_port id="207" id_component="1" name="wf-splitter-ss"/>
+		<tns:task_port id="202" id_component="1" name="wf-splitter-ck"/>
+		<tns:task_port id="203" id_component="1" name="wf-shuffler-ck"/>
+		<tns:task_port id="204" id_component="1" name="wf-reducer-ck"/>
+		<tns:task_port id="205" id_component="1" name="wf-mapper-ck"/>
+		<tns:task_port id="206" id_component="1" name="wf-combiner-ck"/>
+	</tns:workflow>
+
+	<tns:body>
+
+		<tns:repository id="7" name="DataSink">
+			<tns:provides_port id="701" name="sink-provides"/>
+		</tns:repository>
+
+		<tns:repository id="8" name="DataSource">
+			<tns:provides_port id="801" name="source-provides"/>
+		</tns:repository>
+
+		<tns:connector id="3" name="Splitter">
+			<tns:uses_port id="300" id_component="3" name="splitter-uses"/>
+			<tns:uses_port id="301" id_component="3" name="splitter-uses-source"/>
+			<tns:uses_port id="302" id_component="3" name="splitter-uses-sink"/>
+			<tns:provides_port id="303" id_component="3" name="splitter-provides"/>
+			<tns:contract id="30">
+				<tns:uri>/home/jefferson/moex_data/sppliter-contract.cc</tns:uri>
+			</tns:contract>
+			<tns:task_port id="305" id_component="3" name="splitter-task-chunk">
+				<tns:action id="351" name="read_chunk"/>
+				<tns:action id="352" name="perform"/>
+				<tns:action id="353" name="chunk_ready"/>
+			</tns:task_port>
+			<tns:task_port id="306" id_component="3" name="splitter-task-ss">
+				<tns:action id="341" name="read_source"/>
+				<tns:action id="342" name="terminate"/>
+				<tns:action id="343" name="write_sink"/>
+			</tns:task_port>
+		</tns:connector>
+
+		<tns:computation id="5" name="Mapper">
+			<tns:uses_port id="500" id_component="5" name="mapper-uses"/>
+			<tns:provides_port id="501" id_component="5" name="mapper-provides"/>
+			<tns:contract id="50">
+				<tns:uri>/home/jefferson/moex_data/mapper-contract.cc</tns:uri>
+			</tns:contract>
+			<tns:task_port id="502" id_component="5" name="mapper-task-chunk">
+				<tns:action id="551" name="read_chunk"/>
+				<tns:action id="552" name="perform"/>
+				<tns:action id="553" name="chunk_ready"/>
+			</tns:task_port>
+		</tns:computation>
+		
+		<tns:computation id="10" name="Combiner">
+			<tns:uses_port id="1000" id_component="10" name="combiner-uses"/>
+			<tns:provides_port id="1001" id_component="10" name="combiner-provides"/>
+			<tns:contract id="100">
+				<tns:uri>/home/jefferson/moex_data/combiner-contract.cc</tns:uri>
+			</tns:contract>
+			<tns:task_port id="1002" id_component="10" name="combiner-task-chunk">
+				<tns:action id="1051" name="read_chunk"/>
+				<tns:action id="1052" name="perform"/>
+				<tns:action id="1053" name="chunk_ready"/>
+			</tns:task_port>
+		</tns:computation>
+
+		<tns:connector id="4" name="Shuffler">
+			<tns:uses_port id="400" id_component="4" name="shuffler-uses"/>
+			<tns:provides_port id="401" id_component="4" name="shuffler-provides"/>
+			<tns:contract id="40">
+				<tns:uri>/home/jefferson/moex_data/shuffler-contract.cc</tns:uri>
+			</tns:contract>
+			<tns:task_port id="405" id_component="4" name="shuffler-task-chunk">
+				<tns:action id="451" name="read_chunk"/>
+				<tns:action id="452" name="perform"/>
+				<tns:action id="453" name="chunk_ready"/>
+			</tns:task_port>
+		</tns:connector>
+		
+		<tns:computation id="6" name="Reducer">
+			<tns:uses_port id="600" id_component="6" name="reducer-uses"/>
+			<tns:provides_port id="601" id_component="6" name="reducer-provides"/>
+			<tns:contract id="60">
+				<tns:uri>/home/jefferson/moex_data/reducer-contract.cc</tns:uri>
+			</tns:contract>
+			<tns:task_port id="602" id_component="6" name="reducer-task-chunk">
+				<tns:action id="651" name="read_chunk"/>
+				<tns:action id="652" name="perform"/>
+				<tns:action id="653" name="chunk_ready"/>
+			</tns:task_port>
+		</tns:computation>
+		
+		<tns:platform address="http://...." id="1000" name="PLAT_A">
+			<tns:contract id="1001">
+				<tns:uri>/home/jefferson/moex_data/plat-a.cc</tns:uri>
+			</tns:contract>
+		</tns:platform>
+
+		<tns:platform address="http://...." id="2000" name="PLAT_B">
+			<tns:contract id="2001">
+				<tns:uri>/home/jefferson/moex_data/plat-b.cc</tns:uri>
+			</tns:contract>
+		</tns:platform>
+
+	</tns:body>
+
+	<tns:env_binding>
+		<tns:uses_port id="300" id_component="3" name="splitter-uses"/>
+		<tns:provides_port id="601" id_component="6" name="reducer-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="301" id_component="3" name="splitter-uses-source"/>
+		<tns:provides_port id="801" id_component="8" name="source-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="302" id_component="3" name="splitter-uses-sink"/>
+		<tns:provides_port id="701" id_component="7" name="sink-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="500" id_component="5" name="mapper-uses"/>
+		<tns:provides_port id="303" id_component="3" name="splitter-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="1000" id_component="10" name="combiner-uses"/>
+		<tns:provides_port id="501" id_component="5" name="mapper-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="400" id_component="4" name="shuffler-uses"/>
+		<tns:provides_port id="1001" id_component="10" name="combiner-provides"/>
+	</tns:env_binding>
+	<tns:env_binding>
+		<tns:uses_port id="600" id_component="6" name="reducer-uses"/>
+		<tns:provides_port id="401" id_component="4" name="shuffler-provides"/>
+	</tns:env_binding>
+
+	<tns:task_binding>
+		<tns:left_peer id="207" id_component="1" name="wf-splitter-ss"/>
+		<tns:right_peer id="306" id_component="3" name="splitter-task-ss"/>
+	</tns:task_binding>
+	<tns:task_binding>
+		<tns:left_peer id="202" id_component="1" name="wf-splitter-ck"/>
+		<tns:right_peer id="305" id_component="3" name="splitter-task-chunk"/>
+	</tns:task_binding>
+	<tns:task_binding>
+		<tns:left_peer id="203" id_component="1" name="wf-shuffler-ck"/>
+		<tns:right_peer id="405" id_component="4" name="shuffler-task-chunk"/>
+	</tns:task_binding>
+	<tns:task_binding>
+		<tns:left_peer id="204" id_component="1" name="wf-reducer-ck"/>
+		<tns:right_peer id="602" id_component="6" name="reducer-task-chunk"/>
+	</tns:task_binding>
+	<tns:task_binding>
+		<tns:left_peer id="205" id_component="1" name="wf-mapper-ck"/>
+		<tns:right_peer id="502" id_component="5" name="mapper-task-chunk"/>
+	</tns:task_binding>
+	<tns:task_binding>
+		<tns:left_peer id="206" id_component="1" name="wf-combiner-ck"/>
+		<tns:right_peer id="1002" id_component="10" name="combiner-task-chunk"/>
+	</tns:task_binding>
+	
+
+</tns:architecture>

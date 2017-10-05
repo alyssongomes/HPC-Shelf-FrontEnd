@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" type="text/css" href="/css/jsPlumbToolkit-defaults.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style-architecture.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<script src="/lib/jquery/jquery-2.1.4.min.js"></script>
+<script src="/js/xsd/instantiator-xsd.js"></script>
+<script src="/js/xsd/safe_architecture_v4-xsd.js"></script>
+<script src="/lib/jsonix/Jsonix-min.js"></script>
+<script src="/lib/jsplumb/dom.jsPlumb-1.7.6-min.js"></script>
+<script src="/js/services/architecture-service.js"></script>
+<script src="/js/controllers/architecture-controller.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Montagem da Arquitetura</title>
+</head>
+<body style="background: #87CEFA;">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+	    	<div class="navbar-header">
+	      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="/img/logo.png"/></a>
+	    	</div>
+	    	<ul id="nav" class="nav navbar-nav">
+				<li><a href="/home">Home</a></li>
+				<li class="dropdown" >
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aplicação<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+		          		<li><a id="navSaveApp" href="#">Salvar Aplicação</a></li>
+		        	</ul>
+				</li>
+	    	</ul>
+	    	<ul id="nav" class="nav navbar-nav navbar-right">
+				<h4 class="navbar-text">Aplicação</h4>
+	    	</ul>
+		</div>
+	</nav>
+	<div class="panel panel-primary" id="paleta">
+		<div class="panel-heading">
+	    	<h3 class="panel-title">Paleta</h3>
+	  	</div>
+	  	<div class="panel-body">
+	    	<div id="btn-workflow" type="button" class="btn btn-default"><img alt="Workflow" src="/img/workflow.png" width="50px" height="40px"/><h4>Workflow</h4></div>
+	    	<div id="btn-computation" type="button" class="btn btn-default"><img alt="Computação" src="/img/computation.png" width="50px" height="40px"/><h4>Computação</h4></div>
+	    	<div id="btn-platform" type="button" class="btn btn-default"><img alt="Plataforma" src="/img/platform.png" width="50px" height="40px"/><h4>Plataforma</h4></div>
+	    	<div id="btn-repository" type="button" class="btn btn-default"><img alt="Repositório" src="/img/repository.png" width="50px" height="40px"/><h4>Repositório</h4></div>
+	    	<div id="btn-connector" type="button" class="btn btn-default"><img alt="Conector" src="/img/connector.png" width="50px" height="40px"/><h4>Conector</h4></div>
+	  	</div>
+  	</div>
+  	<div class="panel panel-default" id="workspace">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Arquitetura</h3>
+	  </div>
+	  <div class="panel-body jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" id="workspace-body">
+	  </div>
+	</div>
+	<div class="panel panel-primary" id="properties">
+		<div class="panel-heading">
+	    	<h3 class="panel-title">Propriedades</h3>
+	  	</div>
+	  	<div class="panel-body" id="properties-body">
+	  		<h4>Environment Binding</h4>
+	  		<table id="table-env-binding" class="table table-hover">
+	  			<thead>
+	  				<tr>
+	  					<th>Use</th>
+	  					<th>Provide</th>
+	  				</tr>
+	  			</thead>
+	  		</table>
+	  		<h4>Task Binding</h4>
+	  		<table id="table-task-binding" class="table table-hover">
+	  			<thead>
+	  				<tr>
+	  					<th>Left</th>
+	  					<th>Right</th>
+	  				</tr>
+	  			</thead>
+	  		</table>
+	  	</div>
+  	</div>
+  	
+  	<div id="modalComp" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="title-modal"><p>Selecione um componente</p></h4>
+				    </div>
+		            <div class="modal-body">
+		            	<p><b>Catálogo</b></p>
+			            <div style=" width:250px; height:400px; overflow: auto;">
+			                <ul id="listNestedComponents"></ul>
+			            </div>
+			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
+			                <center><label id="nameNestedComp"></label></center>
+			                <h4>Parâmetros de Contexto</h4>
+			                <table class="table table-striped" id="pararNestComp"></table>
+			                <h4>Componentes aninhados</h4>
+			                <table class="table table-striped" id="nestNestedComp"></table>
+			                <h4>Unidades Abstratas</h4>
+			                <table class="table table-striped" id="unitNestedComp"></table>
+			                <h4>Fatias</h4>
+			                <table class="table table-striped" id="slicesNestedComp"></table>
+			                <h4>Parâmetros de Qualidade</h4>
+			                <table class="table table-striped" id="qualytiNestedComp"></table>
+			                <h4>Parâmetros de Custo</h4>
+			                <table class="table table-striped" id="costNestedComp"></table>
+			            </div>
+					</div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveNestedComp">Adicionar Componente</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+  	
+  	
+  	<div id="modalDownload" class="modal fade" role="dialog">
+       	<div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		      	<a href="../file/architecture.xml" download="architecture.xml">Click aqui para baixar a arquitetura</a>
+		      </div>
+		    </div>
+		</div>
+     </div>
+  	
+</body>
+</html>

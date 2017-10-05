@@ -48,7 +48,7 @@ body{
 .workflow{
 	position: absolute;
 	background-image: url("../img/workflow.png");
-	background-size: 180px;
+	background-size: 160px;
 	background-repeat:no-repeat;
 	background-position:center;
 	width: 150px;

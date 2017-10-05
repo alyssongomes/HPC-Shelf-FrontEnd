@@ -195,7 +195,6 @@
     	<attribute name="function_id" type="int"></attribute>
     	<attribute name="function_value" type="string"></attribute>
     	<attribute name="cc_id" type="int"></attribute>
-    	<attribute name="cp_id" type="int"></attribute>
     </complexType>
 
 	<complexType name="calculated_parameter_type">

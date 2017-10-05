@@ -78,3 +78,4 @@
 /home/alysson/workspace/HPC-FrontEnd/src/main/java/br/ufc/hpc/frontend/webservice/CoreServicesDBHandlerException_Exception.java
 /home/alysson/workspace/HPC-FrontEnd/src/main/java/br/ufc/hpc/frontend/controller/ContextContractController.java
 /home/alysson/workspace/HPC-FrontEnd/src/main/java/br/ufc/hpc/frontend/webservice/CoreServicesSAXException_Exception.java
+/home/alysson/workspace/HPC-FrontEnd/src/main/java/br/ufc/hpc/frontend/controller/LoginController.java

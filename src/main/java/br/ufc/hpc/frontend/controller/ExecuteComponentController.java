@@ -1,15 +1,7 @@
 package br.ufc.hpc.frontend.controller;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,12 +11,12 @@ import br.ufc.hpc.frontend.webservice.CoreServices;
 @Controller
 public class ExecuteComponentController{
 	
-	/*private CoreServices service = new CoreServices();
+	private CoreServices service = new CoreServices();
 	private SaveToFileXML stfx = new SaveToFileXML();
 	
-	@RequestMapping("/contract/resolve/{con}")
+	@RequestMapping("/contract/resolve")
 	@ResponseBody
-	public String resolve(@PathVariable("con") String con){
+	public String resolve(@RequestBody String con){
 		try {
 			System.out.println(con);
 			String contracts = service.getCoreServicesHttpSoap11Endpoint().resolve(con);
@@ -32,42 +24,31 @@ public class ExecuteComponentController{
 			return contracts;
 		} catch (Exception e) {
 			System.out.println("Erro at resolve: "+e.toString());
+			return "<?xml version='1.0' encoding='UTF-8'?><contract_list xmlns=\"http://storm.lia.ufc.br\"></contract_list>";
 		}
-		return null;
 	}
 	
-	@RequestMapping("/contract/deploy/{list}")
+	@RequestMapping("/contract/deploy")
 	@ResponseBody
-	public String deploy(@PathVariable("list") String list){
+	public String deploy(@RequestBody String list){
 		try {
 			System.out.println(list.getBytes().length);
 			StringBuffer c =  new StringBuffer();
 			c.append(list);
-			//String candidates = URLDecoder.decode(request.getParameter("list"), "UTF-8");
-			//System.out.println("Lista "+c);
-			
-			OutputStream os = new FileOutputStream("teste.xml",false);
-			OutputStreamWriter osw = new OutputStreamWriter(os);
-			BufferedWriter bw = new BufferedWriter(osw);
-			
-			bw.write(c.toString());
-			bw.newLine();
-			bw.close();
-			
-			
+		
 			String computation = service.getCoreServicesHttpSoap11Endpoint().deploy(c.toString());
-			System.out.println(computation);*/
-			/*stfx.toFile(computation, "system");
-			out.println(computation);*/
-		/*} catch (Exception e) {
+			System.out.println(computation);
+			stfx.toFile(computation, "system");
+			return computation;
+		} catch (Exception e) {
 			System.out.println("Erro no servlet-execute-component: "+e.toString());
+			return "<?xml version='1.0' encoding='UTF-8'?><computational_system xmlns=\"http://storm.lia.ufc.br\" ></computational_system>";
 		}	
-		return null;
 	}
 	
-	@RequestMapping("/contract/instant/{sys}")
+	@RequestMapping("/contract/instantiate")
 	@ResponseBody
-	public String instant(@PathVariable("sys") String sys){
+	public String instant(@RequestBody String sys){
 		try {
 			String computation = service.getCoreServicesHttpSoap11Endpoint().instantiate(sys);
 			System.out.println(computation);
@@ -78,9 +59,9 @@ public class ExecuteComponentController{
 		return null;
 	}
 	
-	@RequestMapping("/contract/destroy/{sys}")
+	@RequestMapping("/contract/destroy")
 	@ResponseBody
-	public String destroy(@PathVariable("sys") String sys){
+	public String destroy(@RequestBody String sys){
 		try {
 			Boolean result = service.getCoreServicesHttpSoap11Endpoint().releasePlatform(sys);
 			System.out.println(result);
@@ -89,6 +70,6 @@ public class ExecuteComponentController{
 			System.out.println("Erro no servlet-execute-component: "+e.toString());
 		}
 		return "Erro ao Liberar!";
-	}*/
+	}
 	
 }

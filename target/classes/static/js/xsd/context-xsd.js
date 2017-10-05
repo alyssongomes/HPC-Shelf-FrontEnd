@@ -479,19 +479,19 @@ var br_ufc_lia_storm = {
           name: 'innerComponentName',
           typeInfo: 'String',
           attributeName: 'inner_component_name',
-          type: 'attribute'
+          type: 'element'
         }, {
           name: 'innerUnityName',
           typeInfo: 'String',
           attributeName: 'inner_unity_name',
-          type: 'attribute'
+          type: 'element'
         },{
-          type: 'element',
+          type: 'attribute',
           name: 'innerComponentId',
           elementName: 'inner_component_id',
           typeInfo: 'Int'
         },{
-          type: 'element',
+          type: 'attribute',
           name: 'innerUnitId',
           elementName: 'inner_unit_id',
           typeInfo: 'Int'	

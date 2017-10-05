@@ -1,13 +1,21 @@
-const WORKFLOW = null; // a definir
+const WORKFLOW = 1; // a definir
 const PLATFORM = 2; 
 const COMPUTATION = 4;
 const CONNECTOR = 5; 
 const DATASOURCE = 7; 
 
+
+var listWorkflow = [];
+var listComputation = [];
+var listConnector = [];
+var listRepository = [];
+var listPlatform = [];
+
 var envBinding = [];
 var taskBinding  = [];
 var workflow = null;
 var body = null;
+var aux = null;
 
 $(document).ready(function(){
 	init();
@@ -91,40 +99,63 @@ function init(){
 		$("#title-modal").append("<p>Selecione uma Plataforma</p>");
 		selectComponent(PLATFORM);
 	});
+	$("#addComponent").click(function(){
+		switch(aux.kind){
+		case WORKFLOW:
+			createWorkflow(aux.obj.id,aux.obj.name, aux.obj.taskPort, aux.obj.providesPort, aux.obj.usesPort);
+			break;
+		case PLATFORM:
+			createPlatform(aux.obj.id, aux.obj.name, aux.obj.providesPort,aux.obj.usesPort );
+			break;
+		case COMPUTATION:
+			createComputation(aux.obj.id, aux.obj.name, aux.obj.taskPort, aux.obj.providesPort,aux.obj.usesPort );
+			break;
+		case CONNECTOR:
+			createConnector(aux.obj.id, aux.obj.name, aux.obj.taskPort, aux.obj.providesPort,aux.obj.usesPort );
+			break;
+		case DATASOURCE:
+			createRepository(aux.obj.id, aux.obj.name, aux.obj.providesPort,aux.obj.usesPort );
+			break
+		}
+	});
+	$("#trash").droppable({
+        drop: function( event, ui ) {
+          deleteElement( ui.draggable, jsplumb );
+        }
+    });
 	
 	getApplication(function(application){
-		console.log(application);
 		
 		workflow = application.value.workflow;
-		createWorkflow(workflow.id,workflow.name, workflow.taskPort, workflow.providesPort, workflow.usesPort);
+		listWorkflow.push(workflow);
 		
 		body = application.value.body;
 		
 		for(var i=0; i<application.value.body.computationOrRepositoryOrConnector.length;i++){
 			if(application.value.body.computationOrRepositoryOrConnector[i].TYPE_NAME === "org_example_safe_architecture_v4.Computation"){
 				var computation = application.value.body.computationOrRepositoryOrConnector[i];
-				createComputation(computation.id, computation.name, computation.taskPort, computation.providesPort,computation.usesPort );
+				listComputation.push(computation);
 			}
 		}
 		
 		for(var i=0; i<application.value.body.computationOrRepositoryOrConnector.length;i++){
 			if(application.value.body.computationOrRepositoryOrConnector[i].TYPE_NAME === "org_example_safe_architecture_v4.Connector"){
 				var connector = application.value.body.computationOrRepositoryOrConnector[i];
-				createConnector(connector.id, connector.name, connector.taskPort, connector.providesPort,connector.usesPort );
+				listConnector.push(connector);
 			}
 		}
 		
 		for(var i=0; i<application.value.body.computationOrRepositoryOrConnector.length;i++){
 			if(application.value.body.computationOrRepositoryOrConnector[i].TYPE_NAME === "org_example_safe_architecture_v4.Repository"){
 				var repository = application.value.body.computationOrRepositoryOrConnector[i];
-				createRepository(repository.id, repository.name, repository.providesPort,repository.usesPort );
+				listRepository.push(repository);
 			}
 		}
 		
 		for(var i=0; i<application.value.body.computationOrRepositoryOrConnector.length;i++){
 			if(application.value.body.computationOrRepositoryOrConnector[i].TYPE_NAME === "org_example_safe_architecture_v4.Platform"){
 				var platform = application.value.body.computationOrRepositoryOrConnector[i];
-				createPlatform(platform.id, platform.name, platform.providesPort,platform.usesPort );
+				listPlatform.push(platform);
 			}
 		}
 	})
@@ -439,7 +470,152 @@ function createConnector(id,name, listTaskPort, listProvidesPort, listUsesPort){
 }
 
 function selectComponent(kindComponent){
+	
+	$("#nameComp").find("p").remove();
+	$("#listTaskPort").find("tr").remove();
+	$("#listProvidesPort").find("tr").remove();
+	$("#listUsesPort").find("tr").remove();
+	
 	$("#modalComp").modal("show");
+	listComponents = $("#listComponents"); 
+	listComponents.find("li").remove();
+	switch(kindComponent){
+		case WORKFLOW:
+			for(var i=0; i<listWorkflow.length;i++){
+				listComponents.append($("<li>").append($("<a onclick='showComponent("+WORKFLOW+","+i+")' >"+listWorkflow[i].name+"</a>")));
+			}
+			break;
+		case PLATFORM:
+			for(var i=0; i<listPlatform.length;i++){
+				listComponents.append($("<li>").append($("<a onclick='showComponent("+PLATFORM+","+i+")' >"+listPlatform[i].name+"</a>")));
+			}
+			break;
+		case COMPUTATION:
+			for(var i=0; i<listComputation.length;i++){
+				listComponents.append($("<li>").append($("<a onclick='showComponent("+COMPUTATION+","+i+")' >"+listComputation[i].name+"</a>")));
+			}
+			break;
+		case CONNECTOR:
+			for(var i=0; i<listConnector.length;i++){
+				listComponents.append($("<li>").append($("<a onclick='showComponent("+CONNECTOR+","+i+")' >"+listConnector[i].name+"</a>")));
+			}
+			break;
+		case DATASOURCE:
+			for(var i=0; i<listRepository.length;i++){
+				listComponents.append($("<li>").append($("<a onclick='showComponent("+DATASOURCE+","+i+")' >"+listRepository[i].name+"</a>")));
+			}
+			break;
+	}
+}
+
+function showComponent(kindComponent, index){
+	$("#nameComp").find("p").remove();
+	$("#listTaskPort").find("tr").remove();
+	$("#listProvidesPort").find("tr").remove();
+	$("#listUsesPort").find("tr").remove();
+	
+	switch(kindComponent){
+	case WORKFLOW:
+		$("#nameComp").append("<p>"+listWorkflow[index].name+"</p>");
+		if(listWorkflow[index].taskPort != undefined){
+			for(var j=0;j<listWorkflow[index].taskPort.length;j++){
+				$("#listTaskPort").append("<tr><td>"+listWorkflow[index].taskPort[j].name+"</td></tr>");
+			}
+		}
+		if(listWorkflow[index].providesPort != undefined){
+			for(var j=0;j<listWorkflow[index].providesPort.length;j++){
+				$("#listProvidesPort").append("<tr><td>"+listWorkflow[index].providesPort[j].name+"</td></tr>");
+			}
+		}
+		if(listWorkflow[index].usesPort != undefined){
+			for(var j=0;j<listWorkflow[index].usesPort.length;j++){
+				$("#listUsesPort").append("<tr><td>"+listWorkflow[index].usesPort[j].name+"</td></tr>");
+			}
+		}
+		aux = {"kind":WORKFLOW,"obj":listWorkflow[index]};
+		break;
+	case PLATFORM:
+		$("#nameComp").append("<p>"+listPlatform[index].name+"</p>");
+		if(listPlatform[index].taskPort != undefined){
+			for(var j=0;j<listPlatform[index].taskPort.length;j++){
+				$("#listTaskPort").append("<tr><td>"+listPlatform[index].taskPort[j].name+"</td></tr>");
+			}
+		}
+		if(listPlatform[index].providesPort != undefined){
+			for(var j=0;j<listPlatform[index].providesPort.length;j++){
+				$("#listProvidesPort").append("<tr><td>"+listPlatform[index].providesPort[j].name+"</td></tr>");
+			}
+		}
+		if(listPlatform[index].usesPort != undefined){
+			for(var j=0;j<listPlatform[index].usesPort.length;j++){
+				$("#listUsesPort").append("<tr><td>"+listPlatform[index].usesPort[j].name+"</td></tr>");
+			}
+		}
+		aux = {"kind":PLATFORM,"obj":listPlatform[index]};
+		break;
+	case COMPUTATION:
+		$("#nameComp").append("<p>"+listComputation[index].name+"</p>");
+		if(listComputation[index].taskPort != undefined){
+			for(var j=0;j<listComputation[index].taskPort.length;j++){
+				$("#listTaskPort").append("<tr><td>"+listComputation[index].taskPort[j].name+"</td></tr>");
+			}
+		}
+		if(listComputation[index].providesPort != undefined){
+			for(var j=0;j<listComputation[index].providesPort.length;j++){
+				$("#listProvidesPort").append("<tr><td>"+listComputation[index].providesPort[j].name+"</td></tr>");
+			}
+		}
+		if(listComputation[index].usesPort != undefined){
+			for(var j=0;j<listComputation[index].usesPort.length;j++){
+				$("#listUsesPort").append("<tr><td>"+listComputation[index].usesPort[j].name+"</td></tr>");
+			}
+		}
+		aux = {"kind":COMPUTATION,"obj":listComputation[index]};
+		break;
+	case CONNECTOR:
+		$("#nameComp").append("<p>"+listConnector[index].name+"</p>");
+		if(listConnector[index].taskPort != undefined){
+			for(var j=0;j<listConnector[index].taskPort.length;j++){
+				$("#listTaskPort").append("<tr><td>"+listConnector[index].taskPort[j].name+"</td></tr>");
+			}
+		}
+		if(listConnector[index].providesPort != undefined){
+			for(var j=0;j<listConnector[index].providesPort.length;j++){
+				$("#listProvidesPort").append("<tr><td>"+listConnector[index].providesPort[j].name+"</td></tr>");
+			}
+		}
+		if(listConnector[index].usesPort != undefined){
+			for(var j=0;j<listConnector[index].usesPort.length;j++){
+				$("#listUsesPort").append("<tr><td>"+listConnector[index].usesPort[j].name+"</td></tr>");
+			}
+		}
+		aux = {"kind":CONNECTOR,"obj":listConnector[index]};
+		break;
+	case DATASOURCE:
+		$("#nameComp").append("<p>"+listRepository[index].name+"</p>");
+		if(listRepository[index].taskPort != undefined){
+			for(var j=0;j<listRepository[index].taskPort.length;j++){
+				$("#listTaskPort").append("<tr><td>"+listRepository[index].taskPort[j].name+"</td></tr>");
+			}
+		}
+		if(listRepository[index].providesPort != undefined){
+			for(var j=0;j<listRepository[index].providesPort.length;j++){
+				$("#listProvidesPort").append("<tr><td>"+listRepository[index].providesPort[j].name+"</td></tr>");
+			}
+		}
+		if(listRepository[index].usesPort != undefined){
+			for(var j=0;j<listRepository[index].usesPort.length;j++){
+				$("#listUsesPort").append("<tr><td>"+listRepository[index].usesPort[j].name+"</td></tr>");
+			}
+		}
+		aux = {"kind":DATASOURCE,"obj":listRepository[index]};
+		break;
+	}
+}
+
+function deleteElement(element, js){
+	jsPlumb.remove(element);
+    element.remove();
 }
 
 function saveApplication(){

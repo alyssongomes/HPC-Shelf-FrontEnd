@@ -3,14 +3,15 @@ var contextStorm = br_ufc_lia_storm;
 function resolve(xml,callback){
 	var listContract = null;
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd-Core/executeComponet?action=resolve",
-		data: 'con='+xml,
-		dataType: "xml",
+		contentType:"text/plain",
+		url:"/contract/resolve",
+		data: ""+xml,
 		type:"POST",
 		success: function(data) {
 			if(data === null){
 				callback(null);
 			}else{
+				data = jQuery.parseXML(data);
 				var str = new XMLSerializer().serializeToString(data);
 				var context = new Jsonix.Context([contextStorm]);
 				var unmarshaller = context.createUnmarshaller();
@@ -38,19 +39,24 @@ function resolveObject(object,callback){
 	
 	var listContract = null;
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd-Core/executeComponet?action=resolve",
-		data: 'con='+xml,
-		dataType: "xml",
+		contentType:"text/plain",
+		url:"/contract/resolve",
+		data: xml,
 		type:"POST",
 		success: function(data) {
 			if(data === null){
 				callback(null);
 			}else{
-				var str = new XMLSerializer().serializeToString(data);
-				var context = new Jsonix.Context([contextStorm]);
-				var unmarshaller = context.createUnmarshaller();
-				listContract = unmarshaller.unmarshalString(str);
-				callback(listContract);
+				try{
+					data = jQuery.parseXML(data);
+					var str = new XMLSerializer().serializeToString(data);
+					var context = new Jsonix.Context([contextStorm]);
+					var unmarshaller = context.createUnmarshaller();
+					listContract = unmarshaller.unmarshalString(str);
+					callback(listContract);
+				}catch (e) {
+					alert(data);
+				}
 			}
 		}
 	});
@@ -72,18 +78,21 @@ function deploy(candidateList, callback){
 	
 	var computationSystem = null;
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd-Core/executeComponet?action=deploy",
-		//data: 'list='+candidateList,
-		data:{list:candidateList},
-		dataType: "xml",
+		url:"/contract/deploy?"+xml,
+		data: xml,
 		type:"POST",
 		success: function(data) {
 			console.log(data);
-			/*var str = new XMLSerializer().serializeToString(data);
-			var context = new Jsonix.Context([contextStorm]);
-			var unmarshaller = context.createUnmarshaller();
-			computationSystem = unmarshaller.unmarshalString(str);
-			callback(computationSystem);*/
+			if(data != null){
+				data = jQuery.parseXML(data);
+				var str = new XMLSerializer().serializeToString(data);
+				var context = new Jsonix.Context([contextStorm]);
+				var unmarshaller = context.createUnmarshaller();
+				computationSystem = unmarshaller.unmarshalString(str);
+				callback(computationSystem);
+			}else{
+				callback(null);
+			}
 		}
 	});
 }
@@ -103,12 +112,15 @@ function instantiate(computationalSystem){
 	
 	var terminal = null;
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd-Core/executeComponet?action=instant",
-		data: 'sys='+computationalSystem,
+		url:"/contract/instantiate?"+computationalSystem,
+		data: computationalSystem,
 		async: false,
 		type:"POST",
 		success: function(data) {
-			terminal = data;
+			console.log(data)
+			if(data != null){
+				terminal = data;
+			}
 		}
 	});
 	return terminal;
@@ -129,8 +141,8 @@ function destroy(computationalSystem, callback){
 	
 	var result = "";
 	$.ajax({
-		url:"/HPC-Shelf-FrontEnd-Core/executeComponet?action=destroy",
-		data: 'sys='+computationalSystem,
+		url:"/contract/destroy?"+computationalSystem,
+		data: computationalSystem,
 		type:"POST",
 		success: function(data) {
 			callback(data);

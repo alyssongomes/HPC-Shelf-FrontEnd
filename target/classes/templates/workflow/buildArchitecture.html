@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
 <script src="/lib/jquery/jquery-2.1.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="/js/xsd/instantiator-xsd.js"></script>
 <script src="/js/xsd/safe_architecture_v4-xsd.js"></script>
 <script src="/lib/jsonix/Jsonix-min.js"></script>
@@ -25,14 +26,14 @@
 	    	<ul id="nav" class="nav navbar-nav">
 				<li><a href="/home">Home</a></li>
 				<li class="dropdown" >
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aplicação<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Arquitetura<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-		          		<li><a id="navSaveApp" href="#">Salvar Aplicação</a></li>
+		          		<li><a id="navSaveApp" href="#">Salvar Arquitetura</a></li>
 		        	</ul>
 				</li>
 	    	</ul>
 	    	<ul id="nav" class="nav navbar-nav navbar-right">
-				<h4 class="navbar-text">Aplicação</h4>
+				<h4 class="navbar-text">Arquitetura</h4>
 	    	</ul>
 		</div>
 	</nav>
@@ -53,6 +54,10 @@
 	    <h3 class="panel-title">Arquitetura</h3>
 	  </div>
 	  <div class="panel-body jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" id="workspace-body">
+	  	<div id="trash">
+           	<img alt="lixo" src="../img/lixo.png" height="70px" width="70px" style="float:left;"/>
+           	<h3>LIXEIRA</h3>
+       	</div>
 	  </div>
 	</div>
 	<div class="panel panel-primary" id="properties">
@@ -91,26 +96,20 @@
 		            <div class="modal-body">
 		            	<p><b>Catálogo</b></p>
 			            <div style=" width:250px; height:400px; overflow: auto;">
-			                <ul id="listNestedComponents"></ul>
+			                <ul id="listComponents"></ul>
 			            </div>
 			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
-			                <center><label id="nameNestedComp"></label></center>
-			                <h4>Parâmetros de Contexto</h4>
-			                <table class="table table-striped" id="pararNestComp"></table>
-			                <h4>Componentes aninhados</h4>
-			                <table class="table table-striped" id="nestNestedComp"></table>
-			                <h4>Unidades Abstratas</h4>
-			                <table class="table table-striped" id="unitNestedComp"></table>
-			                <h4>Fatias</h4>
-			                <table class="table table-striped" id="slicesNestedComp"></table>
-			                <h4>Parâmetros de Qualidade</h4>
-			                <table class="table table-striped" id="qualytiNestedComp"></table>
-			                <h4>Parâmetros de Custo</h4>
-			                <table class="table table-striped" id="costNestedComp"></table>
+			                <center><label id="nameComp"></label></center>
+			                <h4>Portas de Uso</h4>
+			                <table class="table table-striped" id="listUsesPort"></table>
+			                <h4>Portas Provedoras</h4>
+			                <table class="table table-striped" id="listProvidesPort"></table>
+			                <h4>Portas de Tarefa</h4>
+			                <table class="table table-striped" id="listTaskPort"></table>
 			            </div>
 					</div>
 					<div class="modal-footer">
-				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="saveNestedComp">Adicionar Componente</button>
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addComponent">Adicionar Componente</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 					</div>
 	            </div>			

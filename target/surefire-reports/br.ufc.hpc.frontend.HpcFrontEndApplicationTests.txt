@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.ufc.hpc.frontend.HpcFrontEndApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.575 sec - in br.ufc.hpc.frontend.HpcFrontEndApplicationTests

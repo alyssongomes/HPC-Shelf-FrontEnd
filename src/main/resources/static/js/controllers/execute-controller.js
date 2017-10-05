@@ -38,12 +38,15 @@ function init() {
 		resort();
 		deploy(candidatos,function(computSystem){
 			system = computSystem;
-			if(system != null){
+			if(system.value.session != undefined && system.value.networkAddress != undefined){
 				$("#deployTab").append("<h4>Sessão:<b> "+system.value.session+"</b>; Endereço da Plataforma: <b>"+system.value.networkAddress+"</b></h4>");
 				$("#linkComputacional").attr("href","../file/system.xml").attr("download","system.xml").tooltip();
+			
+				var result = instantiate(system);//retorna string
+				$("#status").append("<h3>"+result+"</h3>");
+			}else{
+				alert("Não foi possível resolver o contrato");
 			}
-			var result = instantiate(system);//retorna string
-			$("#status").append("<h3>"+result+"</h3>");
 			$("#modalLoadDeploy").modal('hide');
 		});//retorna obj computational_system
 	});
@@ -181,6 +184,10 @@ function initList(){
 					}
 				}
 				$("#modalLoadContracts").modal('hide');
+			}, function(error){
+				alert("Não foi possível carregar os contratos!");
+				console.log(error);
+				$("#modalLoadContracts").modal('hide');
 			});
 		});
 	});
@@ -197,13 +204,13 @@ function initList(){
 
 function resolved(listCandidates){
 	candidatos = listCandidates;
-	if(candidatos != null){
+	if(candidatos.value.candidate != undefined){
 		$("#candidatos").empty();
 		for(var i = 0; i < candidatos.value.candidate.length; i++){
 			var can = candidatos.value.candidate[i];
 			console.log(can);
 			$("#candidatos").append("<li id='"+i+"'><div class='panel panel-default'><div class='panel-heading' style='background-color:#25BFE1'><h4 class='panel-title'><a data-toggle='collapse' href='#collapse"+i+"'><b> Candidato "+(i+1)+" - "+can.ccName+"</b></a></h4>"+
-		      "</div><div id='collapse"+i+"' class='panel-collapse collapse'><div class='panel-body'>"+show(can)+"</div></div></div></li>");	
+		      "</div><div id='collapse"+i+"' class='panel-collapse collapse'><div class='panel-body' style='text-align: left;'>"+show(can)+"</div></div></div></li>");	
 		}			
 		$("#linkCandidates").attr("href","../file/candidates.xml").attr("download","candidates.xml").tooltip();
 		$("#modalLoadResolve").modal('hide');

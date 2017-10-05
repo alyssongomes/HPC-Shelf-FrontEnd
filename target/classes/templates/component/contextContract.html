@@ -15,6 +15,7 @@
 		<script type="text/javascript" src="../lib/jsonix/Jsonix-min.js"></script>
 		<script type="text/javascript" src="../lib/jfilestyle/jquery-filestyle.min.js"></script>
 		<script type="text/javascript" src="../js/xsd/context-xsd.js"></script>
+		<script type="text/javascript" src="../js/services/setting-service.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="../js/services/component-service.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="../js/services/contract-service.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="../js/controllers/contract-controller.js"></script>
@@ -38,7 +39,6 @@
 			          		<li><a href="#" data-toggle="modal" data-target="#modalNewComp">Novo Contrato</a></li>
 			          		<li><a href="#" id="submit">Registrar Contrato</a></li>
 			            	<li><a href="#" id="save">Baixar Contrato</a></li>
-			            	<li><a href="#" id="clean">Limpar</a></li>
 			          	</ul>
 			        </li>			
 		    	</ul>
@@ -62,11 +62,28 @@
 			</div>
 			<div class="panel-body">
 				<div id="formulario">
-					<div class="panel panel-success" style="width: 1000px;" id="ccNm">
-						<div class="panel-heading"><h4><b>Nome do contrato</b></h4></div>
-						<div class="panel-body"><div class="col-sm-5">
-							<input class="form-control" type="text" id="ccName"/>
-						</div></div><br/>
+					<div class="panel panel-primary" style="width: 1000px;" id="ccNm">
+						<div class="panel-heading"><h4><b>Atributos do contrato</b></h4></div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-5" id="owner"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-5">
+									<input class="form-control" placeholder="Nome do contrato" type="text" id="ccName"/>
+								</div>
+								<div class="col-sm-5">
+									<select class="form-control" id="kindId" >
+										<option value="1" >QUALIFIER</option>
+					                	<option value="2" >PLATFORM</option>
+					                	<option value="3" >DATASTRUCTURE</option>
+					                	<option value="4" >COMPUTATION</option>
+					                	<option value="5" >CONNECTOR</option>
+					                	<option value="7" >DATASOURCE</option>
+									</select>
+								</div>
+							</div>
+						</div><br/>
 					</div>
 					<div class="panel panel-primary" style="width: 1000px;" id="cmpPlt">
 						<div class="panel-heading"><h4><b>Plataforma</b></h4></div>
@@ -74,41 +91,45 @@
 					</div>
 					<br/>
 					<div class="panel panel-primary" style="width: 1000px;">
-						<div class="panel-heading"><h4><b>Argumentos de Contexto</b></h4></div>
+						<div class="panel-heading"><h4><b>Parâmetros de Contexto</b></h4></div>
 						<div class="panel-body"><table id="tabParCont"></table></div>
 					</div>
 					<br/>
-					<div class="panel panel-primary" style="width: 1000px;" >
+					<!-- <div class="panel panel-primary" style="width: 1000px;" >
 						<div class="panel-heading"><h4><b>Unidades Abstratas</b></h4></div>
 						<div class="panel-body"><table id="tabUniAbs"></table></div>
+					</div>-->
+					<!-- <div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Componentes Aninhados Resolvidos</b></h4></div>
+						<div class="panel-body"><table id="tabCmpAni"></table></div>
+					</div>-->
+					<!-- <div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Fatias</b></h4></div>
+						<div class="panel-body"><table id="tabSlices"></table></div>
+					</div>-->
+					<!-- <div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Unidades Concretas</b></h4></div>
+						<div class="panel-body"><table id="tabSlices"></table></div>
+					</div>-->
+					<br/>
+					<div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Parâmetros de Qualidade</b></h4></div>
+						<div class="panel-body"><table id="tabQuality"></table></div>
+					</div>
+					<br/>
+					<div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Parâmetros de Custo</b></h4></div>
+						<div class="panel-body"><table id="tabCost"></table></div>
+					</div>
+					<br/>
+					<div class="panel panel-primary" style="width: 1000px;" >
+						<div class="panel-heading"><h4><b>Parâmetros de Ranking</b></h4></div>
+						<div class="panel-body"><table id="tabRanking"></table></div>
 					</div>
 					<br/>
 					<div class="panel panel-primary" style="width: 1000px;" >
 						<div class="panel-heading"><h4><b>Componentes Aninhados</b></h4></div>
 						<div class="panel-body"><table id="tabCmpAni"></table></div>
-					</div>
-					<div class="panel panel-primary" style="width: 1000px;" >
-						<div class="panel-heading"><h4><b>Componentes Aninhados Resolvidos</b></h4></div>
-						<div class="panel-body"><table id="tabCmpAni"></table></div>
-					</div>
-					<br/>
-					<div class="panel panel-primary" style="width: 1000px;" >
-						<div class="panel-heading"><h4><b>Fatias</b></h4></div>
-						<div class="panel-body"><table id="tabSlices"></table></div>
-					</div>
-					<div class="panel panel-primary" style="width: 1000px;" >
-						<div class="panel-heading"><h4><b>Unidades Concretas</b></h4></div>
-						<div class="panel-body"><table id="tabSlices"></table></div>
-					</div>
-					<br/>
-					<div class="panel panel-primary" style="width: 1000px;" >
-						<div class="panel-heading"><h4><b>Argumentos de Custo</b></h4></div>
-						<div class="panel-body"><table id="tabCost"></table></div>
-					</div>
-					<br/>
-					<div class="panel panel-primary" style="width: 1000px;" >
-						<div class="panel-heading"><h4><b>Argumentos de Qualidade</b></h4></div>
-						<div class="panel-body"><table id="tabQuality"></table></div>
 					</div>
 				</div>
 				<br/>
@@ -130,19 +151,25 @@
 			                <ul id="listComponents"></ul>
 			            </div>
 			            <div style="position: absolute; top: 10px; left: 280px; width:300px; height:400px; overflow: auto;">
-			                <center><label id="nameComp"></label></center>
+			                <center>
+			                	<label id="nameComp">
+			                		<!-- <h3 id="name" value="Componente de Teste">Componente de Teste</h3>
+			                		<p id="idAc" value="1"></p>
+			                		<p id="idSuper" value="2"></p>-->
+			                	</label>
+			                </center>
 			                <h4>Parâmetros de Contexto</h4>
-			                <table class="table table-striped" id="parar"><thead><tr><th>Nome</th></tr></thead></table>
+			                <table class="table table-striped" id="parar"></table>
 			                <h4>Componentes aninhados</h4>
-			                <table class="table table-striped" id="nest"><thead><tr><th>Nome</th><th>ID</th></tr></thead></table>
-			                <h4>Unidades Abstratas</h4>
-			                <table class="table table-striped" id="unit"><thead><tr><th>Nome</th><th>ID</th></tr></thead></table>
-			                <h4>Fatias</h4>
-			                <table class="table table-striped" id="slices"><thead><tr><th>Nome</th><th>QP ID</th><th>ID Comp.</th></tr></thead></table>
+			                <table class="table table-striped" id="nest"></table>
+<!-- 			                <h4>Fatias</h4> -->
+<!-- 			                <table class="table table-striped" id="slices"></table> -->
 			                <h4>Parâmetros de Qualidade</h4>
-			                <table class="table table-striped" id="quality"><thead><tr><th>Nome</th><th>QP ID</th><th>KIND ID</th></tr></thead></table>
+			                <table class="table table-striped" id="quality"></table>
 			                <h4>Parâmetros de Custo</h4>
-			                <table class="table table-striped" id="cost"><thead><tr><th>Nome</th><th>COP ID</th><th>KIND ID</th></tr></thead></table>
+			                <table class="table table-striped" id="cost"></table>
+			                <h4>Parâmetros de Ranking</h4>
+			                <table class="table table-striped" id="ranking"></table>
 			            </div>
 					</div>
 					<div class="modal-footer">
@@ -176,7 +203,7 @@
 							<div style="visibility:hidden;" id="div-new-contract-platform">
 								<h4><b>Nome do contrato</b></h4>
 				                <input class="form-control" type="text" id="name-new-contract" />
-				                <h4><b>Par�metros de Contexto</b></h4>
+				                <h4><b>Parâmetros de Contexto</b></h4>
 				                <table class="table table-striped" id="parar"><thead><tr><th>Nome</th></tr></thead></table>
 				                <h4><b>Componentes aninhados</b></h4>
 				                <table class="table table-striped" id="nest"><thead><tr><th>Nome</th><th>ID</th></tr></thead></table>
@@ -184,9 +211,9 @@
 				                <table class="table table-striped" id="unit"><thead><tr><th>Nome</th><th>ID</th></tr></thead></table>
 				                <h4><b>Fatias</b></h4>
 				                <table class="table table-striped" id="slices"><thead><tr><th>Nome</th><th>QP ID</th><th>ID Comp.</th></tr></thead></table>
-				                <h4><b>Par�metros de Qualidade</b></h4>
+				                <h4><b>Parâmetros de Qualidade</b></h4>
 				                <table class="table table-striped" id="quality"><thead><tr><th>Nome</th><th>QP ID</th><th>KIND ID</th></tr></thead></table>
-				                <h4><b>Par�metros de Custo</b></h4>
+				                <h4><b>Parâmetros de Custo</b></h4>
 				                <table class="table table-striped" id="cost"><thead><tr><th>Nome</th><th>COP ID</th><th>KIND ID</th></tr></thead></table>
 			                </div>
 			            </div>
@@ -198,12 +225,24 @@
 	            </div>			
 			</div>
         </div>
+		
 		<div id="modalSubmit" class="modal fade" role="dialog">
         	<div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-body">
 			      	<img src="../img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
 			      	<h4>Aguarde a submição do contrato...</h4>
+			      </div>
+			    </div>
+			</div>
+        </div>
+        
+        <div id="modalLoadComponent" class="modal fade" role="dialog" >
+        	<div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-body">
+			      	<img src="../img/ajax-loader.gif" style="float: left; margin-right: 10px;"/>
+			      	<h4>Consultando componente...</h4>
 			      </div>
 			    </div>
 			</div>
@@ -229,5 +268,156 @@
 			    </div>
 			</div>
 	     </div>
+	     
+	     
+	     <div id="modalParamQuality" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parâmetro de Qualidade</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<h4 id="nameParQuality"></h4>
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-quality" class="form-control" type="number" step="any" />
+<!-- 								<h5>Tipo</h5>VERIFICAR DO QUE SE TRATA ESSE TIPO -->
+<!-- 								<input id="kind-argument-quality" class="form-control" type="text" /> -->
+<!-- 								<h5>Parâmetro de Contexto</h5> -->
+<!-- 								<select id="cp-argument-quality" class="form-control"></select>		     -->
+							  </div>
+							</div>
+<!-- 							<div class="panel panel-default"> -->
+<!-- 							  <div class="panel-heading">Função</div> -->
+<!-- 							  <div class="panel-body">     -->
+<!-- 							    <h5>Função</h5> -->
+<!-- 							    <input id="function-value-quality" class="form-control" /> -->
+<!-- 							    <h5>Parâmetro de Contexto</h5>-->
+<!-- 								<select id="cp-function-quality" class="form-control"></select>-->
+<!-- 							    <h5>Contrato</h5> -->
+<!-- 								<select id="contract-function-quality" class="form-control"></select> -->
+<!-- 								<br/> -->
+<!-- 								<table class="table table-hover" id="termsQuality"> -->
+<!-- 									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead> -->
+<!-- 									<tbody></tbody> -->
+<!-- 								</table> -->
+<!-- 							  </div> -->
+<!-- 							</div> -->
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParQuality">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalParamCost" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parâmetro de Custo</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<h4 id="nameParCost"></h4>
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-cost" class="form-control" type="number" step="any" />
+<!-- 								<h5>Tipo</h5>VERIFICAR DO QUE SE TRATA ESSE TIPO -->
+<!-- 								<input id="kind-argument-cost" class="form-control" type="text" /> -->
+<!-- 								<h5>Parâmetro de Contexto</h5> -->
+<!-- 								<select id="cp-argument-cost" class="form-control"></select>		     -->
+							  </div>
+							</div>
+<!-- 			            	<div class="panel panel-default"> -->
+<!-- 							  <div class="panel-heading">Função</div> -->
+<!-- 							  <div class="panel-body">     -->
+<!-- 							    <h5>Função</h5> -->
+<!-- 							    <input id="function-value-cost" class="form-control" /> -->
+<!-- 							    <h5>Parâmetro de Contexto</h5>-->
+<!-- 								<select id="cp-function-cost" class="form-control"></select>-->
+<!-- 							    <h5>Contrato</h5> -->
+<!-- 								<select id="contract-function-cost" class="form-control"></select> -->
+<!-- 								<br/> -->
+<!-- 								<table class="table table-hover" id="termsCost"> -->
+<!-- 									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead> -->
+<!-- 									<tbody></tbody> -->
+<!-- 								</table> -->
+<!-- 							  </div> -->
+<!-- 							</div> -->
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParCost">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+        
+        <div id="modalParamRanking" class="modal fade" role="dialog">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Parâmetro de Ranking</h4>
+				    </div>
+		            <div class="modal-body">
+		            	<h4 id="nameParRanking"></h4>
+		            	<div style="overflow:auto; height: 400px; padding:1%;">
+			            	<div class="panel panel-default">
+							  <div class="panel-heading">Argumento</div>
+							  <div class="panel-body">    
+							  	<h5>Valor</h5>
+								<input id="value-argument-ranking" class="form-control" type="number" step="any" />
+<!-- 								<h5>Tipo</h5>VERIFICAR DO QUE SE TRATA ESSE TIPO -->
+<!-- 								<input id="kind-argument-ranking" class="form-control" type="text" /> -->
+<!-- 								<h5>Parâmetro de Contexto</h5> -->
+<!-- 								<select id="cp-argument-ranking" class="form-control"></select>		     -->
+							  </div>
+							</div>
+<!-- 							<div class="panel panel-default"> -->
+<!-- 							  <div class="panel-heading">Função</div> -->
+<!-- 							  <div class="panel-body">     -->
+<!-- 							    <h5>Função</h5> -->
+<!-- 							    <input id="function-value-ranking" class="form-control" /> -->
+<!-- 							    <h5>Parâmetro de Contexto</h5>-->
+<!-- 								<select id="cp-function-ranking" class="form-control"></select>-->
+<!-- 							    <h5>Contrato</h5> -->
+<!-- 								<select id="contract-function-ranking" class="form-control"></select> -->
+<!-- 								<br/> -->
+<!-- 								<table class="table table-hover" id="termsRanking"> -->
+<!-- 									<thead><tr><th>Termo</th><th>Parâmetro de Contexto</th></tr></thead> -->
+<!-- 									<tbody></tbody> -->
+<!-- 								</table> -->
+<!-- 							  </div> -->
+<!-- 							</div> -->
+							<!-- <div class="panel panel-default">
+							  <div class="panel-heading">Parâmtros</div>
+							  <div class="panel-body">    
+							  	<h5>Componente</h5>
+								<select id="component-par-ranking" class="form-control"></select>		    
+							  </div>
+							</div>-->
+		            	</div>
+		            </div>
+					<div class="modal-footer">
+				      	<button type="button" class="btn btn-default" data-dismiss="modal" id="addParRanking">Adicionar Parâmetro</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					</div>
+	            </div>			
+			</div>
+        </div>
+	     
+	     
 	</body>
 </html>

@@ -6,16 +6,20 @@ function getListAbstractComponents() {
 		//url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=list",
 		url:"/component/list",
 		async: false,
-		dataType: "xml",
 		type:"GET",
 		success: function (data) {
-			for (var i = 0; i < data.getElementsByTagName("abstract_component").length; i++) {
-				abstractComponent[i] = {
-						acId: data.getElementsByTagName("abstract_component").item(i).getAttribute("ac_id"),
-						name: data.getElementsByTagName("abstract_component").item(i).getAttribute("name"),
-						path: data.getElementsByTagName("abstract_component").item(i).getAttribute("path"),
-						supertype: data.getElementsByTagName("abstract_component").item(i).getAttribute("supertype")
-				};
+			try{
+				data = jQuery.parseXML(data);
+				for (var i = 0; i < data.getElementsByTagName("abstract_component").length; i++) {
+					abstractComponent[i] = {
+							acId: data.getElementsByTagName("abstract_component").item(i).getAttribute("ac_id"),
+							name: data.getElementsByTagName("abstract_component").item(i).getAttribute("name"),
+							path: data.getElementsByTagName("abstract_component").item(i).getAttribute("path"),
+							supertype: data.getElementsByTagName("abstract_component").item(i).getAttribute("supertype")
+					};
+				}
+			}catch (e) {
+				alert("Não foi possível carregar a lista de componentes!");
 			}
 	    }
 	});
@@ -25,22 +29,27 @@ function getListAbstractComponents() {
 function getAbstractComponent(component){
 	var abstractComponent = null;
 	$.ajax({
-		//url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=get&cmp="+component,
-		url:"/component/get/"+component,
+		contentType:"text/plain",
+		url:"/component/get?"+component,
 		async: false,
-		dataType: "xml",
+		data: component,
 		type:"POST",
 		success: function (data) {
-			var str = new XMLSerializer().serializeToString(data);
-			var context = new Jsonix.Context([contextStorm]);
-			var unmarshaller = context.createUnmarshaller();
-			abstractComponent = unmarshaller.unmarshalString(str).value;
+			try{
+				data = jQuery.parseXML(data);
+				var str = new XMLSerializer().serializeToString(data);
+				var context = new Jsonix.Context([contextStorm]);
+				var unmarshaller = context.createUnmarshaller();
+				abstractComponent = unmarshaller.unmarshalString(str).value;
+			}catch (e) {
+				alert("Não foi possível carregar o componente "+component);
+			}
 	    }
 	});
 	return abstractComponent;
 }
 
-function saveNewAbstractComponent(componentObj, callback){
+function saveNewAbstractComponent(componentObj, callback, callerror){
 	var context = new Jsonix.Context([contextStorm]);
 	var marshaller = context.createMarshaller();
 	var doc = marshaller.marshalDocument({
@@ -51,6 +60,7 @@ function saveNewAbstractComponent(componentObj, callback){
 		value:{
 			name: componentObj.name,
 			kind: componentObj.kind,
+			path: componentObj.path,
 			supertype: componentObj.super,
 			contextParameter: componentObj.parameters,
 			innerComponents: componentObj.inners,
@@ -64,17 +74,22 @@ function saveNewAbstractComponent(componentObj, callback){
 	var oSerializer = new XMLSerializer();
 	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
 	console.log(sXML);
-	/*$.ajax({
-	    type: 'post',
-	    url : '/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=save',
-	    data: 'cmp='+sXML,
-	    dataType: "xml",
+	$.ajax({
+		contentType:"text/plain",
+	    type: 'POST',
+	    url: "/component/save?"+sXML,
+	    data: sXML,
 	    success : function(result){
-	    	callback(result);
+	    	try{
+		    	result = jQuery.parseXML(result);
+		    	callback(result);
+	    	}catch (e) {
+				callerror(e);
+			}
 	    }
-	});*/
+	});
 }
-
+/*
 function addContextParameter(component, callback){
 	$.ajax({
 		url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=addContextParameter&cmp="+component,
@@ -98,3 +113,4 @@ function addAbstractUnit(component, callback){
 	    }
 	});
 }
+*/

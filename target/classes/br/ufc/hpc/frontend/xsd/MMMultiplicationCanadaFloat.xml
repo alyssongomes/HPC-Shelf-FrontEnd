@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:context_contract xmlns:tns="http://storm.lia.ufc.br" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://storm.lia.ufc.br ../../../HPC-Shelf-Core/src/br/ufc/storm/xml/ContextualContract.xsd ">
+	<tns:context_arguments cp_id="151">
+		<tns:context_contract cc_id="41"></tns:context_contract></tns:context_arguments>
+	<tns:abstract_component id_ac="218"></tns:abstract_component>
+	<tns:platform>
+		<tns:platform_contract>
+			<tns:context_arguments cp_id="26">
+				<tns:context_contract cc_id="322"></tns:context_contract></tns:context_arguments>
+			<tns:abstract_component id_ac="19"></tns:abstract_component></tns:platform_contract>
+	</tns:platform></tns:context_contract>

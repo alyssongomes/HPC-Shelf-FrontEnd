@@ -47,6 +47,7 @@ function loadLinksComponents() {
 	$("#components").change(function() {
 		$("#components option:selected").each(function() {
 			var units = getListContracts($(this).attr("id"));
+			console.log(units);
 			$("#units").empty();
 			$("#units").append("<option>Selecione a unidade</option>");
 			for (var i = 0; i < units.length; i++) {

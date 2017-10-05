@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script type ="text/javascript" src="/lib/jquery/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type ="text/javascript" src="/js/services/setting-service.js"></script>
+        <script type ="text/javascript" src="/js/controllers/setting-controller.js"></script>
         <title>Tela de Configurações</title>
         <style type="text/css">
             .main{
@@ -49,9 +51,9 @@
                             <a href="#"><img width="120px" height="120px" class="media-object" src="/img/user.png"/></a>
                           </div>
                           <div class="media-body">
-                            <h4 class="media-heading">Nome</h4>
-                            <h5>Email@gmail.com</h5>
-                            <h5>Papel - [Especialista, Montador, Desenvolvedor, Mantenedor]</h5>
+                            <h4 id="name" class="media-heading"></h4>
+                            <h5 id="email"></h5>
+                            <h5>Admin</h5>
                             <button type="button" id="open-editor" data-toggle="modal" data-target="#editModal"  class="btn btn-primary">Editar</button>
                           </div>
                         </div>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../lib/jfilestyle/jquery-filestyle.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style-main.css"/>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<script type ="text/javascript" src="../lib/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../lib/jsonix/Jsonix-min.js"></script>
+		<script type="text/javascript" src="../js/xsd/context-xsd.js" charset="UTF-8"></script>
+		<script type ="text/javascript" src="../lib/jquery/jquery-ui.min.js"></script>
+		<script type ="text/javascript" src="../js/services/unit-file-service.js"></script>
+		<script type ="text/javascript" src="../js/controllers/unit-file-controller.js"></script>
+		<script type="text/javascript" src="../js/services/component-service.js"></script>
+		<script type="text/javascript" src="../js/services/contract-service.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../lib/jfilestyle/jquery-filestyle.min.js"></script>
+		
+		<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+		
+		<title>Upload Source-Code</title>
+	</head>
+	<!-- <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">-->
+	<body style="background: #87CEFA;">
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../img/logo.png"/></a>
+		    	</div>
+		    	<ul class="nav navbar-nav">
+					<li><a href="/home">Home</a></li>
+					
+		    	</ul>
+		    	<ul id="nav" class="nav navbar-nav navbar-right">
+		    		<h4 class="navbar-text">Upload Source-code</h4>
+		    	</ul>
+			</div>
+		</nav> 
+		<section>
+			<center>
+				<div id="file-upload" class="jumbotron" style="padding:1%; width: 600px; height: 290px; position:absolute; top:30%; left:28%; background-color: #527a7a;">
+					<!-- <div class="jumbotron" style="width:600px; height:80px; padding-top: 10px; border-radius: 8px;">
+						<p>Aplicação destina a envia de códigos-fonte, eles seram associados as unidades concretas.</p>
+					</div>-->
+					<form action="/unitFile" method="post" enctype="multipart/form-data">
+						<input type='file' name="file" /><br/><br/>
+						<div class="col-sm-6">
+							<input class="form-control" size="15" type="text" name="version" placeholder="Versão"/>
+						</div>
+						<div class="col-sm-6">
+							<select class="form-control" style="margin-right: 10px; margin-bottom: 10px;" name="filetype" placeholder="File Type">
+								<option value="1" name="1">SOURCE</option>
+								<option value="2" name="2">BASE</option>
+								<option value="3" name="3">MAIN</option>
+							</select>
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" style="margin-right: 10px; " type="text" name="build" placeholder="Build"/>
+						</div>
+						<div class="col-sm-6">
+							<input class="form-control" style="margin-right: 10px;" type="text" name="path" placeholder="Path"/><br/>
+						</div>
+						<div class="col-sm-6">
+							<select class="form-control" id="components" title="Selecione um componente" style="margin-right: 20px;"></select>
+						</div>
+						<div class="col-sm-6">
+							<select class="form-control" id="units" title="Selecione uma unidade" style="margin-right: 20px;"></select>
+						</div>		
+						<input name="uid" type="hidden" />
+						<input name="filename" type="hidden"  />
+						<input name="filextension" type="hidden" />
+						<center>
+							<button class="btn btn-primary" type="submit" id="submit" style="margin-left:10px; margin-top: 10px;">ENVIAR</button>
+						</center>
+					</form>
+				</div>
+				<div style="width: 600px;" id="message"></div>
+			</center>
+		</section>
+	</body>
+</html>

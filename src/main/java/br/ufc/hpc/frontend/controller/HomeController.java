@@ -1,7 +1,12 @@
 package br.ufc.hpc.frontend.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.ufc.hpc.frontend.constant.Constants;
+import br.ufc.hpc.frontend.model.User;
 
 @Controller
 public class HomeController {
