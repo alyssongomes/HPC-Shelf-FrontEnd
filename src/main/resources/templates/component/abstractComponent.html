@@ -22,10 +22,10 @@
         <script type="text/javascript" src="../js/controllers/component-controller.js" charset="UTF-8"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         
-        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon"/>
         <title>HPC-Shelf</title>
     </head>
-    <body style="background: #87CEFA; overflow: hidden;">
+    <body style="background: #B0C4DE; overflow: hidden;">
     	<nav class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="container-fluid">
 		    	<div class="navbar-header">
@@ -37,9 +37,9 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Componente<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 			          		<li><a id="navNewCmp" href="#" >Novo Componente</a></li>
-							<li><a id="navEditCmp" href="#" >Editar Componente</a></li>
+<!-- 							<li><a id="navEditCmp" href="#" >Editar Componente</a></li> -->
 							<li><a id="submitComponent" href="#">Salvar Componente</a></li>
-							<li><a id="saveUpdate" href="#" >Salvar Modificações</a></li>	
+<!-- 							<li><a id="saveUpdate" href="#" >Salvar Modificações</a></li>	 -->
 			        	</ul>
 					</li>
 		    	</ul>
@@ -232,7 +232,7 @@
 		                    <select class="form-control" id="typeVariance">
 			                	<option value="1" >Invariância</option>
 			                	<option value="2" >Contravariância</option>
-			                	<option value="3" >covariância</option>
+			                	<option value="3" >Covariância</option>
 			                	<option value="4" >Aumentando</option>
 			                	<option value="5" >Diminuindo</option>
 			                </select>
@@ -247,8 +247,8 @@
 		                    	<h4>Domínio Numérico</h4>
 			                    <select class="form-control" id="numericDomain">
 			                    	<option>Selecione um domínio</option>
-			                    	<option value="1">Direto</option>
-			                    	<option value="2">Invertido</option>
+			                    	<option value="direct">Direto</option>
+			                    	<option value="inverted">Invertido</option>
 			                    </select>
 		                    </div>
 		                    <br/>

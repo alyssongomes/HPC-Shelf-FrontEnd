@@ -26,29 +26,37 @@ function init() {
 	$("input:file").jfilestyle({buttonText: "Carregar contrato contextual", inputSize: "400px" });
 	
 	$("#destroy").button().click(function(){
-		$("#modalLoadDestroy").modal({backdrop: 'static', keyboard: false});
-		destroy(system,function(result){
-			$("#modalLoadDestroy").modal('hide');
-			alert("Plataforma: "+result);
-		});
+		if(system != null && system != undefined){
+			$("#modalLoadDestroy").modal({backdrop: 'static', keyboard: false});
+			destroy(system,function(result){
+				$("#modalLoadDestroy").modal('hide');
+				alert("Plataforma: "+result);
+			});
+		}else{
+			alert("Nenhum sistema computacional está ativo!");
+		}
 	});
 	
 	$("#deploy").button().click(function(){
-		$("#modalLoadDeploy").modal({backdrop: 'static', keyboard: false});
-		resort();
-		deploy(candidatos,function(computSystem){
-			system = computSystem;
-			if(system.value.session != undefined && system.value.networkAddress != undefined){
-				$("#deployTab").append("<h4>Sessão:<b> "+system.value.session+"</b>; Endereço da Plataforma: <b>"+system.value.networkAddress+"</b></h4>");
-				$("#linkComputacional").attr("href","../file/system.xml").attr("download","system.xml").tooltip();
-			
-				var result = instantiate(system);//retorna string
-				$("#status").append("<h3>"+result+"</h3>");
-			}else{
-				alert("Não foi possível resolver o contrato");
-			}
-			$("#modalLoadDeploy").modal('hide');
-		});//retorna obj computational_system
+		if(candidatos != null && candidatos != undefined){
+			$("#modalLoadDeploy").modal({backdrop: 'static', keyboard: false});
+			resort();
+			deploy(candidatos,function(computSystem){
+				system = computSystem;
+				if(system.value.session != undefined && system.value.networkAddress != undefined){
+					$("#deployTab").append("<h4>Sessão:<b> "+system.value.session+"</b>; Endereço da Plataforma: <b>"+system.value.networkAddress+"</b></h4>");
+					$("#linkComputacional").attr("href","../file/system.xml").attr("download","system.xml").tooltip();
+				
+					var result = instantiate(system);//retorna string
+					$("#status").append("<h3>"+result+"</h3>");
+				}else{
+					alert("Não foi possível resolver o contrato");
+				}
+				$("#modalLoadDeploy").modal('hide');
+			});//retorna obj computational_system
+		}else{
+			alert("Realize a resolução de um contrato!");
+		}
 	});
 	
 	$("#resolve").button().click(function(){

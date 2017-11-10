@@ -1,0 +1,1480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<candidate_list xmlns="http://storm.lia.ufc.br">
+    <candidate kind_id="1" owner_id="1" cc_id="336" cc_name="FloatMMMultiplicationTest">
+        <context_arguments kind="4" ca_id="553" cp_id="148" cc_id="336">
+            <value data_type="String" value="300"/>
+        </context_arguments>
+        <context_arguments kind="4" ca_id="554" cp_id="149" cc_id="336">
+            <value data_type="String" value="300"/>
+        </context_arguments>
+        <context_arguments kind="4" ca_id="555" cp_id="150" cc_id="336">
+            <value data_type="String" value="300"/>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="557" cp_id="152" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="333" cc_name="MatrixFormat">
+                <abstract_component id_ac="284" name="MatrixFormat">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="558" cp_id="155" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="206" cc_name="MatrixPattern">
+                <abstract_component id_ac="40" name="MatrixPattern">
+                    <supertype id_ac="2" name="Software"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="559" cp_id="156" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="334" cc_name="MatrixType">
+                <abstract_component id_ac="225" name="MatrixType">
+                    <supertype id_ac="2" name="Software"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="560" cp_id="157" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="41" cc_name="Float">
+                <abstract_component id_ac="92" name="Float">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="561" cp_id="158" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="333" cc_name="MatrixFormat">
+                <abstract_component id_ac="284" name="MatrixFormat">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="562" cp_id="159" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="206" cc_name="MatrixPattern">
+                <abstract_component id_ac="40" name="MatrixPattern">
+                    <supertype id_ac="2" name="Software"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="563" cp_id="160" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="334" cc_name="MatrixType">
+                <abstract_component id_ac="225" name="MatrixType">
+                    <supertype id_ac="2" name="Software"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="564" cp_id="161" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="41" cc_name="Float">
+                <abstract_component id_ac="92" name="Float">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="565" cp_id="162" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="333" cc_name="MatrixFormat">
+                <abstract_component id_ac="284" name="MatrixFormat">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments kind="1" ca_id="556" cp_id="151" cc_id="336">
+            <context_contract kind_id="1" owner_id="1" cc_id="41" cc_name="Float">
+                <abstract_component id_ac="92" name="Float">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <context_arguments cp_id="151">
+            <context_contract cc_id="41" cc_name="Float">
+                <abstract_component id_ac="92" name="Float">
+                    <supertype id_ac="96" name="DataStructure"/>
+                    <context_parameter kind="4" cp_id="107" name="Size">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>0</bound_value>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+                    <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+                    <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+                    <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+                    <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+                </abstract_component>
+            </context_contract>
+        </context_arguments>
+        <abstract_component id_ac="218" name="MatrixMatrixMultiplication">
+            <supertype id_ac="160" name="MatrixOperation"/>
+            <context_parameter kind="1" cp_id="160" name="matrix_type_R">
+                <bound kind_id="1" cc_id="334" cc_name="MatrixType">
+                    <abstract_component id_ac="225" name="MatrixType">
+                        <supertype id_ac="2" name="Software"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="159" name="sparse_pattern_R">
+                <bound kind_id="1" cc_id="206" cc_name="MatrixPattern">
+                    <abstract_component id_ac="40" name="MatrixPattern">
+                        <supertype id_ac="2" name="Software"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="158" name="format_R">
+                <bound kind_id="1" cc_id="333" cc_name="MatrixFormat">
+                    <abstract_component id_ac="284" name="MatrixFormat">
+                        <supertype id_ac="96" name="DataStructure"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="157" name="element_type_R">
+                <bound kind_id="1" cc_id="44" cc_name="int">
+                    <abstract_component id_ac="98" name="Int">
+                        <supertype id_ac="96" name="DataStructure"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="156" name="matrix_type_L">
+                <bound kind_id="1" cc_id="334" cc_name="MatrixType">
+                    <abstract_component id_ac="225" name="MatrixType">
+                        <supertype id_ac="2" name="Software"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="155" name="sparse_pattern_L">
+                <bound kind_id="1" cc_id="206" cc_name="MatrixPattern">
+                    <abstract_component id_ac="40" name="MatrixPattern">
+                        <supertype id_ac="2" name="Software"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="4" cp_id="107" name="Size">
+                <bound>
+                    <abstract_component id_ac="0"/>
+                </bound>
+                <bound_value>1</bound_value>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="152" name="format_L">
+                <bound kind_id="1" cc_id="333" cc_name="MatrixFormat">
+                    <abstract_component id_ac="284" name="MatrixFormat">
+                        <supertype id_ac="96" name="DataStructure"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="151" name="element_type_L">
+                <bound kind_id="1" cc_id="44" cc_name="int">
+                    <abstract_component id_ac="98" name="Int">
+                        <supertype id_ac="96" name="DataStructure"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="4" cp_id="150" name="max_dim_size_p">
+                <bound>
+                    <abstract_component id_ac="0"/>
+                </bound>
+                <bound_value>100000</bound_value>
+            </context_parameter>
+            <context_parameter kind="4" cp_id="149" name="max_dim_size_n">
+                <bound>
+                    <abstract_component id_ac="0"/>
+                </bound>
+                <bound_value>100000</bound_value>
+            </context_parameter>
+            <context_parameter kind="4" cp_id="148" name="max_dim_size_m">
+                <bound>
+                    <abstract_component id_ac="0"/>
+                </bound>
+                <bound_value>100000</bound_value>
+            </context_parameter>
+            <context_parameter kind="4" cp_id="233" name="Isoefficiency">
+                <bound>
+                    <abstract_component id_ac="0"/>
+                </bound>
+                <bound_value>0</bound_value>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="162" name="format_S">
+                <bound kind_id="1" cc_id="206" cc_name="MatrixPattern">
+                    <abstract_component id_ac="40" name="MatrixPattern">
+                        <supertype id_ac="2" name="Software"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <context_parameter kind="1" cp_id="161" name="element_type_S">
+                <bound kind_id="1" cc_id="44" cc_name="int">
+                    <abstract_component id_ac="98" name="Int">
+                        <supertype id_ac="96" name="DataStructure"/>
+                    </abstract_component>
+                </bound>
+            </context_parameter>
+            <quality_parameters kind_id="4" calc_id="108" name="TotalFLOPS"/>
+            <cost_parameters kind_id="5" calc_id="112" name="SWEstimatedCost"/>
+            <ranking_parameters kind_id="4" calc_id="113" name="Rank0 - 70% CPU | 30% Memory"/>
+            <ranking_parameters kind_id="4" calc_id="114" name="Rank1 - 90% CPU | 10% Memory"/>
+            <ranking_parameters kind_id="4" calc_id="115" name="Rank2 - 50% CPU | 50% Memory"/>
+            <ranking_parameters kind_id="4" calc_id="116" name="Rank3 - 30% CPU | 30% Memory | 40% Cost"/>
+            <ranking_parameters kind_id="4" calc_id="117" name="Rank4 - Lower Cost"/>
+        </abstract_component>
+        <platform>
+            <platform_contract kind_id="2" owner_id="1" cc_id="321" cc_name="PlataformaSasquatch">
+                <context_arguments kind="1" ca_id="535" cp_id="23" cc_id="321">
+                    <context_contract kind_id="2" owner_id="1" cc_id="315" cc_name="MDCC-CPU-Node">
+                        <context_arguments kind="1" ca_id="510" cp_id="28" cc_id="315">
+                            <context_contract kind_id="1" owner_id="1" cc_id="309" cc_name="E5-2650v3">
+                                <context_arguments kind="1" ca_id="484" cp_id="28" cc_id="309">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                        <abstract_component id_ac="162" name="Intel">
+                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                    <value data_type="String" value="10"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                    <value data_type="String" value="2300"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                    <value data_type="String" value="640"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                    <value data_type="String" value="2560"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                    <value data_type="String" value="25600"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                    <value data_type="String" value="20"/>
+                                </context_arguments>
+                                <abstract_component id_ac="89" name="XEON">
+                                    <supertype id_ac="3" name="Processor"/>
+                                    <context_parameter kind="4" cp_id="45" name="processor_L3_cache_size">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                            <value data_type="String" value="25600"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="44" name="processor_L2_cache_size">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                            <value data_type="String" value="2560"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="43" name="processor_L1_cache_size">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                            <value data_type="String" value="640"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="42" name="processor_core_clock">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                            <value data_type="String" value="2300"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="41" name="processor_family">
+                                        <bound kind_id="1" cc_id="329" cc_name="ProcessorFamily">
+                                            <abstract_component id_ac="246" name="ProcessorFamily">
+                                                <supertype id_ac="1" name="Platform"/>
+                                            </abstract_component>
+                                        </bound>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="40" name="processor_manufacturer">
+                                        <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                            <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                <supertype id_ac="1" name="Platform"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="161" cp_id="40" cc_id="180">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                <abstract_component id_ac="162" name="Intel">
+                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="34" name="processor_architecture">
+                                        <bound kind_id="1" cc_id="332" cc_name="ProcessorArchitecture">
+                                            <abstract_component id_ac="15" name="AcceleratorArchitecture">
+                                                <supertype id_ac="7" name="Accelerator"/>
+                                            </abstract_component>
+                                        </bound>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="33" name="processor_cores">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                            <value data_type="String" value="10"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="54" name="processor_threads">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                            <value data_type="String" value="20"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="73" name="cost_per_core">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>2</bound_value>
+                                    </context_parameter>
+                                </abstract_component>
+                            </context_contract>
+                        </context_arguments>
+                        <context_arguments kind="1" ca_id="511" cp_id="49" cc_id="315">
+                            <context_contract kind_id="1" owner_id="1" cc_id="234" cc_name="CentOS">
+                                <abstract_component id_ac="152" name="Linux">
+                                    <supertype id_ac="26" name="OperatingSystem"/>
+                                </abstract_component>
+                            </context_contract>
+                        </context_arguments>
+                        <context_arguments kind="4" ca_id="512" cp_id="32" cc_id="315">
+                            <value data_type="String" value="2"/>
+                        </context_arguments>
+                        <context_arguments kind="4" ca_id="514" cp_id="36" cc_id="315">
+                            <value data_type="String" value="64"/>
+                        </context_arguments>
+                        <context_arguments kind="4" ca_id="513" cp_id="38" cc_id="315">
+                            <value data_type="String" value="2048"/>
+                        </context_arguments>
+                        <abstract_component id_ac="25" name="Node">
+                            <supertype id_ac="1" name="Platform"/>
+                            <context_parameter kind="4" cp_id="229" name="Core_cost">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>2</bound_value>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="227" name="Memory_cost">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>3</bound_value>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="39" name="local_disk_throughput">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="38" name="local_disk_size">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>1</bound_value>
+                                <context_argument kind="4" ca_id="513" cp_id="38" cc_id="315">
+                                    <value data_type="String" value="2048"/>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="37" name="memory_throughput">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>1</bound_value>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="36" name="memory_size(GB)">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>1</bound_value>
+                                <context_argument kind="4" ca_id="514" cp_id="36" cc_id="315">
+                                    <value data_type="String" value="64"/>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="147" name="num_of_acelerator">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>0</bound_value>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="101" name="node_accelerator">
+                                <bound kind_id="1" cc_id="181" cc_name="No-Acelerator">
+                                    <abstract_component id_ac="27" name="NoAcelerator">
+                                        <supertype id_ac="1" name="Platform"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="504" cp_id="101" cc_id="313">
+                                    <context_contract kind_id="1" owner_id="0" cc_id="185" cc_name="PHI7120">
+                                        <context_arguments kind="1" ca_id="186" cp_id="48" cc_id="185">
+                                            <value data_type="String" value="16"/>
+                                        </context_arguments>
+                                        <context_arguments kind="1" ca_id="187" cp_id="46" cc_id="185">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                <abstract_component id_ac="162" name="Intel">
+                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_arguments>
+                                        <abstract_component id_ac="13" name="MIC">
+                                            <supertype id_ac="7" name="Accelerator"/>
+                                            <context_parameter kind="1" cp_id="48" name="accelerator_memory">
+                                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                                    <abstract_component id_ac="0" name="root">
+                                                        <supertype id_ac="0" name="root"/>
+                                                    </abstract_component>
+                                                </bound>
+                                                <context_argument kind="1" ca_id="186" cp_id="48" cc_id="185">
+                                                    <value data_type="String" value="16"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="47" name="accelerator_model">
+                                                <bound kind_id="1" cc_id="182" cc_name="Acelerator">
+                                                    <abstract_component id_ac="7" name="Accelerator">
+                                                        <supertype id_ac="27" name="NoAcelerator"/>
+                                                    </abstract_component>
+                                                </bound>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="46" name="accelerator_manufacturer">
+                                                <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                                    <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                        <supertype id_ac="1" name="Platform"/>
+                                                    </abstract_component>
+                                                </bound>
+                                                <context_argument kind="1" ca_id="187" cp_id="46" cc_id="185">
+                                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                        <abstract_component id_ac="162" name="Intel">
+                                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                        </abstract_component>
+                                                    </context_contract>
+                                                </context_argument>
+                                            </context_parameter>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="4" cp_id="32" name="num_of_processors">
+                                <bound>
+                                    <abstract_component id_ac="0"/>
+                                </bound>
+                                <bound_value>1</bound_value>
+                                <context_argument kind="4" ca_id="512" cp_id="32" cc_id="315">
+                                    <value data_type="String" value="2"/>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="28" name="node_processor">
+                                <bound kind_id="1" cc_id="140" cc_name="NodeProcessorDefault">
+                                    <abstract_component id_ac="3" name="Processor">
+                                        <supertype id_ac="1" name="Platform"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="510" cp_id="28" cc_id="315">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="309" cc_name="E5-2650v3">
+                                        <context_arguments kind="1" ca_id="484" cp_id="28" cc_id="309">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                <abstract_component id_ac="162" name="Intel">
+                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                            <value data_type="String" value="10"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                            <value data_type="String" value="2300"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                            <value data_type="String" value="640"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                            <value data_type="String" value="2560"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                            <value data_type="String" value="25600"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                            <value data_type="String" value="20"/>
+                                        </context_arguments>
+                                        <abstract_component id_ac="89" name="XEON">
+                                            <supertype id_ac="3" name="Processor"/>
+                                            <context_parameter kind="4" cp_id="45" name="processor_L3_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                                    <value data_type="String" value="25600"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="44" name="processor_L2_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                                    <value data_type="String" value="2560"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="43" name="processor_L1_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                                    <value data_type="String" value="640"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="42" name="processor_core_clock">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                                    <value data_type="String" value="2300"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="41" name="processor_family">
+                                                <bound kind_id="1" cc_id="329" cc_name="ProcessorFamily">
+                                                    <abstract_component id_ac="246" name="ProcessorFamily">
+                                                        <supertype id_ac="1" name="Platform"/>
+                                                    </abstract_component>
+                                                </bound>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="40" name="processor_manufacturer">
+                                                <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                                    <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                        <supertype id_ac="1" name="Platform"/>
+                                                    </abstract_component>
+                                                </bound>
+                                                <context_argument kind="1" ca_id="161" cp_id="40" cc_id="180">
+                                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                        <abstract_component id_ac="162" name="Intel">
+                                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                        </abstract_component>
+                                                    </context_contract>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="34" name="processor_architecture">
+                                                <bound kind_id="1" cc_id="332" cc_name="ProcessorArchitecture">
+                                                    <abstract_component id_ac="15" name="AcceleratorArchitecture">
+                                                        <supertype id_ac="7" name="Accelerator"/>
+                                                    </abstract_component>
+                                                </bound>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="33" name="processor_cores">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                                    <value data_type="String" value="10"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="54" name="processor_threads">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                                    <value data_type="String" value="20"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="73" name="cost_per_core">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>2</bound_value>
+                                            </context_parameter>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="49" name="operating_system">
+                                <bound kind_id="1" cc_id="145" cc_name="Red Hat">
+                                    <abstract_component id_ac="152" name="Linux">
+                                        <supertype id_ac="26" name="OperatingSystem"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="511" cp_id="49" cc_id="315">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="234" cc_name="CentOS">
+                                        <abstract_component id_ac="152" name="Linux">
+                                            <supertype id_ac="26" name="OperatingSystem"/>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_argument>
+                            </context_parameter>
+                            <cost_parameters kind_id="4" calc_id="230" name="Node_cost"/>
+                        </abstract_component>
+                        <cost_arguments value="232.0" cp_id="230"/>
+                    </context_contract>
+                </context_arguments>
+                <context_arguments kind="1" ca_id="536" cp_id="24" cc_id="321">
+                    <context_contract kind_id="1" owner_id="1" cc_id="310" cc_name="MDCC-Interconnect">
+                        <context_arguments kind="1" ca_id="494" cp_id="97" cc_id="310">
+                            <context_contract kind_id="1" owner_id="1" cc_id="311" cc_name="Star">
+                                <abstract_component id_ac="216" name="Star">
+                                    <supertype id_ac="16" name="Topology"/>
+                                </abstract_component>
+                            </context_contract>
+                        </context_arguments>
+                        <context_arguments kind="1" ca_id="492" cp_id="98" cc_id="310">
+                            <value data_type="String" value="5"/>
+                        </context_arguments>
+                        <context_arguments kind="1" ca_id="493" cp_id="99" cc_id="310">
+                            <value data_type="String" value="6.6"/>
+                        </context_arguments>
+                        <abstract_component id_ac="157" name="GigabitEthernet">
+                            <supertype id_ac="6" name="Network"/>
+                            <context_parameter kind="1" cp_id="98" name="Latency (microseconds)">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="492" cp_id="98" cc_id="310">
+                                    <value data_type="String" value="5"/>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="97" name="Topology">
+                                <bound kind_id="1" cc_id="150" cc_name="ClusterTopologyDefault">
+                                    <abstract_component id_ac="16" name="Topology">
+                                        <supertype id_ac="1" name="Platform"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="494" cp_id="97" cc_id="310">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="311" cc_name="Star">
+                                        <abstract_component id_ac="216" name="Star">
+                                            <supertype id_ac="16" name="Topology"/>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_argument>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="99" name="Bandwidth (GB/s)">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                                <context_argument kind="1" ca_id="493" cp_id="99" cc_id="310">
+                                    <value data_type="String" value="6.6"/>
+                                </context_argument>
+                            </context_parameter>
+                        </abstract_component>
+                    </context_contract>
+                </context_arguments>
+                <context_arguments kind="1" ca_id="539" cp_id="35" cc_id="321">
+                    <context_contract kind_id="1" owner_id="1" cc_id="172" cc_name="BareMetal">
+                        <abstract_component id_ac="211" name="BareMetal">
+                            <supertype id_ac="208" name="Virtualization"/>
+                        </abstract_component>
+                    </context_contract>
+                </context_arguments>
+                <context_arguments kind="4" ca_id="538" cp_id="27" cc_id="321">
+                    <value data_type="String" value="1000"/>
+                </context_arguments>
+                <context_arguments kind="1" ca_id="537" cp_id="26" cc_id="321">
+                    <context_contract kind_id="1" owner_id="0" cc_id="322" cc_name="Canada">
+                        <abstract_component id_ac="217" name="America do Norte">
+                            <supertype id_ac="18" name="Locale"/>
+                        </abstract_component>
+                    </context_contract>
+                </context_arguments>
+                <context_arguments kind="4" cp_id="228" cc_id="321">
+                    <value value="5"/>
+                </context_arguments>
+                <context_arguments kind="4" cp_id="111" cc_id="321">
+                    <value value="100"/>
+                </context_arguments>
+                <context_arguments kind="4" cp_id="109" cc_id="321">
+                    <value value="1"/>
+                </context_arguments>
+                <context_arguments kind="1" cp_id="25" cc_id="321">
+                    <context_contract kind_id="1" owner_id="1" cc_id="143" cc_name="ClusterStorageDefault">
+                        <abstract_component id_ac="9" name="Storage">
+                            <supertype id_ac="1" name="Platform"/>
+                            <context_parameter kind="1" cp_id="53" name="storage_manufacturer">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="52" name="storage_latency">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="51" name="storage_throughput">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                            </context_parameter>
+                            <context_parameter kind="1" cp_id="50" name="storage_size">
+                                <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                    <abstract_component id_ac="0" name="root">
+                                        <supertype id_ac="0" name="root"/>
+                                    </abstract_component>
+                                </bound>
+                            </context_parameter>
+                        </abstract_component>
+                    </context_contract>
+                </context_arguments>
+                <abstract_component id_ac="19" name="Cluster">
+                    <supertype id_ac="5" name="Architecture"/>
+                    <context_parameter kind="4" cp_id="228" name="Storage_cost">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>5</bound_value>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="111" name="CostPerHour">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>100</bound_value>
+                        <context_argument kind="4" ca_id="198" cp_id="111" cc_id="186">
+                            <value data_type="String" value="100"/>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="109" name="Rmax(FLOPS)">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                        <context_argument kind="4" ca_id="121" cp_id="109" cc_id="127">
+                            <value data_type="String" value="100"/>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="1" cp_id="35" name="virtualization">
+                        <bound kind_id="1" cc_id="171" cc_name="Virtualization">
+                            <abstract_component id_ac="208" name="Virtualization">
+                                <supertype id_ac="1" name="Platform"/>
+                            </abstract_component>
+                        </bound>
+                        <context_argument kind="1" ca_id="539" cp_id="35" cc_id="321">
+                            <context_contract kind_id="1" owner_id="1" cc_id="172" cc_name="BareMetal">
+                                <abstract_component id_ac="211" name="BareMetal">
+                                    <supertype id_ac="208" name="Virtualization"/>
+                                </abstract_component>
+                            </context_contract>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="4" cp_id="27" name="num_of_nodes">
+                        <bound>
+                            <abstract_component id_ac="0"/>
+                        </bound>
+                        <bound_value>1</bound_value>
+                        <context_argument kind="4" ca_id="538" cp_id="27" cc_id="321">
+                            <value data_type="String" value="1000"/>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="1" cp_id="26" name="locale">
+                        <bound kind_id="1" cc_id="144" cc_name="Brasil">
+                            <abstract_component id_ac="155" name="Brasil">
+                                <supertype id_ac="154" name="AmericaDoSul"/>
+                            </abstract_component>
+                        </bound>
+                        <context_argument kind="1" ca_id="537" cp_id="26" cc_id="321">
+                            <context_contract kind_id="1" owner_id="0" cc_id="322" cc_name="Canada">
+                                <abstract_component id_ac="217" name="America do Norte">
+                                    <supertype id_ac="18" name="Locale"/>
+                                </abstract_component>
+                            </context_contract>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="1" cp_id="25" name="storage">
+                        <bound kind_id="1" cc_id="143" cc_name="ClusterStorageDefault">
+                            <abstract_component id_ac="9" name="Storage">
+                                <supertype id_ac="1" name="Platform"/>
+                            </abstract_component>
+                        </bound>
+                    </context_parameter>
+                    <context_parameter kind="1" cp_id="24" name="interconect">
+                        <bound kind_id="1" cc_id="142" cc_name="Infiniband">
+                            <abstract_component id_ac="158" name="Infiniband">
+                                <supertype id_ac="6" name="Network"/>
+                            </abstract_component>
+                        </bound>
+                        <context_argument kind="1" ca_id="536" cp_id="24" cc_id="321">
+                            <context_contract kind_id="1" owner_id="1" cc_id="310" cc_name="MDCC-Interconnect">
+                                <context_arguments kind="1" ca_id="494" cp_id="97" cc_id="310">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="311" cc_name="Star">
+                                        <abstract_component id_ac="216" name="Star">
+                                            <supertype id_ac="16" name="Topology"/>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_arguments>
+                                <context_arguments kind="1" ca_id="492" cp_id="98" cc_id="310">
+                                    <value data_type="String" value="5"/>
+                                </context_arguments>
+                                <context_arguments kind="1" ca_id="493" cp_id="99" cc_id="310">
+                                    <value data_type="String" value="6.6"/>
+                                </context_arguments>
+                                <abstract_component id_ac="157" name="GigabitEthernet">
+                                    <supertype id_ac="6" name="Network"/>
+                                    <context_parameter kind="1" cp_id="98" name="Latency (microseconds)">
+                                        <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                            <abstract_component id_ac="0" name="root">
+                                                <supertype id_ac="0" name="root"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="492" cp_id="98" cc_id="310">
+                                            <value data_type="String" value="5"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="97" name="Topology">
+                                        <bound kind_id="1" cc_id="150" cc_name="ClusterTopologyDefault">
+                                            <abstract_component id_ac="16" name="Topology">
+                                                <supertype id_ac="1" name="Platform"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="494" cp_id="97" cc_id="310">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="311" cc_name="Star">
+                                                <abstract_component id_ac="216" name="Star">
+                                                    <supertype id_ac="16" name="Topology"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="99" name="Bandwidth (GB/s)">
+                                        <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                            <abstract_component id_ac="0" name="root">
+                                                <supertype id_ac="0" name="root"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="493" cp_id="99" cc_id="310">
+                                            <value data_type="String" value="6.6"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                </abstract_component>
+                            </context_contract>
+                        </context_argument>
+                    </context_parameter>
+                    <context_parameter kind="1" cp_id="23" name="node">
+                        <bound kind_id="1" cc_id="141" cc_name="NodeDefault">
+                            <abstract_component id_ac="25" name="Node">
+                                <supertype id_ac="1" name="Platform"/>
+                            </abstract_component>
+                        </bound>
+                        <context_argument kind="1" ca_id="535" cp_id="23" cc_id="321">
+                            <context_contract kind_id="2" owner_id="1" cc_id="315" cc_name="MDCC-CPU-Node">
+                                <context_arguments kind="1" ca_id="510" cp_id="28" cc_id="315">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="309" cc_name="E5-2650v3">
+                                        <context_arguments kind="1" ca_id="484" cp_id="28" cc_id="309">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                <abstract_component id_ac="162" name="Intel">
+                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                            <value data_type="String" value="10"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                            <value data_type="String" value="2300"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                            <value data_type="String" value="640"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                            <value data_type="String" value="2560"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                            <value data_type="String" value="25600"/>
+                                        </context_arguments>
+                                        <context_arguments kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                            <value data_type="String" value="20"/>
+                                        </context_arguments>
+                                        <abstract_component id_ac="89" name="XEON">
+                                            <supertype id_ac="3" name="Processor"/>
+                                            <context_parameter kind="4" cp_id="45" name="processor_L3_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                                    <value data_type="String" value="25600"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="44" name="processor_L2_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                                    <value data_type="String" value="2560"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="43" name="processor_L1_cache_size">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                                    <value data_type="String" value="640"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="42" name="processor_core_clock">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                                    <value data_type="String" value="2300"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="41" name="processor_family">
+                                                <bound kind_id="1" cc_id="329" cc_name="ProcessorFamily">
+                                                    <abstract_component id_ac="246" name="ProcessorFamily">
+                                                        <supertype id_ac="1" name="Platform"/>
+                                                    </abstract_component>
+                                                </bound>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="40" name="processor_manufacturer">
+                                                <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                                    <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                        <supertype id_ac="1" name="Platform"/>
+                                                    </abstract_component>
+                                                </bound>
+                                                <context_argument kind="1" ca_id="161" cp_id="40" cc_id="180">
+                                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                        <abstract_component id_ac="162" name="Intel">
+                                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                        </abstract_component>
+                                                    </context_contract>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="1" cp_id="34" name="processor_architecture">
+                                                <bound kind_id="1" cc_id="332" cc_name="ProcessorArchitecture">
+                                                    <abstract_component id_ac="15" name="AcceleratorArchitecture">
+                                                        <supertype id_ac="7" name="Accelerator"/>
+                                                    </abstract_component>
+                                                </bound>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="33" name="processor_cores">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                                    <value data_type="String" value="10"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="54" name="processor_threads">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>1</bound_value>
+                                                <context_argument kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                                    <value data_type="String" value="20"/>
+                                                </context_argument>
+                                            </context_parameter>
+                                            <context_parameter kind="4" cp_id="73" name="cost_per_core">
+                                                <bound>
+                                                    <abstract_component id_ac="0"/>
+                                                </bound>
+                                                <bound_value>2</bound_value>
+                                            </context_parameter>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_arguments>
+                                <context_arguments kind="1" ca_id="511" cp_id="49" cc_id="315">
+                                    <context_contract kind_id="1" owner_id="1" cc_id="234" cc_name="CentOS">
+                                        <abstract_component id_ac="152" name="Linux">
+                                            <supertype id_ac="26" name="OperatingSystem"/>
+                                        </abstract_component>
+                                    </context_contract>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="512" cp_id="32" cc_id="315">
+                                    <value data_type="String" value="2"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="514" cp_id="36" cc_id="315">
+                                    <value data_type="String" value="64"/>
+                                </context_arguments>
+                                <context_arguments kind="4" ca_id="513" cp_id="38" cc_id="315">
+                                    <value data_type="String" value="2048"/>
+                                </context_arguments>
+                                <abstract_component id_ac="25" name="Node">
+                                    <supertype id_ac="1" name="Platform"/>
+                                    <context_parameter kind="4" cp_id="229" name="Core_cost">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>2</bound_value>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="227" name="Memory_cost">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>3</bound_value>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="39" name="local_disk_throughput">
+                                        <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                            <abstract_component id_ac="0" name="root">
+                                                <supertype id_ac="0" name="root"/>
+                                            </abstract_component>
+                                        </bound>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="38" name="local_disk_size">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="513" cp_id="38" cc_id="315">
+                                            <value data_type="String" value="2048"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="37" name="memory_throughput">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="36" name="memory_size(GB)">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="514" cp_id="36" cc_id="315">
+                                            <value data_type="String" value="64"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="147" name="num_of_acelerator">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>0</bound_value>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="101" name="node_accelerator">
+                                        <bound kind_id="1" cc_id="181" cc_name="No-Acelerator">
+                                            <abstract_component id_ac="27" name="NoAcelerator">
+                                                <supertype id_ac="1" name="Platform"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="504" cp_id="101" cc_id="313">
+                                            <context_contract kind_id="1" owner_id="0" cc_id="185" cc_name="PHI7120">
+                                                <context_arguments kind="1" ca_id="186" cp_id="48" cc_id="185">
+                                                    <value data_type="String" value="16"/>
+                                                </context_arguments>
+                                                <context_arguments kind="1" ca_id="187" cp_id="46" cc_id="185">
+                                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                        <abstract_component id_ac="162" name="Intel">
+                                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                        </abstract_component>
+                                                    </context_contract>
+                                                </context_arguments>
+                                                <abstract_component id_ac="13" name="MIC">
+                                                    <supertype id_ac="7" name="Accelerator"/>
+                                                    <context_parameter kind="1" cp_id="48" name="accelerator_memory">
+                                                        <bound kind_id="3" cc_id="1" cc_name="DATA">
+                                                            <abstract_component id_ac="0" name="root">
+                                                                <supertype id_ac="0" name="root"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                        <context_argument kind="1" ca_id="186" cp_id="48" cc_id="185">
+                                                            <value data_type="String" value="16"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="1" cp_id="47" name="accelerator_model">
+                                                        <bound kind_id="1" cc_id="182" cc_name="Acelerator">
+                                                            <abstract_component id_ac="7" name="Accelerator">
+                                                                <supertype id_ac="27" name="NoAcelerator"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                    </context_parameter>
+                                                    <context_parameter kind="1" cp_id="46" name="accelerator_manufacturer">
+                                                        <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                                            <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                                <supertype id_ac="1" name="Platform"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                        <context_argument kind="1" ca_id="187" cp_id="46" cc_id="185">
+                                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                                <abstract_component id_ac="162" name="Intel">
+                                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                                </abstract_component>
+                                                            </context_contract>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="4" cp_id="32" name="num_of_processors">
+                                        <bound>
+                                            <abstract_component id_ac="0"/>
+                                        </bound>
+                                        <bound_value>1</bound_value>
+                                        <context_argument kind="4" ca_id="512" cp_id="32" cc_id="315">
+                                            <value data_type="String" value="2"/>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="28" name="node_processor">
+                                        <bound kind_id="1" cc_id="140" cc_name="NodeProcessorDefault">
+                                            <abstract_component id_ac="3" name="Processor">
+                                                <supertype id_ac="1" name="Platform"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="510" cp_id="28" cc_id="315">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="309" cc_name="E5-2650v3">
+                                                <context_arguments kind="1" ca_id="484" cp_id="28" cc_id="309">
+                                                    <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                        <abstract_component id_ac="162" name="Intel">
+                                                            <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                        </abstract_component>
+                                                    </context_contract>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                                    <value data_type="String" value="10"/>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                                    <value data_type="String" value="2300"/>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                                    <value data_type="String" value="640"/>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                                    <value data_type="String" value="2560"/>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                                    <value data_type="String" value="25600"/>
+                                                </context_arguments>
+                                                <context_arguments kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                                    <value data_type="String" value="20"/>
+                                                </context_arguments>
+                                                <abstract_component id_ac="89" name="XEON">
+                                                    <supertype id_ac="3" name="Processor"/>
+                                                    <context_parameter kind="4" cp_id="45" name="processor_L3_cache_size">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="483" cp_id="45" cc_id="309">
+                                                            <value data_type="String" value="25600"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="44" name="processor_L2_cache_size">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="482" cp_id="44" cc_id="309">
+                                                            <value data_type="String" value="2560"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="43" name="processor_L1_cache_size">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="481" cp_id="43" cc_id="309">
+                                                            <value data_type="String" value="640"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="42" name="processor_core_clock">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="480" cp_id="42" cc_id="309">
+                                                            <value data_type="String" value="2300"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="1" cp_id="41" name="processor_family">
+                                                        <bound kind_id="1" cc_id="329" cc_name="ProcessorFamily">
+                                                            <abstract_component id_ac="246" name="ProcessorFamily">
+                                                                <supertype id_ac="1" name="Platform"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                    </context_parameter>
+                                                    <context_parameter kind="1" cp_id="40" name="processor_manufacturer">
+                                                        <bound kind_id="1" cc_id="151" cc_name="ProcessorManufacturer">
+                                                            <abstract_component id_ac="245" name="ProcessorManufacturer">
+                                                                <supertype id_ac="1" name="Platform"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                        <context_argument kind="1" ca_id="161" cp_id="40" cc_id="180">
+                                                            <context_contract kind_id="1" owner_id="1" cc_id="147" cc_name="Intel">
+                                                                <abstract_component id_ac="162" name="Intel">
+                                                                    <supertype id_ac="11" name="ProcessorManufacturer"/>
+                                                                </abstract_component>
+                                                            </context_contract>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="1" cp_id="34" name="processor_architecture">
+                                                        <bound kind_id="1" cc_id="332" cc_name="ProcessorArchitecture">
+                                                            <abstract_component id_ac="15" name="AcceleratorArchitecture">
+                                                                <supertype id_ac="7" name="Accelerator"/>
+                                                            </abstract_component>
+                                                        </bound>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="33" name="processor_cores">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="479" cp_id="33" cc_id="309">
+                                                            <value data_type="String" value="10"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="54" name="processor_threads">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>1</bound_value>
+                                                        <context_argument kind="4" ca_id="478" cp_id="54" cc_id="309">
+                                                            <value data_type="String" value="20"/>
+                                                        </context_argument>
+                                                    </context_parameter>
+                                                    <context_parameter kind="4" cp_id="73" name="cost_per_core">
+                                                        <bound>
+                                                            <abstract_component id_ac="0"/>
+                                                        </bound>
+                                                        <bound_value>2</bound_value>
+                                                    </context_parameter>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <context_parameter kind="1" cp_id="49" name="operating_system">
+                                        <bound kind_id="1" cc_id="145" cc_name="Red Hat">
+                                            <abstract_component id_ac="152" name="Linux">
+                                                <supertype id_ac="26" name="OperatingSystem"/>
+                                            </abstract_component>
+                                        </bound>
+                                        <context_argument kind="1" ca_id="511" cp_id="49" cc_id="315">
+                                            <context_contract kind_id="1" owner_id="1" cc_id="234" cc_name="CentOS">
+                                                <abstract_component id_ac="152" name="Linux">
+                                                    <supertype id_ac="26" name="OperatingSystem"/>
+                                                </abstract_component>
+                                            </context_contract>
+                                        </context_argument>
+                                    </context_parameter>
+                                    <cost_parameters kind_id="4" calc_id="230" name="Node_cost"/>
+                                </abstract_component>
+                            </context_contract>
+                        </context_argument>
+                    </context_parameter>
+                    <quality_parameters kind_id="4" calc_id="1" name="Platform_total_cores"/>
+                    <quality_parameters kind_id="4" calc_id="110" name="EstimatedTime"/>
+                    <cost_parameters kind_id="4" calc_id="231" name="Cluster_cost_per _hour"/>
+                    <cost_parameters kind_id="4" calc_id="232" name="Total_cluster_cost"/>
+                </abstract_component>
+                <quality_arguments value="20000.0" cp_id="1"/>
+                <quality_arguments value="1.0" cp_id="110"/>
+                <cost_arguments value="232005.0" cp_id="231"/>
+                <cost_arguments value="232005.0" cp_id="232"/>
+            </platform_contract>
+        </platform>
+        <ranking_arguments value="1.0" cp_id="113"/>
+        <ranking_arguments value="1.0" cp_id="114"/>
+        <ranking_arguments value="1.0" cp_id="115"/>
+        <ranking_arguments value="1.0" cp_id="116"/>
+        <ranking_arguments value="1.0" cp_id="117"/>
+        <cost_arguments value="100.0" cp_id="112"/>
+    </candidate>
+</candidate_list>
+

@@ -9,12 +9,16 @@ function getListContracts(acId, callback, callerror) {
 		data: ""+acId,
 		type:"POST",
 		success: function(data) {
-			data = jQuery.parseXML(data);
-			var str = new XMLSerializer().serializeToString(data);
-			var context = new Jsonix.Context([contextStorm]);
-			var unmarshaller = context.createUnmarshaller();
-			listContract = unmarshaller.unmarshalString(str).value.contract;
-			callback(listContract);
+			try{
+				data = jQuery.parseXML(data);
+				var str = new XMLSerializer().serializeToString(data);
+				var context = new Jsonix.Context([contextStorm]);
+				var unmarshaller = context.createUnmarshaller();
+				listContract = unmarshaller.unmarshalString(str).value.contract;
+				callback(listContract);
+			}catch(e){
+				callerror(data);
+			}
 		},
 		error: function(xhr){
 			callerror(xhr);

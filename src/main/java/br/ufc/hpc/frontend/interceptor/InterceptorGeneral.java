@@ -17,12 +17,12 @@ public class InterceptorGeneral extends HandlerInterceptorAdapter{
 		String uri = request.getRequestURI();
 		User u = (User) request.getSession().getAttribute(Constants.USER_LOGGED_IN);
 
-		/*if(uri.endsWith("/") || uri.endsWith("/logout") || uri.endsWith("/login"))
+		if(uri.endsWith("/") || uri.endsWith("/logout") || uri.endsWith("/login")){
 			return true; 
-		else if(u==null){
+		}else if(u==null){
 			response.sendRedirect("/?error=Você precisa realizar login");
 			return false; 
-		}*/
+		}
 		return true;
 	}
 	

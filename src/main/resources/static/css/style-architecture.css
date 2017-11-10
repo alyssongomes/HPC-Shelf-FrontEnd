@@ -5,6 +5,7 @@ body{
 #paleta{
 	width: 12%;
 	float: left;
+	height: 92%;
 	margin: 10px;
 	margin-top: 4.5%;
 }
@@ -43,6 +44,16 @@ body{
 #properties-body{
 	height: 92%;
 	overflow: auto;
+}
+
+.application{
+	position: absolute;
+	background-image: url("../img/application.png");
+	background-size: 160px;
+	background-repeat:no-repeat;
+	background-position:center;
+	width: 150px;
+	height: 150px;
 }
 
 .workflow{

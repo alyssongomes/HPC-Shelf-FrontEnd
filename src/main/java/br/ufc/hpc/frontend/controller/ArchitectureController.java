@@ -16,14 +16,15 @@ public class ArchitectureController {
 	@RequestMapping(value={"/architecture/download"}, method=RequestMethod.POST)
 	@ResponseBody
 	public String download(@RequestBody String arch){
+		System.out.println(arch);
 		try{
 			System.out.println(arch);
 			stfx.toFile(arch, "architecture");
 			return "Arquivo criado com sucesso!";
 		}catch (Exception e) {
 			System.out.println("Erro at download: "+e.toString());
+			return "Erro ao baixar o arquivo";
 		}
-		return "Erro ao baixar o arquivo";
 	}
 	
 }

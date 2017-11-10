@@ -38,6 +38,9 @@ var workflowsPage = [];
 //Página corrente
 var currentPage = 1;
 
+//Quero que a modal apareça
+var modalHelp = false;
+
 function setCurrentPage(pageId){
     currentPage = pageId;
     console.log(getCurrentPage().idPage);
@@ -60,6 +63,36 @@ function eventFire(el, etype){
 }
 
 $(document).ready(function(){
+	
+	//mover o console automaticamente
+	window.setInterval(function() {
+		var elem = document.getElementById('panel-console-exit');
+		elem.scrollTop = elem.scrollHeight;
+	}, 500);
+	
+	//mostrar a janela de ajuda
+	if (typeof(Storage) !== "undefined") {
+		if(localStorage.viewModalWorkHelp != undefined){
+			if (localStorage.viewModalWorkHelp === "true") {
+				$("#helpView").prop("checked",true);
+		    } else {
+		    	$("#modalHelp").modal("show");
+		    }
+		}else{
+			localStorage.viewModalWorkHelp = modalHelp;
+			$("#modalHelp").modal("show");
+		}
+	} else {
+	    console.log("Não é possível utilizar o Storage");
+	}
+	
+	$("#helpView").click(function(){
+		localStorage.viewModalWorkHelp = localStorage.viewModalWorkHelp === "true"? false:true;
+	});
+	
+	$("#showHelp").click(function(){
+		$("#modalHelp").modal("show");
+	});
     
     //Paineis de Propriedades
     var task = $("#del-type-task");
@@ -219,6 +252,7 @@ $(document).ready(function(){
                 out("Gerando objeto...");
                 var obj = getCurrentPage();
                 var workflow = $.fn.zTree.getZTreeObj("tree_"+obj.idPage).getNodes();
+                console.log(workflow);
                 var root = Workflow.toJsonix(workflow[0]);
                 out("Objeto Convertido", SUCCESS);
             }catch(err){
@@ -255,7 +289,7 @@ $(document).ready(function(){
     //print no panel de saída
     function out(text, type){
         if(type == null) type = INFO;
-        $("#panel-console-exit").animate({ scrollTop: 1000 }, 3000);
+        //$("#panel-console-exit").animate({ scrollTop: 1000 }, 3000);
         $("#panel-console-exit").append("<p><span class='"+mapLabels.get(type)+"'>["+type+"]:</span> "+text+"</p>");
     }
     
@@ -446,6 +480,10 @@ $(document).ready(function(){
         }
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         var kind = $("#type-task option:selected").attr("value");
         if(kind === "sequence_oper" || kind === "parallel_oper"){
             zTreeObj.addNodes(nodes[0],{name:"operation",pId:nodes[0].id, properties:{
@@ -624,6 +662,10 @@ $(document).ready(function(){
     function applyInvoke(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         if(nodes[0].name === "invoke_oper"){
             nodes[0].properties.invoke = {
             action: $("#action option:selected").attr("value"),
@@ -643,6 +685,10 @@ $(document).ready(function(){
     function applyIterate(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         if($("#iter-label").val() != ""){
             nodes[0].properties.iterate = {
                 max:$("#max").val(),
@@ -658,6 +704,10 @@ $(document).ready(function(){
     function applySelect(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         nodes[0].properties.select = {
             actionId: $("#select-actions").val()
         };
@@ -668,6 +718,10 @@ $(document).ready(function(){
     function applyChoice(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         nodes[0].properties.choice = {
             chosen: $("#chosen").val()
         };
@@ -678,6 +732,10 @@ $(document).ready(function(){
     function applyArg(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         if($("#value-arg").val() != ""){
             nodes[0].properties.arg = {
                 type:$("#type").val(),
@@ -694,6 +752,10 @@ $(document).ready(function(){
     function applyPrimitive(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         nodes[0].properties.primitive = {
             handleId: $("#handle-id").val()
         };
@@ -704,6 +766,10 @@ $(document).ready(function(){
     function applyBase(e){
         var zTreeObj = getCurrentPage().zTreeObj;
         var nodes = zTreeObj.getSelectedNodes();
+        if(nodes.length === 0){
+        	out("Selecione uma operação!",ERROR);
+        	return;
+        }
         nodes[0].properties.base = {
             order: $("#order").val(),
             value:$("#value").val(),
@@ -874,6 +940,7 @@ $(document).ready(function(){
                     }
                 });
                 out("Arquitetura carregada!", SUCCESS);
+                $("#ui-id-3").click();
             }catch(err){
                 console.error(err);
                 out("Não foi possível carregar a arquitetura!", ERROR);

@@ -30,11 +30,29 @@ function init(){
 			});
 			$("#submit").show();
 			$("#save").show();
+			$("#nav-new").click(function(){
+				$("#nav-new").attr("data-target","");
+				$("#nav-new").attr("data-toggle","");
+				window.location = "/contract?c=new";
+			});
 		}
 		//loadDetaisComp($("#nameComp"),"Name",$("#parar"),$("#nest"),$("#unit"),$("#slices"),$("#quality"),$("#cost"));
 	});
 	
-	//$("#main").show("fast");
+	//Requisição de um novo contrato a partir do componente criado na página de componentes
+	var url   = window.location.search.replace("?", "");
+	var items = url.split("&");
+	if(items[0].split("=")[1] != undefined){
+		if(items[0].split("=")[1] === "new"){
+			$("#modalNewComp").modal("show");
+		}else{
+			//nome do componente
+			var acName = items[0].split("=")[1]; 
+			$("#modalNewComp").modal("show");
+			$("#nameComp").append("<h3 value='"+acName+"'>"+acName+"</h3>");
+			loadDetaisComp($("#nameComp"), acName, $("#parar"), $("#nest"), $("#unit"), $("#slices"), $("#quality"), $("#cost"), $("#ranking"));
+		} 
+	}
 	
 	$("#selectPlatform").click(function(){
 		if($("#containerDetailsComp-plt").find("#nameComp").find("h3").attr("value") == null ){
@@ -119,7 +137,7 @@ function loadComponentAbstract(details){
 	for (var i = 0; i < param.length; i++) {
 		var linha = "<tr id='"+i+"'>"+
 			"<td width='300px' id='"+param[i].childNodes.item(0).getAttribute("id")+"' value='"+param[i].childNodes.item(0).getAttribute("value")+"'><h3>"+param[i].childNodes.item(0).getAttribute("value")+"</h3></td>"+
-			"<td width='250px'><select class='form-control' onclick='actionParameter("+i+")' id='"+param[i].childNodes.item(0).getAttribute("id")+"' style='width:250px'><optgroup label='"+i+"'><option optgroup='"+i+"' value='cp_id'>Identificador</option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+
+			"<td width='250px'><select class='form-control' onclick='actionParameter("+i+")' id='"+param[i].childNodes.item(0).getAttribute("id")+"' style='width:250px'><optgroup label='"+i+"'><option optgroup='"+i+"' value='ac_id'></option><option optgroup='"+i+"' value='contract'>Contrato Contextual</option><option optgroup='"+i+"' value='audi'>Valor</option></optgroup></select></td>"+
 			"<td><p hidden id='bound' value='"+param[i].childNodes.item(1).childNodes.item(0).getAttribute("value")+"'></td>"+
 		+"</tr>";
 		$("#tabParCont").append(linha);
@@ -346,18 +364,16 @@ function getContextArguments(formContextArguments){
 	var rows = formContextArguments.find("tr");
 	var arguments = Array();
 	for (var i = 0; i < rows.length; i++) {
-		var argument = {
-			//cpId: parseInt(rows[i].childNodes.item(0).getAttribute("id")),
-			//boundCcId: parseInt(rows[i].childNodes.item(2).childNodes.item(0).getAttribute("value")),
-			//variableCpId: 0
-		};
+		var argument = {};
+		
 		var op = rows[i].childNodes.item(1).childNodes.item(0).options.selectedIndex;
 		if(op === 0){
 			//argument.cpId = parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id);
+			return arguments;
 		}else if(op === 1){
 			argument.contextContract = { 
-				ccId: parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id), 
-				ccName: rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].value
+				ccId: parseInt(rows[i].childNodes.item(4).childNodes.item(0).options[rows[i].childNodes.item(4).childNodes.item(0).options.selectedIndex].id), 
+				ccName: rows[i].childNodes.item(4).childNodes.item(0).options[rows[i].childNodes.item(4).childNodes.item(0).options.selectedIndex].value
 			};
 			argument.value = null;
 		}else{
@@ -377,11 +393,8 @@ function getContextArgumentsPlatform(){
 	var rows = $("#div-new-contract-platform").find("#parar").find("tr:not(:first)");
 	var arguments = Array();
 	for (var i = 0; i < rows.length; i++) {
-		var argument = {
-			//cpId: parseInt(rows[i].childNodes.item(0).getAttribute("id")),
-			//boundCcId: parseInt(rows[i].childNodes.item(2).childNodes.item(0).getAttribute("value")),
-			//variableCpId: 0
-		};
+		var argument = {};
+		
 		var op = rows[i].childNodes.item(2).childNodes.item(0).options.selectedIndex;
 		if(op === 0){
 			argument.cpId = parseInt(rows[i].childNodes.item(3).childNodes.item(0).options[rows[i].childNodes.item(3).childNodes.item(0).options.selectedIndex].id);
@@ -405,7 +418,9 @@ function getQualityParameters(){
 	var arguments = [];
 	var lines = $("#tabQuality > tbody > tr");
 	for(var i=0; i < lines.length;i++){
-		arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		if(lines[i].childNodes.item(2) != null){
+			arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		}
 	}
 	return arguments;
 }
@@ -414,7 +429,9 @@ function getCostParameters(){
 	var arguments = [];
 	var lines = $("#tabCost > tbody > tr");
 	for(var i=0; i < lines.length;i++){
-		arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		if(lines[i].childNodes.item(2) != null){
+			arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		}
 	}
 	return arguments;
 }
@@ -423,7 +440,9 @@ function getRankingParameters(){
 	var arguments = [];
 	var lines = $("#tabRanking > tbody > tr");
 	for(var i=0; i < lines.length;i++){
-		arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		if(lines[i].childNodes.item(2) != null){
+			arguments.push(JSON.parse(lines[i].childNodes.item(2).dataset.json));
+		}
 	}
 	return arguments;
 }
@@ -483,7 +502,6 @@ function loadDetaisComp (viewComp, component, listParar, listNestedComp, listAbs
     
     var cmp = getAbstractComponent(component);
     COMPONENT = cmp;
-    console.log(cmp);
     $("#modalLoadComponent").modal('hide');
     
     
@@ -707,46 +725,68 @@ function newContractPlt(){
 
 function actionParameter(ind){
 	var opt = $("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(1)").find("select option:selected").val();
-	if(opt === 'cp_id'){
+	if(opt === 'ac_id'){
+		/*$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
 		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
-		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
-		var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+		var colum = $("<td/>",{style:"width:200px; padding-left:10px;"});
 		var select = $("#listComp-ops").clone(true);
 		select.addClass("form-control");
 		colum.append(select.css("visibility","visible"));
-		$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
+		$("#tabParCont").find("tr[id='"+ind+"']").append(colum);*/
 
 		//select.selectmenu();//.selectmenu("menuWidget");//.addClass("overflow");
 	}else if(opt === 'contract'){
 		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
 		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
-		var op = $("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(1)").find("select").attr("id");
-		$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
-		getListContracts(op, function(list){
-			if(list != undefined){
-				var listContract = list;
-				
-				var select = $("<select/>",{id:"listContracts", style:"width:250px", class:"form-control"});
-				//select.find("option").remove();
-				if(listContract === null){
-					alert("Não possui contratos!");
-				}else{
-					for (var i = 0; i < listContract.length; i++) {
-						select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
+		
+		//var op = $("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(1)").find("select").attr("id");
+		
+		var colum = $("<td/>",{style:"width:200px; padding-left:10px;"});
+		var select = $("<select/>",{id:"list-cmp-for-contract-"+ind,style:"width:200px; padding-left:10px;"});
+		var options = $("#listComp-ops").find("option");
+		for(var i=0;i < options.length; i++){
+			var o = "<option id='"+options[i].id+"' value='"+options[i].value+"'>"+options[i].value+"</option>";
+			select.append(o);
+		}
+		select.change(function(){
+			console.log(ind);
+			$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(4)").remove();
+			$("#modalLoadContracts").modal({backdrop: 'static', keyboard: false});
+			var cmp = $(this).find("option:selected").attr("id");
+			getListContracts(cmp, function(list){
+				if(list != undefined){
+					var listContract = list;
+					
+					var select = $("<select/>",{id:"listContracts"+ind, style:"width:250px", class:"form-control"});
+					//select.find("option").remove();
+					if(listContract === null){
+						alert("Não possui contratos!");
+					}else{
+						for (var i = 0; i < listContract.length; i++) {
+							select.append("<option id='"+listContract[i].ccId+"' value='"+listContract[i].ccName+"'>"+listContract[i].ccName+"</option>");
+						}
+						var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
+						colum.append(select.css("visibility","visible"));
+						$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
 					}
-					var colum = $("<td/>",{style:"width:250px; padding-left:10px;"});
-					colum.append(select.css("visibility","visible"));
-					$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
+				}else{
+					alert("Este parâmetro não possui contratos");
 				}
-			}else{
-				alert("Este parâmetro não possui contratos");
-			}
-			$("#modalLoadContracts").modal('hide');
-		}, function(error){
-			alert("Não foi possível carregar os contratos!");
-			console.log(error);
-			$("#modalLoadContracts").modal('hide');
+				$("#modalLoadContracts").modal('hide');
+			}, function(error){
+				if(error === null || error === undefined){
+					alert("Esse componente não possui contratos!");
+				}else{
+					alert("Não foi possível carregar os contratos!");
+					console.log(error);
+				}
+				$("#modalLoadContracts").modal('hide');
+			});
 		});
+		select.addClass("form-control");
+		colum.append(select.css("visibility","visible"));
+		$("#tabParCont").find("tr[id='"+ind+"']").append(colum);
+		
 	}else {
 		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();
 		$("#tabParCont").find("tr[id='"+ind+"']").find("td:nth(3)").remove();

@@ -1,4 +1,4 @@
-var ELEMENT = null;
+var c = null;
 var SUPERCMP = null;
 var CONTEXT_PARAMETERS = [];
 var CONTEXT_PARAMETERS_INNER = []
@@ -22,8 +22,6 @@ $(document).ready(function(){
 function init() {
 	
 	$("#submitComponent").hide();
-	$("#saveUpdate").hide();
-	$("#navEditCmp").hide();
 	$("#divNumericDomain").hide();
 	
 	var url   = window.location.search.replace("?", "");
@@ -160,7 +158,7 @@ function init() {
     	openComponent();
     });
     
-    $("#opcaoLimite").click(function(){
+    $("#opcaoLimite").change(function(){
     	var op = $("#opcaoLimite").find("option:selected").attr("value");
     	if(op === "contract"){
     		alert("Selecione um componente!");
@@ -174,16 +172,28 @@ function init() {
     	}
     });
     
-    $("#saveUpdate").click(function(){
-    	componentUpdate = {
-			name:  $("div[id="+ELEMENT+"]").find("p[id=name]").attr("value"),
-			idAc:  $("div[id="+ELEMENT+"]").find("p[id=idAc]").attr("value"),
-	        super: { name: $("div[id="+ELEMENT+"]").find("p[id=supertype]").attr("value"), idAc: parseInt($("div[id="+ELEMENT+"]").find("p[id=idSuper]").attr("value"))  },
-	        parameters: getContextParameters(),
-	        units: getAbstractsUnits()
-    	}
-    	console.log(componentUpdate);
-    });
+//    $("#opcaoLimite > option[value=contract]").click(function(){
+//    	alert("Selecione um componente!");
+//		$("#boundValue").css("visibility","hidden");
+//		$("#bound").show("fast");
+//		$("#divNumericDomain").hide();
+//    });
+//    $("#opcaoLimite > option[value=number]").click(function(){
+//    	$("#bound").hide();
+//		$("#divNumericDomain").show()
+//		$("#boundValue").css("visibility","visible");
+//    });
+    
+//    $("#saveUpdate").click(function(){
+//    	componentUpdate = {
+//			name:  $("div[id="+ELEMENT+"]").find("p[id=name]").attr("value"),
+//			idAc:  $("div[id="+ELEMENT+"]").find("p[id=idAc]").attr("value"),
+//	        super: { name: $("div[id="+ELEMENT+"]").find("p[id=supertype]").attr("value"), idAc: parseInt($("div[id="+ELEMENT+"]").find("p[id=idSuper]").attr("value"))  },
+//	        parameters: getContextParameters(),
+//	        units: getAbstractsUnits()
+//    	}
+//    	console.log(componentUpdate);
+//    });
     
     $("#navNewCmp").click(function(){
     	if(newComp){
@@ -194,13 +204,17 @@ function init() {
     	
     });
     
-    $("#navEditCmp").click(function(){
-    	if(newComp){
-    		window.location = "/component?a=edit";
-    	}else{
-    		openEditComp();
-    	}
+    $("#navNewCmp").click(function(){
+    	$("#modalNewComp").modal("show");
     });
+    
+//    $("#navEditCmp").click(function(){
+//    	if(newComp){
+//    		window.location = "/component?a=edit";
+//    	}else{
+//    		openEditComp();
+//    	}
+//    });
     
     $("#addParQuality").click(function(){
     	addParameterQuality();
@@ -252,147 +266,148 @@ function updateTerms(table, terms){
 }
 
 // FUNÇÕES PARA MANINPULAÇÃO DOS ELEMENTOS NA TELA
-function openComponent() {
-	//var component = getAbstractComponent($("#nameEditComp > h3").attr("value"));
-	var component = {
-		name:"Teste",
-		idAc : 777,
-		supertype: {name:"Superteste",idAc:999},
-		contextParameter:[
-		  {name:"par-1"},
-		  {name:"par-2"},
-		  {name:"par-3"}
-		],
-		abstractUnit:[
-		  {auName:"unid-1"},
-		  {auName:"unid-2"},
-		  {auName:"unid-3"}
-		],
-		innerComponents:[
-		  {name:"inner-1",acId: 1,supertype:{name:"super-inner-1"}},
-		  {name:"inner-2",acId: 2,supertype:{name:"super-inner-2"}},
-		  {name:"inner-3",acId: 3,supertype:{name:"super-inner-3"}},
-		  {name:"inner-4",acId: 4,supertype:{name:"super-inner-1"}},
-		  {name:"inner-5",acId: 5,supertype:{name:"super-inner-2"}},
-		  {name:"inner-6",acId: 6,supertype:{name:"super-inner-3"}}
-		],
-		slices:[
-		  {sliceId:1,innerUnityName:"slice-1",innerComponentName:"inner-1"},
-		  {sliceId:2,innerUnityName:"slice-2",innerComponentName:"inner-2"},
-		  {sliceId:3,innerUnityName:"slice-3",innerComponentName:"inner-3"},
-		  {sliceId:4,innerUnityName:"slice-4",innerComponentName:"inner-3"},
-		  {sliceId:5,innerUnityName:"slice-5",innerComponentName:"inner-2"},
-		  {sliceId:6,innerUnityName:"slice-6",innerComponentName:"inner-1"},
-		  {sliceId:7,innerUnityName:"slice-7",innerComponentName:"inner-4"},
-		  {sliceId:8,innerUnityName:"slice-8",innerComponentName:"inner-4"},
-		  {sliceId:9,innerUnityName:"slice-9",innerComponentName:"inner-5"},
-		  {sliceId:10,innerUnityName:"slice-10",innerComponentName:"inner-6"}
-		]
-	};
-	
-	createNewComponent(component.name, component.supertype.name);
-	$("div[id="+component.name+"]").append("<p id= 'idAc' hidden value='"+component.idAc+"'></p>");
-	$("div[id="+component.name+"]").append("<p id= 'idSuper' hidden value='"+component.supertype.idAc+"'></p>");
-	
-	
-	ELEMENT = component.name;
-	var element = $("#sort2 > div[id="+ELEMENT+"]");
-	console.log(element);
-	
-	$("#init").hide();
-	$("#modalEditeComp").hide();
-	$("#quadro1").show("fast");
-	$("#quadro2").show("fast");
-	
-	
-	if(component.contextParameter != null){
-		var tabParam = $("#listParameters");
-		for(var i=0; i < component.contextParameter.length; i++){
-			var linha  = $("<tr/>",{id: i});
-		    var coluna1 = $("<td/>",{id:0,text:component.contextParameter[i].name, colspan:3 ,style:"width: 70px;", width: 150})
-			linha.append(coluna1);
-			tabParam.append(linha);
-		}
-	}
-	
-	if(component.abstractUnit != null){
-		 var tabUnit = $("#addsUnidades");
-		 for(var i=0; i < component.abstractUnit.length; i++){
-			 var linha = $("<tr/>",{id:i});
-			 linha.append($("<td/>",{text:component.abstractUnit[i].auName, style:"width:200px"}));
-			 linha.append($("<td/>",{text: "Unit "+i, colspan:2, style:"width:80px"}));
-			 tabUnit.append(linha);
-			 
-			 var div = $("<div/>",{value:'units', class:'unit'});
-			 var nameUni = $("<h4/>",{style:"width:50px;", text:"Unit "+i});
-			 div.append(nameUni);
-			 element.append(div);
-		}
-	}
-	
-	if(component.innerComponents != null){
-		var tableCompNested = $("#addsComponents");
-		for(var i = 0; i < component.innerComponents.length; i++){
-			var div = $("<div/>",{ id: i, class:"componentNested"});
-			var localY = parseInt(element.offset().top);
-	        var localX = parseInt(element.offset().left);
-	        div.css("top",(localY+150)+"px").css("left",(localX+20)+"px");
-			div.append($("<h3/>",{ text: component.innerComponents[i].name, align:"center", style:"color: white;"}));
-			div.append($("<h5/>",{ text: ""+component.innerComponents[i].supertype.name+"", align:"center", style:"color:white;" }));
-			$("#sort2").append(div);
-	        $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
-	        
-	        var line = $("<tr/>", {id: i});
-	        line.append($("<td/>",{text: component.innerComponents[i].name, style:"width:150px"}));
-	        line.append($("<td/>",{text: component.innerComponents[i].supertype.name, colspan:3,style:"width:100px"}));
-	        tableCompNested.append(line);
-	        
-	        var endpoint = {
-	            endpoint : "Rectangle" ,
-	            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
-	            connector:"StateMachine",
-	            isTarget : true,
-	            anchor: "Continuous"
-        	}
-	        
-	        for(var j = 0; j < component.slices.length; j++){
-	        	if(component.innerComponents[i].name === component.slices[j].innerComponentName){
-	        		
-	        		jsPlumb.connect({
-	        		    source:div,
-	        		    target:element,
-	        		    endpoint : "Rectangle" ,
-			            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
-			            connector:"StateMachine",
-			            anchor: "Continuous",
-			            deleteEndpointsOnDetach : false,
-			            reattach:true,
-			            overlays: [
-			                [ "Label", { location:0.10, length:80, label: component.slices[j].innerUnityName, cssClass: "endPointPar" } ]
-			            ],
-			            parameters:{
-			                "nameSlice": component.slices[j].innerUnityName,
-			                "idSlice": component.slices[j].sliceId,
-			                "component": component.innerComponents[i].name,
-			                "idComponent": component.innerComponents[i].acId
-			            	}
-	        		});
-	        		jsPlumb.draggable(div);
-	        	}
-	        	jsPlumb.repaintEverything();
-	        }
-		}
-	}
-}
+//function openComponent() {
+//	//var component = getAbstractComponent($("#nameEditComp > h3").attr("value"));
+//	var component = {
+//		name:"Teste",
+//		idAc : 777,
+//		supertype: {name:"Superteste",idAc:999},
+//		contextParameter:[
+//		  {name:"par-1"},
+//		  {name:"par-2"},
+//		  {name:"par-3"}
+//		],
+//		abstractUnit:[
+//		  {auName:"unid-1"},
+//		  {auName:"unid-2"},
+//		  {auName:"unid-3"}
+//		],
+//		innerComponents:[
+//		  {name:"inner-1",acId: 1,supertype:{name:"super-inner-1"}},
+//		  {name:"inner-2",acId: 2,supertype:{name:"super-inner-2"}},
+//		  {name:"inner-3",acId: 3,supertype:{name:"super-inner-3"}},
+//		  {name:"inner-4",acId: 4,supertype:{name:"super-inner-1"}},
+//		  {name:"inner-5",acId: 5,supertype:{name:"super-inner-2"}},
+//		  {name:"inner-6",acId: 6,supertype:{name:"super-inner-3"}}
+//		],
+//		slices:[
+//		  {sliceId:1,innerUnityName:"slice-1",innerComponentName:"inner-1"},
+//		  {sliceId:2,innerUnityName:"slice-2",innerComponentName:"inner-2"},
+//		  {sliceId:3,innerUnityName:"slice-3",innerComponentName:"inner-3"},
+//		  {sliceId:4,innerUnityName:"slice-4",innerComponentName:"inner-3"},
+//		  {sliceId:5,innerUnityName:"slice-5",innerComponentName:"inner-2"},
+//		  {sliceId:6,innerUnityName:"slice-6",innerComponentName:"inner-1"},
+//		  {sliceId:7,innerUnityName:"slice-7",innerComponentName:"inner-4"},
+//		  {sliceId:8,innerUnityName:"slice-8",innerComponentName:"inner-4"},
+//		  {sliceId:9,innerUnityName:"slice-9",innerComponentName:"inner-5"},
+//		  {sliceId:10,innerUnityName:"slice-10",innerComponentName:"inner-6"}
+//		]
+//	};
+//	
+//	createNewComponent(component.name, component.supertype.name);
+//	$("div[id="+component.name+"]").append("<p id= 'idAc' hidden value='"+component.idAc+"'></p>");
+//	$("div[id="+component.name+"]").append("<p id= 'idSuper' hidden value='"+component.supertype.idAc+"'></p>");
+//	
+//	
+//	ELEMENT = component.name;
+//	var element = $("#sort2 > div[id="+ELEMENT+"]");
+//	console.log(element);
+//	
+//	$("#init").hide();
+//	$("#modalEditeComp").hide();
+//	$("#quadro1").show("fast");
+//	$("#quadro2").show("fast");
+//	
+//	
+//	if(component.contextParameter != null){
+//		var tabParam = $("#listParameters");
+//		for(var i=0; i < component.contextParameter.length; i++){
+//			var linha  = $("<tr/>",{id: i});
+//		    var coluna1 = $("<td/>",{id:0,text:component.contextParameter[i].name, colspan:3 ,style:"width: 70px;", width: 150})
+//			linha.append(coluna1);
+//			tabParam.append(linha);
+//		}
+//	}
+//	
+//	if(component.abstractUnit != null){
+//		 var tabUnit = $("#addsUnidades");
+//		 for(var i=0; i < component.abstractUnit.length; i++){
+//			 var linha = $("<tr/>",{id:i});
+//			 linha.append($("<td/>",{text:component.abstractUnit[i].auName, style:"width:200px"}));
+//			 linha.append($("<td/>",{text: "Unit "+i, colspan:2, style:"width:80px"}));
+//			 tabUnit.append(linha);
+//			 
+//			 var div = $("<div/>",{value:'units', class:'unit'});
+//			 var nameUni = $("<h4/>",{style:"width:50px;", text:"Unit "+i});
+//			 div.append(nameUni);
+//			 element.append(div);
+//		}
+//	}
+//	
+//	if(component.innerComponents != null){
+//		var tableCompNested = $("#addsComponents");
+//		for(var i = 0; i < component.innerComponents.length; i++){
+//			var div = $("<div/>",{ id: i, class:"componentNested"});
+//			var localY = parseInt(element.offset().top);
+//	        var localX = parseInt(element.offset().left);
+//	        div.css("top",(localY+150)+"px").css("left",(localX+20)+"px");
+//			div.append($("<h3/>",{ text: component.innerComponents[i].name, align:"center", style:"color: white;"}));
+//			div.append($("<h5/>",{ text: ""+component.innerComponents[i].supertype.name+"", align:"center", style:"color:white;" }));
+//			$("#sort2").append(div);
+//	        $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
+//	        
+//	        var line = $("<tr/>", {id: i});
+//	        line.append($("<td/>",{text: component.innerComponents[i].name, style:"width:150px"}));
+//	        line.append($("<td/>",{text: component.innerComponents[i].supertype.name, colspan:3,style:"width:100px"}));
+//	        tableCompNested.append(line);
+//	        
+//	        var endpoint = {
+//	            endpoint : "Rectangle" ,
+//	            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
+//	            connector:"StateMachine",
+//	            isTarget : true,
+//	            anchor: "Continuous"
+//        	}
+//	        
+//	        for(var j = 0; j < component.slices.length; j++){
+//	        	if(component.innerComponents[i].name === component.slices[j].innerComponentName){
+//	        		
+//	        		jsPlumb.connect({
+//	        		    source:div,
+//	        		    target:element,
+//	        		    endpoint : "Rectangle" ,
+//			            endpointStyle:{width:40,height: 20,fillStyle:'#008B8B'},
+//			            connector:"StateMachine",
+//			            anchor: "Continuous",
+//			            deleteEndpointsOnDetach : false,
+//			            reattach:true,
+//			            overlays: [
+//			                [ "Label", { location:0.10, length:80, label: component.slices[j].innerUnityName, cssClass: "endPointPar" } ]
+//			            ],
+//			            parameters:{
+//			                "nameSlice": component.slices[j].innerUnityName,
+//			                "idSlice": component.slices[j].sliceId,
+//			                "component": component.innerComponents[i].name,
+//			                "idComponent": component.innerComponents[i].acId
+//			            	}
+//	        		});
+//	        		jsPlumb.draggable(div);
+//	        	}
+//	        	jsPlumb.repaintEverything();
+//	        }
+//		}
+//	}
+//}
 
 function createNewComponent(name, supertype){
 	
-    var div = $("<div/>",{ id: name, class:"component"});
+    var div = $("<div/>",{ id: name, class:"component", title:"Click com o botão direito para listar as opções."});
     div.css("top","200px");
     div.append($("<h3/>",{ text: name, align:"center"}));
     div.append("<p id= 'name' hidden value='"+name+"'></p>");
     div.append("<p id= 'supertype' hidden value='"+supertype+"'></p>");
     div.append($("<h5/>",{ text: ""+supertype+" - "+types.get(parseInt($("#typeComponent").val()))+"", align:"center"}));
+    div.tooltip();
     $("#sort2").append(div);
     $("#sort2 > div:not(#trash)").draggable({ cursor:"move"});
     jsPlumb.makeTarget(div,{
@@ -402,6 +417,7 @@ function createNewComponent(name, supertype){
         anchor: "Continuous"
     });
     jsPlumb.draggable(div);
+    
     
     /* MENU POP-UP */
     $.contextMenu({
@@ -530,17 +546,23 @@ function addParameterQuality(){
 	var name = $("#name-par-quality").val();
 	var func = $("#function-value-quality").val();
 	if(name != ""){
+		
 		//Object Parameter Quality
 		var quality = {
 			name: name,
-			//kindId:$("#kind-quality").val()===null? undefined:parseInt($("#kind-quality").val()),
-			kindId: 2,
-			calculatedArgument:{
+			kindId: 2
+		};
+		
+		if(($("#value-argument-quality").val() != null && $("#value-argument-quality").val() != "")
+				|| ($("#kind-argument-quality").val() != null && $("#kind-argument-quality").val() != "")
+				|| $("#cp-argument-quality").val() != null && $("#cp-argument-quality").val() != ""){
+			
+			quality.calculatedArgument = {
 				value:$("#value-argument-quality").val()===null || $("#value-argument-quality").val()===""? undefined:parseFloat($("#value-argument-quality").val()),
 				kindId:$("#kind-argument-quality").val()===null || $("#kind-argument-quality").val()===""? undefined:parseInt($("#kind-argument-quality").val()),
 				cpId:$("#cp-argument-quality").val()===null || $("#cp-argument-quality").val()===""? undefined:parseInt($("#cp-argument-quality").val())
 			}
-		};
+		}
 		
 		if($("#function-value-quality").val()!=null && $("#function-value-quality").val()!=""){
 			
@@ -583,18 +605,25 @@ function addParameterQuality(){
 function addParameterCost(){
 	var name = $("#name-par-cost").val();
 	var func = $("#function-value-cost").val();
-	//Object Parameter Cost
+	
 	if(name != ""){
+		
+		//Object Parameter Cost
 		var cost = {
 			name: name,
-			//kindId: $("#kind-cost").val()===null? undefined:parseInt($("#kind-cost").val()),
-			kindId: 3,
-			calculatedArgument:{
-				value:$("#value-argument-cost").val()===null? undefined:parseFloat($("#value-argument-cost").val()),
-				kindId: $("#kind-argument-cost").val()===null? undefined:parseInt($("#kind-argument-cost").val()),
-				cpId: $("#cp-argument-cost").val()===null? undefined:parseInt($("#cp-argument-cost").val())
-			}
+			kindId: 3
 		};
+		
+		if(($("#value-argument-cost").val() != null && $("#value-argument-cost").val() != "")
+				|| ($("#kind-argument-cost").val() != null && $("#kind-argument-cost").val() != "")
+				|| $("#cp-argument-cost").val() != null && $("#cp-argument-cost").val() != ""){
+			
+			cost.calculatedArgument = {
+				value:$("#value-argument-cost").val()==="" || $("#value-argument-cost").val()===null? undefined:parseFloat($("#value-argument-cost").val()),
+				kindId: $("#kind-argument-cost").val()==="" || $("#kind-argument-cost").val()===null? undefined:parseInt($("#kind-argument-cost").val()),
+				cpId: $("#cp-argument-cost").val()==="" || $("#cp-argument-cost").val()===null? undefined:parseInt($("#cp-argument-cost").val())
+			}
+		}
 		
 		if($("#function-value-cost").val() != null && $("#function-value-cost").val() != ""){
 
@@ -637,18 +666,23 @@ function addParameterRanking(){
 	var name = $("#name-par-ranking").val();
 	var func = $("#function-value-ranking").val();
 	if(name != ""){
+		
 		//Object Parameter Ranking
 		var ranking = {
 			name: name,
-			//kindId: $("#kind-ranking").val()===null? undefined:parseInt($("#kind-ranking").val()),
-			kindId:4,
-			calculatedArgument:{
-				value:$("#value-argument-ranking").val()===null? undefined:parseFloat($("#value-argument-ranking").val()),
-				kindId: $("#kind-argument-ranking").val()===null? undefined:parseInt($("#kind-argument-ranking").val()),
-				cpId: $("#cp-argument-ranking").val()===null? undefined:parseInt($("#cp-argument-ranking").val()),
-			}
+			kindId:4
 		};
 		
+		if(($("#value-argument-ranking").val() != null && $("#value-argument-ranking").val() != "")
+				|| ($("#kind-argument-ranking").val() != null && $("#kind-argument-ranking").val() != "")
+				|| $("#cp-argument-ranking").val() != null && $("#cp-argument-ranking").val() != ""){
+			
+			ranking.calculatedArgument = {
+				value:$("#value-argument-ranking").val()===null || $("#value-argument-ranking").val()===""? undefined:parseFloat($("#value-argument-ranking").val()),
+				kindId: $("#kind-argument-ranking").val()===null || $("#kind-argument-ranking").val()==""? undefined:parseInt($("#kind-argument-ranking").val()),
+				cpId: $("#cp-argument-ranking").val()===null || $("#cp-argument-ranking").val() === ""? undefined:parseInt($("#cp-argument-ranking").val()),
+			}
+		}
 		
 		if($("#function-value-ranking").val()!=null && $("#function-value-ranking").val()!=""){
 			
@@ -800,6 +834,9 @@ function deleteElement(element, js){
 	    $("#addsUnidades").find("tr:not(:first-child)").remove();
         $("#listParameters").find("tr:not(:first-child)").remove();
         $("#addsComponents").find("tr:not(:first-child)").remove();
+        if(name === ELEMENT){
+        	window.location = "/component?a=new";
+        }
 	}else{
 		jsPlumb.remove(element);
 	    element.remove();
@@ -861,16 +898,11 @@ function addNewAbstractComponent(){
     var qualities = getQualityParameters();
     var costs = getCostParameters();
     var rankings = getRankingParameters();
-    console.log(qualities);
-    console.log(costs);
-    console.log(rankings);
     var compObj = {
         name: nameComponent,
         kind: parseInt($("#typeComponent").val()),
         'super': { name: supertype, idAc: parseInt(idsupertype)  },
-        //'super': { name: "Hue", idAc: 1  },//o supertipo deve ser obrigatório
         parameters: contextParameter.length===0? undefined:contextParameter,
-        //path: $("#pathComponent").val(),
         units: unitsAbstracts.length===0? undefined:unitsAbstracts,
         inners: nestedComponents.length===0? undefined:nestedComponents,
         slices: unislices.length===0? undefined:unislices,
@@ -896,6 +928,7 @@ function addNewAbstractComponent(){
     }, function (result){
     	alert("Não foi possível cadastrar seu componente!");
     	$("#modalSubmit").modal('hide');
+    	console.log(result);
     });
 }
 
@@ -1042,6 +1075,10 @@ function loadParameters(){
 		$("#cp-argument-cost").find("option").remove();
 		$("#cp-argument-ranking").find("option").remove();
 		
+		$("#cp-argument-quality").append("<option></option>");
+		$("#cp-argument-cost").append("<option></option>");
+		$("#cp-argument-ranking").append("<option></option>");
+		
 		for(var i=0; i< CONTEXT_PARAMETERS.length; i++){
 			$("#cp-argument-quality").append("<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>");
 			$("#cp-argument-cost").append("<option value="+CONTEXT_PARAMETERS[i].cpId+">"+CONTEXT_PARAMETERS[i].name+"</option>");
@@ -1097,16 +1134,16 @@ function parameters(listParameters){
 		parametersObjs[i] = {
 			name: listParameters[i].childNodes[0].getAttribute("value"),
 			kind: 1,
-			varience: listParameters[i].firstChild.getElementsByTagName("p").item(3).getAttribute("value")
+			variance: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(3).getAttribute("value"))
 		}
-		if($("#opcaoLimite").find("option:selected").attr("value") === "contract"){
+		if(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value") != "undefined"){
 			parametersObjs[i].bound = {
 				ccId: listParameters[i].firstChild.firstChild.value == ""? null: parseInt(listParameters[i].firstChild.getElementsByTagName("p").item(0).getAttribute("value")),
 				ccName: listParameters[i].firstChild.firstChild.value == ""? null: listParameters[i].firstChild.getElementsByTagName("p").item(1).getAttribute("value")
 			}
 		}else{
+			parametersObjs[i].numericDomain = listParameters[i].firstChild.getElementsByTagName("p").item(4).getAttribute("value");
 			parametersObjs[i].boundValue = listParameters[i].firstChild.getElementsByTagName("p").item(2).getAttribute("value");
-			parametersObjs[i].boundValueDomain = listParameters[i].firstChild.getElementsByTagName("p").item(4).getAttribute("value")
 		}
 	}
 	return parametersObjs;

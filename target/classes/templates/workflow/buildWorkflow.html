@@ -5,8 +5,8 @@
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="../lib/jquery/jquery-ui.css"/>
         <link rel="stylesheet" type="text/css" href="../css/build-workflow.css"/>
-        <!--<script type ="text/javascript" src="libs/jQuery/jquery-2.1.4.min.js"></script>
-		<script type ="text/javascript" src="libs/jQuery/jquery-ui.js"></script>-->
+        <!-- <script type ="text/javascript" src="../lib/jQuery/jquery-2.1.4.min.js"></script>
+		<script type ="text/javascript" src="../lib/jQuery/jquery-ui.js"></script>-->
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type ="text/javascript" src="../lib/bootstrap/bootstrap.min.js"></script>
@@ -20,17 +20,17 @@
         <script src="../lib/ContextMenu/jquery.contextMenu.js"></script>
         <script src="../lib/ContextMenu/jquery.ui.position.js"></script>
         <script src="../js/services/converters/workflow.js"></script>
-        <script src="../js/services/converters/architecture.js"></script>
         <script src="../js/services/workflow-service.js"></script>
         <script type="text/javascript" src="../js/controllers/workflow-controller.js"></script>
+        <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon"/>
         <title>Construção do Workflow</title>
     </head>
     <!-- <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">-->
-    <body style="background: #87CEFA;">
+    <body style="background: #B0C4DE;">
         <nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"><b>WORK</b><!--<img width="50px" style="margin-top: -13px; float: left;" src="../resources/img/logo.png"/>--></a>
+                    <a class="navbar-brand" href="#"><img width="50px" style="margin-top: -13px; float: left;" src="../img/logo.png"/></a>
 		    	</div>
 		    	<ul class="nav navbar-nav">
 					<li><a href="/home">Home</a></li>
@@ -61,7 +61,7 @@
                             <li><a id="clean-out" href="#" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Limpar</a></li>
                         </ul>
                     </li>
-                    <li><a href="../index.html">Ajuda</a></li>
+                    <li><a id="showHelp">Ajuda</a></li>
 		    	</ul>
 		    	<ul id="nav" class="nav navbar-nav navbar-right">
 		    		<h4 class="navbar-text">Workflow</h4>
@@ -235,5 +235,51 @@
                 </center>
             </div>
         </section>
+         <div id="modalHelp" class="modal fade" role="dialog">
+	       	<div class="modal-dialog">
+			    <div class="modal-content">
+				    <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="title-modal"><p>Ajuda</p></h4>
+				    </div>
+					<div class="modal-body">
+						<div style="height:300px; overflow: auto;">
+							<table class="table table-striped" > 
+								<thead>
+									<tr>
+										<th>Elemento</th>
+										<th>Descrição</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td><img src="../img/add_operation.png" /></td><td>Adição de nova operação</td><td></td></tr>
+									<tr><td><img src="../img/remove_operation.png" /></td><td>Remoção de operação</td><td></td></tr>
+									<tr><td><img src="../img/operation.png" /></td><td>Operação Genérica (esta operação pode ser mudada, desde que seja selecionada o seu novo tipo na aba de propriedades)</td><td></td></tr>
+									<tr><td><img src="../img/icon_sequence.png" /></td><td>Escopo Sequencia (Escopo que executa sequenciamente as operações)</td><td></td></tr>
+									<tr><td><img src="../img/icon_parallel.png" /></td><td>Escopo Paralelo (Escopo que executa paralelamente as operações)</td><td></td></tr>
+									<tr><td><img src="../img/icon_choice.png" /></td><td>Escopo Escolha (Escopo que executa um determinado SELECT, dependendo de uma determinada ação)</td><td></td></tr>
+									<tr><td><img src="../img/icon_select.png" /></td><td>Operação de seleção (Operação que executa ações quando é selecionado pelo CHOICE)</td><td></td></tr>
+									<tr><td><img src="../img/icon_invoke.png" /></td><td>Invoca um componente (Permite realização a resolução, instânciação ou implantação do componente)</td><td></td></tr>
+									<tr><td><img src="../img/icon_action.png" /></td><td>Aciona um componente (Permite realização a resolução, instânciação ou implantação do componente)</td><td></td></tr>
+									<tr><td><img src="../img/icon_arg.png" /></td><td>Argumento de execução (Permite informar um argumento para invocação ou acionamento de um componente)</td><td></td></tr>
+									<tr><td><img src="../img/icon_activate.png" /></td><td>Ação de ativação (Denota a ativação síncrona de uma ação)</td><td></td></tr>
+									<tr><td><img src="../img/icon_start.png" /></td><td>Ação de ativação assíncrona (denota a ativação assíncrona de uma ação, a qual pode ser manipulada por um identicador)</td><td></td></tr>
+									<tr><td><img src="../img/icon_cancel.png" /></td><td>Ação de cancelamento (Denota o cancelamento da ativação de uma ação previamente ativada de forma assíncrona)</td><td></td></tr>
+									<tr><td><img src="../img/icon_wait.png" /></td><td>Ação de espera (denota a espera do término de uma ação assíncrona previamente ativada, possivelmente bloqueando a thread do workflow onde foi executada)</td><td></td></tr>
+									<tr><td><img src="../img/icon_iterate.png" /></td><td>Escopo de Repetição (Escopo que permite repetir a execução das ações aninhadas ao escopo)</td><td></td></tr>
+									<tr><td><img src="../img/icon_continue.png" /></td><td>Ação de continuação (Ação que volta ao início da iteração onde encontra-se diretamente aninhada)</td><td></td></tr>
+									<tr><td><img src="../img/icon_break.png" /></td><td>Ação de quebra (Ação que termina a iteração onde encontra-se diretamente aninhada)</td><td></td></tr>
+									<tr><td><img src="../img/icon_skip.png" /></td><td>Ação vazia</td><td></td></tr>
+								</tbody>
+							</table>
+						</div>
+						<input id="helpView" type="checkbox">Não esta tela novamente!</input>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+					</div>
+			    </div>
+			</div>
+	     </div>
     </body>
 </html>

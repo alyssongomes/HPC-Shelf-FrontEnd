@@ -4,12 +4,13 @@ var safeArchiteture = org_example_safe_architecture_v4;
 function getApplication(callback){
 	var context = new Jsonix.Context([instantiator,safeArchiteture]);
 	var unmarshaller = context.createUnmarshaller();
-	unmarshaller.unmarshalURL('/js/services/mr-arch-novo.xml',function(unmarshalled){
+	//unmarshaller.unmarshalURL('/js/services/mr-arch-novo.xml',function(unmarshalled){
+	unmarshaller.unmarshalURL('/js/services/tutorial-arch.xml',function(unmarshalled){
 		callback(unmarshalled);
 	});
 }
 
-function createApplication(architeture, callback){
+function registerApplication(architeture, callback){
 	var context = new Jsonix.Context([instantiator,safeArchiteture]);
 	var marshaller = context.createMarshaller();
 	var doc = marshaller.marshalDocument({
@@ -21,12 +22,10 @@ function createApplication(architeture, callback){
 	});
 	var oSerializer = new XMLSerializer();
 	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
-	callback(sXML);
 	$.ajax({
-    	url:"/architecture/download?arch="+sXML,
+		contentType:"text/plain",
+    	url:"/architecture/download?"+sXML,
     	data: sXML,
-		dataType: "text",
-		contentType: 'text/xml',
 		type:"POST",
 		success: function(data) {
 			callback(data);

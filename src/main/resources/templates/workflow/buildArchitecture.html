@@ -15,13 +15,14 @@
 <script src="/js/services/architecture-service.js"></script>
 <script src="/js/controllers/architecture-controller.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="shortcut icon" href="../img/logo.png" type="image/x-icon"/>
 <title>Montagem da Arquitetura</title>
 </head>
-<body style="background: #87CEFA;">
+<body style="background: #B0C4DE;">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 	  <div class="container-fluid">
 	    	<div class="navbar-header">
-	      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="/img/logo.png"/></a>
+	      		<a class="navbar-brand" href="#"><img width="70px" style="margin-top: -13px; float: left;" src="../img/logo.png"/></a>
 	    	</div>
 	    	<ul id="nav" class="nav navbar-nav">
 				<li><a href="/home">Home</a></li>
@@ -31,6 +32,7 @@
 		          		<li><a id="navSaveApp" href="#">Salvar Arquitetura</a></li>
 		        	</ul>
 				</li>
+				<li><a id="openHelp">Ajuda</a></li>
 	    	</ul>
 	    	<ul id="nav" class="nav navbar-nav navbar-right">
 				<h4 class="navbar-text">Arquitetura</h4>
@@ -41,7 +43,8 @@
 		<div class="panel-heading">
 	    	<h3 class="panel-title">Paleta</h3>
 	  	</div>
-	  	<div class="panel-body">
+	  	<div class="panel-body" style="height:505px; overflow: auto;">
+	  		<div id="btn-application" type="button" class="btn btn-default"><img alt="Application" src="/img/application.png" width="50px" height="40px"/><h4>Aplicação</h4></div>
 	    	<div id="btn-workflow" type="button" class="btn btn-default"><img alt="Workflow" src="/img/workflow.png" width="50px" height="40px"/><h4>Workflow</h4></div>
 	    	<div id="btn-computation" type="button" class="btn btn-default"><img alt="Computação" src="/img/computation.png" width="50px" height="40px"/><h4>Computação</h4></div>
 	    	<div id="btn-platform" type="button" class="btn btn-default"><img alt="Plataforma" src="/img/platform.png" width="50px" height="40px"/><h4>Plataforma</h4></div>
@@ -54,10 +57,10 @@
 	    <h3 class="panel-title">Arquitetura</h3>
 	  </div>
 	  <div class="panel-body jtk-demo-canvas canvas-wide drag-drop-demo jtk-surface jtk-surface-nopan" id="workspace-body">
-	  	<div id="trash">
-           	<img alt="lixo" src="../img/lixo.png" height="70px" width="70px" style="float:left;"/>
-           	<h3>LIXEIRA</h3>
-       	</div>
+<!-- 	  	<div id="trash" style="height: 80px; width: 80px;"> -->
+<!--            	<img alt="lixo" src="../img/lixo.png" height="70px" width="70px" style="float:left;"/> -->
+<!--            	<h3>LIXEIRA</h3> -->
+<!--        	</div> -->
 	  </div>
 	</div>
 	<div class="panel panel-primary" id="properties">
@@ -123,6 +126,67 @@
 		      <div class="modal-body">
 		      	<a href="../file/architecture.xml" download="architecture.xml">Click aqui para baixar a arquitetura</a>
 		      </div>
+		    </div>
+		</div>
+     </div>
+     
+     <div id="modalHelp" class="modal fade" role="dialog">
+       	<div class="modal-dialog">
+		    <div class="modal-content">
+			    <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id="title-modal"><p>Ajuda</p></h4>
+			    </div>
+				<div class="modal-body" style="padding: 30px">
+					<table class="table table-striped" >
+						<thead>
+							<tr style="width: 30px;">
+								<th>Elemento</th>
+								<th>Descrição</th>
+								<th>Exemplo</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<svg id="svgelem" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+										<circle id="redcircle" cx="15" cy="15" r="15" fill="#008B8B" />
+									</svg>
+								</td>
+								<td>Porta provedora (recebem ligação de portas de uso)</td>
+								<td rowspan="2"><img width="150px" height="80px" src="../img/example_use_prov.png" /></td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="svgelem" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+										<circle id="redcircle" cx="15" cy="15" r="15" fill="##008B8B" />
+									</svg>
+								</td>
+								<td>Porta de uso (se ligam com portas provedoras)</td>
+							</tr>
+							<tr>
+								<td>
+									<svg id="svgelem" height="30" width="30" xmlns="http://www.w3.org/2000/svg">
+										<rect id="redrect" width="30" height="30" fill="#008B8B" />
+									</svg>
+								</td>
+								<td>Porta de tarefa (se ligam com outras portas de tarefa)</td>
+								<td rowspan="1"><img width="150px" height="80px" src="../img/example_task_task.png" /></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="../img/icon_delete.png" height="30px" width="30px" />
+								</td>
+								<td>Deleter Componente da Arquitetura</td>
+							</tr>
+						</tbody>
+					</table>
+					<br/>
+					<input id="helpView" type="checkbox">Não esta tela novamente!</input>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+				</div>
 		    </div>
 		</div>
      </div>

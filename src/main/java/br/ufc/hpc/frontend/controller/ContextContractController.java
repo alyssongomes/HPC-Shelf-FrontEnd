@@ -36,8 +36,8 @@ public class ContextContractController{
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		try {
 			System.out.println(con);
-			Boolean result = service.getCoreServicesHttpSoap11Endpoint().addContextContract(con);
-			//Boolean result = true;
+			//Boolean result = service.getCoreServicesHttpSoap11Endpoint().addContextContract(con);
+			Boolean result = true;
 			System.out.println(result);
 			return header+"<result value=\""+result+"\"/>";
 		} catch (Exception e) {

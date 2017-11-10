@@ -3,7 +3,6 @@ var contextStorm = br_ufc_lia_storm;
 function getListAbstractComponents() {
 	var abstractComponent = [];
 	$.ajax({
-		//url:"/HPC-Shelf-FrontEnd-Core/abstractComponentCore?action=list",
 		url:"/component/list",
 		async: false,
 		type:"GET",
@@ -30,7 +29,7 @@ function getAbstractComponent(component){
 	var abstractComponent = null;
 	$.ajax({
 		contentType:"text/plain",
-		url:"/component/get?"+component,
+		url:"/component/get",
 		async: false,
 		data: component,
 		type:"POST",
@@ -50,44 +49,50 @@ function getAbstractComponent(component){
 }
 
 function saveNewAbstractComponent(componentObj, callback, callerror){
-	var context = new Jsonix.Context([contextStorm]);
-	var marshaller = context.createMarshaller();
-	var doc = marshaller.marshalDocument({
-		name:{
-			namespaceURI: 'http:\/\/storm.lia.ufc.br',
-			localPart: 'abstract_component'
-		},
-		value:{
-			name: componentObj.name,
-			kind: componentObj.kind,
-			path: componentObj.path,
-			supertype: componentObj.super,
-			contextParameter: componentObj.parameters,
-			innerComponents: componentObj.inners,
-			abstractUnit: componentObj.units,
-			slices: componentObj.slices,
-			qualityParameters:componentObj.qualityParameters,
-			costParameters:componentObj.costParameters,
-			rankingParameters:componentObj.rankingParameters
-		}
-	});
-	var oSerializer = new XMLSerializer();
-	var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
-	console.log(sXML);
-	$.ajax({
-		contentType:"text/plain",
-	    type: 'POST',
-	    url: "/component/save?"+sXML,
-	    data: sXML,
-	    success : function(result){
-	    	try{
-		    	result = jQuery.parseXML(result);
-		    	callback(result);
-	    	}catch (e) {
-				callerror(e);
+	try{
+		var context = new Jsonix.Context([contextStorm]);
+		var marshaller = context.createMarshaller();
+		var doc = marshaller.marshalDocument({
+			name:{
+				namespaceURI: 'http:\/\/storm.lia.ufc.br',
+				localPart: 'abstract_component'
+			},
+			value:{
+				name: componentObj.name,
+				kind: componentObj.kind,
+				path: componentObj.path,
+				supertype: componentObj.super,
+				contextParameter: componentObj.parameters,
+				innerComponents: componentObj.inners,
+				abstractUnit: componentObj.units,
+				slices: componentObj.slices,
+				qualityParameters:componentObj.qualityParameters,
+				costParameters:componentObj.costParameters,
+				rankingParameters:componentObj.rankingParameters
 			}
-	    }
-	});
+		});
+		var oSerializer = new XMLSerializer();
+		var sXML = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
+		console.log(sXML);
+		$.ajax({
+			contentType:"text/plain",
+		    type: 'POST',
+		    url: "/component/save",
+		    data: sXML,
+		    success : function(result){
+		    	try{
+			    	result = jQuery.parseXML(result);
+			    	callback(result);
+		    	}catch (e) {
+					callerror(e);
+				}
+		    },error: function(erro){
+		    	callerror(erro);
+		    }
+		});
+	}catch(e){
+		callerror(e);
+	}
 }
 /*
 function addContextParameter(component, callback){

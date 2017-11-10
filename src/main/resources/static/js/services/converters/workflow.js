@@ -340,15 +340,15 @@ class Workflow{
         }
     }
     
-    static toJsonix(work){
+	static toJsonix(work){
         if(work.name === "sequence_oper"){
             var root = {};
             root.sequenceOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
+                order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
                 operation : []
             }
             for(var i=0; i<work.children.length;i++){
@@ -358,11 +358,11 @@ class Workflow{
         }else if(work.name === "parallel_oper"){
             var root = {};
             root.parallelOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
                 operation : []
             }
             for(var i=0; i<work.children.length;i++){
@@ -372,13 +372,13 @@ class Workflow{
         }else if(work.name === "iterate_oper"){
             var root = {};
             root.iterateOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                max: work.properties.iterate.max,
-                iterLabel: work.properties.iterate.iterLabel,
+            	order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                max: work.properties.iterate.max !="" && work.properties.iterate.max !=null? parseInt(work.properties.iterate.max):undefined,
+                iterLabel: work.properties.iterate.iterLabel != "" && work.properties.iterate.iterLabel != null?work.properties.iterate.iterLabel:undefined,
                 operation : []
             }
             for(var i=0; i<work.children.length;i++){
@@ -388,13 +388,13 @@ class Workflow{
         }else if(work.name === "invoke_oper"){
             var root = {};
             root.invokeOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                action: work.properties.invoke.action,
-                id: ""+work.properties.invoke.componentId,
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                action: work.properties.invoke.action !="" && work.properties.invoke.action !=null? work.properties.invoke.action:undefined,
+                id: work.properties.invoke.componentId !="" && work.properties.invoke.componentId != null? ""+work.properties.invoke.componentId:undefined,
                 arg : []
             }
             if(work.children != undefined)
@@ -403,19 +403,19 @@ class Workflow{
             return root;
         }else if(work.name === "arg"){
             var arg = {
-                type: work.properties.arg.type,
-                value:work.properties.arg.value
+                type: work.properties.arg.type != "" && work.properties.arg.type != null? work.properties.arg.type:undefined,
+                value:work.properties.arg.value != "" && work.properties.arg.value != null? work.properties.arg.value:undefined
             }
             return arg;
         }else if(work.name === "choice_oper"){
             var root = {};
             root.choiceOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                chosen: work.properties.choice.chosen,
+            	order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                chosen: work.properties.choice.chosen != "" && work.properties.choice.chosen != null? work.properties.choice.chosen:undefined,
                 select : []
             }
             for(var i=0; i<work.children.length;i++){
@@ -424,12 +424,12 @@ class Workflow{
             return root;
         }else if(work.name === "select"){
             var select = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                actionId: work.properties.select.actionId,
+            	order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                actionId: work.properties.select.actionId != "" && work.properties.select.actionId != null? work.properties.select.actionId:undefined,
                 operation : []
             }
             for(var i=0; i<work.children.length;i++){
@@ -439,12 +439,12 @@ class Workflow{
         }else if(work.name === "start_oper"){
             var root = {};
             root.startOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                handleId: work.properties.primitive.handleId,
+           		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                handleId: work.properties.primitive.handleId != "" && work.properties.primitive.handleId != null? work.properties.primitive.handleId:undefined,
                 action : null
             }
             root.startOper.action = Workflow.toJsonix(work.children[0]);
@@ -452,13 +452,13 @@ class Workflow{
             return root;
         }else if(work.name === "action"){
             var action = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                action: work.properties.action.action,
-                id: ""+work.properties.action.componentId,
+            	order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                action: work.properties.action.action != "" && work.properties.action.action != null? work.properties.action.action:undefined,
+                id: ""+work.properties.action.componentId != "" && work.properties.action.componentId != null? ""+work.properties.action.componentId:undefined,
                 arg : []
             }
             if(work.children != undefined)
@@ -468,12 +468,12 @@ class Workflow{
         }else if(work.name === "wait_oper"){
             var root = {};
             root.waitOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                handleId: work.properties.primitive.handleId,
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                handleId: work.properties.primitive.handleId != "" && work.properties.primitive.handleId != null? work.properties.primitive.handleId:undefined,
                 action : []
             }
             root.waitOper.action = Workflow.toJsonix(work.children[0]);
@@ -481,12 +481,12 @@ class Workflow{
         }else if(work.name === "cancel_oper"){
             var root = {};
             root.cancelOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label,
-                handleId: work.properties.primitive.handleId,
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
+                handleId: work.properties.primitive.handleId != "" && work.properties.primitive.handleId != null? work.properties.primitive.handleId:undefined,
                 action : []
             }
             root.cancelOper.action = Workflow.toJsonix(work.children[0]);
@@ -494,31 +494,31 @@ class Workflow{
         }else if(work.name === "break_oper"){
             var root = {};
             root.breakOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined
             }
             return root;
         }else if(work.name === "skip_oper"){
             var root = {};
             root.skipOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined,
             }
             return root;
         }else if(work.name === "continue_oper"){
             var root = {};
             root.continueOper = {
-                order: work.properties.base.order,
-                value:work.properties.base.value,
-                oper_name:work.properties.base.oper_name,
-                level: work.properties.base.level,
-                base_label:work.properties.base.base_label
+        		order: work.properties.base.order != "" && work.properties.base.order != null? parseInt(work.properties.base.order):undefined,
+                value:work.properties.base.value != "" && work.properties.base.value != null? work.properties.base.value:undefined,
+                oper_name:work.properties.base.oper_name !="" && work.properties.base.oper_name != null? work.properties.base.oper_name:undefined,
+                level: work.properties.base.level != "" && work.properties.base.level != null? parseInt(work.properties.base.level):undefined,
+                base_label:work.properties.base.base_label != "" && work.properties.base.base_label != null? work.properties.base.base_label:undefined
             }
             return root;
         }

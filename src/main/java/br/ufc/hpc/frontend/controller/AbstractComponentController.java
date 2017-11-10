@@ -52,8 +52,8 @@ public class AbstractComponentController{
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		try {
 			System.out.println(cmp);
-			Boolean result = service.getCoreServicesHttpSoap11Endpoint().addAbstractComponent(cmp);
-			//Boolean result = true;
+			//Boolean result = service.getCoreServicesHttpSoap11Endpoint().addAbstractComponent(cmp);
+			Boolean result = true;
 			return header+"<result value=\""+result+"\"/>";
 		} catch (Exception e) {
 			System.out.println("Erro at save component: "+e.toString());
@@ -61,30 +61,4 @@ public class AbstractComponentController{
 		return header+"<result value='false'/>";
 	}
 	
-	/*@RequestMapping("/component/addParameter/{cmp}")
-	@ResponseBody
-	public String addParameter(@PathVariable("cmp") String cmp){
-		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"; 
-		try {
-			Boolean result = service.getCoreServicesHttpSoap11Endpoint().addContextParameter(cmp);
-			return header+"<result value=\""+result+"\"/>";
-		} catch (Exception e) {
-			System.out.println("Erro at add parameter: "+e.toString());
-		}
-		return header;
-	}
-	
-	@RequestMapping("/component/addUnit/{cmp}")
-	@ResponseBody
-	public String addUnit(@PathVariable("cmp") String cmp){
-		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-		try{
-			Integer result = service.getCoreServicesHttpSoap11Endpoint().addAbstractUnit(cmp);
-			System.out.println(result);
-			return header+"<result value=\""+result+"\"/>";
-		}catch(Exception e){
-			System.out.println("Erro at add unit: "+e.toString());
-		}
-		return head;
-	}*/
 }

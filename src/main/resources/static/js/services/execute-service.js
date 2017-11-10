@@ -74,7 +74,6 @@ function deploy(candidateList, callback){
 	});
 	var oSerializer = new XMLSerializer();
 	candidateList = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"+oSerializer.serializeToString(doc);
-	console.log(candidateList);
 	
 	var computationSystem = null;
 	$.ajax({

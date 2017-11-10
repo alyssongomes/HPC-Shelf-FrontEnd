@@ -414,6 +414,16 @@ var br_ufc_lia_storm = {
           elementName: 'context_variable_required_id',
           typeInfo: 'Int'
         }, {
+            type: 'element',
+            name: 'numericDomain',
+            elementName: 'numeric_domain',
+            typeInfo: 'String'
+        }, {
+        	name: 'variance',
+            typeInfo: 'Int',
+            attributeName: 'variance',
+            type: 'attribute'
+        }, {
           name: 'name',
           typeInfo: 'String',
           attributeName: 'name',

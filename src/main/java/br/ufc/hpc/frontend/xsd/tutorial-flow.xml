@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:workflow xmlns:tns="http://www.example.org/SAFe_workflow_V4"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/SAFe_workflow_V4 SAFe_workflow_V4.xsd ">
+
+
+	<tns:sequence_oper>
+		
+
+		<tns:operation>
+			<tns:choice_oper>
+				
+				<tns:select action_id="321">
+					<tns:operation>
+						<tns:invoke_oper action="resolve" id="321"/>
+					</tns:operation>
+					<tns:operation>
+						<tns:invoke_oper action="resolve" id="322"/>
+					</tns:operation>
+				</tns:select>
+				
+				<tns:select action_id="322">
+					<tns:operation>
+						<tns:invoke_oper action="resolve" id="322"/>
+					</tns:operation>
+					<tns:operation>
+						<tns:invoke_oper action="resolve" id="321"/>
+					</tns:operation>
+					<tns:operation>
+						<tns:break_oper base_label="teste"/>
+					</tns:operation>
+				</tns:select>
+				
+			</tns:choice_oper>
+		</tns:operation>
+		
+		
+
+	</tns:sequence_oper>
+
+</tns:workflow>

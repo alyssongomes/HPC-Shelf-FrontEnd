@@ -10,7 +10,6 @@
 		<script type="text/javascript" src="../lib/jsonix/Jsonix-min.js"></script>
 		<script type="text/javascript" src="../js/xsd/context-xsd.js" charset="UTF-8"></script>
 		<script type ="text/javascript" src="../lib/jquery/jquery-ui.min.js"></script>
-		<script type ="text/javascript" src="../js/services/unit-file-service.js"></script>
 		<script type ="text/javascript" src="../js/controllers/unit-file-controller.js"></script>
 		<script type="text/javascript" src="../js/services/component-service.js"></script>
 		<script type="text/javascript" src="../js/services/contract-service.js"></script>
@@ -22,7 +21,7 @@
 		<title>Upload Source-Code</title>
 	</head>
 	<!-- <body style="background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);">-->
-	<body style="background: #87CEFA;">
+	<body style="background: #B0C4DE;">
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 		    	<div class="navbar-header">
@@ -39,10 +38,12 @@
 		</nav> 
 		<section>
 			<center>
+				<img width="200px" style="margin-top:-75px;" src="../img/file.png"/>
 				<div id="file-upload" class="jumbotron" style="padding:1%; width: 600px; height: 290px; position:absolute; top:30%; left:28%; background-color: #527a7a;">
 					<!-- <div class="jumbotron" style="width:600px; height:80px; padding-top: 10px; border-radius: 8px;">
 						<p>Aplicação destina a envia de códigos-fonte, eles seram associados as unidades concretas.</p>
 					</div>-->
+					<div style="width: 550px;" id="message"></div>
 					<form action="/unitFile" method="post" enctype="multipart/form-data">
 						<input type='file' name="file" /><br/><br/>
 						<div class="col-sm-6">
@@ -75,7 +76,6 @@
 						</center>
 					</form>
 				</div>
-				<div style="width: 600px;" id="message"></div>
 			</center>
 		</section>
 	</body>

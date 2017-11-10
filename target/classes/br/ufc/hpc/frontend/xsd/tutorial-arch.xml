@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:architecture 
+	xmlns:tns="http://www.example.org/SAFe_architecture_V4" 
+	xmlns:tns1="http://www.example.org/instantiator" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.example.org/SAFe_architecture_V4 SAFe_architecture_V4.xsd ">
+  
+  <tns:application id="0" name="application-tutorial">
+    <tns:uses_port id="13" name="port_SAFeSWL" id_component="0"/>
+    <tns:uses_port id="14" name="port_Go" id_component="0"/>
+  </tns:application>
+  
+  <tns:workflow id="1" name="workflow-tutorial">
+    <tns:provides_port id="21" name="port_SAFeSWL" id_component="1"/>
+    <tns:provides_port id="22" name="port_Go" id_component="1"/>				   
+    <tns:task_port id="23" name="task-client" id_component="1"/>
+  </tns:workflow>
+  
+  <tns:body>
+    <tns:computation name="testClient" id="3">
+      <tns:uses_port id="30" name="client-uses-A" id_component="3"/>
+      <tns:provides_port name="env-client" id="20" id_component="3"/>
+      <tns:contract id="31">
+        <tns:uri>http://tempuri-client.org</tns:uri>
+      </tns:contract>
+      <tns:task_port name="task-client" id="32" id_component="3">
+      		<tns:action id="321" name="action_1"/>
+      		<tns:action id="322" name="action_2"/>
+      </tns:task_port>
+    </tns:computation>
+    
+    <tns:platform name="PLAT_a" id="1000">
+      <tns:contract id="1001">
+        <tns:uri>http://tempuri-client.org</tns:uri>
+      </tns:contract>
+    </tns:platform>
+    
+  </tns:body>
+  
+  <tns:env_binding>
+  	<tns:uses_port id="13" name="port_SAFeSWL" id_component="0"/> 
+  	<tns:provides_port id="21" name="port_SAFeSWL" id_component="1"/>
+  </tns:env_binding>
+  <tns:env_binding>
+  	<tns:uses_port id="14" name="port_Go" id_component="0"/> 
+  	<tns:provides_port id="22" name="port_Go" id_component="1"/>
+  </tns:env_binding>
+  
+</tns:architecture>
